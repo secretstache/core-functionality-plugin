@@ -154,11 +154,19 @@ class Ssm_Common_Objects {
 
 		$plugin_admin = new Ssm_Common_Objects_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		/**
+		 *	10 - priority
+		 *	1 - number of arguments to be passed to function (1 array in this case)
+		 */
+ 		$this->loader->add_action( 'custom_registration_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
 
-		$this->loader->add_action( 'custom_registration_hook', $plugin_admin, 'register_post_types', 10, 1 ); // 10 - priority, 1 - number of args
-		$this->loader->add_action( 'init', $plugin_admin, 'call_registration_hook' ); // provides 1) flexibility 2) opportunity to pass args to function 3) we can call do_action() from anywhere
+		/**
+		 *  This approach provides: 
+		 *	1) Flexibility
+		 *	2) Opportunity to pass arguments to function
+		 *	3) Opportunity to activate registration hook using do_action() from anywhere
+		 */
+		$this->loader->add_action( 'init', $plugin_admin, 'call_registration_hook' ); 
 
 	}
 

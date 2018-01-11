@@ -100,9 +100,15 @@ class Ssm_Common_Objects_Admin {
 
 	}
 
+	/**
+	 * This function is fired after 'custom_registration_hook' was called.
+	 * It extracts the array of cpt's, loop through each of them and register it.
+	 *	
+	 * @since    1.0.0
+	 */
 	public function register_post_types( $args ) {
 
-		foreach ($args as $post_type) {
+		foreach ( $args as $post_type ) {
 
 			$cap_type 		= $post_type[ 'cap_type' ];
 			$plural 		= $post_type[ 'plural' ];
@@ -185,53 +191,78 @@ class Ssm_Common_Objects_Admin {
 
 	}
 
+	/**
+	 * We are calling this function after 'init' hook was fired.
+	 * If required post_type is included using add_theme_support, it adds
+	 * the appropriate multidemensional array to the main array of cpt's.
+	 * After that 'custom_registration_hook' is calling with the corresponding arguments.
+	 *	
+	 * @since    1.0.0
+	 */
 	public function call_registration_hook() {
 
 		$args = array();
 
-		array_push( $args, array(
-			"cap_type" 		=> "page",
-			"plural" 		=> "Team Members",
-			"single" 		=> "Team Member",
-			"cpt_name" 		=> "team",
-			"slug" 			=> "ssm-team",
-			"text_domain" 	=> "ssm-team",
-			"menu_icon"		=> "dashicons-businessman"
-		));
+		if ( current_theme_supports( 'ssm-team-cpt' ) ) {
 
-		array_push( $args, array(
-			"cap_type" 		=> "page",
-			"plural" 		=> "Testimonials",
-			"single" 		=> "Testimonial",
-			"cpt_name" 		=> "testimonial",
-			"slug" 			=> "ssm-testimonial",
-			"text_domain" 	=> "ssm-testimonials",
-			"menu_icon"		=> "dashicons-format-chat"
-		));
+			array_push( $args, array(
+				"cap_type" 		=> "page",
+				"plural" 		=> "Team Members",
+				"single" 		=> "Team Member",
+				"cpt_name" 		=> "team",
+				"slug" 			=> "ssm-team",
+				"text_domain" 	=> "ssm-team",
+				"menu_icon"		=> "dashicons-businessman"
+			));
+		}
 
-		array_push( $args, array(
-			"cap_type" 		=> "page",
-			"plural" 		=> "Projects",
-			"single" 		=> "Projects",
-			"cpt_name" 		=> "project",
-			"slug" 			=> "ssm-project",
-			"text_domain" 	=> "ssm-projects",
-			"menu_icon"		=> "dashicons-portfolio"
-		));
+		if ( current_theme_supports( 'ssm-testimonial-cpt' ) ) {
 
-		array_push( $args, array(
-			"cap_type" 		=> "page",
-			"plural" 		=> "Code Snippets",
-			"single" 		=> "Code Snippet",
-			"cpt_name" 		=> "code-snippet",
-			"slug" 			=> "ssm-code-snippet",
-			"text_domain" 	=> "ssm-code-snippets",
-			"menu_icon"		=> "dashicons-format-quote"
-		));
+			array_push( $args, array(
+				"cap_type" 		=> "page",
+				"plural" 		=> "Testimonials",
+				"single" 		=> "Testimonial",
+				"cpt_name" 		=> "testimonial",
+				"slug" 			=> "ssm-testimonial",
+				"text_domain" 	=> "ssm-testimonials",
+				"menu_icon"		=> "dashicons-format-chat"
+			));
+		}
+
+		if ( current_theme_supports( 'ssm-project-cpt' ) ) {
+
+			array_push( $args, array(
+				"cap_type" 		=> "page",
+				"plural" 		=> "Projects",
+				"single" 		=> "Projects",
+				"cpt_name" 		=> "project",
+				"slug" 			=> "ssm-project",
+				"text_domain" 	=> "ssm-projects",
+				"menu_icon"		=> "dashicons-portfolio"
+			));
+		}
+
+		if ( current_theme_supports( 'ssm-code-snippet-cpt' ) ) {
+
+			array_push( $args, array(
+				"cap_type" 		=> "page",
+				"plural" 		=> "Code Snippets",
+				"single" 		=> "Code Snippet",
+				"cpt_name" 		=> "code-snippet",
+				"slug" 			=> "ssm-code-snippet",
+				"text_domain" 	=> "ssm-code-snippets",
+				"menu_icon"		=> "dashicons-format-quote"
+			));
+		}
 
 		// new post type goes here...
 
-		do_action( 'custom_registration_hook', $args );
+		if ( !empty( $args ) ) {
+			
+			do_action( 'custom_registration_hook', $args );
+
+		}
+
 	}
 
 
