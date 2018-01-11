@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       SSM Common Objects
  * Plugin URI:        https://www.secretstache.com/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Enables a set of Custom Post Types (Team, Testimonial, Project, Code snippet)
  * Version:           1.0.0
  * Author:            Secret Stache Media
  * Author URI:        https://www.secretstache.com/
