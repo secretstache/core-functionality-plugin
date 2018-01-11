@@ -100,4 +100,139 @@ class Ssm_Common_Objects_Admin {
 
 	}
 
+	public function register_post_types( $args ) {
+
+		foreach ($args as $post_type) {
+
+			$cap_type 		= $post_type[ 'cap_type' ];
+			$plural 		= $post_type[ 'plural' ];
+			$single 		= $post_type[ 'single' ];
+			$cpt_name 		= $post_type[ 'cpt_name' ];
+			$slug			= $post_type[ 'slug' ];
+			$text_domain 	= $post_type[ 'text_domain' ];
+			$menu_icon		= $post_type[ 'menu_icon' ];
+
+			$opts = array(
+				'can_export' 					=> TRUE,
+				'capability_type' 				=> $cap_type,
+				'description' 					=> '',
+				'exclude_from_search' 			=> FALSE,
+				'has_archive' 					=> FALSE,
+				'hierarchical'	 				=> FALSE,
+				'map_meta_cap' 					=> TRUE,
+				'menu_icon' 					=> $menu_icon,
+				'menu_position' 				=> 25,
+				'public' 						=> FALSE,
+				'publicly_querable' 			=> TRUE,
+				'query_var' 					=> TRUE,
+				'register_meta_box_cb'			=> '',
+				'rewrite' 						=> FALSE,
+				'show_in_admin_bar'				=> TRUE,
+				'show_in_menu'					=> TRUE,
+				'show_in_nav_menu' 				=> TRUE,
+				'show_ui' 						=> TRUE,
+				'supports' 						=> array( 'title', 'editor' ),
+				'taxonomies' 					=> array(),
+				'show_in_rest' 					=> TRUE
+			);
+
+			$opts['capabilities'] = array(
+				'delete_others_posts'			=> "delete_others_{$cap_type}s",
+				'delete_post'					=> "delete_{$cap_type}",
+				'delete_posts'					=> "delete_{$cap_type}s",
+				'delete_private_posts'			=> "delete_private_{$cap_type}s",
+				'delete_published_posts'		=> "delete_published_{$cap_type}s",
+				'edit_others_posts'				=> "edit_others_{$cap_type}s",
+				'edit_post'						=> "edit_{$cap_type}",
+				'edit_posts'					=> "edit_{$cap_type}s",
+				'edit_private_posts'			=> "edit_private_{$cap_type}s",
+				'edit_published_posts'			=> "edit_published_{$cap_type}s",
+				'publish_posts'					=> "publish_{$cap_type}s",
+				'read_post'						=> "read_{$cap_type}",
+				'read_private_posts'			=> "read_private_{$cap_type}s"
+			);
+
+			$opts['labels'] = array(
+				'add_new'						=> esc_html__( "Add New {$single}", $text_domain ),
+				'add_new_item'					=> esc_html__( "Add New {$single}", $text_domain ),
+				'all_items'						=> esc_html__( $plural, $text_domain ),
+				'edit_item'						=> esc_html__( "Edit {$single}", $text_domain ),
+				'menu_name'						=> esc_html__( $plural, $text_domain ),
+				'name'							=> esc_html__( $plural, $text_domain ),
+				'name_admin_bar'				=> esc_html__( $single, $text_domain ),
+				'new_item'						=> esc_html__( "New {$single}", $text_domain ),
+				'not_found'						=> esc_html__( "No {$plural} Found", $text_domain ),
+				'not_found_in_trash'			=> esc_html__( "No {$plural} Found in Trash", $text_domain ),
+				'parent_item_colon'				=> esc_html__( "Parent {$plural} :", $text_domain ),
+				'search_items'					=> esc_html__( "Search {$plural}", $text_domain ),
+				'singular_name'					=> esc_html__( $single, $text_domain ),
+				'view_item'						=> esc_html__( "View {$single}", $text_domain )
+			);
+
+			$opts['rewrite'] = array(
+				'ep_mask'						=> EP_PERMALINK,
+				'feeds'							=> FALSE,
+				'pages'							=> TRUE,
+				'slug'							=> esc_html__( strtolower( $slug ), $text_domain ),
+				'with_front'					=> FALSE
+			);
+
+			$opts = apply_filters( 'ssm-online-review-cpt-options', $opts );
+
+			register_post_type( strtolower( $cpt_name ), $opts );
+
+		}
+
+	}
+
+	public function call_registration_hook() {
+
+		$args = array();
+
+		array_push( $args, array(
+			"cap_type" 		=> "page",
+			"plural" 		=> "Team Members",
+			"single" 		=> "Team Member",
+			"cpt_name" 		=> "team",
+			"slug" 			=> "ssm-team",
+			"text_domain" 	=> "ssm-team",
+			"menu_icon"		=> "dashicons-businessman"
+		));
+
+		array_push( $args, array(
+			"cap_type" 		=> "page",
+			"plural" 		=> "Testimonials",
+			"single" 		=> "Testimonial",
+			"cpt_name" 		=> "testimonial",
+			"slug" 			=> "ssm-testimonial",
+			"text_domain" 	=> "ssm-testimonials",
+			"menu_icon"		=> "dashicons-format-chat"
+		));
+
+		array_push( $args, array(
+			"cap_type" 		=> "page",
+			"plural" 		=> "Projects",
+			"single" 		=> "Projects",
+			"cpt_name" 		=> "project",
+			"slug" 			=> "ssm-project",
+			"text_domain" 	=> "ssm-projects",
+			"menu_icon"		=> "dashicons-portfolio"
+		));
+
+		array_push( $args, array(
+			"cap_type" 		=> "page",
+			"plural" 		=> "Code Snippets",
+			"single" 		=> "Code Snippet",
+			"cpt_name" 		=> "code-snippet",
+			"slug" 			=> "ssm-code-snippet",
+			"text_domain" 	=> "ssm-code-snippets",
+			"menu_icon"		=> "dashicons-format-quote"
+		));
+
+		// new post type goes here...
+
+		do_action( 'custom_registration_hook', $args );
+	}
+
+
 }

@@ -157,6 +157,9 @@ class Ssm_Common_Objects {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		$this->loader->add_action( 'custom_registration_hook', $plugin_admin, 'register_post_types', 10, 1 ); // 10 - priority, 1 - number of args
+		$this->loader->add_action( 'init', $plugin_admin, 'call_registration_hook' ); // provides 1) flexibility 2) opportunity to pass args to function 3) we can call do_action() from anywhere
+
 	}
 
 	/**
