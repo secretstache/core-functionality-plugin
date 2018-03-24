@@ -6,8 +6,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    Ssm_Common_Objects
- * @subpackage Ssm_Common_Objects/public
+ * @package    SSM_Core_Functionality_Starter
+ * @subpackage SSM_Core_Functionality_Starter/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Ssm_Common_Objects
- * @subpackage Ssm_Common_Objects/public
+ * @package    SSM_Core_Functionality_Starter
+ * @subpackage SSM_Core_Functionality_Starter/public
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class Ssm_Common_Objects_Public {
+class SSM_Core_Functionality_Starter_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -65,15 +65,15 @@ class Ssm_Common_Objects_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Ssm_Common_Objects_Loader as all of the hooks are defined
+		 * defined in SSM_Core_Functionality_Starter_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Ssm_Common_Objects_Loader will then create the relationship
+		 * The SSM_Core_Functionality_Starter_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-common-objects-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-core-functionality-starter-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class Ssm_Common_Objects_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Ssm_Common_Objects_Loader as all of the hooks are defined
+		 * defined in SSM_Core_Functionality_Starter_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Ssm_Common_Objects_Loader will then create the relationship
+		 * The SSM_Core_Functionality_Starter_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-common-objects-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-core-functionality-starter-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

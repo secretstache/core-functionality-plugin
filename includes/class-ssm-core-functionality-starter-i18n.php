@@ -9,8 +9,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    Ssm_Common_Objects
- * @subpackage Ssm_Common_Objects/includes
+ * @package    SSM_Core_Functionality_Starter
+ * @subpackage SSM_Core_Functionality_Starter/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Ssm_Common_Objects
- * @subpackage Ssm_Common_Objects/includes
+ * @package    SSM_Core_Functionality_Starter
+ * @subpackage SSM_Core_Functionality_Starter/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class Ssm_Common_Objects_i18n {
+class SSM_Core_Functionality_Starter_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Ssm_Common_Objects_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'ssm-common-objects',
+			'ssm-core-functionality-starter',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

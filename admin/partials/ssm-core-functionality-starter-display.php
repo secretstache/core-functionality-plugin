@@ -8,8 +8,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    Ssm_Common_Objects
- * @subpackage Ssm_Common_Objects/admin/partials
+ * @package    SSM_Core_Functionality_Starter
+ * @subpackage SSM_Core_Functionality_Starter/admin/partials
  */
 ?>
 
