@@ -114,16 +114,17 @@ class SSM_Core_Functionality_Starter_Admin {
 		$cpt_args = array();
 
 		array_push( $cpt_args, array(
-			"cpt_name" 		=> "test",
-			"slug" 			=> "ssm-test",
-			"text_domain" 	=> "ssm-test",
-			"cap_type" 		=> "page",
-			"single" 		=> "Test",
-			"plural" 		=> "Tests",
-			"menu_icon"		=> "dashicons-admin-page",
-			"menu_position"	=> 25,
-			"show_in_menu"	=> TRUE,
-			"supports" 		=> array( 'title', 'editor', 'thumbnail' )
+			"cpt_name" 			=> "test",
+			"slug" 				=> "ssm-test",
+			"text_domain" 		=> "ssm-test",
+			"single" 			=> "Test",
+			"plural" 			=> "Tests",
+
+			"capability_type" 	=> "page",
+			"menu_icon"			=> "dashicons-admin-page",
+			"menu_position"		=> 25,
+			"show_in_menu"		=> TRUE,
+			"supports" 			=> array( 'title', 'editor', 'thumbnail' )
 		));
 
 		// new post types go here...
@@ -198,57 +199,64 @@ class SSM_Core_Functionality_Starter_Admin {
 	 */
 	public function register_post_types( $args ) {
 
+		$defaults = array(
+			'can_export'   			=> TRUE,
+			'capability_type' 		=> "page",
+			'description' 			=> '',
+			'exclude_from_search' 	=> FALSE,
+			'has_archive' 			=> FALSE,
+			'hierarchical'	 		=> FALSE,
+			'map_meta_cap'			=> TRUE,
+			'menu_icon' 			=> 'dashicons-admin-page',
+			'menu_position' 		=> 25,
+			'public' 				=> FALSE,
+			'publicly_querable' 	=> TRUE,
+			'query_var' 			=> TRUE,
+			'register_meta_box_cb'	=> '',
+			'rewrite' 				=> FALSE,
+			'show_in_admin_bar'		=> TRUE,
+			'show_in_menu'			=> TRUE,
+			'show_in_nav_menu' 		=> TRUE,
+			'show_ui' 				=> TRUE,
+			'supports' 				=> array( 'title', 'editor', 'thumbnail' ),
+			'taxonomies' 			=> array(),
+			'show_in_rest' 			=> TRUE
+		);
+
+
 		foreach ( $args as $post_type ) {
+
+			// Obligatory variables
 
 			$cpt_name 		= $post_type[ 'cpt_name' ];
 			$slug			= $post_type[ 'slug' ];
 			$text_domain 	= $post_type[ 'text_domain' ];
-			$cap_type 		= $post_type[ 'cap_type' ];
 			$single 		= $post_type[ 'single' ];
 			$plural 		= $post_type[ 'plural' ];
-			$menu_icon		= $post_type[ 'menu_icon' ];
-			$menu_position	= $post_type[ 'menu_position' ];
-			$show_in_menu	= $post_type[ 'show_in_menu' ];
-			$supports		= $post_type[ 'supports' ];
+			
+			// Optional variables
 
-			$opts = array(
-				'can_export' 					=> TRUE,
-				'capability_type' 				=> $cap_type,
-				'description' 					=> '',
-				'exclude_from_search' 			=> FALSE,
-				'has_archive' 					=> FALSE,
-				'hierarchical'	 				=> FALSE,
-				'map_meta_cap' 					=> TRUE,
-				'menu_icon' 					=> $menu_icon,
-				'menu_position' 				=> $menu_position,
-				'public' 						=> FALSE,
-				'publicly_querable' 			=> TRUE,
-				'query_var' 					=> TRUE,
-				'register_meta_box_cb'			=> '',
-				'rewrite' 						=> FALSE,
-				'show_in_admin_bar'				=> TRUE,
-				'show_in_menu'					=> $show_in_menu,
-				'show_in_nav_menu' 				=> TRUE,
-				'show_ui' 						=> TRUE,
-				'supports' 						=> $supports,
-				'taxonomies' 					=> array(),
-				'show_in_rest' 					=> TRUE
-			);
+			$opts = array();
+
+			foreach ( $defaults as $parameter => $value ) {
+				$$parameter = $post_type[ $parameter ] ? $post_type[ $parameter ] : $defaults[ $parameter ];
+				$opts[ $parameter ] = $$parameter;
+			}
 
 			$opts['capabilities'] = array(
-				'delete_others_posts'			=> "delete_others_{$cap_type}s",
-				'delete_post'					=> "delete_{$cap_type}",
-				'delete_posts'					=> "delete_{$cap_type}s",
-				'delete_private_posts'			=> "delete_private_{$cap_type}s",
-				'delete_published_posts'		=> "delete_published_{$cap_type}s",
-				'edit_others_posts'				=> "edit_others_{$cap_type}s",
-				'edit_post'						=> "edit_{$cap_type}",
-				'edit_posts'					=> "edit_{$cap_type}s",
-				'edit_private_posts'			=> "edit_private_{$cap_type}s",
-				'edit_published_posts'			=> "edit_published_{$cap_type}s",
-				'publish_posts'					=> "publish_{$cap_type}s",
-				'read_post'						=> "read_{$cap_type}",
-				'read_private_posts'			=> "read_private_{$cap_type}s"
+				'delete_others_posts'			=> "delete_others_{$capability_type}s",
+				'delete_post'					=> "delete_{$capability_type}",
+				'delete_posts'					=> "delete_{$capability_type}s",
+				'delete_private_posts'			=> "delete_private_{$capability_type}s",
+				'delete_published_posts'		=> "delete_published_{$capability_type}s",
+				'edit_others_posts'				=> "edit_others_{$capability_type}s",
+				'edit_post'						=> "edit_{$capability_type}",
+				'edit_posts'					=> "edit_{$capability_type}s",
+				'edit_private_posts'			=> "edit_private_{$capability_type}s",
+				'edit_published_posts'			=> "edit_published_{$capability_type}s",
+				'publish_posts'					=> "publish_{$capability_type}s",
+				'read_post'						=> "read_{$capability_type}",
+				'read_private_posts'			=> "read_private_{$capability_type}s"
 			);
 
 			$opts['labels'] = array(
@@ -276,7 +284,7 @@ class SSM_Core_Functionality_Starter_Admin {
 				'with_front'					=> FALSE
 			);
 
-			$opts = apply_filters( 'ssm-online-review-cpt-options', $opts );
+			$opts = apply_filters( "ssm-" . $slug . "-cpt-options", $opts );
 
 			register_post_type( strtolower( $cpt_name ), $opts );
 
