@@ -155,10 +155,12 @@ class SSM_Core_Functionality_Starter {
 		$plugin_admin = new SSM_Core_Functionality_Starter_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		/**
-		 *	10 - priority
-		 *	1 - number of arguments to be passed to function (1 array in this case)
+		 *	10, 20, 30 - priorities. (firstly we register post types, then - taxonomies, then - terms)
+		 *	1 - number of arguments to be passed to function (1 array of args in this case for all functions)
 		 */
- 		$this->loader->add_action( 'custom_registration_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
+		 $this->loader->add_action( 'custom_cpt_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
+		 $this->loader->add_action( 'custom_taxonomies_hook', $plugin_admin, 'register_taxonomies', 20, 1 );
+		 $this->loader->add_action( 'custom_terms_hook', $plugin_admin, 'register_terms', 30, 1 );
 
 		/**
 		 *  This approach provides: 

@@ -101,6 +101,96 @@ class SSM_Core_Functionality_Starter_Admin {
 	}
 
 	/**
+	 * This function is hooked to 'init'.
+	 * Step by step, it adds items to main multidemensional array of post types,
+	 * taxonomies and terms and call corresponding hooks using do_action().
+	 *	
+	 * @since    1.0.0
+	 */
+	public function call_registration_hook() {
+
+		// Registration of CPT
+
+		$cpt_args = array();
+
+		array_push( $cpt_args, array(
+			"cpt_name" 		=> "test",
+			"slug" 			=> "ssm-test",
+			"text_domain" 	=> "ssm-test",
+			"cap_type" 		=> "page",
+			"single" 		=> "Test",
+			"plural" 		=> "Tests",
+			"menu_icon"		=> "dashicons-admin-page",
+			"menu_position"	=> 25,
+			"show_in_menu"	=> TRUE,
+			"supports" 		=> array( 'title', 'editor', 'thumbnail' )
+		));
+
+		// new post types go here...
+
+		if ( !empty( $cpt_args ) ) {
+			do_action( 'custom_cpt_hook', $cpt_args );
+		}
+
+
+		// Registration of Taxonomies
+
+		$tax_args = array();
+
+		array_push( $tax_args, array(
+			"name" 		=> "test_type",
+			"cpt" 		=> "test",
+			"args" 		=> array(
+				"label" 	=> "Types",
+				"labels" 	=> array(
+					'name' => _x( 'Types', 'Types' ),
+					'singular_name' => _x( 'Type', 'Type' ),
+					'search_items' =>  __( 'Search Types' ),
+					'all_items' => __( 'All Types' ),
+					'parent_item' => __( 'Parent Types' ),
+					'parent_item_colon' => __( 'Parent Type:' ),
+					'edit_item' => __( 'Edit Type' ), 
+					'update_item' => __( 'Update Type' ),
+					'add_new_item' => __( 'Add New Type' ),
+					'new_item_name' => __( 'New Topic Type' ),
+					'menu_name' => __( 'Types' )
+				),
+				'hierarchical' => true,
+				'show_ui' => true,
+				'show_admin_column' => true,
+				'query_var' => true,
+				'rewrite' => array( 'slug' => 'type' )
+			)
+		));
+	
+		// new taxonomies go here...
+
+		if ( !empty( $tax_args ) ) {
+			do_action( 'custom_taxonomies_hook', $tax_args );
+		}
+
+
+		// Registration of Terms
+
+		$terms_args = array();
+
+		array_push( $terms_args, array(
+			"name" 		=> "Test",
+			"taxonomy" 	=> "test_type",
+			"args" => array(
+				"slug" => "test"
+			)
+		) );
+		
+		// new terms go here...
+
+		if ( !empty( $terms_args ) ) {
+			do_action( 'custom_terms_hook', $terms_args );
+		}
+
+	}
+
+	/**
 	 * This function is fired after 'custom_registration_hook' was called.
 	 * It extracts the array of cpt's, loop through each of them and register it.
 	 *	
@@ -110,13 +200,16 @@ class SSM_Core_Functionality_Starter_Admin {
 
 		foreach ( $args as $post_type ) {
 
-			$cap_type 		= $post_type[ 'cap_type' ];
-			$plural 		= $post_type[ 'plural' ];
-			$single 		= $post_type[ 'single' ];
 			$cpt_name 		= $post_type[ 'cpt_name' ];
 			$slug			= $post_type[ 'slug' ];
 			$text_domain 	= $post_type[ 'text_domain' ];
+			$cap_type 		= $post_type[ 'cap_type' ];
+			$single 		= $post_type[ 'single' ];
+			$plural 		= $post_type[ 'plural' ];
 			$menu_icon		= $post_type[ 'menu_icon' ];
+			$menu_position	= $post_type[ 'menu_position' ];
+			$show_in_menu	= $post_type[ 'show_in_menu' ];
+			$supports		= $post_type[ 'supports' ];
 
 			$opts = array(
 				'can_export' 					=> TRUE,
@@ -127,17 +220,17 @@ class SSM_Core_Functionality_Starter_Admin {
 				'hierarchical'	 				=> FALSE,
 				'map_meta_cap' 					=> TRUE,
 				'menu_icon' 					=> $menu_icon,
-				'menu_position' 				=> 25,
+				'menu_position' 				=> $menu_position,
 				'public' 						=> FALSE,
 				'publicly_querable' 			=> TRUE,
 				'query_var' 					=> TRUE,
 				'register_meta_box_cb'			=> '',
 				'rewrite' 						=> FALSE,
 				'show_in_admin_bar'				=> TRUE,
-				'show_in_menu'					=> TRUE,
+				'show_in_menu'					=> $show_in_menu,
 				'show_in_nav_menu' 				=> TRUE,
 				'show_ui' 						=> TRUE,
-				'supports' 						=> array( 'title', 'editor' ),
+				'supports' 						=> $supports,
 				'taxonomies' 					=> array(),
 				'show_in_rest' 					=> TRUE
 			);
@@ -192,78 +285,43 @@ class SSM_Core_Functionality_Starter_Admin {
 	}
 
 	/**
-	 * We are calling this function after 'init' hook was fired.
-	 * If required post_type is included using add_theme_support, it adds
-	 * the appropriate multidemensional array to the main array of cpt's.
-	 * After that 'custom_registration_hook' is calling with the corresponding arguments.
+	 * This function is fired after 'custom_taxonomies_hook' was called.
+	 * It extracts the array of taxonomies, loop through each of them and register it to the corresponding cpt's.
 	 *	
 	 * @since    1.0.0
 	 */
-	public function call_registration_hook() {
+	public function register_taxonomies( $args ) {
 
-		$args = array();
+		foreach ( $args as $taxonomy ) {
 
-		if ( current_theme_supports( 'ssm-team-cpt' ) ) {
+			$name 	= $taxonomy['name']; 
+			$cpt 	= $taxonomy['cpt'];
+			$args 	= $taxonomy['args'];
 
-			array_push( $args, array(
-				"cap_type" 		=> "page",
-				"plural" 		=> "Team Members",
-				"single" 		=> "Team Member",
-				"cpt_name" 		=> "team",
-				"slug" 			=> "ssm-team",
-				"text_domain" 	=> "ssm-team",
-				"menu_icon"		=> "dashicons-businessman"
-			));
-		}
-
-		if ( current_theme_supports( 'ssm-testimonial-cpt' ) ) {
-
-			array_push( $args, array(
-				"cap_type" 		=> "page",
-				"plural" 		=> "Testimonials",
-				"single" 		=> "Testimonial",
-				"cpt_name" 		=> "testimonial",
-				"slug" 			=> "ssm-testimonial",
-				"text_domain" 	=> "ssm-testimonials",
-				"menu_icon"		=> "dashicons-format-chat"
-			));
-		}
-
-		if ( current_theme_supports( 'ssm-project-cpt' ) ) {
-
-			array_push( $args, array(
-				"cap_type" 		=> "page",
-				"plural" 		=> "Projects",
-				"single" 		=> "Projects",
-				"cpt_name" 		=> "project",
-				"slug" 			=> "ssm-project",
-				"text_domain" 	=> "ssm-projects",
-				"menu_icon"		=> "dashicons-portfolio"
-			));
-		}
-
-		if ( current_theme_supports( 'ssm-code-snippet-cpt' ) ) {
-
-			array_push( $args, array(
-				"cap_type" 		=> "page",
-				"plural" 		=> "Code Snippets",
-				"single" 		=> "Code Snippet",
-				"cpt_name" 		=> "code-snippet",
-				"slug" 			=> "ssm-code-snippet",
-				"text_domain" 	=> "ssm-code-snippets",
-				"menu_icon"		=> "dashicons-format-quote"
-			));
-		}
-
-		// new post type goes here...
-
-		if ( !empty( $args ) ) {
-			
-			do_action( 'custom_registration_hook', $args );
+			register_taxonomy( $name, $cpt, $args );
 
 		}
 
 	}
 
+	/**
+	 * This function is fired after 'custom_terms_hook' was called.
+	 * It extracts the array of terms, loop through each of them and register it to the corresponding taxonomies.
+	 *	
+	 * @since    1.0.0
+	 */
+	public function register_terms( $args ) {
+
+		foreach ( $args as $term ) {
+
+			$name 		= $term['name']; 
+			$taxonomy 	= $term['taxonomy'];
+			$args 		= $term['args'];
+
+			wp_insert_term( $name, $taxonomy, $args );
+
+		}
+
+	}
 
 }
