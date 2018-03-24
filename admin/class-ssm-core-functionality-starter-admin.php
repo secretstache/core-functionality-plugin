@@ -139,30 +139,15 @@ class SSM_Core_Functionality_Starter_Admin {
 		$tax_args = array();
 
 		array_push( $tax_args, array(
-			"name" 		=> "test_type",
-			"cpt" 		=> "test",
-			"args" 		=> array(
-				"label" 	=> "Types",
-				"labels" 	=> array(
-					'name' => _x( 'Types', 'Types' ),
-					'singular_name' => _x( 'Type', 'Type' ),
-					'search_items' =>  __( 'Search Types' ),
-					'all_items' => __( 'All Types' ),
-					'parent_item' => __( 'Parent Types' ),
-					'parent_item_colon' => __( 'Parent Type:' ),
-					'edit_item' => __( 'Edit Type' ), 
-					'update_item' => __( 'Update Type' ),
-					'add_new_item' => __( 'Add New Type' ),
-					'new_item_name' => __( 'New Topic Type' ),
-					'menu_name' => __( 'Types' )
-				),
-				'hierarchical' => true,
-				'show_ui' => true,
-				'show_admin_column' => true,
-				'query_var' => true,
-				'rewrite' => array( 'slug' => 'type' )
-			)
-		));
+			"tax_name" 		=> "test_type",
+			"cpt_name" 		=> "test",
+			"slug" 			=> "ssm-test-type",
+			"text_domain"	=> "ssm-test-type",
+			"single" 		=> "Type",
+			"plural" 		=> "Types",
+			
+			'hierarchical' 		=> TRUE
+		) );
 	
 		// new taxonomies go here...
 
@@ -223,7 +208,6 @@ class SSM_Core_Functionality_Starter_Admin {
 			'show_in_rest' 			=> TRUE
 		);
 
-
 		foreach ( $args as $post_type ) {
 
 			// Obligatory variables
@@ -239,7 +223,7 @@ class SSM_Core_Functionality_Starter_Admin {
 			$opts = array();
 
 			foreach ( $defaults as $parameter => $value ) {
-				$$parameter = $post_type[ $parameter ] ? $post_type[ $parameter ] : $defaults[ $parameter ];
+				$$parameter = !is_null( $post_type[ $parameter ] ) ? $post_type[ $parameter ] : $defaults[ $parameter ];
 				$opts[ $parameter ] = $$parameter;
 			}
 
@@ -300,13 +284,61 @@ class SSM_Core_Functionality_Starter_Admin {
 	 */
 	public function register_taxonomies( $args ) {
 
+		$defaults = array(
+			'hierarchical' 		=> FALSE,
+			'show_ui' 			=> TRUE,
+			'show_admin_column' => TRUE,
+			'query_var' 		=> TRUE
+		);
+
 		foreach ( $args as $taxonomy ) {
 
-			$name 	= $taxonomy['name']; 
-			$cpt 	= $taxonomy['cpt'];
-			$args 	= $taxonomy['args'];
+			// Obligatory variables
 
-			register_taxonomy( $name, $cpt, $args );
+			$tax_name 		= $taxonomy['tax_name']; 
+			$cpt_name 		= $taxonomy['cpt_name'];
+			$slug 			= $taxonomy['slug'];
+			$text_domain 	= $taxonomy['text_domain'];
+			$single 		= $taxonomy['single'];
+			$plural 		= $taxonomy['plural'];
+
+			// Optional variables
+
+			$opts = array();
+
+			foreach ( $defaults as $parameter => $value ) {
+				$$parameter = !is_null( $taxonomy[ $parameter ] ) ? $taxonomy[ $parameter ] : $defaults[ $parameter ];
+				$opts[ $parameter ] = $$parameter;
+			}
+
+			$opts['labels'] = array(
+				'add_new'				=> esc_html__( "Add New {$single}", $text_domain ),
+				'add_new_item'			=> esc_html__( "Add New {$single}", $text_domain ),
+				'all_items'				=> esc_html__( $plural, $text_domain ),
+				'edit_item'				=> esc_html__( "Edit {$single}", $text_domain ),
+				'menu_name'				=> esc_html__( $plural, $text_domain ),
+				'name'					=> esc_html__( $plural, $text_domain ),
+				'name_admin_bar'		=> esc_html__( $single, $text_domain ),
+				'new_item'				=> esc_html__( "New {$single}", $text_domain ),
+				'not_found'				=> esc_html__( "No {$plural} Found", $text_domain ),
+				'not_found_in_trash'	=> esc_html__( "No {$plural} Found in Trash", $text_domain ),
+				'parent_item_colon'		=> esc_html__( "Parent {$plural} :", $text_domain ),
+				'search_items'			=> esc_html__( "Search {$plural}", $text_domain ),
+				'singular_name'			=> esc_html__( $single, $text_domain ),
+				'view_item'				=> esc_html__( "View {$single}", $text_domain )
+			);
+
+			$opts['rewrite'] = array(
+				'ep_mask'			=> EP_PERMALINK,
+				'feeds'				=> FALSE,
+				'pages'				=> TRUE,
+				'slug'				=> esc_html__( strtolower( $slug ), $text_domain ),
+				'with_front'		=> FALSE
+			);
+
+			$opts = apply_filters( "ssm-" . $slug . "-options", $opts );
+
+			register_taxonomy( $tax_name, $cpt_name, $opts );
 
 		}
 
