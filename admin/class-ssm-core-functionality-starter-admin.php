@@ -161,11 +161,11 @@ class SSM_Core_Functionality_Starter_Admin {
 		$terms_args = array();
 
 		array_push( $terms_args, array(
-			"name" 		=> "Test",
-			"taxonomy" 	=> "test_type",
-			"args" => array(
-				"slug" => "test"
-			)
+			"term_name" 		=> "Term",
+			"taxonomy_name" 	=> "test_type",
+			"slug"				=> "test_type_term",
+
+			"description" 		=> "Test description"
 		) );
 		
 		// new terms go here...
@@ -352,13 +352,34 @@ class SSM_Core_Functionality_Starter_Admin {
 	 */
 	public function register_terms( $args ) {
 
+		$defaults = array(
+			'alias_of' 		=> '',
+			'description' 	=> '',
+			'parent' 		=> 0
+		);
+
 		foreach ( $args as $term ) {
 
-			$name 		= $term['name']; 
-			$taxonomy 	= $term['taxonomy'];
-			$args 		= $term['args'];
+			// Obligatory variables
 
-			wp_insert_term( $name, $taxonomy, $args );
+			$term_name 		= $term['term_name']; 
+			$taxonomy_name 	= $term['taxonomy_name'];
+			$slug 			= $term['slug'];
+
+			// Optional variabls
+
+			$opts = array();
+
+			foreach ( $defaults as $parameter => $value ) {
+				$$parameter = !is_null( $term[ $parameter ] ) ? $term[ $parameter ] : $defaults[ $parameter ];
+				$opts[ $parameter ] = $$parameter;
+			}
+
+			$opts['slug'] = strtolower( $slug );
+
+			$opts = apply_filters( "ssm-" . $slug . "-options", $opts );
+
+			wp_insert_term( $term_name, $taxonomy_name, $opts );
 
 		}
 
