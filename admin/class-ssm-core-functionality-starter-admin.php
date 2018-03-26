@@ -124,7 +124,12 @@ class SSM_Core_Functionality_Starter_Admin {
 			"menu_icon"			=> "dashicons-admin-page",
 			"menu_position"		=> 25,
 			"show_in_menu"		=> TRUE,
-			"supports" 			=> array( 'title', 'editor', 'thumbnail' )
+			"supports" 			=> array( 'title', 'editor', 'thumbnail' ),
+
+			"labels" 			=> array(
+				'set_featured_image'	=> "Another formulation of Set featured image",
+				'remove_featured_image' => "Another formulation of Remove featured image"
+			)
 		));
 
 		// new post types go here...
@@ -146,7 +151,11 @@ class SSM_Core_Functionality_Starter_Admin {
 			"single" 		=> "Type",
 			"plural" 		=> "Types",
 			
-			'hierarchical' 		=> TRUE
+			'hierarchical' 		=> TRUE,
+
+			"labels" 			=> array(
+				'add_new_item'	=> "Another formulation of Add new Type",
+			)
 		) );
 	
 		// new taxonomies go here...
@@ -184,7 +193,9 @@ class SSM_Core_Functionality_Starter_Admin {
 	 */
 	public function register_post_types( $args ) {
 
-		$defaults = array(
+		$defaults = array();
+
+		$defaults['general'] = array(
 			'can_export'   			=> TRUE,
 			'capability_type' 		=> "page",
 			'description' 			=> '',
@@ -222,28 +233,12 @@ class SSM_Core_Functionality_Starter_Admin {
 
 			$opts = array();
 
-			foreach ( $defaults as $parameter => $value ) {
-				$$parameter = !is_null( $post_type[ $parameter ] ) ? $post_type[ $parameter ] : $defaults[ $parameter ];
+			foreach ( $defaults['general'] as $parameter => $value ) {
+				$$parameter = !is_null( $post_type[ $parameter ] ) ? $post_type[ $parameter ] : $defaults['general'][ $parameter ];
 				$opts[ $parameter ] = $$parameter;
 			}
 
-			$opts['capabilities'] = array(
-				'delete_others_posts'			=> "delete_others_{$capability_type}s",
-				'delete_post'					=> "delete_{$capability_type}",
-				'delete_posts'					=> "delete_{$capability_type}s",
-				'delete_private_posts'			=> "delete_private_{$capability_type}s",
-				'delete_published_posts'		=> "delete_published_{$capability_type}s",
-				'edit_others_posts'				=> "edit_others_{$capability_type}s",
-				'edit_post'						=> "edit_{$capability_type}",
-				'edit_posts'					=> "edit_{$capability_type}s",
-				'edit_private_posts'			=> "edit_private_{$capability_type}s",
-				'edit_published_posts'			=> "edit_published_{$capability_type}s",
-				'publish_posts'					=> "publish_{$capability_type}s",
-				'read_post'						=> "read_{$capability_type}",
-				'read_private_posts'			=> "read_private_{$capability_type}s"
-			);
-
-			$opts['labels'] = array(
+			$defaults['labels'] = array(
 				'name'					=> esc_html__( $plural, $text_domain ),
 				'singular_name'			=> esc_html__( $single, $text_domain ),
 				'add_new'				=> esc_html__( "Add New {$single}", $text_domain ),
@@ -261,15 +256,41 @@ class SSM_Core_Functionality_Starter_Admin {
 				'attributes' 			=> esc_html__( "{$single} Attributes", $text_domain ),
 				'insert_into_item'		=> esc_html__( "Insert into {$single}", $text_domain ),
 				'uploaded_to_this_item' => esc_html__( "Uploaded to this {$single}", $text_domain ),
-				'featured_image'		=> esc_html__( "Featured image of this {$single}", $text_domain ),
-				'set_featured_image'	=> esc_html__( "Set featured image for this {$single}", $text_domain ),
-				'remove_featured_image' => esc_html__( "Remove featured image from this {$single}", $text_domain ),
-				'use_featured_image'	=> esc_html__( "Use as featured image for this {$single}", $text_domain ),
+				'featured_image'		=> esc_html__( "Featured image", $text_domain ),
+				'set_featured_image'	=> esc_html__( "Set featured image for this", $text_domain ),
+				'remove_featured_image' => esc_html__( "Remove featured image", $text_domain ),
+				'use_featured_image'	=> esc_html__( "Use as featured image", $text_domain ),
 				'menu_name'				=> esc_html__( $plural, $text_domain ),
 				'filter_items_list'		=> esc_html__( "Filter {$plural} list", $text_domain ),
 				'items_list_navigation' => esc_html__( "{$plural} list navigation", $text_domain ),
 				'items_list'			=> esc_html__( "{$plural} list", $text_domain ),
 				'name_admin_bar'		=> esc_html__( $single, $text_domain )
+			);
+
+			if ( isset( $post_type['labels'] ) ) {
+				
+				foreach ( $defaults['labels'] as $parameter => $value ) {
+					$opts['labels'][ $parameter ] = !is_null( $post_type['labels'][ $parameter ] ) ? $post_type['labels'][ $parameter ] : $defaults['labels'][ $parameter ];
+				}
+
+			} else {
+				$opts['labels'] = $defaults['labels'];
+			}
+
+			$opts['capabilities'] = array(
+				'delete_others_posts'			=> "delete_others_{$capability_type}s",
+				'delete_post'					=> "delete_{$capability_type}",
+				'delete_posts'					=> "delete_{$capability_type}s",
+				'delete_private_posts'			=> "delete_private_{$capability_type}s",
+				'delete_published_posts'		=> "delete_published_{$capability_type}s",
+				'edit_others_posts'				=> "edit_others_{$capability_type}s",
+				'edit_post'						=> "edit_{$capability_type}",
+				'edit_posts'					=> "edit_{$capability_type}s",
+				'edit_private_posts'			=> "edit_private_{$capability_type}s",
+				'edit_published_posts'			=> "edit_published_{$capability_type}s",
+				'publish_posts'					=> "publish_{$capability_type}s",
+				'read_post'						=> "read_{$capability_type}",
+				'read_private_posts'			=> "read_private_{$capability_type}s"
 			);
 
 			$opts['rewrite'] = array(
@@ -296,7 +317,9 @@ class SSM_Core_Functionality_Starter_Admin {
 	 */
 	public function register_taxonomies( $args ) {
 
-		$defaults = array(
+		$defaults = array();
+
+		$defaults['general'] = array(
 			'hierarchical' 		=> FALSE,
 			'show_ui' 			=> TRUE,
 			'show_admin_column' => TRUE,
@@ -318,39 +341,42 @@ class SSM_Core_Functionality_Starter_Admin {
 
 			$opts = array();
 
-			foreach ( $defaults as $parameter => $value ) {
-				$$parameter = !is_null( $taxonomy[ $parameter ] ) ? $taxonomy[ $parameter ] : $defaults[ $parameter ];
+			foreach ( $defaults['general'] as $parameter => $value ) {
+				$$parameter = !is_null( $taxonomy[ $parameter ] ) ? $taxonomy[ $parameter ] : $defaults['general'][ $parameter ];
 				$opts[ $parameter ] = $$parameter;
 			}
 
-			$opts['labels'] = array(
-				'name'					=> esc_html__( $plural, $text_domain ),
-				'singular_name'			=> esc_html__( $single, $text_domain ),
-				'add_new'				=> esc_html__( "Add New {$single}", $text_domain ),
-				'add_new_item'			=> esc_html__( "Add New {$single}", $text_domain ),
-				'edit_item'				=> esc_html__( "Edit {$single}", $text_domain ),
-				'new_item'				=> esc_html__( "New {$single}", $text_domain ),
-				'view_item'				=> esc_html__( "View {$single}", $text_domain ),
-				'view_items'			=> esc_html__( "View {$plural}", $text_domain ),
-				'search_items'			=> esc_html__( "Search {$plural}", $text_domain ),
-				'not_found'				=> esc_html__( "No {$plural} Found", $text_domain ),
-				'not_found_in_trash'	=> esc_html__( "No {$plural} Found in Trash", $text_domain ),
-				'parent_item_colon'		=> esc_html__( "Parent {$plural} :", $text_domain ),
-				'all_items'				=> esc_html__( $plural, $text_domain ),
-				'archives'				=> esc_html__( "{$single} Archives", $text_domain ),
-				'attributes' 			=> esc_html__( "{$single} Attributes", $text_domain ),
-				'insert_into_item'		=> esc_html__( "Insert into {$single}", $text_domain ),
-				'uploaded_to_this_item' => esc_html__( "Uploaded to this {$single}", $text_domain ),
-				'featured_image'		=> esc_html__( "Featured image of this {$single}", $text_domain ),
-				'set_featured_image'	=> esc_html__( "Set featured image for this {$single}", $text_domain ),
-				'remove_featured_image' => esc_html__( "Remove featured image from this {$single}", $text_domain ),
-				'use_featured_image'	=> esc_html__( "Use as featured image for this {$single}", $text_domain ),
-				'menu_name'				=> esc_html__( $plural, $text_domain ),
-				'filter_items_list'		=> esc_html__( "Filter {$plural} list", $text_domain ),
-				'items_list_navigation' => esc_html__( "{$plural} list navigation", $text_domain ),
-				'items_list'			=> esc_html__( "{$plural} list", $text_domain ),
-				'name_admin_bar'		=> esc_html__( $single, $text_domain )
+			$defaults['labels'] = array(
+				'name'						=> esc_html__( $plural, $text_domain ),
+				'singular_name'				=> esc_html__( $single, $text_domain ),
+				'menu_name'					=> esc_html__( $plural, $text_domain ),
+				'all_items'					=> esc_html__( $plural, $text_domain ),
+				'edit_item'					=> esc_html__( "Edit {$single}", $text_domain ),
+				'view_item'					=> esc_html__( "View {$single}", $text_domain ),
+				'view_items'				=> esc_html__( "View {$plural}", $text_domain ),
+				'update_item'				=> esc_html__( "Update {$single}", $text_domain ),
+				'add_new'					=> esc_html__( "Add New {$single}", $text_domain ),
+				'add_new_item'				=> esc_html__( "Add New {$single}", $text_domain ),
+				'new_item_name'				=> esc_html__( "New {$single} name", $text_domain ),
+				'parent_item'				=> esc_html__( "Parent {$single} :", $text_domain ),
+				'parent_item_colon'			=> esc_html__( "Parent {$plural} :", $text_domain ),
+				'search_items'				=> esc_html__( "Search {$plural}", $text_domain ),
+				'popular_items'				=> esc_html__( "Popular {$plural}", $text_domain ),
+				'separate_items_with_commas'=> esc_html__( "Separate {$plural} with commas", $text_domain ),
+				'add_or_remove_items' 		=> esc_html__( "Add or remove {$plural}", $text_domain ),
+				'choose_from_most_used'		=> esc_html__( "Choose from most used", $text_domain ),
+				'not_found'					=> esc_html__( "No {$plural} Found", $text_domain ),
 			);
+
+			if ( isset( $taxonomy['labels'] ) ) {
+				
+				foreach ( $defaults['labels'] as $parameter => $value ) {
+					$opts['labels'][ $parameter ] = !is_null( $taxonomy['labels'][ $parameter ] ) ? $taxonomy['labels'][ $parameter ] : $defaults['labels'][ $parameter ];
+				}
+
+			} else {
+				$opts['labels'] = $defaults['labels'];
+			}
 
 			$opts['rewrite'] = array(
 				'ep_mask'			=> EP_PERMALINK,
