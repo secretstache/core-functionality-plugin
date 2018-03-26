@@ -244,20 +244,32 @@ class SSM_Core_Functionality_Starter_Admin {
 			);
 
 			$opts['labels'] = array(
-				'add_new'						=> esc_html__( "Add New {$single}", $text_domain ),
-				'add_new_item'					=> esc_html__( "Add New {$single}", $text_domain ),
-				'all_items'						=> esc_html__( $plural, $text_domain ),
-				'edit_item'						=> esc_html__( "Edit {$single}", $text_domain ),
-				'menu_name'						=> esc_html__( $plural, $text_domain ),
-				'name'							=> esc_html__( $plural, $text_domain ),
-				'name_admin_bar'				=> esc_html__( $single, $text_domain ),
-				'new_item'						=> esc_html__( "New {$single}", $text_domain ),
-				'not_found'						=> esc_html__( "No {$plural} Found", $text_domain ),
-				'not_found_in_trash'			=> esc_html__( "No {$plural} Found in Trash", $text_domain ),
-				'parent_item_colon'				=> esc_html__( "Parent {$plural} :", $text_domain ),
-				'search_items'					=> esc_html__( "Search {$plural}", $text_domain ),
-				'singular_name'					=> esc_html__( $single, $text_domain ),
-				'view_item'						=> esc_html__( "View {$single}", $text_domain )
+				'name'					=> esc_html__( $plural, $text_domain ),
+				'singular_name'			=> esc_html__( $single, $text_domain ),
+				'add_new'				=> esc_html__( "Add New {$single}", $text_domain ),
+				'add_new_item'			=> esc_html__( "Add New {$single}", $text_domain ),
+				'edit_item'				=> esc_html__( "Edit {$single}", $text_domain ),
+				'new_item'				=> esc_html__( "New {$single}", $text_domain ),
+				'view_item'				=> esc_html__( "View {$single}", $text_domain ),
+				'view_items'			=> esc_html__( "View {$plural}", $text_domain ),
+				'search_items'			=> esc_html__( "Search {$plural}", $text_domain ),
+				'not_found'				=> esc_html__( "No {$plural} Found", $text_domain ),
+				'not_found_in_trash'	=> esc_html__( "No {$plural} Found in Trash", $text_domain ),
+				'parent_item_colon'		=> esc_html__( "Parent {$plural} :", $text_domain ),
+				'all_items'				=> esc_html__( $plural, $text_domain ),
+				'archives'				=> esc_html__( "{$single} Archives", $text_domain ),
+				'attributes' 			=> esc_html__( "{$single} Attributes", $text_domain ),
+				'insert_into_item'		=> esc_html__( "Insert into {$single}", $text_domain ),
+				'uploaded_to_this_item' => esc_html__( "Uploaded to this {$single}", $text_domain ),
+				'featured_image'		=> esc_html__( "Featured image of this {$single}", $text_domain ),
+				'set_featured_image'	=> esc_html__( "Set featured image for this {$single}", $text_domain ),
+				'remove_featured_image' => esc_html__( "Remove featured image from this {$single}", $text_domain ),
+				'use_featured_image'	=> esc_html__( "Use as featured image for this {$single}", $text_domain ),
+				'menu_name'				=> esc_html__( $plural, $text_domain ),
+				'filter_items_list'		=> esc_html__( "Filter {$plural} list", $text_domain ),
+				'items_list_navigation' => esc_html__( "{$plural} list navigation", $text_domain ),
+				'items_list'			=> esc_html__( "{$plural} list", $text_domain ),
+				'name_admin_bar'		=> esc_html__( $single, $text_domain )
 			);
 
 			$opts['rewrite'] = array(
@@ -312,20 +324,32 @@ class SSM_Core_Functionality_Starter_Admin {
 			}
 
 			$opts['labels'] = array(
+				'name'					=> esc_html__( $plural, $text_domain ),
+				'singular_name'			=> esc_html__( $single, $text_domain ),
 				'add_new'				=> esc_html__( "Add New {$single}", $text_domain ),
 				'add_new_item'			=> esc_html__( "Add New {$single}", $text_domain ),
-				'all_items'				=> esc_html__( $plural, $text_domain ),
 				'edit_item'				=> esc_html__( "Edit {$single}", $text_domain ),
-				'menu_name'				=> esc_html__( $plural, $text_domain ),
-				'name'					=> esc_html__( $plural, $text_domain ),
-				'name_admin_bar'		=> esc_html__( $single, $text_domain ),
 				'new_item'				=> esc_html__( "New {$single}", $text_domain ),
+				'view_item'				=> esc_html__( "View {$single}", $text_domain ),
+				'view_items'			=> esc_html__( "View {$plural}", $text_domain ),
+				'search_items'			=> esc_html__( "Search {$plural}", $text_domain ),
 				'not_found'				=> esc_html__( "No {$plural} Found", $text_domain ),
 				'not_found_in_trash'	=> esc_html__( "No {$plural} Found in Trash", $text_domain ),
 				'parent_item_colon'		=> esc_html__( "Parent {$plural} :", $text_domain ),
-				'search_items'			=> esc_html__( "Search {$plural}", $text_domain ),
-				'singular_name'			=> esc_html__( $single, $text_domain ),
-				'view_item'				=> esc_html__( "View {$single}", $text_domain )
+				'all_items'				=> esc_html__( $plural, $text_domain ),
+				'archives'				=> esc_html__( "{$single} Archives", $text_domain ),
+				'attributes' 			=> esc_html__( "{$single} Attributes", $text_domain ),
+				'insert_into_item'		=> esc_html__( "Insert into {$single}", $text_domain ),
+				'uploaded_to_this_item' => esc_html__( "Uploaded to this {$single}", $text_domain ),
+				'featured_image'		=> esc_html__( "Featured image of this {$single}", $text_domain ),
+				'set_featured_image'	=> esc_html__( "Set featured image for this {$single}", $text_domain ),
+				'remove_featured_image' => esc_html__( "Remove featured image from this {$single}", $text_domain ),
+				'use_featured_image'	=> esc_html__( "Use as featured image for this {$single}", $text_domain ),
+				'menu_name'				=> esc_html__( $plural, $text_domain ),
+				'filter_items_list'		=> esc_html__( "Filter {$plural} list", $text_domain ),
+				'items_list_navigation' => esc_html__( "{$plural} list navigation", $text_domain ),
+				'items_list'			=> esc_html__( "{$plural} list", $text_domain ),
+				'name_admin_bar'		=> esc_html__( $single, $text_domain )
 			);
 
 			$opts['rewrite'] = array(
