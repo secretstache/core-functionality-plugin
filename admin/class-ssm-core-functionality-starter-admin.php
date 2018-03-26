@@ -385,4 +385,17 @@ class SSM_Core_Functionality_Starter_Admin {
 
 	}
 
+	/**
+	 * Prevent adding new terms to custom taxonomies.
+	 *	
+	 * @since    1.0.0
+	 */
+	function term_adding_prevent( $term, $taxonomy ) {
+
+		$taxonomies = array( "test_type" ); //list of taxonomies we don't allow to add term into
+
+		return ( in_array( $taxonomy, $taxonomies ) ) ? new WP_Error( 'term_addition_blocked', __( 'You cannot add terms to this taxonomy.' ) ) : $term;
+		
+	}
+
 }

@@ -162,6 +162,8 @@ class SSM_Core_Functionality_Starter {
 		 $this->loader->add_action( 'custom_taxonomies_hook', $plugin_admin, 'register_taxonomies', 20, 1 );
 		 $this->loader->add_action( 'custom_terms_hook', $plugin_admin, 'register_terms', 30, 1 );
 
+		//  $this->loader->add_action( 'pre_insert_term', $plugin_admin, 'term_adding_prevent', 10, 2 );
+
 		/**
 		 *  This approach provides: 
 		 *	1) Flexibility
