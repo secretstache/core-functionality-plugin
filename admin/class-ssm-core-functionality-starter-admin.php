@@ -218,6 +218,7 @@ class SSM_Core_Functionality_Starter_Admin {
 			'taxonomies' 			=> array(),
 			'show_in_rest' 			=> TRUE
 		);
+		
 
 		foreach ( $args as $post_type ) {
 
@@ -268,16 +269,14 @@ class SSM_Core_Functionality_Starter_Admin {
 			);
 
 			if ( isset( $post_type['labels'] ) ) {
-				
 				foreach ( $defaults['labels'] as $parameter => $value ) {
 					$opts['labels'][ $parameter ] = !is_null( $post_type['labels'][ $parameter ] ) ? $post_type['labels'][ $parameter ] : $defaults['labels'][ $parameter ];
 				}
-
 			} else {
 				$opts['labels'] = $defaults['labels'];
 			}
 
-			$opts['capabilities'] = array(
+			$defaults['capabilities'] = array(
 				'delete_others_posts'			=> "delete_others_{$capability_type}s",
 				'delete_post'					=> "delete_{$capability_type}",
 				'delete_posts'					=> "delete_{$capability_type}s",
@@ -292,6 +291,14 @@ class SSM_Core_Functionality_Starter_Admin {
 				'read_post'						=> "read_{$capability_type}",
 				'read_private_posts'			=> "read_private_{$capability_type}s"
 			);
+
+			if ( isset( $post_type['capabilities'] ) ) {
+				foreach ( $defaults['capabilities'] as $parameter => $value ) {
+					$opts['capabilities'][ $parameter ] = !is_null( $post_type['capabilities'][ $parameter ] ) ? $post_type['capabilities'][ $parameter ] : $defaults['capabilities'][ $parameter ];
+				}
+			} else {
+				$opts['capabilities'] = $defaults['capabilities'];
+			}
 
 			$opts['rewrite'] = array(
 				'ep_mask'						=> EP_PERMALINK,
