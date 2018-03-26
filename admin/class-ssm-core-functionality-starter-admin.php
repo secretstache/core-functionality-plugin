@@ -129,6 +129,12 @@ class SSM_Core_Functionality_Starter_Admin {
 			"labels" 			=> array(
 				'set_featured_image'	=> "Another formulation of Set featured image",
 				'remove_featured_image' => "Another formulation of Remove featured image"
+			),
+			"capabilities"		=> array(
+				'delete_others_posts' 	=> "delete_others_posts"
+			),
+			"rewrite" 			=> array(
+				'with_front'			=> TRUE
 			)
 		));
 
@@ -137,7 +143,6 @@ class SSM_Core_Functionality_Starter_Admin {
 		if ( !empty( $cpt_args ) ) {
 			do_action( 'custom_cpt_hook', $cpt_args );
 		}
-
 
 		// Registration of Taxonomies
 
@@ -155,6 +160,12 @@ class SSM_Core_Functionality_Starter_Admin {
 
 			"labels" 			=> array(
 				'add_new_item'	=> "Another formulation of Add new Type",
+			),
+			"capabilities"		=> array(
+				'assign_terms'			=> "edit_pages"
+			),
+			"rewrite" 			=> array(
+				'with_front'			=> TRUE
 			)
 		) );
 	
@@ -300,13 +311,21 @@ class SSM_Core_Functionality_Starter_Admin {
 				$opts['capabilities'] = $defaults['capabilities'];
 			}
 
-			$opts['rewrite'] = array(
+			$defaults['rewrite'] = array(
 				'ep_mask'						=> EP_PERMALINK,
 				'feeds'							=> FALSE,
 				'pages'							=> TRUE,
 				'slug'							=> esc_html__( strtolower( $slug ), $text_domain ),
 				'with_front'					=> FALSE
 			);
+
+			if ( isset( $post_type['rewrite'] ) ) {
+				foreach ( $defaults['rewrite'] as $parameter => $value ) {
+					$opts['rewrite'][ $parameter ] = !is_null( $post_type['rewrite'][ $parameter ] ) ? $post_type['rewrite'][ $parameter ] : $defaults['rewrite'][ $parameter ];
+				}
+			} else {
+				$opts['rewrite'] = $defaults['rewrite'];
+			}
 
 			$opts = apply_filters( "ssm-" . $slug . "-cpt-options", $opts );
 
@@ -385,13 +404,36 @@ class SSM_Core_Functionality_Starter_Admin {
 				$opts['labels'] = $defaults['labels'];
 			}
 
-			$opts['rewrite'] = array(
+			$defaults['capabilities'] = array(
+				'manage_terms' 		=> "manage_categories",
+				'edit_terms' 		=> "manage_categories",
+				'delete_terms' 		=> "manage_categories",
+				'assign_terms'		=> "edit_posts"
+			);
+
+			if ( isset( $taxonomy['capabilities'] ) ) {
+				foreach ( $defaults['capabilities'] as $parameter => $value ) {
+					$opts['capabilities'][ $parameter ] = !is_null( $taxonomy['capabilities'][ $parameter ] ) ? $taxonomy['capabilities'][ $parameter ] : $defaults['capabilities'][ $parameter ];
+				}
+			} else {
+				$opts['capabilities'] = $defaults['capabilities'];
+			}
+
+			$defaults['rewrite'] = array(
 				'ep_mask'			=> EP_PERMALINK,
 				'feeds'				=> FALSE,
 				'pages'				=> TRUE,
 				'slug'				=> esc_html__( strtolower( $slug ), $text_domain ),
 				'with_front'		=> FALSE
 			);
+
+			if ( isset( $taxonomy['rewrite'] ) ) {
+				foreach ( $defaults['rewrite'] as $parameter => $value ) {
+					$opts['rewrite'][ $parameter ] = !is_null( $taxonomy['rewrite'][ $parameter ] ) ? $taxonomy['rewrite'][ $parameter ] : $defaults['rewrite'][ $parameter ];
+				}
+			} else {
+				$opts['rewrite'] = $defaults['rewrite'];
+			}
 
 			$opts = apply_filters( "ssm-" . $slug . "-options", $opts );
 
