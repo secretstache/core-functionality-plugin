@@ -164,6 +164,7 @@ class SSM_Core_Functionality_Starter {
 
 		//  $this->loader->add_action( 'pre_insert_term', $plugin_admin, 'term_adding_prevent', 10, 2 );
 		//  $this->loader->add_action( 'delete_term_taxonomy', $plugin_admin, 'term_removing_prevent', 10, 1 );
+		//  $this->loader->add_action( 'save_post', $plugin_admin, 'set_default_object_terms', 30, 2 );
 
 		/**
 		 *  This approach provides: 

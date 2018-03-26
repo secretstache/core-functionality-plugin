@@ -419,4 +419,32 @@ class SSM_Core_Functionality_Starter_Admin {
 	
 	}
 
+	/**
+	 * Set default terms for custom taxonomies on post save.
+	 *	
+	 * @since    1.0.0
+	 */
+	function set_default_object_terms( $post_id, $post ) {
+
+		if ( 'publish' === $post->post_status ) {
+
+			$defaults = array(
+				'test_type' 	=> array( 'test_type_term' ),
+				// and so on...
+			);
+
+			$taxonomies = get_object_taxonomies( $post->post_type );
+
+			foreach ( (array) $taxonomies as $taxonomy ) {
+
+				$terms = wp_get_post_terms( $post_id, $taxonomy );
+				
+				if ( empty( $terms ) && array_key_exists( $taxonomy, $defaults ) ) {
+					wp_set_object_terms( $post_id, $defaults[$taxonomy], $taxonomy );
+				}
+
+			}
+		}
+	}	
+
 }
