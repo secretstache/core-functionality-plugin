@@ -398,4 +398,25 @@ class SSM_Core_Functionality_Starter_Admin {
 		
 	}
 
+	/**
+	 * Prevent removing terms from custom taxonomies.
+	 *	
+	 * @since    1.0.0
+	 */
+	function term_removing_prevent( $term_id ) {
+
+		$terms = array();
+		$taxonomies = array( "test_type" ); //list of taxonomies whose terms we don't allow to remove
+
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = array_merge( $terms, get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => false ) ) );
+		}
+
+		foreach ( $terms as $term ) {
+			if( get_term( $term_id )->slug === $term->slug ) 
+				wp_die( 'You cannot remove terms from this taxonomy.' );
+		}
+	
+	}
+
 }
