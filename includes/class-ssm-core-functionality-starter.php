@@ -158,21 +158,28 @@ class SSM_Core_Functionality_Starter {
 		 *	10, 20, 30 - priorities. (firstly we register post types, then - taxonomies, then - terms)
 		 *	1 - number of arguments to be passed to function (1 array of args in this case for all functions)
 		 */
-		 $this->loader->add_action( 'custom_cpt_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
-		 $this->loader->add_action( 'custom_taxonomies_hook', $plugin_admin, 'register_taxonomies', 20, 1 );
-		 $this->loader->add_action( 'custom_terms_hook', $plugin_admin, 'register_terms', 30, 1 );
 
-		//  $this->loader->add_action( 'pre_insert_term', $plugin_admin, 'term_adding_prevent', 10, 2 );
-		//  $this->loader->add_action( 'delete_term_taxonomy', $plugin_admin, 'term_removing_prevent', 10, 1 );
-		//  $this->loader->add_action( 'save_post', $plugin_admin, 'set_default_object_terms', 30, 2 );
+		/* Registrations */
 
-		/**
-		 *  This approach provides: 
-		 *	1) Flexibility
-		 *	2) Opportunity to pass arguments to function
-		 *	3) Opportunity to activate registration hook using do_action() from anywhere
-		 */
-		$this->loader->add_action( 'init', $plugin_admin, 'call_registration_hook' ); 
+		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' ); 
+
+		$this->loader->add_action( 'custom_cpt_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
+		$this->loader->add_action( 'custom_taxonomies_hook', $plugin_admin, 'register_taxonomies', 20, 1 );
+		$this->loader->add_action( 'custom_terms_hook', $plugin_admin, 'register_terms', 30, 1 );
+
+		/* Additional features */
+		
+		if ( current_theme_supports( 'term_adding_prevent' ) ) {
+			$this->loader->add_action( 'pre_insert_term', $plugin_admin, 'term_adding_prevent', 10, 2 );
+		}
+
+		if ( current_theme_supports( 'term_removing_prevent' ) ) {
+			$this->loader->add_action( 'delete_term_taxonomy', $plugin_admin, 'term_removing_prevent', 10, 1 );
+		}
+
+		if ( current_theme_supports( 'set_default_terms' ) ) {
+			$this->loader->add_action( 'save_post', $plugin_admin, 'set_default_terms', 30, 2 );
+		}
 
 	}
 
