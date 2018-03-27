@@ -100,104 +100,9 @@ class SSM_Core_Functionality_Starter_Admin {
 
 	}
 
-	/**
-	 * This function is hooked to 'init'.
-	 * Step by step, it adds items to main multidemensional array of post types,
-	 * taxonomies and terms and call corresponding hooks using do_action().
-	 *	
-	 * @since    1.0.0
-	 */
-	public function call_registration_hook() {
-
-		// Registration of CPT
-
-		$cpt_args = array();
-
-		array_push( $cpt_args, array(
-			"cpt_name" 			=> "test",
-			"slug" 				=> "ssm-test",
-			"text_domain" 		=> "ssm-test",
-			"single" 			=> "Test",
-			"plural" 			=> "Tests",
-
-			"capability_type" 	=> "page",
-			"menu_icon"			=> "dashicons-admin-page",
-			"menu_position"		=> 25,
-			"show_in_menu"		=> TRUE,
-			"supports" 			=> array( 'title', 'editor', 'thumbnail' ),
-
-			"labels" 			=> array(
-				'set_featured_image'	=> "Another formulation of Set featured image",
-				'remove_featured_image' => "Another formulation of Remove featured image"
-			),
-			"capabilities"		=> array(
-				'delete_others_posts' 	=> "delete_others_posts"
-			),
-			"rewrite" 			=> array(
-				'with_front'			=> TRUE
-			)
-		));
-
-		// new post types go here...
-
-		if ( !empty( $cpt_args ) ) {
-			do_action( 'custom_cpt_hook', $cpt_args );
-		}
-
-		// Registration of Taxonomies
-
-		$tax_args = array();
-
-		array_push( $tax_args, array(
-			"tax_name" 		=> "test_type",
-			"cpt_name" 		=> "test",
-			"slug" 			=> "ssm-test-type",
-			"text_domain"	=> "ssm-test-type",
-			"single" 		=> "Type",
-			"plural" 		=> "Types",
-			
-			'hierarchical' 		=> TRUE,
-
-			"labels" 			=> array(
-				'add_new_item'	=> "Another formulation of Add new Type",
-			),
-			"capabilities"		=> array(
-				'assign_terms'			=> "edit_pages"
-			),
-			"rewrite" 			=> array(
-				'with_front'			=> TRUE
-			)
-		) );
-	
-		// new taxonomies go here...
-
-		if ( !empty( $tax_args ) ) {
-			do_action( 'custom_taxonomies_hook', $tax_args );
-		}
-
-
-		// Registration of Terms
-
-		$terms_args = array();
-
-		array_push( $terms_args, array(
-			"term_name" 		=> "Term",
-			"taxonomy_name" 	=> "test_type",
-			"slug"				=> "test_type_term",
-
-			"description" 		=> "Test description"
-		) );
-		
-		// new terms go here...
-
-		if ( !empty( $terms_args ) ) {
-			do_action( 'custom_terms_hook', $terms_args );
-		}
-
-	}
+	/* Immutable functions */
 
 	/**
-	 * This function is fired after 'custom_registration_hook' was called.
 	 * It extracts the array of cpt's, loop through each of them and register it.
 	 *	
 	 * @since    1.0.0
@@ -336,7 +241,6 @@ class SSM_Core_Functionality_Starter_Admin {
 	}
 
 	/**
-	 * This function is fired after 'custom_taxonomies_hook' was called.
 	 * It extracts the array of taxonomies, loop through each of them and register it to the corresponding cpt's.
 	 *	
 	 * @since    1.0.0
@@ -444,7 +348,6 @@ class SSM_Core_Functionality_Starter_Admin {
 	}
 
 	/**
-	 * This function is fired after 'custom_terms_hook' was called.
 	 * It extracts the array of terms, loop through each of them and register it to the corresponding taxonomies.
 	 *	
 	 * @since    1.0.0
@@ -483,6 +386,104 @@ class SSM_Core_Functionality_Starter_Admin {
 		}
 
 	}
+
+	/* Mutable functions */
+
+	/**
+	 * Step by step, it adds items to main multidemensional array of post types,
+	 * taxonomies and terms and call corresponding hooks using do_action().
+	 *	
+	 * @since    1.0.0
+	 */
+	public function call_registration() {
+
+		// Registration of CPT
+
+		$cpt_args = array();
+
+		array_push( $cpt_args, array(
+			"cpt_name" 			=> "test",
+			"slug" 				=> "ssm-test",
+			"text_domain" 		=> "ssm-test",
+			"single" 			=> "Test",
+			"plural" 			=> "Tests",
+
+			"capability_type" 	=> "page",
+			"menu_icon"			=> "dashicons-admin-page",
+			"menu_position"		=> 25,
+			"show_in_menu"		=> TRUE,
+			"supports" 			=> array( 'title', 'editor', 'thumbnail' ),
+
+			"labels" 			=> array(
+				'set_featured_image'	=> "Another formulation of Set featured image",
+				'remove_featured_image' => "Another formulation of Remove featured image"
+			),
+			"capabilities"		=> array(
+				'delete_others_posts' 	=> "delete_others_posts"
+			),
+			"rewrite" 			=> array(
+				'with_front'			=> TRUE
+			)
+		));
+
+		// new post types go here...
+
+		if ( !empty( $cpt_args ) ) {
+			do_action( 'custom_cpt_hook', $cpt_args );
+		}
+
+		// Registration of Taxonomies
+
+		$tax_args = array();
+
+		array_push( $tax_args, array(
+			"tax_name" 		=> "test_type",
+			"cpt_name" 		=> "test",
+			"slug" 			=> "ssm-test-type",
+			"text_domain"	=> "ssm-test-type",
+			"single" 		=> "Type",
+			"plural" 		=> "Types",
+			
+			'hierarchical' 		=> TRUE,
+
+			"labels" 			=> array(
+				'add_new_item'	=> "Another formulation of Add new Type",
+			),
+			"capabilities"		=> array(
+				'assign_terms'			=> "edit_pages"
+			),
+			"rewrite" 			=> array(
+				'with_front'			=> TRUE
+			)
+		) );
+	
+		// new taxonomies go here...
+
+		if ( !empty( $tax_args ) ) {
+			do_action( 'custom_taxonomies_hook', $tax_args );
+		}
+
+
+		// Registration of Terms
+
+		$terms_args = array();
+
+		array_push( $terms_args, array(
+			"term_name" 		=> "Term",
+			"taxonomy_name" 	=> "test_type",
+			"slug"				=> "test_type_term",
+
+			"description" 		=> "Test description"
+		) );
+		
+		// new terms go here...
+
+		if ( !empty( $terms_args ) ) {
+			do_action( 'custom_terms_hook', $terms_args );
+		}
+
+	}
+
 
 	/**
 	 * Prevent adding new terms to custom taxonomies.
@@ -523,7 +524,7 @@ class SSM_Core_Functionality_Starter_Admin {
 	 *	
 	 * @since    1.0.0
 	 */
-	function set_default_object_terms( $post_id, $post ) {
+	function set_default_terms( $post_id, $post ) {
 
 		if ( 'publish' === $post->post_status ) {
 
