@@ -151,7 +151,7 @@ class SSM_Core_Functionality_Starter_Admin {
 			$opts = array();
 
 			foreach ( $defaults['general'] as $parameter => $value ) {
-				$$parameter = !is_null( $post_type[ $parameter ] ) ? $post_type[ $parameter ] : $defaults['general'][ $parameter ];
+				$$parameter = ( isset( $post_type[ $parameter] ) && !is_null( $post_type[ $parameter ] ) ) ? $post_type[ $parameter ] : $defaults['general'][ $parameter ];
 				$opts[ $parameter ] = $$parameter;
 			}
 
@@ -272,7 +272,7 @@ class SSM_Core_Functionality_Starter_Admin {
 			$opts = array();
 
 			foreach ( $defaults['general'] as $parameter => $value ) {
-				$$parameter = !is_null( $taxonomy[ $parameter ] ) ? $taxonomy[ $parameter ] : $defaults['general'][ $parameter ];
+				$$parameter = ( isset( $taxonomy[ $parameter ] ) && !is_null( $taxonomy[ $parameter ] ) ) ? $taxonomy[ $parameter ] : $defaults['general'][ $parameter ];
 				$opts[ $parameter ] = $$parameter;
 			}
 
@@ -373,7 +373,7 @@ class SSM_Core_Functionality_Starter_Admin {
 			$opts = array();
 
 			foreach ( $defaults as $parameter => $value ) {
-				$$parameter = !is_null( $term[ $parameter ] ) ? $term[ $parameter ] : $defaults[ $parameter ];
+				$$parameter = ( isset( $term[ $parameter ] ) && !is_null( $term[ $parameter ] ) ) ? $term[ $parameter ] : $defaults[ $parameter ];
 				$opts[ $parameter ] = $$parameter;
 			}
 
