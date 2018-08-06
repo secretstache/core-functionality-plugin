@@ -161,7 +161,10 @@ class SSM_Core_Functionality_Starter {
 
 		/* Registrations */
 
-		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' ); 
+		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
+		
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'check_for_required_plugins' );
+		$this->loader->add_action( 'custom_required_plugins_hook', $plugin_admin, 'check_required_plugins', 10, 1 );
 
 		$this->loader->add_action( 'custom_cpt_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
 		$this->loader->add_action( 'custom_taxonomies_hook', $plugin_admin, 'register_taxonomies', 20, 1 );
