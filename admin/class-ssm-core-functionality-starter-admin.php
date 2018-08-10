@@ -491,12 +491,12 @@ class SSM_Core_Functionality_Starter_Admin {
 
 		$plugins_args = array();
 
-		array_push( $plugins_args, array(
-			"plugin_name"	=> "Radio Buttons for Taxonomies",
-			"plugin_slug"	=> "radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php",
-			"type"			=> "error",
-			"plugin_link" 	=> "https://wordpress.org/plugins/radio-buttons-for-taxonomies/"
-		) );
+		// array_push( $plugins_args, array(
+		// 	"plugin_name"	=> "Radio Buttons for Taxonomies",
+		// 	"plugin_slug"	=> "radio-buttons-for-taxonomies/radio-buttons-for-taxonomies.php",
+		// 	"type"			=> "error",
+		// 	"plugin_link" 	=> "https://wordpress.org/plugins/radio-buttons-for-taxonomies/"
+		// ) );
 
 		// array_push( $plugins_args, array(
 		// 	"plugin_name"	=> "Gutenberg",
@@ -621,6 +621,397 @@ class SSM_Core_Functionality_Starter_Admin {
 			}
 		}
 
+	}
+
+
+	/* Inhereted from ssm-core */
+
+
+	/**
+	 * Makes the login screen's logo link to your homepage, instead of to WordPress.org.
+	 * @since 1.0.0
+	 */
+	function login_headerurl() {
+		return home_url();
+	}
+
+	/**
+	 * Makes the login screen's logo title attribute your site title, instead of 'WordPress'.
+	 * @since 1.0.0
+	 */
+	function login_headertitle() {
+		return get_bloginfo( 'name' );
+	}
+
+	/**
+	 * Makes WordPress-generated emails appear 'from' your WordPress site name, instead of from 'WordPress'.
+	 * @since 1.0.0
+	 */
+	function mail_from_name() {
+		return get_option( 'blogname' );
+	}
+
+	/**
+	 * Makes WordPress-generated emails appear 'from' your WordPress admin email address.
+	 * Disabled by default, in case you don't want to reveal your admin email.
+	 * @since 1.0.0
+	 */
+	function wp_mail_from() {
+		return get_option( 'admin_email' );
+	}
+
+	/**
+	 * Removes the WP icon from the admin bar
+	 * See: http://wp-snippets.com/remove-wordpress-logo-admin-bar/
+	 * @since 1.0.0
+	 */
+	function remove_wp_icon_from_admin_bar() {
+		global $wp_admin_bar;
+		$wp_admin_bar->remove_menu('wp-logo');
+	}
+
+	/**
+	 * Modify the admin footer text
+	 * See: http://wp-snippets.com/change-footer-text-in-wp-admin/
+	 * @since 1.0.0
+	 */
+	function admin_footer_text () {
+
+		$footer_text = get_option('ssm_core_agency_name') != NULL ? get_option('ssm_core_agency_name') : 'Secret Stache Media';
+		$footer_link = get_option('ssm_core_agency_url') != NULL ? get_option('ssm_core_agency_url') : 'http://secretstache.com';
+
+		echo 'Built by <a href="' . $footer_link . '" target="_blank">' . $footer_text . '</a> with WordPress.';
+	}
+
+	/**
+	 * Hide Advanced Custom Fields to Users
+	 * @since 1.0.0
+	 */
+	function remove_acf_menu() {
+
+		// provide a list of usernames who can edit custom field definitions here
+		$acfAdmins = get_option('ssm_core_acf_admin_users') != NULL ? get_option('ssm_core_acf_admin_users') : array(1);
+	
+		// get the current user
+		$current_user = wp_get_current_user();
+	
+		if ( $acfAdmins != NULL ) {
+	
+		// match and remove if needed
+		if( !in_array( $current_user->ID, $acfAdmins ) ) {
+			remove_menu_page('edit.php?post_type=acf-field-group');
+		}
+	
+		}
+	}
+
+	/**
+	 * Remove Unnecessary User Roles
+	 * @since 1.0.0
+	 */
+
+	function remove_roles() {
+
+		remove_role( 'subscriber' );
+		remove_role( 'contributor' );
+	
+	}
+
+	/**
+	 * Remove default link for images
+	 * @since 1.0.0
+	 */
+	function remove_image_link() {
+
+		$image_set = get_option( 'image_default_link_type' );
+		
+		if ($image_set !== 'none') {
+			update_option('image_default_link_type', 'none');
+		}
+	}
+
+	/**
+	 * Show Kitchen Sink in WYSIWYG Editor by default
+	 * @since 1.0.0
+	 */
+	function show_kitchen_sink($args) {
+		$args['wordpress_adv_hidden'] = false;
+		return $args;
+	}
+
+	/**
+	 * Disable unused widgets.
+	 * @since 1.0.0
+	 */
+	function remove_widgets() {
+
+		unregister_widget( 'WP_Widget_Pages' );
+		unregister_widget( 'WP_Widget_Calendar' );
+		// unregister_widget( 'WP_Widget_Archives' );
+		unregister_widget( 'WP_Widget_Meta' );
+		unregister_widget( 'WP_Widget_Recent_Posts' );
+		unregister_widget( 'WP_Widget_Recent_Comments' );
+		unregister_widget( 'WP_Widget_RSS' );
+		unregister_widget( 'WP_Widget_Tag_Cloud' );
+	
+	}
+
+	/**
+	 * Modifies the TinyMCE settings array
+	 * @since 1.0.0
+	 */
+	function update_tiny_mce( $init ) {
+
+		$init['block_formats'] = 'Paragraph=p;Heading 2=h2; Heading 3=h3; Heading 4=h4; Blockquote=blockquote';
+		return $init;
+	
+	}
+
+	/**
+	 * Remove <p> tags from around images
+	 * See: http://css-tricks.com/snippets/wordpress/remove-paragraph-tags-from-around-images/
+	 * @since 1.0.0
+	 */
+	function remove_ptags_on_images( $content ) {
+
+		return preg_replace( '/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content );
+	
+	}
+
+	/**
+	 * Remove the injected styles for the [gallery] shortcode
+	 * @since 1.0.0
+	 */
+	function remove_gallery_styles( $css ) {
+
+		return preg_replace( "!<style type='text/css'>(.*?)</style>!s", '', $css );
+	
+	}
+
+	/**
+	* Set Home Page Programmatically if a Page Called "Home" Exists
+	* @since 1.0.0
+	*/
+	function force_homepage() {
+		$homepage = get_page_by_title( 'Home' );
+	
+		if ( $homepage ) {
+			update_option( 'page_on_front', $homepage->ID );
+			update_option( 'show_on_front', 'page' );
+		}
+	}
+
+	/**
+	* Removes unnecessary menu items from add new dropdown
+	* @since 1.0.0
+	*/
+	function remove_wp_nodes() {
+		global $wp_admin_bar;
+		$wp_admin_bar->remove_node( 'new-link' );
+		$wp_admin_bar->remove_node( 'new-media' );
+		$wp_admin_bar->remove_node( 'new-user' );
+	}
+	
+	/**
+	 * Filter Yoast SEO Metabox Priority
+	 * @since 1.0.0
+	 */
+	function yoast_seo_metabox_priority() {
+		return 'low';
+	}
+
+	/**
+	 * Add SSM widget to the dashboard.
+	 */
+	function hosting_dashboard_widget() {
+
+		wp_add_dashboard_widget(
+					'ssm_main_dashboard_widget', // Widget slug.
+					'Managed Hosting by Secret Stache Media', // Title.
+					array( $this, 'hosting_widget_function') // Display function.
+			);  
+	}
+	/**
+	 * Create the function to output the contents of our Dashboard Widget.
+	 */
+	function hosting_widget_function() {
+	
+		$html = '<p>As a customer of our managed hosting service, you can rest assured that your software is kept up to date and served on the best hosting technology available.</p>';
+		$html .= '<p>You are also covered by our <strong>Code Warantee</strong>, so if you see something that doesn\'t seem right, feel free to <a href="mailto:help@secretstache.com">reach out</a>.';
+	
+		echo $html;
+	
+	}
+
+	function ssm_core_settings() {
+
+		register_setting( 'ssm-core-settings-group', 'ssm_core_acf_admin_users' );
+	
+		register_setting( 'ssm-core-settings-group', 'ssm_core_agency_name' );
+		register_setting( 'ssm-core-settings-group', 'ssm_core_agency_url' );
+	
+		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo' );
+		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_width' );
+		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_height' );
+	
+	
+		if ( current_theme_supports( 'ssm-admin-branding' ) ) {
+			add_settings_section( 'ssm-core-agency-options', 'Agency Options', array( $this, 'ssm_core_agency_options'), 'ssm_core');
+		}
+	
+		add_settings_field( 'ssm-core-agency-name', 'Agency Name', array( $this, 'ssm_core_agency_name' ), 'ssm_core', 'ssm-core-agency-options' );
+		add_settings_field( 'ssm-core-agency-url', 'Agency URL', array( $this, 'ssm_core_agency_url' ), 'ssm_core', 'ssm-core-agency-options' );
+		add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssm_core_login_logo' ), 'ssm_core', 'ssm-core-agency-options' );
+	
+		
+		if ( current_theme_supports( 'ssm-acf' ) ) {
+			add_settings_section( 'ssm-core-acf-options', 'ACF Options', array( $this,  'ssm_acf_options' ), 'ssm_core' );
+		}
+	
+		add_settings_field(
+			'ssm-core-acf-admin-users',
+			'Admin users who need access to ACF',
+			array( $this, 'ssm_core_acf_admin_users' ),
+			'ssm_core',
+			'ssm-core-acf-options',
+			[
+				'admins' => get_users( array('role' => 'administrator') )
+			]
+		);
+	}
+	
+	
+	function ssm_core_agency_options() {
+
+	}
+	
+	function ssm_core_agency_name() {
+		$agencyName = $this->ssm_get_option('ssm_core_agency_name') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_agency_name') ) : 'Secret Stache Media';
+		echo '<input type="text" name="ssm_core_agency_name" value="' . $agencyName . '" class="regular-text"/>';
+	}
+	
+	function ssm_core_agency_url() {
+		$agencyURL = $this->ssm_get_option('ssm_core_agency_url') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_agency_url') ) : 'http://secretstache.com';
+		echo '<input type="text" name="ssm_core_agency_url" value="' . $agencyURL . '" class="regular-text url"/>';
+		echo '<p class="description">Include <code>http(s)://</code></p>';
+	}
+	
+	function ssm_core_login_logo() {
+		$defaultLogo = SSMC_ASSETS_URL . 'images/login-logo.png';
+		$loginLogo = $this->ssm_get_option('ssm_core_login_logo') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_login_logo') ) : $defaultLogo;
+		$width = $this->ssm_get_option('ssm_core_login_logo_width') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_login_logo_width') ) : '230px';
+		$height = $this->ssm_get_option('ssm_core_login_logo_height') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_login_logo_height') ) : 'auto';
+	
+		echo '<div class="login-logo-wrap">';
+		echo '<img src="' . $loginLogo . '" id="logo-preview" class="login-logo" alt="Login Logo" style="height: ' . $height . '; width: ' . $width . '; "/>';
+		echo '<div class="media-buttons">';
+		echo '<input type="button" id="upload-image-button" class="button button-secondary" value="Upload Logo" />';
+		echo '<input type="button" id="remove-image-button" class="button button-secondary" value="Remove Logo" />';
+		echo '</div>';
+		echo '<input type="hidden" id="ssm-core-login-logo" name="ssm_core_login_logo" value="' . $loginLogo . '">';
+		echo '<input type="hidden" id="ssm-core-login-logo-width" name="ssm_core_login_logo_width" value="' . $width . '">';
+		echo '<input type="hidden" id="ssm-core-login-logo-height" name="ssm_core_login_logo_height" value="' . $height . '">';
+		echo '</div>';
+	}
+	
+	function ssm_acf_options() {
+	
+	}
+	
+	function ssm_core_acf_admin_users( $args ) {
+		$admins = $args['admins'];
+		$acfAdmins = $this->ssm_get_option('ssm_core_acf_admin_users') != NULL ? $this->ssm_get_option('ssm_core_acf_admin_users') : array();
+	
+		?>
+		<select id="ssm-core-acf-admin-users" name="ssm_core_acf_admin_users[]" multiple style="min-width: 200px;">
+			<?php foreach ( $admins as $admin ) { ?>
+				<?php $selected = in_array( $admin->ID, $acfAdmins ) ? ' selected' : ''; ?>
+				<option value="<?php echo $admin->ID; ?>"<?php echo $selected; ?>>
+					<?php echo $admin->user_login; ?>
+				</option>
+			<?php } ?>
+		</select>
+		<?php
+	}
+	
+	function add_ssm_options_page() {
+
+		if ( ! current_theme_supports('ssm-admin-branding') && ! current_theme_supports('ssm-admin-branding') )
+		  return;
+	
+		add_submenu_page(
+		'options-general.php',
+		  'SSM Core', // page title
+		  'Core', // menu title
+		'manage_options',
+		'ssm_core',
+		array( $this, 'ssm_core_options_page' )
+	  );
+	
+	}
+	
+	function ssm_core_options_page() {
+		require_once( SSMC_DIR . 'ssm_core_templates/admin-options.php' );
+	}
+
+	/**
+	 * Replaces the login screen's WordPress logo with the 'login-logo.png' in your child theme images folder.
+	 * Disabled by default. Make sure you have a login logo before using this function!
+	 * Updated 2.0.1: Assumes SVG logo by default
+	 * @since 1.0.0
+	 */
+	function login_logo() {
+
+		$defaultLogo = SSMC_ASSETS_URL . 'images/login-logo.png';
+		
+		$background_image =  $this->ssm_get_option('ssm_core_login_logo') != NULL ? $this->ssm_get_option('ssm_core_login_logo') : $defaultLogo;
+		$height =  $this->ssm_get_option('ssm_core_login_logo_height') != NULL ? $this->ssm_get_option('ssm_core_login_logo_height') : '128px';
+		$width =  $this->ssm_get_option('ssm_core_login_logo_width') != NULL ? $this->ssm_get_option('ssm_core_login_logo_width') : '150px';
+		
+			?>
+			<style type="text/css">
+				body.login div#login h1 a {
+					background-image: url(<?php echo $background_image; ?>) !important;
+					background-repeat: no-repeat;
+					background-size: cover;
+					height: <?php echo $height; ?>;
+					margin-bottom: 15px;
+					width: <?php echo $width; ?>;
+				}
+			</style>
+			<?php
+		}
+	
+	function load_admin_scripts( $hook ) {
+
+		if ( $hook != 'settings_page_ssm_core' )
+			return;
+	
+		wp_register_style( 'ssm-core-admin-css', SSMC_ASSETS_URL . 'styles/admin.css', array(), SSMC_VERSION , 'all' );
+		wp_enqueue_style( 'ssm-core-admin-css' );
+	
+		wp_enqueue_media();
+	
+		wp_register_script( 'ssm-core-admin-js', SSMC_ASSETS_URL . 'scripts/admin.js', array('jquery'), SSMC_VERSION, true );
+	
+		$login_logo_array = array(
+			'url' => SSMC_ASSETS_URL . 'images/login-logo.png',
+		);
+	
+		wp_localize_script( 'ssm-core-admin-js', 'login_logo', $login_logo_array );
+	
+		wp_enqueue_script( 'ssm-core-admin-js' );
+	
+	}
+
+	// Get prb option value
+	function ssm_get_option( $option_name, $default = '' ) {
+
+		if ( \get_option('ssm_core_options')[$option_name] != NULL ) {
+		return \get_option('ssm_core_options')[$option_name];
+		} else {
+		return $default;
+		}
 	}
 
 }

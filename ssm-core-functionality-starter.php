@@ -80,3 +80,12 @@ function run_ssm_core_functionality_starter() {
 
 }
 run_ssm_core_functionality_starter();
+
+
+/**
+ * Define plugin constants (inhereted from ssm-core)
+ */
+define( 'SSMC_VERSION', '0.2.3' );
+define( 'SSMC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) ) );
+define( 'SSMC_DIR', plugin_dir_path( __FILE__ ) );
+define( 'SSMC_ASSETS_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'ssm_core_assets' ) );

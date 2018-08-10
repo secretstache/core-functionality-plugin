@@ -154,23 +154,77 @@ class SSM_Core_Functionality_Starter {
 
 		$plugin_admin = new SSM_Core_Functionality_Starter_Admin( $this->get_plugin_name(), $this->get_version() );
 
+		/* Testing purposes */
+
+		add_theme_support( 'term_adding_prevent' );
+		add_theme_support( 'term_removing_prevent' );
+		add_theme_support( 'set_default_terms' );
+		add_theme_support( 'ssm-required-plugins' );
+
+		add_theme_support( 'ssm-acf' );
+ 		add_theme_support( 'ssm-admin-branding' );
+  		add_theme_support( 'ssm-admin-setup' );
+		add_theme_support( 'ssm-dashboard-widgets' );
+		add_theme_support( 'ssm-options' );
+		
+		/* Inhereted from ssm-core */
+
+		if ( current_theme_supports( 'ssm-acf' ) ) {
+			$this->loader->add_action( 'admin_init', $plugin_admin, 'remove_acf_menu');
+		}
+
+		if ( current_theme_supports( 'ssm-admin-branding' ) ) {
+			$this->loader->add_filter( 'login_headerurl', $plugin_admin, 'login_headerurl' );
+			$this->loader->add_filter( 'login_headertitle', $plugin_admin, 'login_headertitle' );
+			$this->loader->add_filter( 'wp_mail_from_name', $plugin_admin, 'mail_from_name' );
+			$this->loader->add_filter( 'wp_mail_from', $plugin_admin, 'wp_mail_from' );
+			$this->loader->add_action( 'wp_before_admin_bar_render', $plugin_admin, 'remove_wp_icon_from_admin_bar' );
+			$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'admin_footer_text' );
+		}
+
+		if ( current_theme_supports( 'ssm-admin-setup' ) ) {
+			$this->loader->add_action( 'init', $plugin_admin, 'remove_roles');  
+			$this->loader->add_action( 'admin_init', $plugin_admin, 'remove_image_link', 10);  
+			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'show_kitchen_sink' );
+			$this->loader->add_action( 'widgets_init', $plugin_admin, 'remove_widgets');
+			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'update_tiny_mce' );
+			$this->loader->add_filter( 'the_content', $plugin_admin, 'remove_ptags_on_images' );
+			$this->loader->add_filter( 'gallery_style', $plugin_admin, 'remove_gallery_styles' );
+			$this->loader->add_action( 'admin_init', $plugin_admin, 'force_homepage');
+			$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'remove_wp_nodes', 999 );
+			$this->loader->add_filter( 'wpseo_metabox_prio', $plugin_admin, 'yoast_seo_metabox_priority' );
+		}
+
+		if ( current_theme_supports( 'ssm-dashboard-widgets' ) ) {
+			$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'hosting_dashboard_widget' );
+		}
+
+		if ( current_theme_supports( 'ssm-options' ) ) {
+			$this->loader->add_action( 'admin_init', $plugin_admin, 'ssm_core_settings' );
+			$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_ssm_options_page', 99 );
+			$this->loader->add_action( 'login_enqueue_scripts', $plugin_admin, 'login_logo' );
+			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'load_admin_scripts' );
+		}
+
 		/**
 		 *	10, 20, 30 - priorities. (firstly we register post types, then - taxonomies, then - terms)
 		 *	1 - number of arguments to be passed to function (1 array of args in this case for all functions)
 		 */
 
 		/* Registrations */
-
-		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
 		
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'check_for_required_plugins' );
-		$this->loader->add_action( 'custom_required_plugins_hook', $plugin_admin, 'check_required_plugins', 10, 1 );
+		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
 
 		$this->loader->add_action( 'custom_cpt_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
 		$this->loader->add_action( 'custom_taxonomies_hook', $plugin_admin, 'register_taxonomies', 20, 1 );
 		$this->loader->add_action( 'custom_terms_hook', $plugin_admin, 'register_terms', 30, 1 );
 
 		/* Additional features */
+
+		if ( current_theme_supports( 'ssm-required-plugins' ) ) {
+			$this->loader->add_action( 'admin_notices', $plugin_admin, 'check_for_required_plugins' );
+			$this->loader->add_action( 'custom_required_plugins_hook', $plugin_admin, 'check_required_plugins', 10, 1 );	
+		}
 		
 		if ( current_theme_supports( 'term_adding_prevent' ) ) {
 			$this->loader->add_action( 'pre_insert_term', $plugin_admin, 'term_adding_prevent', 10, 2 );
