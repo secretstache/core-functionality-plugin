@@ -1,0 +1,147 @@
+{
+    "key": "group_5b286c67141a9",
+    "title": "3. Expert Session Information",
+    "fields": [
+        {
+            "key": "field_5b2871606d28a",
+            "label": "Session Form",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "Session forms are managed on the <a href=\"\/wp-admin\/admin.php?page=acf-options-brand-settings#acf-group_5b5a6360dfd16\" target=\"_blank\">Brand Settings Page<\/a>.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_5b2873d2296a6",
+            "label": "Select an Expert",
+            "name": "session_expert",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "ccd_expert"
+            ],
+            "taxonomy": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
+        {
+            "key": "field_5b28726f805b4",
+            "label": "Participation Ends:",
+            "name": "participation_ends",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "manually": "Manually",
+                "scheduled": "On Specified Date & Time"
+            },
+            "default_value": [
+                "manually"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5b29bf9117bfb",
+            "label": "Status",
+            "name": "participation_status",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b28726f805b4",
+                        "operator": "==",
+                        "value": "manually"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Open",
+            "ui_off_text": "Closed"
+        },
+        {
+            "key": "field_5b29bfd117bfc",
+            "label": "End Date & Time",
+            "name": "participation_end_date_time",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5b28726f805b4",
+                        "operator": "==",
+                        "value": "scheduled"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "F j, Y g:i a",
+            "return_format": "Y-m-d H:i:s",
+            "first_day": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "ccd_post_format:expert-sessions"
+            },
+            {
+                "param": "page",
+                "operator": "!=",
+                "value": "533"
+            }
+        ]
+    ],
+    "menu_order": 5,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1533499988
+}

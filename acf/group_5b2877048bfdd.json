@@ -1,0 +1,46 @@
+{
+    "key": "group_5b2877048bfdd",
+    "title": "4. Show Notes",
+    "fields": [
+        {
+            "key": "field_5b2877048f1aa",
+            "label": "4. Show Notes",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "editor-intro",
+                "id": ""
+            },
+            "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet dolor in laoreet interdum. Sed id mi vel velit hendrerit finibus ut id est.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_taxonomy",
+                "operator": "==",
+                "value": "ccd_post_format:podcasts"
+            },
+            {
+                "param": "page",
+                "operator": "!=",
+                "value": "533"
+            }
+        ]
+    ],
+    "menu_order": 10,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1532648053
+}

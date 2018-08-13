@@ -1,0 +1,505 @@
+{
+    "key": "group_5b5143313806f",
+    "title": "Content Blocks",
+    "fields": [
+        {
+            "key": "field_5b514352b070a",
+            "label": "Content Blocks",
+            "name": "content_blocks",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "hide-label",
+                "id": ""
+            },
+            "collapsed": "field_5b51454cf4c6c",
+            "min": 1,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Content Block",
+            "sub_fields": [
+                {
+                    "key": "field_5b51454cf4c6c",
+                    "label": "Content Block",
+                    "name": "content_block",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "choices": {
+                        "Recent Posts": "Recent Posts",
+                        "Exclusive Content": "Exclusive Content",
+                        "Upcoming Events": "Upcoming Events",
+                        "Advertisement": "Advertisement",
+                        "Call to Action": "Call to Action",
+                        "Video": "Video",
+                        "Text Editor": "Text Editor",
+                        "Taxonomy Navigation": "Taxonomy Navigation"
+                    },
+                    "default_value": [],
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "ui": 0,
+                    "return_format": "value",
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_5b515209d36d6",
+                    "label": "Section Title",
+                    "name": "section_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "!=",
+                                "value": ""
+                            },
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "!=",
+                                "value": "Call to Action"
+                            },
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "!=",
+                                "value": "Recent Posts"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "100",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "Section Title (Optional)",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5b5147226c835",
+                    "label": "Included Post Formats",
+                    "name": "included_post_formats",
+                    "type": "taxonomy",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Recent Posts"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "li-one-third",
+                        "id": ""
+                    },
+                    "taxonomy": "ccd_post_format",
+                    "field_type": "checkbox",
+                    "add_term": 0,
+                    "save_terms": 1,
+                    "load_terms": 1,
+                    "return_format": "id",
+                    "multiple": 0,
+                    "allow_null": 0
+                },
+                {
+                    "key": "field_5b535e3a13b1b",
+                    "label": "Featured Post",
+                    "name": "featured_post",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Recent Posts"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "post"
+                    ],
+                    "taxonomy": [],
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1
+                },
+                {
+                    "key": "field_5b5153263c565",
+                    "label": "Posts to show",
+                    "name": "posts_to_show",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Exclusive Content"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "post"
+                    ],
+                    "taxonomy": [],
+                    "filters": [
+                        "search",
+                        "taxonomy"
+                    ],
+                    "elements": "",
+                    "min": "",
+                    "max": "",
+                    "return_format": "id"
+                },
+                {
+                    "key": "field_5b59ec9d430c5",
+                    "label": "Number of events to show",
+                    "name": "number_of_events_to_show",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Upcoming Events"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 5,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_5b520bd06981f",
+                    "label": "Advertiser Options",
+                    "name": "advertiser_options",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Advertisement"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "random": "Random Sponsor",
+                        "specific": "Specific Sponsor"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "random",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_5b64d8e0692a5",
+                    "label": "Ad Display Options",
+                    "name": "ad_display_options",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b520bd06981f",
+                                "operator": "!=",
+                                "value": "specific"
+                            },
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Advertisement"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "primary": "Primary Square",
+                        "secondary": "Secondary Square",
+                        "media": "Media Square"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_5b520c1669820",
+                    "label": "Select Sponsor",
+                    "name": "sponsor",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b520bd06981f",
+                                "operator": "==",
+                                "value": "specific"
+                            },
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Advertisement"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "ccd_sponsor"
+                    ],
+                    "taxonomy": [],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "ui": 1
+                },
+                {
+                    "key": "field_5b520c8c69823",
+                    "label": "Headline",
+                    "name": "cta_headline",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Call to Action"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5b520cc569824",
+                    "label": "Subheadline",
+                    "name": "cta_subheadline",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Call to Action"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5b520cda69825",
+                    "label": "URL",
+                    "name": "cta_url",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Call to Action"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5b520cfe69826",
+                    "label": "oEmbed URL",
+                    "name": "video_url",
+                    "type": "oembed",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Video"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "width": "",
+                    "height": ""
+                },
+                {
+                    "key": "field_5b520dfd4f5dc",
+                    "label": "Text Editor",
+                    "name": "editor",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Text Editor"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
+                },
+                {
+                    "key": "field_5b520f299a288",
+                    "label": "Taxonomy Navigation",
+                    "name": "taxonomy",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5b51454cf4c6c",
+                                "operator": "==",
+                                "value": "Taxonomy Navigation"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "hide-label",
+                        "id": ""
+                    },
+                    "choices": {
+                        "categories": "Categories",
+                        "post-formats": "Post Formats"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "category",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "modified": 1533337367
+}

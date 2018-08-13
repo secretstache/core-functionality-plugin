@@ -58,6 +58,15 @@ class SSM_Core_Functionality_Starter {
 	protected $version;
 
 	/**
+	 * The plugin's root dir
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $version    The plugin's root dir
+	 */
+	protected $plugin_root_dir;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -73,6 +82,8 @@ class SSM_Core_Functionality_Starter {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'ssm-core-functionality-starter';
+
+		$this->plugin_root_dir = WP_PLUGIN_DIR . "/" . get_plugin_data( plugin_dir_path(__FILE__) )['TextDomain'];
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -152,7 +163,7 @@ class SSM_Core_Functionality_Starter {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new SSM_Core_Functionality_Starter_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new SSM_Core_Functionality_Starter_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_root_dir() );
 
 		/* Testing purposes */
 
@@ -160,6 +171,7 @@ class SSM_Core_Functionality_Starter {
 		add_theme_support( 'term_removing_prevent' );
 		add_theme_support( 'set_default_terms' );
 		add_theme_support( 'ssm-required-plugins' );
+		add_theme_support( 'ssm-field-factory' );
 
 		add_theme_support( 'ssm-acf' );
  		add_theme_support( 'ssm-admin-branding' );
@@ -185,11 +197,11 @@ class SSM_Core_Functionality_Starter {
 		if ( current_theme_supports( 'ssm-admin-setup' ) ) {
 			$this->loader->add_action( 'init', $plugin_admin, 'remove_roles');  
 			$this->loader->add_action( 'admin_init', $plugin_admin, 'remove_image_link', 10);  
-			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'show_kitchen_sink' );
+			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'show_kitchen_sink', 10, 1 );
 			$this->loader->add_action( 'widgets_init', $plugin_admin, 'remove_widgets');
-			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'update_tiny_mce' );
-			$this->loader->add_filter( 'the_content', $plugin_admin, 'remove_ptags_on_images' );
-			$this->loader->add_filter( 'gallery_style', $plugin_admin, 'remove_gallery_styles' );
+			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'update_tiny_mce', 10, 1 );
+			$this->loader->add_filter( 'the_content', $plugin_admin, 'remove_ptags_on_images', 10, 1 );
+			$this->loader->add_filter( 'gallery_style', $plugin_admin, 'remove_gallery_styles', 10, 1 );
 			$this->loader->add_action( 'admin_init', $plugin_admin, 'force_homepage');
 			$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'remove_wp_nodes', 999 );
 			$this->loader->add_filter( 'wpseo_metabox_prio', $plugin_admin, 'yoast_seo_metabox_priority' );
@@ -203,7 +215,13 @@ class SSM_Core_Functionality_Starter {
 			$this->loader->add_action( 'admin_init', $plugin_admin, 'ssm_core_settings' );
 			$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_ssm_options_page', 99 );
 			$this->loader->add_action( 'login_enqueue_scripts', $plugin_admin, 'login_logo' );
-			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'load_admin_scripts' );
+			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'load_admin_scripts', 10, 1 );
+		}
+
+		if ( current_theme_supports( 'ssm-field-factory' ) ) {
+			$this->loader->add_filter( 'acf/settings/save_json', $plugin_admin, 'ssm_save_json' );
+			$this->loader->add_filter( 'aljm_save_json', $plugin_admin, 'ssm_save_folder_json', 10, 1 );
+			$this->loader->add_filter( 'acf/settings/load_json', $plugin_admin, 'ssm_load_json', 10, 1 );
 		}
 
 		/**
@@ -294,6 +312,16 @@ class SSM_Core_Functionality_Starter {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Retrieve the plugin's root path.
+	 *
+	 * @since     1.0.0
+	 * @return    string    The version number of the plugin.
+	 */
+	public function get_plugin_root_dir() {
+		return $this->plugin_root_dir;
 	}
 
 }
