@@ -31,11 +31,14 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Define plugin constants
  */
+
 define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'SSMC_VERSION', '0.2.3' );
+define( 'SSMC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) ) );
+define( 'SSMC_DIR', plugin_dir_path( __FILE__ ) );
+define( 'SSMC_ASSETS_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'ssm-core-assets' ) );
 
 /**
  * The code that runs during plugin activation.
@@ -80,12 +83,3 @@ function run_ssm_core_functionality_starter() {
 
 }
 run_ssm_core_functionality_starter();
-
-
-/**
- * Define plugin constants (inhereted from ssm-core)
- */
-define( 'SSMC_VERSION', '0.2.3' );
-define( 'SSMC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) ) );
-define( 'SSMC_DIR', plugin_dir_path( __FILE__ ) );
-define( 'SSMC_ASSETS_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'ssm_core_assets' ) );
