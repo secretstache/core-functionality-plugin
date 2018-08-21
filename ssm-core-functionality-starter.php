@@ -38,7 +38,8 @@ define( 'PLUGIN_NAME_VERSION', '1.0.0' );
 define( 'SSMC_VERSION', '0.2.3' );
 define( 'SSMC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) ) );
 define( 'SSMC_DIR', plugin_dir_path( __FILE__ ) );
-define( 'SSMC_ASSETS_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'ssm-core-assets' ) );
+define( 'SSMC_ADMIN_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'admin/' ) );
+define( 'SSMC_PUBLIC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'public/' ) );
 
 /**
  * The code that runs during plugin activation.

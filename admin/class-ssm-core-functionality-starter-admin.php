@@ -898,7 +898,7 @@ class SSM_Core_Functionality_Starter_Admin {
 	}
 	
 	public function ssm_core_login_logo() {
-		$defaultLogo = SSMC_ASSETS_URL . 'images/login-logo.png';
+		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
 		$loginLogo = $this->ssm_get_option('ssm_core_login_logo') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_login_logo') ) : $defaultLogo;
 		$width = $this->ssm_get_option('ssm_core_login_logo_width') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_login_logo_width') ) : '230px';
 		$height = $this->ssm_get_option('ssm_core_login_logo_height') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_login_logo_height') ) : 'auto';
@@ -952,7 +952,7 @@ class SSM_Core_Functionality_Starter_Admin {
 	}
 	
 	public function ssm_core_options_page() {
-		require_once( SSMC_DIR . 'ssm_core_templates/admin-options.php' );
+		require_once( SSMC_DIR . 'admin/templates/admin-options.php' );
 	}
 
 	/**
@@ -963,7 +963,7 @@ class SSM_Core_Functionality_Starter_Admin {
 	 */
 	public function login_logo() {
 
-		$defaultLogo = SSMC_ASSETS_URL . 'images/login-logo.png';
+		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
 		
 		$background_image =  $this->ssm_get_option('ssm_core_login_logo') != NULL ? $this->ssm_get_option('ssm_core_login_logo') : $defaultLogo;
 		$height =  $this->ssm_get_option('ssm_core_login_logo_height') != NULL ? $this->ssm_get_option('ssm_core_login_logo_height') : '128px';
@@ -988,15 +988,15 @@ class SSM_Core_Functionality_Starter_Admin {
 		if ( $hook != 'settings_page_ssm_core' )
 			return;
 	
-		wp_register_style( 'ssm-core-admin-css', SSMC_ASSETS_URL . 'styles/admin.css', array(), SSMC_VERSION , 'all' );
+		wp_register_style( 'ssm-core-admin-css', SSMC_ADMIN_URL . 'css/admin.css', array(), SSMC_VERSION , 'all' );
 		wp_enqueue_style( 'ssm-core-admin-css' );
 	
 		wp_enqueue_media();
 	
-		wp_register_script( 'ssm-core-admin-js', SSMC_ASSETS_URL . 'scripts/admin.js', array('jquery'), SSMC_VERSION, true );
+		wp_register_script( 'ssm-core-admin-js', SSMC_ADMIN_URL . 'js/admin.js', array('jquery'), SSMC_VERSION, true );
 	
 		$login_logo_array = array(
-			'url' => SSMC_ASSETS_URL . 'images/login-logo.png',
+			'url' => SSMC_ADMIN_URL . 'images/login-logo.png',
 		);
 	
 		wp_localize_script( 'ssm-core-admin-js', 'login_logo', $login_logo_array );
