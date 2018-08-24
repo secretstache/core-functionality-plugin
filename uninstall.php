@@ -22,7 +22,7 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality_Starter
+ * @package    SSM_Core_Functionality
  */
 
 // If uninstall not called from WordPress, then exit.

@@ -10,18 +10,18 @@
  *
  * @link              https://www.secretstache.com/
  * @since             1.0.0
- * @package           SSM_Core_Functionality_Starter
+ * @package           SSM_Core_Functionality
  *
  * @wordpress-plugin
- * Plugin Name:       SSM Core Functionality Starter
+ * Plugin Name:       SSM Core Functionality
  * Plugin URI:        https://www.secretstache.com/
- * Description:       SSM Core Functionality Starter
+ * Description:       SSM Core Functionality
  * Version:           1.0.0
  * Author:            Secret Stache Media
  * Author URI:        https://www.secretstache.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       ssm-core-functionality-starter
+ * Text Domain:       ssm-core-functionality
  * Domain Path:       /languages
  */
 
@@ -43,30 +43,30 @@ define( 'SSMC_PUBLIC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'publi
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-ssm-core-functionality-starter-activator.php
+ * This action is documented in includes/class-ssm-core-functionality-activator.php
  */
-function activate_ssm_core_functionality_starter() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ssm-core-functionality-starter-activator.php';
-	SSM_Core_Functionality_Starter_Activator::activate();
+function activate_ssm_core_functionality() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ssm-core-functionality-activator.php';
+	SSM_Core_Functionality_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-ssm-core-functionality-starter-deactivator.php
+ * This action is documented in includes/class-ssm-core-functionality-deactivator.php
  */
-function deactivate_ssm_core_functionality_starter() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ssm-core-functionality-starter-deactivator.php';
-	SSM_Core_Functionality_Starter_Deactivator::deactivate();
+function deactivate_ssm_core_functionality() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ssm-core-functionality-deactivator.php';
+	SSM_Core_Functionality_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_ssm_core_functionality_starter' );
-register_deactivation_hook( __FILE__, 'deactivate_ssm_core_functionality_starter' );
+register_activation_hook( __FILE__, 'activate_ssm_core_functionality' );
+register_deactivation_hook( __FILE__, 'deactivate_ssm_core_functionality' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-ssm-core-functionality-starter.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-ssm-core-functionality.php';
 
 /**
  * Begins execution of the plugin.
@@ -77,10 +77,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-ssm-core-functionality-sta
  *
  * @since    1.0.0
  */
-function run_ssm_core_functionality_starter() {
+function run_ssm_core_functionality() {
 
-	$plugin = new SSM_Core_Functionality_Starter();
+	$plugin = new SSM_Core_Functionality();
 	$plugin->run();
 
 }
-run_ssm_core_functionality_starter();
+run_ssm_core_functionality();

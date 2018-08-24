@@ -9,8 +9,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality_Starter
- * @subpackage SSM_Core_Functionality_Starter/includes
+ * @package    SSM_Core_Functionality
+ * @subpackage SSM_Core_Functionality/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    SSM_Core_Functionality_Starter
- * @subpackage SSM_Core_Functionality_Starter/includes
+ * @package    SSM_Core_Functionality
+ * @subpackage SSM_Core_Functionality/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Core_Functionality_Starter {
+class SSM_Core_Functionality {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class SSM_Core_Functionality_Starter {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      SSM_Core_Functionality_Starter_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      SSM_Core_Functionality_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -81,7 +81,7 @@ class SSM_Core_Functionality_Starter {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'ssm-core-functionality-starter';
+		$this->plugin_name = 'ssm-core-functionality';
 
 		$this->plugin_root_dir = WP_PLUGIN_DIR . "/" . get_plugin_data( plugin_dir_path(__FILE__) )['TextDomain'];
 
@@ -97,10 +97,10 @@ class SSM_Core_Functionality_Starter {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - SSM_Core_Functionality_Starter_Loader. Orchestrates the hooks of the plugin.
-	 * - SSM_Core_Functionality_Starter_i18n. Defines internationalization functionality.
-	 * - SSM_Core_Functionality_Starter_Admin. Defines all hooks for the admin area.
-	 * - SSM_Core_Functionality_Starter_Public. Defines all hooks for the public side of the site.
+	 * - SSM_Core_Functionality_Loader. Orchestrates the hooks of the plugin.
+	 * - SSM_Core_Functionality_i18n. Defines internationalization functionality.
+	 * - SSM_Core_Functionality_Admin. Defines all hooks for the admin area.
+	 * - SSM_Core_Functionality_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -114,33 +114,33 @@ class SSM_Core_Functionality_Starter {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-starter-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-starter-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-starter-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-starter-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-public.php';
 
-		$this->loader = new SSM_Core_Functionality_Starter_Loader();
+		$this->loader = new SSM_Core_Functionality_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the SSM_Core_Functionality_Starter_i18n class in order to set the domain and to register the hook
+	 * Uses the SSM_Core_Functionality_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -148,7 +148,7 @@ class SSM_Core_Functionality_Starter {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new SSM_Core_Functionality_Starter_i18n();
+		$plugin_i18n = new SSM_Core_Functionality_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -163,7 +163,7 @@ class SSM_Core_Functionality_Starter {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new SSM_Core_Functionality_Starter_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_root_dir() );
+		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_root_dir() );
 
 		/* Testing purposes */
 
@@ -267,7 +267,7 @@ class SSM_Core_Functionality_Starter {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new SSM_Core_Functionality_Starter_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new SSM_Core_Functionality_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -298,7 +298,7 @@ class SSM_Core_Functionality_Starter {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    SSM_Core_Functionality_Starter_Loader    Orchestrates the hooks of the plugin.
+	 * @return    SSM_Core_Functionality_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

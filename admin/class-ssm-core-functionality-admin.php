@@ -6,8 +6,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality_Starter
- * @subpackage SSM_Core_Functionality_Starter/admin
+ * @package    SSM_Core_Functionality
+ * @subpackage SSM_Core_Functionality/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    SSM_Core_Functionality_Starter
- * @subpackage SSM_Core_Functionality_Starter/admin
+ * @package    SSM_Core_Functionality
+ * @subpackage SSM_Core_Functionality/admin
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Core_Functionality_Starter_Admin {
+class SSM_Core_Functionality_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -66,15 +66,15 @@ class SSM_Core_Functionality_Starter_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in SSM_Core_Functionality_Starter_Loader as all of the hooks are defined
+		 * defined in SSM_Core_Functionality_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The SSM_Core_Functionality_Starter_Loader will then create the relationship
+		 * The SSM_Core_Functionality_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-core-functionality-starter-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-core-functionality-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -89,15 +89,15 @@ class SSM_Core_Functionality_Starter_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in SSM_Core_Functionality_Starter_Loader as all of the hooks are defined
+		 * defined in SSM_Core_Functionality_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The SSM_Core_Functionality_Starter_Loader will then create the relationship
+		 * The SSM_Core_Functionality_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-core-functionality-starter-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-core-functionality-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
