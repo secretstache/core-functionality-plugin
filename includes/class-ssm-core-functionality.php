@@ -58,15 +58,6 @@ class SSM_Core_Functionality {
 	protected $version;
 
 	/**
-	 * The plugin's root dir
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $version    The plugin's root dir
-	 */
-	protected $plugin_root_dir;
-
-	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -82,8 +73,6 @@ class SSM_Core_Functionality {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'ssm-core-functionality';
-
-		$this->plugin_root_dir = WP_PLUGIN_DIR . "/" . get_plugin_data( plugin_dir_path(__FILE__) )['TextDomain'];
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -133,6 +122,46 @@ class SSM_Core_Functionality {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-public.php';
 
+		/**
+		 * The class responsible for CPT functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-cpt.php';
+
+		$this->loader = new SSM_Core_Functionality_Loader();
+
+		/**
+		 * The class responsible for custom taxonomies functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-taxonomies.php';
+
+		/**
+		 * The class responsible for Required Plugins functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-required-plugins.php';
+
+		/**
+		 * The class responsible for Admin Setup functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin-setup.php';
+
+		$this->loader = new SSM_Core_Functionality_Loader();
+
+		/**
+		 * The class responsible for Admin Branding functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin-branding.php';
+
+		/**
+		 * The class responsible for Options functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-options.php';
+
+		/**
+		 * The class responsible for Field Factory module functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-field-factory.php';
+
+
 		$this->loader = new SSM_Core_Functionality_Loader();
 
 	}
@@ -163,98 +192,91 @@ class SSM_Core_Functionality {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_root_dir() );
+		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version() );
+		
+		$plugin_cpt = new SSM_Core_Functionality_CPT( $this->get_plugin_name(), $this->get_version() );
+		$plugin_taxonomies = new SSM_Core_Functionality_Taxonomies( $this->get_plugin_name(), $this->get_version() );
+		$plugin_required_plugins = new SSM_Core_Functionality_Required_Plugins( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin_setup = new SSM_Core_Functionality_Admin_Setup( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin_branding = new SSM_Core_Functionality_Admin_Branding( $this->get_plugin_name(), $this->get_version() );
+		$plugin_options = new SSM_Core_Functionality_Options( $this->get_plugin_name(), $this->get_version() );
+		$plugin_field_factory = new SSM_Core_Functionality_Field_Factory( $this->get_plugin_name(), $this->get_version() );
 
-		/* Testing purposes */
+		/* Enable all modules for testing purposes */
 
-		add_theme_support( 'term_adding_prevent' );
-		add_theme_support( 'term_removing_prevent' );
-		add_theme_support( 'set_default_terms' );
+		add_theme_support( 'ssm-cpt' );
+		add_theme_support( 'ssm-taxonomies' );
 		add_theme_support( 'ssm-required-plugins' );
-		add_theme_support( 'ssm-field-factory' );
-
-		add_theme_support( 'ssm-acf' );
  		add_theme_support( 'ssm-admin-branding' );
   		add_theme_support( 'ssm-admin-setup' );
-		add_theme_support( 'ssm-dashboard-widgets' );
 		add_theme_support( 'ssm-options' );
+		add_theme_support( 'ssm-field-factory' );
 		
-		/* Inhereted from ssm-core */
+		if ( current_theme_supports( 'ssm-cpt' ) ) {
+			$this->loader->add_action( 'custom_cpt_hook', $plugin_cpt, 'register_post_types', 10, 1 ); 
+		}
 
-		if ( current_theme_supports( 'ssm-acf' ) ) {
-			$this->loader->add_action( 'admin_init', $plugin_admin, 'remove_acf_menu');
+		if ( current_theme_supports( 'ssm-taxonomies' ) ) {
+			$this->loader->add_action( 'custom_taxonomies_hook', $plugin_taxonomies, 'register_taxonomies', 20, 1 );
+			$this->loader->add_action( 'custom_terms_hook', $plugin_taxonomies, 'register_terms', 30, 1 );
+			$this->loader->add_action( 'pre_insert_term', $plugin_taxonomies, 'term_adding_prevent', 10, 2 );
+			$this->loader->add_action( 'delete_term_taxonomy', $plugin_taxonomies, 'term_removing_prevent', 10, 1 );
+			$this->loader->add_action( 'save_post', $plugin_taxonomies, 'set_default_terms', 30, 2 );
+		}
+
+		if ( current_theme_supports( 'ssm-required-plugins' ) ) {
+			$this->loader->add_action( 'admin_notices', $plugin_required_plugins, 'list_of_required_plugins' );
+			$this->loader->add_action( 'custom_required_plugins_hook', $plugin_required_plugins, 'check_required_plugins', 10, 1 );	
 		}
 
 		if ( current_theme_supports( 'ssm-admin-branding' ) ) {
-			$this->loader->add_filter( 'login_headerurl', $plugin_admin, 'login_headerurl' );
-			$this->loader->add_filter( 'login_headertitle', $plugin_admin, 'login_headertitle' );
-			$this->loader->add_filter( 'wp_mail_from_name', $plugin_admin, 'mail_from_name' );
-			$this->loader->add_filter( 'wp_mail_from', $plugin_admin, 'wp_mail_from' );
-			$this->loader->add_action( 'wp_before_admin_bar_render', $plugin_admin, 'remove_wp_icon_from_admin_bar' );
-			$this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'admin_footer_text' );
+
+			$admin_branding_arguments = array(
+				[ "type" => "filter" , "hook" => "login_header_url", "function" => "login_headerurl" ],
+				[ "type" => "filter" , "hook" => "login_headertitle", "function" => "login_headertitle" ],
+				[ "type" => "filter" , "hook" => "wp_mail_from_name", "function" => "mail_from_name" ],
+				[ "type" => "filter" , "hook" => "wp_mail_from", "function" => "wp_mail_from" ],
+				[ "type" => "action" , "hook" => "wp_before_admin_bar_render", "function" => "remove_wp_icon_from_admin_bar" ],
+				[ "type" => "filter" , "hook" => "admin_footer_text", "function" => "admin_footer_text" ]
+			);
+
+			$this->loader->add_filter( 'login_headerurl', $plugin_admin_branding, 'login_headerurl' );
+			$this->loader->add_filter( 'login_headertitle', $plugin_admin_branding, 'login_headertitle' );
+			$this->loader->add_filter( 'wp_mail_from_name', $plugin_admin_branding, 'mail_from_name' );
+			$this->loader->add_filter( 'wp_mail_from', $plugin_admin_branding, 'wp_mail_from' );
+			$this->loader->add_action( 'wp_before_admin_bar_render', $plugin_admin_branding, 'remove_wp_icon_from_admin_bar' );
+			$this->loader->add_filter( 'admin_footer_text', $plugin_admin_branding, 'admin_footer_text' );
 		}
 
 		if ( current_theme_supports( 'ssm-admin-setup' ) ) {
-			$this->loader->add_action( 'init', $plugin_admin, 'remove_roles');  
-			$this->loader->add_action( 'admin_init', $plugin_admin, 'remove_image_link', 10);  
-			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'show_kitchen_sink', 10, 1 );
-			$this->loader->add_action( 'widgets_init', $plugin_admin, 'remove_widgets');
-			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'update_tiny_mce', 10, 1 );
-			$this->loader->add_filter( 'the_content', $plugin_admin, 'remove_ptags_on_images', 10, 1 );
-			$this->loader->add_filter( 'gallery_style', $plugin_admin, 'remove_gallery_styles', 10, 1 );
-			$this->loader->add_action( 'admin_init', $plugin_admin, 'force_homepage');
-			$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'remove_wp_nodes', 999 );
-			$this->loader->add_filter( 'wpseo_metabox_prio', $plugin_admin, 'yoast_seo_metabox_priority' );
-		}
-
-		if ( current_theme_supports( 'ssm-dashboard-widgets' ) ) {
-			$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin, 'hosting_dashboard_widget' );
+			$this->loader->add_action( 'init', $plugin_admin_setup, 'remove_roles');  
+			$this->loader->add_action( 'admin_init', $plugin_admin_setup, 'remove_image_link', 10);  
+			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin_setup, 'show_kitchen_sink', 10, 1 );
+			$this->loader->add_action( 'widgets_init', $plugin_admin_setup, 'remove_widgets');
+			$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin_setup, 'hosting_dashboard_widget' );
+			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin_setup, 'update_tiny_mce', 10, 1 );
+			$this->loader->add_filter( 'the_content', $plugin_admin_setup, 'remove_ptags_on_images', 10, 1 );
+			$this->loader->add_filter( 'gallery_style', $plugin_admin_setup, 'remove_gallery_styles', 10, 1 );
+			$this->loader->add_action( 'admin_init', $plugin_admin_setup, 'force_homepage');
+			$this->loader->add_action( 'admin_bar_menu', $plugin_admin_setup, 'remove_wp_nodes', 999 );
+			$this->loader->add_filter( 'wpseo_metabox_prio', $plugin_admin_setup, 'yoast_seo_metabox_priority' );
 		}
 
 		if ( current_theme_supports( 'ssm-options' ) ) {
-			$this->loader->add_action( 'admin_init', $plugin_admin, 'ssm_core_settings' );
-			$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_ssm_options_page', 99 );
-			$this->loader->add_action( 'login_enqueue_scripts', $plugin_admin, 'login_logo' );
-			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'load_admin_scripts', 10, 1 );
+			$this->loader->add_action( 'admin_init', $plugin_options, 'ssm_core_settings' );
+			$this->loader->add_action( 'admin_menu', $plugin_options, 'add_ssm_options_page', 99 );
+			$this->loader->add_action( 'login_enqueue_scripts', $plugin_options, 'login_logo' );
+			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_options, 'load_admin_scripts', 10, 1 );
 		}
 
 		if ( current_theme_supports( 'ssm-field-factory' ) ) {
-			$this->loader->add_filter( 'acf/settings/save_json', $plugin_admin, 'ssm_save_json' );
-			$this->loader->add_filter( 'aljm_save_json', $plugin_admin, 'ssm_save_folder_json', 10, 1 );
-			$this->loader->add_filter( 'acf/settings/load_json', $plugin_admin, 'ssm_load_json', 10, 1 );
+			$this->loader->add_filter( 'acf/settings/save_json', $plugin_field_factory, 'ssm_save_json' );
+			$this->loader->add_filter( 'aljm_save_json', $plugin_field_factory, 'ssm_save_folder_json', 10, 1 );
+			$this->loader->add_filter( 'acf/settings/load_json', $plugin_field_factory, 'ssm_load_json', 10, 1 );
+			$this->loader->add_action( 'admin_init', $plugin_field_factory, 'remove_acf_menu');
 		}
 
-		/**
-		 *	10, 20, 30 - priorities. (firstly we register post types, then - taxonomies, then - terms)
-		 *	1 - number of arguments to be passed to function (1 array of args in this case for all functions)
-		 */
-
-		/* Registrations */
-		
 		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
-
-		$this->loader->add_action( 'custom_cpt_hook', $plugin_admin, 'register_post_types', 10, 1 ); 
-		$this->loader->add_action( 'custom_taxonomies_hook', $plugin_admin, 'register_taxonomies', 20, 1 );
-		$this->loader->add_action( 'custom_terms_hook', $plugin_admin, 'register_terms', 30, 1 );
-
-		/* Additional features */
-
-		if ( current_theme_supports( 'ssm-required-plugins' ) ) {
-			$this->loader->add_action( 'admin_notices', $plugin_admin, 'check_for_required_plugins' );
-			$this->loader->add_action( 'custom_required_plugins_hook', $plugin_admin, 'check_required_plugins', 10, 1 );	
-		}
-		
-		if ( current_theme_supports( 'term_adding_prevent' ) ) {
-			$this->loader->add_action( 'pre_insert_term', $plugin_admin, 'term_adding_prevent', 10, 2 );
-		}
-
-		if ( current_theme_supports( 'term_removing_prevent' ) ) {
-			$this->loader->add_action( 'delete_term_taxonomy', $plugin_admin, 'term_removing_prevent', 10, 1 );
-		}
-
-		if ( current_theme_supports( 'set_default_terms' ) ) {
-			$this->loader->add_action( 'save_post', $plugin_admin, 'set_default_terms', 30, 2 );
-		}
 
 	}
 
@@ -312,16 +334,6 @@ class SSM_Core_Functionality {
 	 */
 	public function get_version() {
 		return $this->version;
-	}
-
-	/**
-	 * Retrieve the plugin's root path.
-	 *
-	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
-	 */
-	public function get_plugin_root_dir() {
-		return $this->plugin_root_dir;
 	}
 
 }
