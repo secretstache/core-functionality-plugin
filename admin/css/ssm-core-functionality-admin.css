@@ -2,3 +2,41 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+ .login-logo-wrap {
+    width: 230px;
+}
+
+.login-logo-wrap img.login-logo {
+    display: block;
+    margin: 0 auto 15px;
+}
+
+.login-logo-wrap .media-buttons {
+    text-align: center;
+}
+
+.login-logo-wrap .media-buttons input.button {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+#ssm_modules .ssm_module,
+#ssm_functions .ssm_function {
+    float: left;
+    margin-right: 40px;
+}
+
+#ssm_functions .module_name {
+    margin-top: 0;
+}
+
+.ssm_function.ssm-admin-branding {
+    clear: both;
+}
+
+.ssm_function.ssm-admin-branding,
+.ssm_function.ssm-admin-setup,
+.ssm_function.ssm-field-factory {
+    margin-top: 40px;
+}

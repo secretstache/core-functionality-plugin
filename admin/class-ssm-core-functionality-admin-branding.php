@@ -18,6 +18,34 @@ class SSM_Core_Functionality_Admin_Branding extends SSM_Core_Functionality_Admin
 		return get_bloginfo( 'name' );
 	}
 
+		/**
+	 * Replaces the login screen's WordPress logo with the 'login-logo.png' in your child theme images folder.
+	 * Disabled by default. Make sure you have a login logo before using this function!
+	 * Updated 2.0.1: Assumes SVG logo by default
+	 * @since 1.0.0
+	 */
+	public function login_logo() {
+
+		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
+		
+		$background_image =  $this->ssm_get_option('ssm_core_login_logo') != NULL ? $this->ssm_get_option('ssm_core_login_logo') : $defaultLogo;
+		$height =  $this->ssm_get_option('ssm_core_login_logo_height') != NULL ? $this->ssm_get_option('ssm_core_login_logo_height') : '128px';
+		$width =  $this->ssm_get_option('ssm_core_login_logo_width') != NULL ? $this->ssm_get_option('ssm_core_login_logo_width') : '150px';
+		
+        ?>
+        <style type="text/css">
+            body.login div#login h1 a {
+                background-image: url(<?php echo $background_image; ?>) !important;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: <?php echo $height; ?>;
+                margin-bottom: 15px;
+                width: <?php echo $width; ?>;
+            }
+        </style>
+        <?php
+    }
+
 	/**
 	 * Makes WordPress-generated emails appear 'from' your WordPress site name, instead of from 'WordPress'.
 	 * @since 1.0.0
@@ -40,7 +68,7 @@ class SSM_Core_Functionality_Admin_Branding extends SSM_Core_Functionality_Admin
 	 * See: http://wp-snippets.com/remove-wordpress-logo-admin-bar/
 	 * @since 1.0.0
 	 */
-	public function remove_wp_icon_from_admin_bar() {
+	public function remove_icon_bar() {
 		global $wp_admin_bar;
 		$wp_admin_bar->remove_menu('wp-logo');
 	}

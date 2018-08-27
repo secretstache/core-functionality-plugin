@@ -127,8 +127,6 @@ class SSM_Core_Functionality {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-cpt.php';
 
-		$this->loader = new SSM_Core_Functionality_Loader();
-
 		/**
 		 * The class responsible for custom taxonomies functionality
 		 */
@@ -143,8 +141,6 @@ class SSM_Core_Functionality {
 		 * The class responsible for Admin Setup functionality
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin-setup.php';
-
-		$this->loader = new SSM_Core_Functionality_Loader();
 
 		/**
 		 * The class responsible for Admin Branding functionality
@@ -192,92 +188,115 @@ class SSM_Core_Functionality {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version() );
+		$modules = array(
+			[ "slug" => 'ssm-cpt', "name" => "CPT" ],
+			[ "slug" => 'ssm-taxonomies', "name" => "Taxonomies" ],
+			[ "slug" => 'ssm-required-plugins', "name" => "Required Plugins" ],
+			[ "slug" => 'ssm-admin-branding', "name" => "Admin Branding" ],
+			[ "slug" => 'ssm-admin-setup', "name" => "Admin Setup" ],
+			[ "slug" => 'ssm-field-factory', "name" => "Field Factory" ]
+		);
+
+		$modules_functions['ssm-cpt'] = array(
+			"module_name" => "CPT",
+			"hooks" => array(
+				[ "type" => "action" , "name" => "custom_cpt_hook", "class" => "plugin_cpt", "function" => "register_post_types", "priority" => 10, "arguments" => 1 ]
+			)
+		);
+
+		$modules_functions['ssm-taxonomies'] = array(
+			"module_name" => "Taxonomies",
+			"hooks" => array(
+				[ "type" => "action" , "name" => "custom_taxonomies_hook", "class" => "plugin_taxonomies", "function" => "register_taxonomies", "priority" => 20, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "custom_terms_hook", "class" => "plugin_taxonomies", "function" => "register_terms", "priority" => 30, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "pre_insert_term", "class" => "plugin_taxonomies", "function" => "term_adding_prevent", "priority" => 10, "arguments" => 2 ],
+				[ "type" => "action" , "name" => "delete_terms_taxonomy", "class" => "plugin_taxonomies", "function" => "term_removing_prevent", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "save_post", "class" => "plugin_taxonomies", "function" => "set_default_terms", "priority" => 30, "arguments" => 2 ]
+			)
+		);
+
+		$modules_functions['ssm-required-plugins'] = array(
+			"module_name" => "Required Plugins",
+			"hooks" => array(
+				[ "type" => "action" , "name" => "admin_notices", "class" => "plugin_required_plugins", "function" => "list_of_required_plugins" ],
+				[ "type" => "action" , "name" => "custom_required_plugins_hook", "class" => "plugin_required_plugins", "function" => "check_required_plugins", "priority" => 10, "arguments" => 1 ]
+			)
+		);
+
+		$modules_functions['ssm-admin-branding'] = array(
+			"module_name" => "Admin Branding",
+			"hooks" => array(
+				[ "type" => "filter" , "name" => "login_headerurl", "class" => "plugin_admin_branding", "function" => "login_headerurl" ],
+				[ "type" => "filter" , "name" => "login_headertitle", "class" => "plugin_admin_branding", "function" => "login_headertitle" ],
+				[ "type" => "filter" , "name" => "login_enqueue_scripts", "class" => "plugin_admin_branding", "function" => "login_logo" ],
+				[ "type" => "filter" , "name" => "wp_mail_from_name", "class" => "plugin_admin_branding", "function" => "mail_from_name" ],
+				[ "type" => "filter" , "name" => "wp_mail_from", "class" => "plugin_admin_branding", "function" => "wp_mail_from" ],
+				[ "type" => "action" , "name" => "wp_before_admin_bar_render", "class" => "plugin_admin_branding", "function" => "remove_icon_bar" ],
+				[ "type" => "filter" , "name" => "admin_footer_text", "class" => "plugin_admin_branding", "function" => "admin_footer_text" ]
+			)
+		);
+
+		$modules_functions['ssm-admin-setup'] = array(
+			"module_name" => "Admin Setup",
+			"hooks" => array(
+				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "remove_roles" ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "remove_image_link", "priority" => 10 ],
+				[ "type" => "filter" , "name" => "tiny_mce_before_init", "class" => "plugin_admin_setup", "function" => "show_kitchen_sink", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "widgets_init", "class" => "plugin_admin_setup", "function" => "remove_widgets" ],
+				[ "type" => "action" , "name" => "wp_dashboard_setup", "class" => "plugin_admin_setup", "function" => "hosting_dashboard_widget" ],
+				[ "type" => "filter" , "name" => "tiny_mce_before_init", "class" => "plugin_admin_setup", "function" => "update_tiny_mce", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "filter" , "name" => "the_content", "class" => "plugin_admin_setup", "function" => "remove_ptags_on_images", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "filter" , "name" => "gallery_style", "class" => "plugin_admin_setup", "function" => "remove_gallery_styles", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "force_homepage" ],
+				[ "type" => "action" , "name" => "admin_bar_menu", "class" => "plugin_admin_setup", "function" => "remove_wp_nodes", "priority" => 999 ],
+				[ "type" => "filter" , "name" => "wpseo_metabox_prio", "class" => "plugin_admin_setup", "function" => "yoast_seo_metabox_priority" ]		
+			)
+		);
+
+		$modules_functions['ssm-field-factory'] = array(
+			"module_name" => "Field Factory",
+			"hooks" => array(
+				[ "type" => "filter" , "name" => "acf/settings/save_json", "class" => "plugin_field_factory", "function" => "ssm_save_json" ],
+				[ "type" => "filter" , "name" => "aljm_save_json", "class" => "plugin_field_factory", "function" => "ssm_save_folder_json", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "filter" , "name" => "acf/settings/load_json", "class" => "plugin_field_factory", "function" => "ssm_load_json", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_field_factory", "function" => "remove_acf_menu" ]
+			)
+		);
 		
+		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version() );
 		$plugin_cpt = new SSM_Core_Functionality_CPT( $this->get_plugin_name(), $this->get_version() );
 		$plugin_taxonomies = new SSM_Core_Functionality_Taxonomies( $this->get_plugin_name(), $this->get_version() );
 		$plugin_required_plugins = new SSM_Core_Functionality_Required_Plugins( $this->get_plugin_name(), $this->get_version() );
 		$plugin_admin_setup = new SSM_Core_Functionality_Admin_Setup( $this->get_plugin_name(), $this->get_version() );
 		$plugin_admin_branding = new SSM_Core_Functionality_Admin_Branding( $this->get_plugin_name(), $this->get_version() );
-		$plugin_options = new SSM_Core_Functionality_Options( $this->get_plugin_name(), $this->get_version() );
 		$plugin_field_factory = new SSM_Core_Functionality_Field_Factory( $this->get_plugin_name(), $this->get_version() );
-
-		/* Enable all modules for testing purposes */
-
-		add_theme_support( 'ssm-cpt' );
-		add_theme_support( 'ssm-taxonomies' );
-		add_theme_support( 'ssm-required-plugins' );
- 		add_theme_support( 'ssm-admin-branding' );
-  		add_theme_support( 'ssm-admin-setup' );
-		add_theme_support( 'ssm-options' );
-		add_theme_support( 'ssm-field-factory' );
+		$plugin_options = new SSM_Core_Functionality_Options( $this->get_plugin_name(), $this->get_version(), $modules, $modules_functions );
 		
-		if ( current_theme_supports( 'ssm-cpt' ) ) {
-			$this->loader->add_action( 'custom_cpt_hook', $plugin_cpt, 'register_post_types', 10, 1 ); 
-		}
-
-		if ( current_theme_supports( 'ssm-taxonomies' ) ) {
-			$this->loader->add_action( 'custom_taxonomies_hook', $plugin_taxonomies, 'register_taxonomies', 20, 1 );
-			$this->loader->add_action( 'custom_terms_hook', $plugin_taxonomies, 'register_terms', 30, 1 );
-			$this->loader->add_action( 'pre_insert_term', $plugin_taxonomies, 'term_adding_prevent', 10, 2 );
-			$this->loader->add_action( 'delete_term_taxonomy', $plugin_taxonomies, 'term_removing_prevent', 10, 1 );
-			$this->loader->add_action( 'save_post', $plugin_taxonomies, 'set_default_terms', 30, 2 );
-		}
-
-		if ( current_theme_supports( 'ssm-required-plugins' ) ) {
-			$this->loader->add_action( 'admin_notices', $plugin_required_plugins, 'list_of_required_plugins' );
-			$this->loader->add_action( 'custom_required_plugins_hook', $plugin_required_plugins, 'check_required_plugins', 10, 1 );	
-		}
-
-		if ( current_theme_supports( 'ssm-admin-branding' ) ) {
-
-			$admin_branding_arguments = array(
-				[ "type" => "filter" , "hook" => "login_header_url", "function" => "login_headerurl" ],
-				[ "type" => "filter" , "hook" => "login_headertitle", "function" => "login_headertitle" ],
-				[ "type" => "filter" , "hook" => "wp_mail_from_name", "function" => "mail_from_name" ],
-				[ "type" => "filter" , "hook" => "wp_mail_from", "function" => "wp_mail_from" ],
-				[ "type" => "action" , "hook" => "wp_before_admin_bar_render", "function" => "remove_wp_icon_from_admin_bar" ],
-				[ "type" => "filter" , "hook" => "admin_footer_text", "function" => "admin_footer_text" ]
-			);
-
-			$this->loader->add_filter( 'login_headerurl', $plugin_admin_branding, 'login_headerurl' );
-			$this->loader->add_filter( 'login_headertitle', $plugin_admin_branding, 'login_headertitle' );
-			$this->loader->add_filter( 'wp_mail_from_name', $plugin_admin_branding, 'mail_from_name' );
-			$this->loader->add_filter( 'wp_mail_from', $plugin_admin_branding, 'wp_mail_from' );
-			$this->loader->add_action( 'wp_before_admin_bar_render', $plugin_admin_branding, 'remove_wp_icon_from_admin_bar' );
-			$this->loader->add_filter( 'admin_footer_text', $plugin_admin_branding, 'admin_footer_text' );
-		}
-
-		if ( current_theme_supports( 'ssm-admin-setup' ) ) {
-			$this->loader->add_action( 'init', $plugin_admin_setup, 'remove_roles');  
-			$this->loader->add_action( 'admin_init', $plugin_admin_setup, 'remove_image_link', 10);  
-			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin_setup, 'show_kitchen_sink', 10, 1 );
-			$this->loader->add_action( 'widgets_init', $plugin_admin_setup, 'remove_widgets');
-			$this->loader->add_action( 'wp_dashboard_setup', $plugin_admin_setup, 'hosting_dashboard_widget' );
-			$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin_setup, 'update_tiny_mce', 10, 1 );
-			$this->loader->add_filter( 'the_content', $plugin_admin_setup, 'remove_ptags_on_images', 10, 1 );
-			$this->loader->add_filter( 'gallery_style', $plugin_admin_setup, 'remove_gallery_styles', 10, 1 );
-			$this->loader->add_action( 'admin_init', $plugin_admin_setup, 'force_homepage');
-			$this->loader->add_action( 'admin_bar_menu', $plugin_admin_setup, 'remove_wp_nodes', 999 );
-			$this->loader->add_filter( 'wpseo_metabox_prio', $plugin_admin_setup, 'yoast_seo_metabox_priority' );
-		}
-
-		if ( current_theme_supports( 'ssm-options' ) ) {
-			$this->loader->add_action( 'admin_init', $plugin_options, 'ssm_core_settings' );
-			$this->loader->add_action( 'admin_menu', $plugin_options, 'add_ssm_options_page', 99 );
-			$this->loader->add_action( 'login_enqueue_scripts', $plugin_options, 'login_logo' );
-			$this->loader->add_action( 'admin_enqueue_scripts', $plugin_options, 'load_admin_scripts', 10, 1 );
-		}
-
-		if ( current_theme_supports( 'ssm-field-factory' ) ) {
-			$this->loader->add_filter( 'acf/settings/save_json', $plugin_field_factory, 'ssm_save_json' );
-			$this->loader->add_filter( 'aljm_save_json', $plugin_field_factory, 'ssm_save_folder_json', 10, 1 );
-			$this->loader->add_filter( 'acf/settings/load_json', $plugin_field_factory, 'ssm_load_json', 10, 1 );
-			$this->loader->add_action( 'admin_init', $plugin_field_factory, 'remove_acf_menu');
-		}
-
+		$this->loader->add_action( 'admin_init', $plugin_options, 'ssm_core_settings' );
+		$this->loader->add_action( 'admin_menu', $plugin_options, 'add_ssm_options_page', 99 );
+		$this->loader->add_action( 'admin_init', $plugin_options, 'handle_options_update' );
 		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		$ssm_enabled_modules = get_option( 'ssm_enabled_modules' );
+		$ssm_enabled_functions = get_option( 'ssm_enabled_functions' );
+			
+		foreach ( $ssm_enabled_modules as $module ) {
+			add_theme_support( $module['slug'] );
+		}
+
+		foreach ( $ssm_enabled_functions as $slug => $function ) {
+			if ( current_theme_supports( $slug ) ) {
+				foreach ( $function['hooks'] as $hook ) {
+					call_user_func_array(
+						array( $this->loader, "add_{$hook['type']}" ),
+						array( $hook['name'], ${$hook['class']}, $hook['function'], $hook['priority'], $hook['arguments'] )
+					);
+					
+				}
+			}
+		}
 	}
 
 	/**

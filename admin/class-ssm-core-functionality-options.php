@@ -2,6 +2,57 @@
 
 class SSM_Core_Functionality_options extends SSM_Core_Functionality_Admin {
 
+    /**
+	 * The list of modules to be included in the core
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 */
+    protected $modules;
+
+    /**
+	 * The array of arguments in accordance with corresponding core modules
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 */
+    protected $modules_functions;
+
+    /**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since   1.0.0
+     * @access  public
+	 */
+    public function __construct( $plugin_name, $plugin_version, $modules, $modules_functions ) {
+
+        $this->modules = $modules;
+        $this->modules_functions = $modules_functions;
+        $this->set_initial_options();
+    }
+
+    /**
+	 * Set up initial state of the main options (enable all of the modules and features).
+	 *
+	 * @since   1.0.0
+     * @access  public
+	 */
+    public function set_initial_options() {
+
+        $ssm_enabled_functions = get_option( 'ssm_enabled_functions' );
+
+        if ( !get_option( 'ssm_enabled_modules' ) ) {
+            add_option( 'ssm_enabled_modules' );
+            update_option('ssm_enabled_modules', $this->modules, true);
+        }
+
+        if ( !get_option( 'ssm_enabled_functions' ) ) {
+            add_option( 'ssm_enabled_functions' );
+            update_option('ssm_enabled_functions', $this->modules_functions, true);
+        }
+
+    }
+
     /** 
      * Register SSM Core Settings
      *  
@@ -17,36 +68,114 @@ class SSM_Core_Functionality_options extends SSM_Core_Functionality_Admin {
 		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_width' );
 		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_height' );
 	
-	
-		if ( current_theme_supports( 'ssm-admin-branding' ) ) {
-			add_settings_section( 'ssm-core-agency-options', 'Agency Options', array( $this, 'ssm_core_agency_options'), 'ssm_core');
-		}
+		add_settings_section( 'ssm-core-agency-options', 'Agency Options', array( $this, 'ssm_core_agency_options'), 'ssm_core');
 	
 		add_settings_field( 'ssm-core-agency-name', 'Agency Name', array( $this, 'ssm_core_agency_name' ), 'ssm_core', 'ssm-core-agency-options' );
 		add_settings_field( 'ssm-core-agency-url', 'Agency URL', array( $this, 'ssm_core_agency_url' ), 'ssm_core', 'ssm-core-agency-options' );
 		add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssm_core_login_logo' ), 'ssm_core', 'ssm-core-agency-options' );
+        
+        // add_settings_section( 'ssm-core-acf-options', 'ACF Options', array( $this,  'ssm_acf_options' ), 'ssm_core' );
+        // add_settings_field(
+		// 	'ssm-core-acf-admin-users',
+		// 	'Admin users who need access to ACF',
+		// 	array( $this, 'ssm_core_acf_admin_users' ),
+		// 	'ssm_core',
+		// 	'ssm-core-acf-options',
+		// 	[
+		// 		'admins' => get_users( array('role' => 'administrator') )
+		// 	]
+        // );
+                
+        add_settings_field( 'ssm-modules', 'Modules', array( $this, 'ssm_modules' ), 'ssm_core', 'ssm-core-agency-options' );
+        add_settings_field( 'ssm-modules-functions', 'Modules Functions', array( $this, 'ssm_modules_functions' ), 'ssm_core', 'ssm-core-agency-options' );
 	
-		
-		if ( current_theme_supports( 'ssm-acf' ) ) {
-			add_settings_section( 'ssm-core-acf-options', 'ACF Options', array( $this,  'ssm_acf_options' ), 'ssm_core' );
-		}
-	
-		add_settings_field(
-			'ssm-core-acf-admin-users',
-			'Admin users who need access to ACF',
-			array( $this, 'ssm_core_acf_admin_users' ),
-			'ssm_core',
-			'ssm-core-acf-options',
-			[
-				'admins' => get_users( array('role' => 'administrator') )
-			]
-		);
-	}
-	
-	
-	public function ssm_core_agency_options() {
+    }
 
-	}
+    public function ssm_modules() {
+
+        $ssm_enabled_modules = get_option( 'ssm_enabled_modules' );
+
+        echo "<div id='ssm_modules'>";
+        
+        foreach ( $this->modules as $module ) {
+
+            $checked = ( in_array( $module, $ssm_enabled_modules ) ) ? 'checked' : '';
+            
+            echo "<div class='ssm_module {$module['slug']}' data-module-slug='{$module['slug']}'>";
+            echo "<input type='checkbox' name='{$module['slug']}' id='{$module['slug']}' {$checked} />";
+            echo "<label for='{$module['slug']}'> {$module['name']} </label>";
+            echo "</div>";
+        }
+
+        echo "</div>";
+    }
+    
+    public function ssm_modules_functions() {
+
+        $ssm_enabled_functions = get_option( 'ssm_enabled_functions' );
+
+        echo "<div id='ssm_functions'>";
+
+        foreach ( $this->modules_functions as $slug => $function ) {
+            echo "<div class='ssm_function {$slug}' data-module-slug='{$slug}'>";
+            echo "<h4 class='module_name'>{$function['module_name']}</h3>";
+
+            foreach ( $function['hooks'] as $hook ) {
+                
+                if ( is_array( $ssm_enabled_functions[$slug]['hooks'] ) ) {
+                    $checked = ( in_array( $hook, $ssm_enabled_functions[$slug]['hooks'] ) ) ? 'checked' : '';
+                }
+
+                echo "<input type='checkbox' name='{$hook['function']}' id='{$hook['function']}' {$checked} />";
+                echo "<label for='{$hook['function']}'> {$hook['function']} </label>";
+                echo "<br />";
+            }
+
+            echo "</div>";
+        }
+
+        echo "</div>";
+    }
+
+    public function handle_options_update() {
+
+        if ( isset( $_POST ) && $_POST['option_page'] == 'ssm-core-settings-group' && $_POST['action'] == 'update' ) {
+
+            $new_modules = array();
+
+            foreach ( $this->modules as $module ) {
+                
+                if ( $_POST[$module['slug']] == 'on' ) {
+                    array_push( $new_modules, $module );
+                }
+
+            }
+
+            foreach ( $this->modules_functions as $slug => $function ) {
+
+                $new_functions[$slug] = array();
+                $new_hooks = array();
+
+                foreach ( $function['hooks'] as $hook ) {
+
+                    if ( $_POST[$hook['function']] == 'on' ) {
+                        array_push( $new_hooks, $hook );
+                    }
+                    
+                }
+
+                $new_functions[$slug]["module_name"] = $function['module_name'];
+                $new_functions[$slug]["hooks"] = $new_hooks;
+                
+            }
+
+            update_option( 'ssm_enabled_modules', $new_modules );
+            update_option( 'ssm_enabled_functions', $new_functions );
+
+        }
+    }
+	
+	public function ssm_core_agency_options() {}
 	
 	public function ssm_core_agency_name() {
 		$agencyName = $this->ssm_get_option('ssm_core_agency_name') != NULL ? esc_attr( $this->ssm_get_option('ssm_core_agency_name') ) : 'Secret Stache Media';
@@ -77,9 +206,7 @@ class SSM_Core_Functionality_options extends SSM_Core_Functionality_Admin {
 		echo '</div>';
 	}
 	
-	public function ssm_acf_options() {
-	
-	}
+	public function ssm_acf_options() {}
 	
 	public function ssm_core_acf_admin_users( $args ) {
 		$admins = $args['admins'];
@@ -98,9 +225,6 @@ class SSM_Core_Functionality_options extends SSM_Core_Functionality_Admin {
 	}
 	
 	public function add_ssm_options_page() {
-
-		if ( ! current_theme_supports('ssm-admin-branding') && ! current_theme_supports('ssm-admin-branding') )
-		  return;
 	
 		add_submenu_page(
 		'options-general.php',
@@ -114,61 +238,7 @@ class SSM_Core_Functionality_options extends SSM_Core_Functionality_Admin {
 	}
 	
 	public function ssm_core_options_page() {
-		require_once( SSMC_DIR . 'admin/templates/admin-options.php' );
-	}
-
-	/**
-	 * Replaces the login screen's WordPress logo with the 'login-logo.png' in your child theme images folder.
-	 * Disabled by default. Make sure you have a login logo before using this function!
-	 * Updated 2.0.1: Assumes SVG logo by default
-	 * @since 1.0.0
-	 */
-	public function login_logo() {
-
-		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
-		
-		$background_image =  $this->ssm_get_option('ssm_core_login_logo') != NULL ? $this->ssm_get_option('ssm_core_login_logo') : $defaultLogo;
-		$height =  $this->ssm_get_option('ssm_core_login_logo_height') != NULL ? $this->ssm_get_option('ssm_core_login_logo_height') : '128px';
-		$width =  $this->ssm_get_option('ssm_core_login_logo_width') != NULL ? $this->ssm_get_option('ssm_core_login_logo_width') : '150px';
-		
-			?>
-			<style type="text/css">
-				body.login div#login h1 a {
-					background-image: url(<?php echo $background_image; ?>) !important;
-					background-repeat: no-repeat;
-					background-size: cover;
-					height: <?php echo $height; ?>;
-					margin-bottom: 15px;
-					width: <?php echo $width; ?>;
-				}
-			</style>
-			<?php
-		}
-    
-    /** 
-     * Load Admin Scripts
-     *  
-     */
-	public function load_admin_scripts( $hook ) {
-
-		if ( $hook != 'settings_page_ssm_core' )
-			return;
-	
-		wp_register_style( 'ssm-core-admin-css', SSMC_ADMIN_URL . 'css/admin.css', array(), SSMC_VERSION , 'all' );
-		wp_enqueue_style( 'ssm-core-admin-css' );
-	
-		wp_enqueue_media();
-	
-		wp_register_script( 'ssm-core-admin-js', SSMC_ADMIN_URL . 'js/admin.js', array('jquery'), SSMC_VERSION, true );
-	
-		$login_logo_array = array(
-			'url' => SSMC_ADMIN_URL . 'images/login-logo.png',
-		);
-	
-		wp_localize_script( 'ssm-core-admin-js', 'login_logo', $login_logo_array );
-	
-		wp_enqueue_script( 'ssm-core-admin-js' );
-	
-	}
+        require_once( SSMC_DIR . 'admin/templates/admin-options.php' );
+    }
 
 }
