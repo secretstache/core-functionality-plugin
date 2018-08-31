@@ -40,6 +40,22 @@ class SSM_Core_Functionality_Admin {
 	 */
 	private $version;
 
+	    /**
+	 * The list of admin modules to be included in the core
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 */
+    protected $admin_modules;
+
+    /**
+	 * The array of arguments in accordance with corresponding admin core modules
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 */
+    protected $admin_modules_functions;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -47,10 +63,13 @@ class SSM_Core_Functionality_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $admin_modules, $admin_modules_functions ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		$this->admin_modules = $admin_modules;
+        $this->admin_modules_functions = $admin_modules_functions;
 
 	}
 
@@ -175,6 +194,7 @@ class SSM_Core_Functionality_Admin {
 		} else {
 			return $default;
 		}
+
 	}
 
 

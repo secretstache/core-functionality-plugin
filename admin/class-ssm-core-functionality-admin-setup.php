@@ -141,4 +141,126 @@ class SSM_Core_Functionality_Admin_Setup extends SSM_Core_Functionality_Admin {
 		return 'low';
 	}
 
+	/**
+	 * Remove Editor Support on Pages (Replaced with SSMPB)
+	 * 
+	 * @since 1.0.0
+	 */
+	public function remove_post_type_support() {
+		remove_post_type_support( 'page', 'editor' );
+	}
+
+	/**
+	 * Remove default dasboards
+	 * 
+	 * @since 1.0.0
+	 */
+	public function remove_dashboard_meta() {
+
+		remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');
+		remove_meta_box( 'rg_forms_dashboard', 'dashboard', 'normal' );
+		remove_meta_box( 'wpe_dify_news_feed', 'dashboard', 'normal' );
+		remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' );
+		remove_meta_box( 'ssm_main_dashboard_widget', 'dashboard', 'normal' );
+	
+	}
+
+	/**
+	 * Add SSM menu item
+	 * 
+	 * @since 1.0.0
+	 */
+	public function ssm_admin_menu() {
+
+		add_menu_page(
+			__( 'Secret Stache', 'ssm' ), // page_title
+			'Secret Stache', // menu_title
+			'manage_options', // capability
+			'ssm', // menu_slug
+			'', // function
+			'dashicons-layout', // icon
+			5 // position
+		);
+
+	}
+
+	/**
+	 * Move various menu items into LIB menu
+	 * 
+	 * @since 1.0.0
+	 */
+	public function move_cpts_to_admin_menu() {
+	
+		global $wp_post_types;
+	
+		if ( post_type_exists('insert_cpt') ) {
+			$wp_post_types['insert_cpt']->show_in_menu = 'ssm';
+		}
+	
+	}
+
+	/**
+	 * Filter the admin body classes if is_front
+	 * 
+	 * @since 1.0.0
+	 */
+	public function is_front_admin_body_class( $classes ) {
+		
+		global $post;
+	
+		$current_id = $post->ID;
+		$front_page_id = get_option( 'page_on_front' );
+	
+		if ( $current_id == $front_page_id ) {
+			return $classes = 'is-front';
+		}
+	
+	}
+
+	/**
+	 * Update width post meta on AJAX call
+	 * 
+	 * @since 1.0.0
+	 */
+	public function update_width_post_meta( $post_ID, $post, $update ) {
+	
+		if ( isset( $_POST['columns_count'] ) ) {
+	
+			for ( $i = 0; $i < $_POST['columns_count']; $i++ ) { 
+
+				if ( get_post_meta( $_POST['post_ID'], 'columns_width_' . $i ) ) {
+					update_post_meta( $_POST['post_ID'], 'columns_width_' . $i, $_POST['columns_width_' . $i] );
+				} else {
+					add_post_meta( $_POST['post_ID'], 'columns_width_' . $i, $_POST['columns_width_' . $i] );       
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get width values on AJAX call
+	 * 
+	 * @since 1.0.0
+	 */
+	public function get_width_values() {
+		
+		$response = array();
+		
+		for ( $i = 0; $i < $_POST['columns_count']; $i++ ) { 
+			array_push( $response, get_post_meta( $_POST['page_id'], 'columns_width_' . $i, true ) );
+		}
+		
+		echo json_encode( $response );
+		wp_die();
+	
+	}
+
 }

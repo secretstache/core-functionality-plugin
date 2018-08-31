@@ -76,21 +76,21 @@ class SSM_Core_Functionality {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_admin_hooks();
-		$this->define_public_hooks();
 
+		$this->set_admin_modules();
+		$this->set_public_modules();
+
+		$this->set_initial_options();
+
+		$this->define_public_hooks();
+		$this->define_admin_hooks();
+		$this->define_general_hooks();
+
+		$this->set_options_page();
 	}
 
 	/**
 	 * Load the required dependencies for this plugin.
-	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - SSM_Core_Functionality_Loader. Orchestrates the hooks of the plugin.
-	 * - SSM_Core_Functionality_i18n. Defines internationalization functionality.
-	 * - SSM_Core_Functionality_Admin. Defines all hooks for the admin area.
-	 * - SSM_Core_Functionality_Public. Defines all hooks for the public side of the site.
-	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
@@ -98,6 +98,11 @@ class SSM_Core_Functionality {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+
+		/**
+		 * The class responsible for Options page registration
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-options.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -148,14 +153,19 @@ class SSM_Core_Functionality {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin-branding.php';
 
 		/**
-		 * The class responsible for Options functionality
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-options.php';
-
-		/**
 		 * The class responsible for Field Factory module functionality
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-field-factory.php';
+	
+		/**
+		 * The class responsible for GForm module functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-gform.php';
+
+		/**
+		 * The class responsible for Public Setup module functionality
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-public-setup.php';
 
 
 		$this->loader = new SSM_Core_Functionality_Loader();
@@ -180,15 +190,14 @@ class SSM_Core_Functionality {
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
-	 * of the plugin.
+	 * Fulfill arrays of admin modules and functions with initial data
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since   1.0.0
+     * @access  private
 	 */
-	private function define_admin_hooks() {
+	private function set_admin_modules() {
 
-		$modules = array(
+		$this->admin_modules = array(
 			[ "slug" => 'ssm-cpt', "name" => "CPT" ],
 			[ "slug" => 'ssm-taxonomies', "name" => "Taxonomies" ],
 			[ "slug" => 'ssm-required-plugins', "name" => "Required Plugins" ],
@@ -197,14 +206,14 @@ class SSM_Core_Functionality {
 			[ "slug" => 'ssm-field-factory', "name" => "Field Factory" ]
 		);
 
-		$modules_functions['ssm-cpt'] = array(
+		$this->admin_modules_functions['ssm-cpt'] = array(
 			"module_name" => "CPT",
 			"hooks" => array(
 				[ "type" => "action" , "name" => "custom_cpt_hook", "class" => "plugin_cpt", "function" => "register_post_types", "priority" => 10, "arguments" => 1 ]
 			)
 		);
 
-		$modules_functions['ssm-taxonomies'] = array(
+		$this->admin_modules_functions['ssm-taxonomies'] = array(
 			"module_name" => "Taxonomies",
 			"hooks" => array(
 				[ "type" => "action" , "name" => "custom_taxonomies_hook", "class" => "plugin_taxonomies", "function" => "register_taxonomies", "priority" => 20, "arguments" => 1 ],
@@ -215,7 +224,7 @@ class SSM_Core_Functionality {
 			)
 		);
 
-		$modules_functions['ssm-required-plugins'] = array(
+		$this->admin_modules_functions['ssm-required-plugins'] = array(
 			"module_name" => "Required Plugins",
 			"hooks" => array(
 				[ "type" => "action" , "name" => "admin_notices", "class" => "plugin_required_plugins", "function" => "list_of_required_plugins" ],
@@ -223,7 +232,7 @@ class SSM_Core_Functionality {
 			)
 		);
 
-		$modules_functions['ssm-admin-branding'] = array(
+		$this->admin_modules_functions['ssm-admin-branding'] = array(
 			"module_name" => "Admin Branding",
 			"hooks" => array(
 				[ "type" => "filter" , "name" => "login_headerurl", "class" => "plugin_admin_branding", "function" => "login_headerurl" ],
@@ -236,7 +245,7 @@ class SSM_Core_Functionality {
 			)
 		);
 
-		$modules_functions['ssm-admin-setup'] = array(
+		$this->admin_modules_functions['ssm-admin-setup'] = array(
 			"module_name" => "Admin Setup",
 			"hooks" => array(
 				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "remove_roles" ],
@@ -249,11 +258,20 @@ class SSM_Core_Functionality {
 				[ "type" => "filter" , "name" => "gallery_style", "class" => "plugin_admin_setup", "function" => "remove_gallery_styles", "priority" => 10, "arguments" => 1 ],
 				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "force_homepage" ],
 				[ "type" => "action" , "name" => "admin_bar_menu", "class" => "plugin_admin_setup", "function" => "remove_wp_nodes", "priority" => 999 ],
-				[ "type" => "filter" , "name" => "wpseo_metabox_prio", "class" => "plugin_admin_setup", "function" => "yoast_seo_metabox_priority" ]		
+				[ "type" => "filter" , "name" => "wpseo_metabox_prio", "class" => "plugin_admin_setup", "function" => "yoast_seo_metabox_priority" ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "remove_post_type_support" ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "remove_dashboard_meta" ],
+				[ "type" => "action" , "name" => "admin_menu", "class" => "plugin_admin_setup", "function" => "ssm_admin_menu" ],
+				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "move_cpts_to_admin_menu", "priority" => 25 ],
+				// [ "type" => "filter" , "name" => "admin_body_class", "class" => "plugin_admin_setup", "function" => "is_front_admin_body_class", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "wp_ajax_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
+				[ "type" => "action" , "name" => "wp_ajax_nopriv_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
+				[ "type" => "action" , "name" => "save_post", "class" => "plugin_admin_setup", "function" => "update_width_post_meta", "priority" => 10, "arguments" => 3 ]
+
 			)
 		);
 
-		$modules_functions['ssm-field-factory'] = array(
+		$this->admin_modules_functions['ssm-field-factory'] = array(
 			"module_name" => "Field Factory",
 			"hooks" => array(
 				[ "type" => "filter" , "name" => "acf/settings/save_json", "class" => "plugin_field_factory", "function" => "ssm_save_json" ],
@@ -262,41 +280,76 @@ class SSM_Core_Functionality {
 				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_field_factory", "function" => "remove_acf_menu" ]
 			)
 		);
-		
-		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version() );
-		$plugin_cpt = new SSM_Core_Functionality_CPT( $this->get_plugin_name(), $this->get_version() );
-		$plugin_taxonomies = new SSM_Core_Functionality_Taxonomies( $this->get_plugin_name(), $this->get_version() );
-		$plugin_required_plugins = new SSM_Core_Functionality_Required_Plugins( $this->get_plugin_name(), $this->get_version() );
-		$plugin_admin_setup = new SSM_Core_Functionality_Admin_Setup( $this->get_plugin_name(), $this->get_version() );
-		$plugin_admin_branding = new SSM_Core_Functionality_Admin_Branding( $this->get_plugin_name(), $this->get_version() );
-		$plugin_field_factory = new SSM_Core_Functionality_Field_Factory( $this->get_plugin_name(), $this->get_version() );
-		$plugin_options = new SSM_Core_Functionality_Options( $this->get_plugin_name(), $this->get_version(), $modules, $modules_functions );
-		
-		$this->loader->add_action( 'admin_init', $plugin_options, 'ssm_core_settings' );
-		$this->loader->add_action( 'admin_menu', $plugin_options, 'add_ssm_options_page', 99 );
-		$this->loader->add_action( 'admin_init', $plugin_options, 'handle_options_update' );
-		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$ssm_enabled_modules = get_option( 'ssm_enabled_modules' );
-		$ssm_enabled_functions = get_option( 'ssm_enabled_functions' );
-			
-		foreach ( $ssm_enabled_modules as $module ) {
-			add_theme_support( $module['slug'] );
-		}
+	}
 
-		foreach ( $ssm_enabled_functions as $slug => $function ) {
-			if ( current_theme_supports( $slug ) ) {
-				foreach ( $function['hooks'] as $hook ) {
-					call_user_func_array(
-						array( $this->loader, "add_{$hook['type']}" ),
-						array( $hook['name'], ${$hook['class']}, $hook['function'], $hook['priority'], $hook['arguments'] )
-					);
-					
-				}
-			}
-		}
+	/**
+	 * Fulfill arrays of public modules ann functions with initial data
+	 *
+	 * @since   1.0.0
+     * @access  private
+	 */
+	private function set_public_modules() {
+
+		$this->public_modules = array(
+			[ "slug" => 'ssm-gform', "name" => "GForm" ],
+			[ "slug" => 'ssm-public-setup', "name" => "Public Setup" ]
+		);
+
+		$this->public_modules_functions['ssm-gform'] = array(
+			"module_name" => "GForm",
+			"hooks" => array(
+				[ "type" => "filter" , "name" => "gform_init_scripts_open", "class" => "plugin_gform", "function" => "footer_scripts_init" ],
+				[ "type" => "filter" , "name" => "gfrom_cdata_open", "class" => "plugin_gform", "function" => "wrap_gform_cdata_open", "priority" => 10 ],
+				[ "type" => "filter" , "name" => "gform_cdata_close", "class" => "plugin_gform", "function" => "wrap_gform_cdata_close", "priority" => 99 ]
+			)
+		);
+
+		$this->public_modules_functions['ssm-public-setup'] = array(
+			"module_name" => "Public Setup",
+			"hooks" => array(
+				[ "type" => "action" , "name" => "init", "class" => "plugin_public_setup", "function" => "add_year_shortcode" ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_public_setup", "function" => "set_favicon" ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_public_setup", "function" => "ssm_do_facebook_pixel", "priority" => 99 ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_public_setup", "function" => "ssm_setup_google_tag_manager", "priority" => 99 ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_public_setup", "function" => "ssm_setup_google_site_verification", "priority" => 1 ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_public_setup", "function" => "ssm_custom_head_scripts", "priority" => 99 ],
+				[ "type" => "action" , "name" => "wp_footer", "class" => "plugin_public_setup", "function" => "ssm_custom_footer_scripts", "priority" => 99 ]
+			)
+		);
+
+	}
+
+	/**
+	 * Set up initial state of the main options (enable all of the modules and features).
+	 *
+	 * @since   1.0.0
+     * @access  public
+	 */
+    public function set_initial_options() {
+
+        //Set initial state of Admin variables
+        if ( !get_option( 'admin_enabled_modules' ) ) {
+            add_option( 'admin_enabled_modules' );
+            update_option('admin_enabled_modules', $this->admin_modules, true);
+        }
+
+        if ( !get_option( 'admin_enabled_functions' ) ) {
+            add_option( 'admin_enabled_functions' );
+            update_option('admin_enabled_functions', $this->admin_modules_functions, true);
+        }
+
+        //Set initial state of Public variables
+        if ( !get_option( 'public_enabled_modules' ) ) {
+            add_option( 'public_enabled_modules' );
+            update_option('public_enabled_modules', $this->public_modules, true);
+        }
+
+        if ( !get_option( 'public_enabled_functions' ) ) {
+            add_option( 'public_enabled_functions' );
+            update_option('public_enabled_functions', $this->public_modules_functions, true);
+        }
+
 	}
 
 	/**
@@ -308,10 +361,114 @@ class SSM_Core_Functionality {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new SSM_Core_Functionality_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_gform = new SSM_Core_Functionality_GForm( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
+		$plugin_public_setup = new SSM_Core_Functionality_Public_Setup( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
+
+		$this->register_modules( 'public', array(
+				"plugin_gform" => $plugin_gform,
+				"plugin_public_setup" => $plugin_public_setup
+			)
+		);
+
+	}
+
+	/**
+	 * Register all of the hooks related to the admin area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_admin_hooks() {
+				
+		$plugin_cpt = new SSM_Core_Functionality_CPT( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_taxonomies = new SSM_Core_Functionality_Taxonomies( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_required_plugins = new SSM_Core_Functionality_Required_Plugins( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_admin_setup = new SSM_Core_Functionality_Admin_Setup( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_admin_branding = new SSM_Core_Functionality_Admin_Branding( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_field_factory = new SSM_Core_Functionality_Field_Factory( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		
+		$this->register_modules( 'admin', array(
+				'plugin_cpt' => $plugin_cpt,
+				'plugin_taxonomies' => $plugin_taxonomies,
+				'plugin_required_plugins' => $plugin_required_plugins,
+				'plugin_admin_setup' => $plugin_admin_setup,
+				'plugin_admin_branding' => $plugin_admin_branding,
+				'plugin_field_factory' => $plugin_field_factory
+			)
+		);
+
+	}
+
+	/**
+	 * Receive context (public,admin) and array of modules,
+	 * go through it and register corresponding hooks
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function register_modules( $context, $objects ) {
+
+		foreach ( $objects as $slug => $object ) {
+			$$slug = $object;
+		}
+
+		${$context . "_enabled_modules"} = get_option( "{$context}_enabled_modules" );
+		${$context . "_enabled_functions"}= get_option( "{$context}_enabled_functions" );
+
+		foreach ( ${$context . "_enabled_modules"} as $module ) {
+			add_theme_support( $module['slug'] );
+		}
+
+		foreach ( ${$context . "_enabled_functions"} as $slug => $function ) {
+			if ( current_theme_supports( $slug ) ) {
+				foreach ( $function['hooks'] as $hook ) {
+					call_user_func_array(
+						array( $this->loader, "add_{$hook['type']}" ),
+						array( $hook['name'], ${$hook['class']}, $hook['function'], $hook['priority'], $hook['arguments'] )
+					);
+					
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * Define general hooks such as: admin and public scripts enqueuing,
+	 * initial CPTs, taxonomies and terms registration (call_registration)
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_general_hooks() {
+
+		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_public_modules_functions() );
+		$plugin_public = new SSM_Core_Functionality_Public( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
+
+	}
+
+	/**
+	 * Set up Options Page
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function set_options_page() {
+
+		$plugin_options = new SSM_Core_Functionality_Options( $this->get_public_modules(), $this->get_public_modules_functions(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+			
+		$this->loader->add_action( 'admin_init', $plugin_options, 'ssm_core_settings' );
+		$this->loader->add_action( 'admin_menu', $plugin_options, 'add_ssm_options_page', 99 );
+		$this->loader->add_action( 'admin_init', $plugin_options, 'handle_options_update' );
 
 	}
 
@@ -353,6 +510,42 @@ class SSM_Core_Functionality {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+		/**
+	 * Return array of current registered admin modules
+	 *
+	 * @since    1.0.0
+	 */
+	protected function get_admin_modules() {
+		return $this->admin_modules;
+	}
+
+	/**
+	 * Return array of current registered admin modules functions
+	 *
+	 * @since    1.0.0
+	 */
+	protected function get_admin_modules_functions() {
+		return $this->admin_modules_functions;
+	}
+
+	/**
+	 * Return array of current registered public modules
+	 *
+	 * @since    1.0.0
+	 */
+	protected function get_public_modules() {
+		return $this->public_modules;
+	}
+
+	/**
+	 * Return array of current registered public modules functions
+	 *
+	 * @since    1.0.0
+	 */
+	protected function get_public_modules_functions() {
+		return $this->public_modules_functions;
 	}
 
 }

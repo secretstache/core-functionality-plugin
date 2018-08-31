@@ -73,7 +73,7 @@
 	  return false;
 	});
 
-	$(document).on( 'click', '.ssm_module', function(e) {
+	$(document).on( 'click', '.admin_module', function(e) {
 		
 		if (e.target.tagName == 'INPUT') {
 
@@ -81,13 +81,13 @@
 
 			if ( $(this).find('input').attr('checked') == undefined ) {
 
-				$('#ssm_functions .ssm_function.' + slug).find('input').each(function() {
+				$('#admin_functions .admin_function.' + slug).find('input').each(function() {
 					$(this).prop('checked', false);
 				});
 
 			} else {
 
-				$('#ssm_functions .ssm_function.' + slug).find('input').each(function() {
+				$('#admin_functions .admin_function.' + slug).find('input').each(function() {
 					$(this).prop('checked', true);
 				});
 
@@ -96,14 +96,49 @@
 		}
 	});
 
-	$(document).on( 'change', '.ssm_function :checkbox', function(e) {
+	$(document).on( 'click', '.public_module', function(e) {
 		
-		var slug = $(this).parents('.ssm_function').data('module-slug');
+		if (e.target.tagName == 'INPUT') {
 
-		if ( $(this).parents('.ssm_function').find('input:checked' ).length == 0 ) {
-			$('.ssm_module.' + slug + ' input').prop('checked', false);
+			var slug = $(this).data('module-slug');
+
+			if ( $(this).find('input').attr('checked') == undefined ) {
+
+				$('#public_functions .public_function.' + slug).find('input').each(function() {
+					$(this).prop('checked', false);
+				});
+
+			} else {
+
+				$('#public_functions .public_function.' + slug).find('input').each(function() {
+					$(this).prop('checked', true);
+				});
+
+			}
+
+		}
+	});
+
+	$(document).on( 'change', '.admin_function :checkbox', function(e) {
+		
+		var slug = $(this).parents('.admin_function').data('module-slug');
+
+		if ( $(this).parents('.admin_function').find('input:checked' ).length == 0 ) {
+			$('.admin_module.' + slug + ' input').prop('checked', false);
 		} else {
-			$('.ssm_module.' + slug + ' input').prop('checked', true);
+			$('.admin_module.' + slug + ' input').prop('checked', true);
+		}
+
+	});
+
+	$(document).on( 'change', '.public_function :checkbox', function(e) {
+		
+		var slug = $(this).parents('.public_function').data('module-slug');
+
+		if ( $(this).parents('.public_function').find('input:checked' ).length == 0 ) {
+			$('.public_module.' + slug + ' input').prop('checked', false);
+		} else {
+			$('.public_module.' + slug + ' input').prop('checked', true);
 		}
 
 	});

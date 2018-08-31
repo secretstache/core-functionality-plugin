@@ -41,16 +41,35 @@ class SSM_Core_Functionality_Public {
 	private $version;
 
 	/**
+	 * The list of public modules to be included in the core
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 */
+    protected $public_modules;
+
+    /**
+	 * The array of arguments in accordance with corresponding public core modules
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 */
+	protected $public_modules_functions;
+	
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $public_modules, $public_modules_functions ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		$this->public_modules = $public_modules;
+        $this->public_modules_functions = $public_modules_functions;
 
 	}
 
@@ -60,21 +79,7 @@ class SSM_Core_Functionality_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in SSM_Core_Functionality_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The SSM_Core_Functionality_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-core-functionality-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -83,21 +88,7 @@ class SSM_Core_Functionality_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in SSM_Core_Functionality_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The SSM_Core_Functionality_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-core-functionality-public.js', array( 'jquery' ), $this->version, false );
-
 	}
 
 }

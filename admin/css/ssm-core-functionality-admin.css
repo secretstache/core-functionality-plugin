@@ -21,22 +21,25 @@
     margin: 0 3px;
 }
 
-#ssm_modules .ssm_module,
-#ssm_functions .ssm_function {
+#admin_modules .admin_module,
+#admin_functions .admin_function,
+#public_modules .public_module,
+#public_functions .public_function {
     float: left;
     margin-right: 40px;
 }
 
-#ssm_functions .module_name {
-    margin-top: 0;
+#admin_functions .module_name,
+#public_functions .module_name  {
+    margin-top: 5px;
 }
 
-.ssm_function.ssm-admin-branding {
+.admin_function.ssm-admin-branding {
     clear: both;
 }
 
-.ssm_function.ssm-admin-branding,
-.ssm_function.ssm-admin-setup,
-.ssm_function.ssm-field-factory {
+.admin_function.ssm-admin-branding,
+.admin_function.ssm-admin-setup,
+.admin_function.ssm-field-factory {
     margin-top: 40px;
 }
