@@ -81,6 +81,7 @@ class SSM_Core_Functionality {
 		$this->set_public_modules();
 
 		$this->set_initial_options();
+		$this->set_helpers_alias();
 
 		$this->define_public_hooks();
 		$this->define_admin_hooks();
@@ -103,6 +104,11 @@ class SSM_Core_Functionality {
 		 * The class responsible for Options page registration
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-options.php';
+
+		/**
+		 * The class responsible for Helpers registration
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-helpers.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -169,7 +175,6 @@ class SSM_Core_Functionality {
 
 
 		$this->loader = new SSM_Core_Functionality_Loader();
-
 	}
 
 	/**
@@ -263,7 +268,7 @@ class SSM_Core_Functionality {
 				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "remove_dashboard_meta" ],
 				[ "type" => "action" , "name" => "admin_menu", "class" => "plugin_admin_setup", "function" => "ssm_admin_menu" ],
 				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "move_cpts_to_admin_menu", "priority" => 25 ],
-				// [ "type" => "filter" , "name" => "admin_body_class", "class" => "plugin_admin_setup", "function" => "is_front_admin_body_class", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "filter" , "name" => "admin_body_class", "class" => "plugin_admin_setup", "function" => "is_front_admin_body_class", "priority" => 10, "arguments" => 1 ],
 				[ "type" => "action" , "name" => "wp_ajax_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
 				[ "type" => "action" , "name" => "wp_ajax_nopriv_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
 				[ "type" => "action" , "name" => "save_post", "class" => "plugin_admin_setup", "function" => "update_width_post_meta", "priority" => 10, "arguments" => 3 ]
@@ -321,6 +326,17 @@ class SSM_Core_Functionality {
 	}
 
 	/**
+	 * Set Alias for SSM_Core_Functionality_Helpers class
+	 * Example of usage: echo SSM::limit_words( $text, 20 )
+	 *
+	 * @since   1.0.0
+     * @access  private
+	 */
+	private function set_helpers_alias() {
+		class_alias('SSM_Core_Functionality_Helpers', 'SSM');
+	}
+
+	/**
 	 * Set up initial state of the main options (enable all of the modules and features).
 	 *
 	 * @since   1.0.0
@@ -348,7 +364,7 @@ class SSM_Core_Functionality {
         if ( !get_option( 'public_enabled_functions' ) ) {
             add_option( 'public_enabled_functions' );
             update_option('public_enabled_functions', $this->public_modules_functions, true);
-        }
+		}
 
 	}
 

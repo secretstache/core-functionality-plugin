@@ -186,17 +186,4 @@ class SSM_Core_Functionality_Admin {
 
 	}
 
-	// Get prb option value
-	public function ssm_get_option( $option_name, $default = '' ) {
-
-		if ( \get_option('ssm_core_options')[$option_name] != NULL ) {
-			return \get_option('ssm_core_options')[$option_name];
-		} else {
-			return $default;
-		}
-
-	}
-
-
-
 }

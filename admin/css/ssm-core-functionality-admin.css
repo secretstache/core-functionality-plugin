@@ -24,7 +24,8 @@
 #admin_modules .admin_module,
 #admin_functions .admin_function,
 #public_modules .public_module,
-#public_functions .public_function {
+#public_functions .public_function,
+#helpers .helper {
     float: left;
     margin-right: 40px;
 }
@@ -42,4 +43,8 @@
 .admin_function.ssm-admin-setup,
 .admin_function.ssm-field-factory {
     margin-top: 40px;
+}
+
+#helpers {
+    line-height: 2.5em;
 }

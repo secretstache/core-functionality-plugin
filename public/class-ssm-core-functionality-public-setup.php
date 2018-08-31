@@ -28,7 +28,7 @@ class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public 
      */
     public function set_favicon() {
 
-        if ( $favicon = get_field('favicon', 'options') ) {
+        if ( $favicon = SSM::get_field('favicon', 'options') ) {
             echo '<link rel="shortcut icon" href="' . $favicon['url'] . '" />';
         }
 
@@ -41,14 +41,14 @@ class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public 
      */
     public function ssm_do_facebook_pixel() {
 
-        if ( $fb_id = get_field('facebook_account_id', 'options') ) {
+        if ( $fb_id = SSM::get_field('facebook_account_id', 'options') ) {
             
             global $post;
             
             $fb_standard_event = '';
             $value = '';
             
-            if ( get_field('facebook_standard_event') != NULL && get_field('facebook_standard_event') == 'purchase' ) {
+            if ( SSM::get_field('facebook_standard_event') != NULL && SSM::get_field('facebook_standard_event') == 'purchase' ) {
             
                 if ( $value ) {
                     $fb_standard_event = 'fbq("track", "Purchase", {"value": "' . $value . '" , "currency" : "USD"});';
@@ -56,8 +56,8 @@ class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public 
                     $fb_standard_event = 'fbq("track", "Purchase");';
                 }
         
-            } elseif ( get_field('facebook_standard_event') != NULL ) {
-                $fb_standard_event = get_field('facebook_standard_event');
+            } elseif ( SSM::get_field('facebook_standard_event') != NULL ) {
+                $fb_standard_event = SSM::get_field('facebook_standard_event');
             }
             
             ?>
@@ -88,7 +88,7 @@ class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public 
      */
     public function ssm_setup_google_tag_manager() { ?>
 
-        <?php if ( $gtm = get_field('google_tag_manager_id', 'options') ) { ?>
+        <?php if ( $gtm = SSM::get_field('google_tag_manager_id', 'options') ) { ?>
 
         <!-- Begin Google Tag Manager -->
         <noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -113,7 +113,7 @@ class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public 
      */
     public function ssm_setup_google_site_verification() { ?>
 
-        <?php if ( $sv = get_field('google_site_verification_id', 'options') ) { ?>
+        <?php if ( $sv = SSM::get_field('google_site_verification_id', 'options') ) { ?>
 
         <!-- Begin Google Search Console Verification -->
         <meta name="google-site-verification" content="<?php echo $sv; ?>" />
@@ -129,8 +129,8 @@ class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public 
 	 * @since 1.0.0
      */
     public function ssm_custom_head_scripts() {
-        
-        $custom_scripts = get_field('custom_tracking_scripts', 'options');
+
+        $custom_scripts = SSM::get_field('custom_tracking_scripts', 'options');
         
         if ( $custom_scripts ) {
             
@@ -149,8 +149,8 @@ class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public 
      * @since 1.0.0
      */
     public function ssm_custom_footer_scripts() {
-    
-        $custom_scripts = get_field('custom_tracking_scripts', 'options');
+        
+        $custom_scripts = SSM::get_field('custom_tracking_scripts', 'options');
         
         if ( $custom_scripts ) {
            

@@ -13,7 +13,6 @@ class SSM_Core_Functionality_Options {
         $this->public_modules_functions = $public_modules_functions;
         $this->admin_modules = $admin_modules;
         $this->admin_modules_functions = $admin_modules_functions;
-
     }
     
     /** 
@@ -37,16 +36,24 @@ class SSM_Core_Functionality_Options {
 		add_settings_field( 'ssm-core-agency-url', 'Agency URL', array( $this, 'ssm_core_agency_url' ), 'ssm_core', 'ssm-core-agency-options' );
 		add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssm_core_login_logo' ), 'ssm_core', 'ssm-core-agency-options' );
         
+        //Admin Area
         add_settings_section( 'ssm-core-admin-modules', 'Admin Area', array( $this, 'ssm_core_admin_modules'), 'ssm_core');
    
         add_settings_field( 'ssm-admin-modules', 'Modules', array( $this, 'ssm_admin_modules' ), 'ssm_core', 'ssm-core-admin-modules' );
         add_settings_field( 'ssm-admin-modules-functions', 'Modules Functions', array( $this, 'ssm_admin_modules_functions' ), 'ssm_core', 'ssm-core-admin-modules' );
         
+        //Public Area
         add_settings_section( 'ssm-core-public-modules', 'Public Area', array( $this, 'ssm_core_public_modules'), 'ssm_core');
 
         add_settings_field( 'ssm-public-modules', 'Modules', array( $this, 'ssm_public_modules' ), 'ssm_core', 'ssm-core-public-modules' );
         add_settings_field( 'ssm-public-modules-functions', 'Modules Functions', array( $this, 'ssm_public_modules_functions' ), 'ssm_core', 'ssm-core-public-modules' );
-    
+        
+        //Helpers
+        add_settings_section( 'ssm-core-helpers', 'Helpers', array( $this, 'ssm_core_helpers'), 'ssm_core');
+
+        add_settings_field( 'ssm-helpers', 'Functions', array( $this, 'ssm_helpers' ), 'ssm_core', 'ssm-core-helpers' );
+
+
         // add_settings_field( 'ssm-modules', 'Modules', array( $this, 'ssm_modules' ), 'ssm_core', 'ssm-core-admin-modules' );
         // add_settings_field( 'ssm-modules-functions', 'Modules Functions', array( $this, 'ssm_modules_functions' ), 'ssm_core', 'ssm-core-admin-modules' );
 
@@ -157,6 +164,23 @@ class SSM_Core_Functionality_Options {
 
     }
 
+    public function ssm_helpers() {
+
+        $helpers = get_class_methods('SSM');
+
+        echo "<div id='helpers'>";
+        
+        foreach ( $helpers as $helper ) {
+  
+            echo "<div class='helper {$helper}' data-helper-slug='{$helper}'>";
+            echo "<input type='checkbox' name='{$helper}' id='{$helper}' checked onclick=\"return false;\" />";
+            echo "<label for='{$helper}'> {$helper} </label>";
+            echo "</div>";
+        }
+
+        echo "</div>";
+
+    }
 
     public function handle_options_update() {
 
@@ -229,6 +253,7 @@ class SSM_Core_Functionality_Options {
     
     public function ssm_core_admin_modules() {}
     public function ssm_core_public_modules() {}
+    public function ssm_core_helpers() {}
 
 	public function ssm_core_agency_name() {
 		$agencyName = get_option('ssm_core_agency_name') != NULL ? esc_attr( get_option('ssm_core_agency_name') ) : 'Secret Stache Media';
