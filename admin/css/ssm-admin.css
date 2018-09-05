@@ -35,11 +35,10 @@
     margin-top: 5px;
 }
 
-.admin_function.ssm-admin-branding {
+.admin_function.ssm-admin-setup {
     clear: both;
 }
 
-.admin_function.ssm-admin-branding,
 .admin_function.ssm-admin-setup,
 .admin_function.ssm-field-factory {
     margin-top: 40px;

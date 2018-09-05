@@ -154,11 +154,6 @@ class SSM {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-admin-setup.php';
 
 		/**
-		 * The class responsible for Admin Branding functionality
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-admin-branding.php';
-
-		/**
 		 * The class responsible for Field Factory module functionality
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-field-factory.php';
@@ -206,7 +201,6 @@ class SSM {
 			[ "slug" => 'ssm-cpt', "name" => "CPT" ],
 			[ "slug" => 'ssm-taxonomies', "name" => "Taxonomies" ],
 			[ "slug" => 'ssm-required-plugins', "name" => "Required Plugins" ],
-			[ "slug" => 'ssm-admin-branding', "name" => "Admin Branding" ],
 			[ "slug" => 'ssm-admin-setup', "name" => "Admin Setup" ],
 			[ "slug" => 'ssm-field-factory', "name" => "Field Factory" ]
 		);
@@ -237,19 +231,6 @@ class SSM {
 			)
 		);
 
-		$this->admin_modules_functions['ssm-admin-branding'] = array(
-			"module_name" => "Admin Branding",
-			"hooks" => array(
-				[ "type" => "filter" , "name" => "login_headerurl", "class" => "plugin_admin_branding", "function" => "login_headerurl" ],
-				[ "type" => "filter" , "name" => "login_headertitle", "class" => "plugin_admin_branding", "function" => "login_headertitle" ],
-				[ "type" => "filter" , "name" => "login_enqueue_scripts", "class" => "plugin_admin_branding", "function" => "login_logo" ],
-				[ "type" => "filter" , "name" => "wp_mail_from_name", "class" => "plugin_admin_branding", "function" => "mail_from_name" ],
-				[ "type" => "filter" , "name" => "wp_mail_from", "class" => "plugin_admin_branding", "function" => "wp_mail_from" ],
-				[ "type" => "action" , "name" => "wp_before_admin_bar_render", "class" => "plugin_admin_branding", "function" => "remove_icon_bar" ],
-				[ "type" => "filter" , "name" => "admin_footer_text", "class" => "plugin_admin_branding", "function" => "admin_footer_text" ]
-			)
-		);
-
 		$this->admin_modules_functions['ssm-admin-setup'] = array(
 			"module_name" => "Admin Setup",
 			"hooks" => array(
@@ -271,8 +252,15 @@ class SSM {
 				[ "type" => "filter" , "name" => "admin_body_class", "class" => "plugin_admin_setup", "function" => "is_front_admin_body_class", "priority" => 10, "arguments" => 1 ],
 				[ "type" => "action" , "name" => "wp_ajax_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
 				[ "type" => "action" , "name" => "wp_ajax_nopriv_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
-				[ "type" => "action" , "name" => "save_post", "class" => "plugin_admin_setup", "function" => "update_width_post_meta", "priority" => 10, "arguments" => 3 ]
-
+				[ "type" => "action" , "name" => "save_post", "class" => "plugin_admin_setup", "function" => "update_width_post_meta", "priority" => 10, "arguments" => 3 ],
+				[ "type" => "filter" , "name" => "login_headerurl", "class" => "plugin_admin_setup", "function" => "login_headerurl" ],
+				[ "type" => "filter" , "name" => "login_headertitle", "class" => "plugin_admin_setup", "function" => "login_headertitle" ],
+				[ "type" => "filter" , "name" => "login_enqueue_scripts", "class" => "plugin_admin_setup", "function" => "login_logo" ],
+				[ "type" => "filter" , "name" => "wp_mail_from_name", "class" => "plugin_admin_setup", "function" => "mail_from_name" ],
+				[ "type" => "filter" , "name" => "wp_mail_from", "class" => "plugin_admin_setup", "function" => "wp_mail_from" ],
+				[ "type" => "action" , "name" => "wp_before_admin_bar_render", "class" => "plugin_admin_setup", "function" => "remove_icon_bar" ],
+				[ "type" => "filter" , "name" => "admin_footer_text", "class" => "plugin_admin_setup", "function" => "admin_footer_text" ]
+			
 			)
 		);
 
@@ -401,7 +389,6 @@ class SSM {
 		$plugin_taxonomies = new SSM_Taxonomies( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
 		$plugin_required_plugins = new SSM_Required_Plugins( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
 		$plugin_admin_setup = new SSM_Admin_Setup( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
-		$plugin_admin_branding = new SSM_Admin_Branding( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
 		$plugin_field_factory = new SSM_Field_Factory( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
 		
 		$this->register_modules( 'admin', array(
@@ -409,7 +396,6 @@ class SSM {
 				'plugin_taxonomies' => $plugin_taxonomies,
 				'plugin_required_plugins' => $plugin_required_plugins,
 				'plugin_admin_setup' => $plugin_admin_setup,
-				'plugin_admin_branding' => $plugin_admin_branding,
 				'plugin_field_factory' => $plugin_field_factory
 			)
 		);

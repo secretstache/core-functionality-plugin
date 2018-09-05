@@ -166,7 +166,7 @@ class SSM_Options {
 
     public function ssm_helpers() {
 
-        $helpers = get_class_methods('SSM');
+        $helpers = get_class_methods('SSMH');
 
         echo "<div id='helpers'>";
         

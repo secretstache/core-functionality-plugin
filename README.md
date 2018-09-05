@@ -6,9 +6,9 @@ This is a Core functionality boilerplate for SSM projects built on top of [WordP
 
 The main functionality of the plugin is organized within 2 main files:
 
-`includes/class-ssm-core-functionality` - the list of declarations, located inside of `define_admin_hooks` function. Consists of 2 parts: *registrations* and *additional features*.
+`includes/class-ssm` - the list of declarations, located inside of `define_admin_hooks` function. Consists of 2 parts: *registrations* and *additional features*.
 
-`admin/class-ssm-core-functionality-admin` - the list of corresponding functions. Consists of 2 types of functions: *immutable* and *mutable*
+`admin/class-ssm-admin` - the list of corresponding functions. Consists of 2 types of functions: *immutable* and *mutable*
 
 **Registrations:**
 
@@ -54,15 +54,15 @@ Example of usage:
 
 In order to register custom post types, taxonomies and terms, user shoud:
 
-1. Take a look around `register_post_types`, `register_taxonomies`, `register_terms` functions inside `admin/class-ssm-core-functionality-admin` file in order to see the list of arguments allowed to override. ( *$defaults* ).
-2. Find `call_registration` function inside `admin/class-ssm-core-functionality-admin` file. 
+1. Take a look around `register_post_types`, `register_taxonomies`, `register_terms` functions inside `admin/class-ssm-admin` file in order to see the list of arguments allowed to override. ( *$defaults* ).
+2. Find `call_registration` function inside `admin/class-ssm-admin` file. 
 3. According to provided examples, fulfill corresponding *cpt_args*, *tax_args*, *term_args* arrays overriding variables due to project needs.
 
 In order to enable some additional feature (for example, to prevent adding terms to some taxonomies), user should:
 
 1. Enable corresponding feature inside of theme framework core:
 `add_theme_support('term_adding_prevent')`
-2. Find `term_adding_prevent` function inside `admin/class-ssm-core-functionality-admin` file.
+2. Find `term_adding_prevent` function inside `admin/class-ssm-admin` file.
 3. Fulfill $taxonomies array with the list of taxonomies user won't be able to add terms into.
 
 
