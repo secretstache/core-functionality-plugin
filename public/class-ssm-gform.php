@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_GForm extends SSM_Core_Functionality_Public {
+class SSM_GForm extends SSM_Public {
 
     /**
      * Force Gravity Forms to init scripts in the footer and ensure that the DOM is loaded before scripts are executed

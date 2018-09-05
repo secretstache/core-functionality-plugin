@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Public_Setup extends SSM_Core_Functionality_Public {
+class SSM_Public_Setup extends SSM_Public {
 
     /**
      * Show current year as a shortcode

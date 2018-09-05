@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Required_Plugins extends SSM_Core_Functionality_Admin {
+class SSM_Required_Plugins extends SSM_Admin {
 
 	/**
 	 * Set up list of required plugins with corresponding options

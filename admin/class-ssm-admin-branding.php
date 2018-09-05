@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Admin_Branding extends SSM_Core_Functionality_Admin {
+class SSM_Admin_Branding extends SSM_Admin {
 
     /**
 	 * Makes the login screen's logo link to your homepage, instead of to WordPress.org.
@@ -28,9 +28,9 @@ class SSM_Core_Functionality_Admin_Branding extends SSM_Core_Functionality_Admin
 
 		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
 		
-		$background_image =  SSM::get_option('ssm_core_login_logo') != NULL ? SSM::get_option('ssm_core_login_logo') : $defaultLogo;
-		$height =  SSM::get_option('ssm_core_login_logo_height') != NULL ? SSM::get_option('ssm_core_login_logo_height') : '128px';
-		$width =  SSM::get_option('ssm_core_login_logo_width') != NULL ? SSM::get_option('ssm_core_login_logo_width') : '150px';
+		$background_image =  SSMH::get_option('ssm_core_login_logo') != NULL ? SSMH::get_option('ssm_core_login_logo') : $defaultLogo;
+		$height =  SSMH::get_option('ssm_core_login_logo_height') != NULL ? SSMH::get_option('ssm_core_login_logo_height') : '128px';
+		$width =  SSMH::get_option('ssm_core_login_logo_width') != NULL ? SSMH::get_option('ssm_core_login_logo_width') : '150px';
 		
         ?>
         <style type="text/css">
@@ -51,7 +51,7 @@ class SSM_Core_Functionality_Admin_Branding extends SSM_Core_Functionality_Admin
 	 * @since 1.0.0
 	 */
 	public function mail_from_name() {
-		return SSM::get_option( 'blogname' );
+		return SSMH::get_option( 'blogname' );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class SSM_Core_Functionality_Admin_Branding extends SSM_Core_Functionality_Admin
 	 * @since 1.0.0
 	 */
 	public function wp_mail_from() {
-		return SSM::get_option( 'admin_email' );
+		return SSMH::get_option( 'admin_email' );
 	}
 
 	/**
@@ -80,8 +80,8 @@ class SSM_Core_Functionality_Admin_Branding extends SSM_Core_Functionality_Admin
 	 */
 	function admin_footer_text() {
 
-		$footer_text = SSM::get_option('ssm_core_agency_name') != NULL ? SSM::get_option('ssm_core_agency_name') : 'Secret Stache Media';
-		$footer_link = SSM::get_option('ssm_core_agency_url') != NULL ? SSM::get_option('ssm_core_agency_url') : 'http://secretstache.com';
+		$footer_text = SSMH::get_option('ssm_core_agency_name') != NULL ? SSMH::get_option('ssm_core_agency_name') : 'Secret Stache Media';
+		$footer_link = SSMH::get_option('ssm_core_agency_url') != NULL ? SSMH::get_option('ssm_core_agency_url') : 'http://secretstache.com';
 
 		echo 'Built by <a href="' . $footer_link . '" target="_blank">' . $footer_text . '</a> with WordPress.';
 	}

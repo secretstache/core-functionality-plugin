@@ -6,8 +6,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/includes
+ * @package    SSM
+ * @subpackage SSM/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/includes
+ * @package    SSM
+ * @subpackage SSM/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Core_Functionality_Loader {
+class SSM_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

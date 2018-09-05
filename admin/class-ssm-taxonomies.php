@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Taxonomies extends SSM_Core_Functionality_Admin {
+class SSM_Taxonomies extends SSM_Admin {
     
     /**
      * 

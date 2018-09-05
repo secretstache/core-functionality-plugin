@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Options {
+class SSM_Options {
 
     /**
      * Initialize the class and set its properties.

@@ -9,8 +9,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/includes
+ * @package    SSM
+ * @subpackage SSM/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/includes
+ * @package    SSM
+ * @subpackage SSM/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Core_Functionality_i18n {
+class SSM_i18n {
 
 
 	/**

@@ -6,8 +6,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/admin
+ * @package    SSM
+ * @subpackage SSM/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/admin
+ * @package    SSM
+ * @subpackage SSM/admin
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Core_Functionality_Admin {
+class SSM_Admin {
 
 	/**
 	 * The ID of this plugin.

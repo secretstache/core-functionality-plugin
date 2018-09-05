@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Helpers {
+class SSM_Helpers {
 
     /**
      * Field abstraction layer

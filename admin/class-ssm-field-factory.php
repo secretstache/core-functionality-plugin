@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Field_Factory extends SSM_Core_Functionality_Admin {
+class SSM_Field_Factory extends SSM_Admin {
 
 	/**
 	 * Set up ACF JSON directory

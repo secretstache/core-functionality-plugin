@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_CPT extends SSM_Core_Functionality_Admin {
+class SSM_CPT extends SSM_Admin {
 
     /**
 	 * It extracts the array of cpt's, loop through each of them and register it.

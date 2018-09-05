@@ -6,8 +6,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/public
+ * @package    SSM
+ * @subpackage SSM/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/public
+ * @package    SSM
+ * @subpackage SSM/public
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Core_Functionality_Public {
+class SSM_Public {
 
 	/**
 	 * The ID of this plugin.

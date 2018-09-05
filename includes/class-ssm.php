@@ -9,8 +9,8 @@
  * @link       https://www.secretstache.com/
  * @since      1.0.0
  *
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/includes
+ * @package    SSM
+ * @subpackage SSM/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    SSM_Core_Functionality
- * @subpackage SSM_Core_Functionality/includes
+ * @package    SSM
+ * @subpackage SSM/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Core_Functionality {
+class SSM {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class SSM_Core_Functionality {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      SSM_Core_Functionality_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      SSM_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -72,7 +72,7 @@ class SSM_Core_Functionality {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'ssm-core-functionality';
+		$this->plugin_name = 'ssm';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -103,84 +103,84 @@ class SSM_Core_Functionality {
 		/**
 		 * The class responsible for Options page registration
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-options.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-options.php';
 
 		/**
 		 * The class responsible for Helpers registration
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-helpers.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-helpers.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-core-functionality-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ssm-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-public.php';
 
 		/**
 		 * The class responsible for CPT functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-cpt.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-cpt.php';
 
 		/**
 		 * The class responsible for custom taxonomies functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-taxonomies.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-taxonomies.php';
 
 		/**
 		 * The class responsible for Required Plugins functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-required-plugins.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-required-plugins.php';
 
 		/**
 		 * The class responsible for Admin Setup functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin-setup.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-admin-setup.php';
 
 		/**
 		 * The class responsible for Admin Branding functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-admin-branding.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-admin-branding.php';
 
 		/**
 		 * The class responsible for Field Factory module functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-core-functionality-field-factory.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ssm-field-factory.php';
 	
 		/**
 		 * The class responsible for GForm module functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-gform.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-gform.php';
 
 		/**
 		 * The class responsible for Public Setup module functionality
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-core-functionality-public-setup.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-public-setup.php';
 
 
-		$this->loader = new SSM_Core_Functionality_Loader();
+		$this->loader = new SSM_Loader();
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the SSM_Core_Functionality_i18n class in order to set the domain and to register the hook
+	 * Uses the SSM_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -188,7 +188,7 @@ class SSM_Core_Functionality {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new SSM_Core_Functionality_i18n();
+		$plugin_i18n = new SSM_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -326,14 +326,14 @@ class SSM_Core_Functionality {
 	}
 
 	/**
-	 * Set Alias for SSM_Core_Functionality_Helpers class
+	 * Set Alias for SSM_Helpers class
 	 * Example of usage: echo SSM::limit_words( $text, 20 )
 	 *
 	 * @since   1.0.0
      * @access  private
 	 */
 	private function set_helpers_alias() {
-		class_alias('SSM_Core_Functionality_Helpers', 'SSM');
+		class_alias('SSM_Helpers', 'SSMH');
 	}
 
 	/**
@@ -377,8 +377,8 @@ class SSM_Core_Functionality {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_gform = new SSM_Core_Functionality_GForm( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
-		$plugin_public_setup = new SSM_Core_Functionality_Public_Setup( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
+		$plugin_gform = new SSM_GForm( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
+		$plugin_public_setup = new SSM_Public_Setup( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
 
 		$this->register_modules( 'public', array(
 				"plugin_gform" => $plugin_gform,
@@ -397,12 +397,12 @@ class SSM_Core_Functionality {
 	 */
 	private function define_admin_hooks() {
 				
-		$plugin_cpt = new SSM_Core_Functionality_CPT( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
-		$plugin_taxonomies = new SSM_Core_Functionality_Taxonomies( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
-		$plugin_required_plugins = new SSM_Core_Functionality_Required_Plugins( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
-		$plugin_admin_setup = new SSM_Core_Functionality_Admin_Setup( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
-		$plugin_admin_branding = new SSM_Core_Functionality_Admin_Branding( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
-		$plugin_field_factory = new SSM_Core_Functionality_Field_Factory( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_cpt = new SSM_CPT( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_taxonomies = new SSM_Taxonomies( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_required_plugins = new SSM_Required_Plugins( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_admin_setup = new SSM_Admin_Setup( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_admin_branding = new SSM_Admin_Branding( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_field_factory = new SSM_Field_Factory( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
 		
 		$this->register_modules( 'admin', array(
 				'plugin_cpt' => $plugin_cpt,
@@ -459,8 +459,8 @@ class SSM_Core_Functionality {
 	 */
 	private function define_general_hooks() {
 
-		$plugin_admin = new SSM_Core_Functionality_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_public_modules_functions() );
-		$plugin_public = new SSM_Core_Functionality_Public( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
+		$plugin_admin = new SSM_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_public_modules_functions() );
+		$plugin_public = new SSM_Public( $this->get_plugin_name(), $this->get_version(), $this->get_public_modules(), $this->get_public_modules_functions() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -480,7 +480,7 @@ class SSM_Core_Functionality {
 	 */
 	private function set_options_page() {
 
-		$plugin_options = new SSM_Core_Functionality_Options( $this->get_public_modules(), $this->get_public_modules_functions(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_options = new SSM_Options( $this->get_public_modules(), $this->get_public_modules_functions(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
 			
 		$this->loader->add_action( 'admin_init', $plugin_options, 'ssm_core_settings' );
 		$this->loader->add_action( 'admin_menu', $plugin_options, 'add_ssm_options_page', 99 );
@@ -512,7 +512,7 @@ class SSM_Core_Functionality {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    SSM_Core_Functionality_Loader    Orchestrates the hooks of the plugin.
+	 * @return    SSM_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

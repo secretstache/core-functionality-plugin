@@ -1,6 +1,6 @@
 <?php
 
-class SSM_Core_Functionality_Admin_Setup extends SSM_Core_Functionality_Admin {
+class SSM_Admin_Setup extends SSM_Admin {
 
     /**
 	 * Remove unnecessary standard WP Roles
@@ -19,7 +19,7 @@ class SSM_Core_Functionality_Admin_Setup extends SSM_Core_Functionality_Admin {
 	 */
 	public function remove_image_link() {
 
-		$image_set = SSM::get_option( 'image_default_link_type' );
+		$image_set = SSMH::get_option( 'image_default_link_type' );
 		
 		if ($image_set !== 'none') {
 			update_option('image_default_link_type', 'none');
@@ -217,7 +217,7 @@ class SSM_Core_Functionality_Admin_Setup extends SSM_Core_Functionality_Admin {
 		global $post;
 	
 		$current_id = $post->ID;
-		$front_page_id = SSM::get_option( 'page_on_front' );
+		$front_page_id = SSMH::get_option( 'page_on_front' );
 	
 		if ( $current_id == $front_page_id ) {
 			return $classes = 'is-front';
