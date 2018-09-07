@@ -1,0 +1,6 @@
+{
+    "require": {
+      "soberwp/bundle": "1.0.2-p",
+      "johnbillion/extended-cpts": "4.2.0"
+    }
+  }

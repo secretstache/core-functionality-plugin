@@ -81,6 +81,7 @@ function run_ssm() {
 
 	$plugin = new SSM();
 	$plugin->run();
+	require_once( plugin_dir_path( __FILE__ ) . "vendor/autoload.php" );
 
 }
 run_ssm();
