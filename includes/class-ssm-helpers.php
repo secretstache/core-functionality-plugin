@@ -9,7 +9,7 @@ class SSM_Helpers {
      */
     public static function get_field( $field_name, $options = FALSE, $post_id = '' ) {
 
-        if ( FIELD_LIBRARY == 'ACF' ) {
+        // if ( FIELD_LIBRARY == 'ACF' ) {
             
             if ( $options == TRUE ) {
                 return get_field( $field_name, 'options' );
@@ -17,17 +17,19 @@ class SSM_Helpers {
                 return get_field( $field_name, $post_id );
             }
 
-        } elseif ( FIELD_LIBRARY == 'Carbon' ) {
+        // } 
+        
+        // elseif ( FIELD_LIBRARY == 'Carbon' ) {
 
-            if ( $options == TRUE ) {
-                return carbon_get_theme_option( $field_name );
-            } else {
-                return carbon_get_the_post_meta( $field_name );
-            }
+        //     if ( $options == TRUE ) {
+        //         return carbon_get_theme_option( $field_name );
+        //     } else {
+        //         return carbon_get_the_post_meta( $field_name );
+        //     }
 
-        } else {
-            return false;
-        }
+        // } else {
+        //     return false;
+        // }
     
     }
 
