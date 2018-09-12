@@ -1,5 +1,38 @@
 (function( $ ) {
 
+	$(document).ready(function() {
+
+		var grid = $('.acf-columns-2 .wp-list-table');
+
+		if (grid.length != 0) {
+
+			grid.find('thead tr').append(
+				'<th scope="col" id="acf-fg-category" class="manage-column column-acf-fg-category">Category</th>'
+			);
+
+			grid.find('tbody tr').each(function() {
+				
+				var category_class = $(this).attr('class').split(/\s+/).slice(-1)[0];
+				var category = category_class.split('-');
+				
+				category_name = category[1];
+				category_link = '/wp-admin/edit.php?post_type=acf-field-group&acf_category=' + category_name;
+
+				$(this).append(
+					'<td class="acf-fg-category column-acf-fg-category" data-colname="Category">\
+						<a class="row-category" href="' + category_link + '" aria-label="“' + category_name + '” (Edit)">' + category_name + '</a>\
+					</td>'
+				)
+			})
+
+			grid.find('tfoot tr').append(
+				'<th scope="col" class="manage-column column-acf-fg-category">Category</th>'
+			)
+
+		}
+
+	})
+
 	$('#upload-image-button').click(function() {
 		var send_attachment = wp.media.editor.send.attachment;
 		var button = $(this);

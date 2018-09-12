@@ -87,7 +87,7 @@ class SSM_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts() {		
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-admin.js', array( 'jquery' ), $this->version, false );
 	}
 
@@ -158,6 +158,15 @@ class SSM_Admin {
 				'with_front'			=> TRUE
 			)
 		) );
+
+		array_push( $tax_args, array(
+			"tax_name" 		=> "acf_category",
+			"cpt_name" 		=> "acf-field-group",
+			"slug" 			=> "category",
+			"text_domain"	=> "category",
+			"single" 		=> "Category",
+			"plural" 		=> "Category",
+		) );
 	
 		// new taxonomies go here...
 
@@ -176,6 +185,30 @@ class SSM_Admin {
 			"slug"				=> "test_type_term",
 
 			"description" 		=> "Test description"
+		) );
+
+		array_push( $terms_args, array(
+			"term_name" 		=> "Modules",
+			"taxonomy_name" 	=> "acf_category",
+			"slug"				=> "modules",
+		) );
+
+		array_push( $terms_args, array(
+			"term_name" 		=> "Lists",
+			"taxonomy_name" 	=> "acf_category",
+			"slug"				=> "lists",
+		) );
+
+		array_push( $terms_args, array(
+			"term_name" 		=> "Components",
+			"taxonomy_name" 	=> "acf_category",
+			"slug"				=> "components",
+		) );
+
+		array_push( $terms_args, array(
+			"term_name" 		=> "Options",
+			"taxonomy_name" 	=> "acf_category",
+			"slug"				=> "options",
 		) );
 		
 		// new terms go here...

@@ -28,7 +28,7 @@
  * @author     Secret Stache Media <alex@secretstache.com>
  */
 class SSM {
-
+	
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
@@ -167,7 +167,6 @@ class SSM {
 		 * The class responsible for Public Setup module functionality
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ssm-public-setup.php';
-
 
 		$this->loader = new SSM_Loader();
 	}
@@ -455,7 +454,7 @@ class SSM {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
-		
+
 	}
 
 	/**

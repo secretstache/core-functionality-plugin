@@ -47,3 +47,13 @@
 #helpers {
     line-height: 2.5em;
 }
+
+#taxonomy-acf_category #acf_category-tabs,
+#taxonomy-acf_category #acf_category-adder,
+#taxonomy-acf_category #acf_category-0 {
+    display: none;
+}
+
+.wp-list-table a.row-category {
+    text-transform: capitalize;
+}
