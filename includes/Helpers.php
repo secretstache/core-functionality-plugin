@@ -1,6 +1,8 @@
 <?php
 
-class SSM_Helpers {
+namespace SSM\Includes;
+
+class Helpers {
 
     /**
      * Field abstraction layer

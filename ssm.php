@@ -3,11 +3,6 @@
 /**
  * The plugin bootstrap file
  *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
  * @link              https://www.secretstache.com/
  * @since             1.0.0
  * @package           SSM
@@ -24,6 +19,12 @@
  * Text Domain:       ssm
  * Domain Path:       /languages
  */
+
+namespace SSM;
+
+use SSM\Includes\Root;
+use SSM\Includes\Activator;
+use SSM\Includes\Deactivator;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -46,8 +47,7 @@ define( 'SSMC_PUBLIC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'publi
  * This action is documented in includes/class-ssm-activator.php
  */
 function activate_ssm() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ssm-activator.php';
-	SSM_Activator::activate();
+	Activator::activate();
 }
 
 /**
@@ -55,8 +55,7 @@ function activate_ssm() {
  * This action is documented in includes/class-ssm-deactivator.php
  */
 function deactivate_ssm() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ssm-deactivator.php';
-	SSM_Deactivator::deactivate();
+	Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_ssm' );
@@ -66,7 +65,6 @@ register_deactivation_hook( __FILE__, 'deactivate_ssm' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-ssm.php';
 
 /**
  * Begins execution of the plugin.
@@ -79,9 +77,11 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-ssm.php';
  */
 function run_ssm() {
 
-	$plugin = new SSM();
-	$plugin->run();
 	require_once( plugin_dir_path( __FILE__ ) . "vendor/autoload.php" );
 
+	$root = new Root();
+	$root->run();
+
 }
+
 run_ssm();

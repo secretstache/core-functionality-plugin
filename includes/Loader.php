@@ -1,5 +1,7 @@
 <?php
 
+namespace SSM\Includes;
+
 /**
  * Register all actions and filters for the plugin
  *
@@ -21,7 +23,7 @@
  * @subpackage SSM/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Loader {
+class Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

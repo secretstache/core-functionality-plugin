@@ -1,5 +1,7 @@
 <?php
 
+namespace SSM\Includes;
+
 /**
  * Fired during plugin activation
  *
@@ -20,7 +22,7 @@
  * @subpackage SSM/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Activator {
+class Activator {
 
 	/**
 	 * Short Description. (use period)
@@ -30,6 +32,7 @@ class SSM_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		
 
 	}
 

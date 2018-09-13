@@ -1,6 +1,11 @@
 <?php
 
-class SSM_Admin_Setup extends SSM_Admin {
+namespace SSM\Admin;
+
+use SSM\Admin\Admin;
+use SSM\Includes\Helpers as SSMH;
+
+class AdminSetup extends Admin {
 
     /**
 	 * Remove unnecessary standard WP Roles

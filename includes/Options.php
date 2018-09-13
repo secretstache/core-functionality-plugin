@@ -1,6 +1,8 @@
 <?php
 
-class SSM_Options {
+namespace SSM\Includes;
+
+class Options {
 
     /**
      * Initialize the class and set its properties.

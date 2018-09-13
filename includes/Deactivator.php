@@ -1,5 +1,7 @@
 <?php
 
+namespace SSM\Deactivate;
+
 /**
  * Fired during plugin deactivation
  *
@@ -20,7 +22,7 @@
  * @subpackage SSM/includes
  * @author     Secret Stache Media <alex@secretstache.com>
  */
-class SSM_Deactivator {
+class Deactivator {
 
 	/**
 	 * Short Description. (use period)

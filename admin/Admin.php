@@ -1,26 +1,8 @@
 <?php
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * @link       https://www.secretstache.com/
- * @since      1.0.0
- *
- * @package    SSM
- * @subpackage SSM/admin
- */
+namespace SSM\Admin;
 
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    SSM
- * @subpackage SSM/admin
- * @author     Secret Stache Media <alex@secretstache.com>
- */
-class SSM_Admin {
+class Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -173,7 +155,6 @@ class SSM_Admin {
 		if ( !empty( $tax_args ) ) {
 			do_action( 'custom_taxonomies_hook', $tax_args );
 		}
-
 
 		// Registration of Terms
 
