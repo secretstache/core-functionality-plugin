@@ -1,27 +1,11 @@
 {
-    "key": "group_5b29ca531e2e6",
-    "title": "3. Video Information",
+    "key": "group_5b92e4de49df2",
+    "title": "[Option] HTML Attributes",
     "fields": [
         {
-            "key": "field_5b29ca6c7e4ce",
-            "label": "Hosted Video URL",
-            "name": "hosted_video_url",
-            "type": "oembed",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "width": "",
-            "height": ""
-        },
-        {
-            "key": "field_5b29ca917e4cf",
-            "label": "Source",
-            "name": "video_source",
+            "key": "field_5b92e5013a811",
+            "label": "HTML ID",
+            "name": "html_id",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -38,9 +22,9 @@
             "maxlength": ""
         },
         {
-            "key": "field_5b673cb30c6ec",
-            "label": "Source URL",
-            "name": "video_source_url",
+            "key": "field_5b92e5083a812",
+            "label": "HTML Classes",
+            "name": "html_classes",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -60,24 +44,19 @@
     "location": [
         [
             {
-                "param": "post_taxonomy",
+                "param": "post_type",
                 "operator": "==",
-                "value": "ccd_post_format:videos"
-            },
-            {
-                "param": "page",
-                "operator": "!=",
-                "value": "533"
+                "value": "page"
             }
         ]
     ],
-    "menu_order": 5,
-    "position": "acf_after_title",
+    "menu_order": 0,
+    "position": "normal",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": 0,
     "description": "",
-    "modified": 1533492421
+    "modified": 1536579736
 }
