@@ -129,7 +129,7 @@
 		}
 	});
 
-	$(document).on( 'click', '.public_module', function(e) {
+	$(document).on( 'click', '.front_module', function(e) {
 		
 		if (e.target.tagName == 'INPUT') {
 
@@ -137,13 +137,13 @@
 
 			if ( $(this).find('input').attr('checked') == undefined ) {
 
-				$('#public_functions .public_function.' + slug).find('input').each(function() {
+				$('#front_functions .front_function.' + slug).find('input').each(function() {
 					$(this).prop('checked', false);
 				});
 
 			} else {
 
-				$('#public_functions .public_function.' + slug).find('input').each(function() {
+				$('#front_functions .front_function.' + slug).find('input').each(function() {
 					$(this).prop('checked', true);
 				});
 
@@ -164,14 +164,14 @@
 
 	});
 
-	$(document).on( 'change', '.public_function :checkbox', function(e) {
+	$(document).on( 'change', '.front_function :checkbox', function(e) {
 		
-		var slug = $(this).parents('.public_function').data('module-slug');
+		var slug = $(this).parents('.front_function').data('module-slug');
 
-		if ( $(this).parents('.public_function').find('input:checked' ).length == 0 ) {
-			$('.public_module.' + slug + ' input').prop('checked', false);
+		if ( $(this).parents('.front_function').find('input:checked' ).length == 0 ) {
+			$('.front_module.' + slug + ' input').prop('checked', false);
 		} else {
-			$('.public_module.' + slug + ' input').prop('checked', true);
+			$('.front_module.' + slug + ' input').prop('checked', true);
 		}
 
 	});

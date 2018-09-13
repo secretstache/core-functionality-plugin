@@ -2,6 +2,8 @@
 
 namespace SSM\Includes;
 
+use SSM\Includes\Helpers as SSMH;
+
 class Options {
 
     /**
@@ -9,10 +11,10 @@ class Options {
      *
 	 * @since    1.0.0
 	 */
-	public function __construct( $public_modules, $public_modules_functions, $admin_modules, $admin_modules_functions ) {
+	public function __construct( $front_modules, $front_modules_functions, $admin_modules, $admin_modules_functions ) {
 
-        $this->public_modules = $public_modules;
-        $this->public_modules_functions = $public_modules_functions;
+        $this->front_modules = $front_modules;
+        $this->front_modules_functions = $front_modules_functions;
         $this->admin_modules = $admin_modules;
         $this->admin_modules_functions = $admin_modules_functions;
     }
@@ -44,11 +46,11 @@ class Options {
         add_settings_field( 'ssm-admin-modules', 'Modules', array( $this, 'ssm_admin_modules' ), 'ssm_core', 'ssm-core-admin-modules' );
         add_settings_field( 'ssm-admin-modules-functions', 'Modules Functions', array( $this, 'ssm_admin_modules_functions' ), 'ssm_core', 'ssm-core-admin-modules' );
         
-        //Public Area
-        add_settings_section( 'ssm-core-public-modules', 'Public Area', array( $this, 'ssm_core_public_modules'), 'ssm_core');
+        //Front Area
+        add_settings_section( 'ssm-core-front-modules', 'Front Area', array( $this, 'ssm_core_front_modules'), 'ssm_core');
 
-        add_settings_field( 'ssm-public-modules', 'Modules', array( $this, 'ssm_public_modules' ), 'ssm_core', 'ssm-core-public-modules' );
-        add_settings_field( 'ssm-public-modules-functions', 'Modules Functions', array( $this, 'ssm_public_modules_functions' ), 'ssm_core', 'ssm-core-public-modules' );
+        add_settings_field( 'ssm-front-modules', 'Modules', array( $this, 'ssm_front_modules' ), 'ssm_core', 'ssm-core-front-modules' );
+        add_settings_field( 'ssm-front-modules-functions', 'Modules Functions', array( $this, 'ssm_front_modules_functions' ), 'ssm_core', 'ssm-core-front-modules' );
         
         //Helpers
         add_settings_section( 'ssm-core-helpers', 'Helpers', array( $this, 'ssm_core_helpers'), 'ssm_core');
@@ -118,17 +120,17 @@ class Options {
         echo "</div>";
     }
 
-    public function ssm_public_modules() {
+    public function ssm_front_modules() {
         
-        $public_enabled_modules = get_option( 'public_enabled_modules' );
+        $front_enabled_modules = get_option( 'front_enabled_modules' );
 
-        echo "<div id='public_modules'>";
+        echo "<div id='front_modules'>";
         
-        foreach ( $this->public_modules as $module ) {
+        foreach ( $this->front_modules as $module ) {
 
-            $checked = ( in_array( $module, $public_enabled_modules ) ) ? 'checked' : '';
+            $checked = ( in_array( $module, $front_enabled_modules ) ) ? 'checked' : '';
             
-            echo "<div class='public_module {$module['slug']}' data-module-slug='{$module['slug']}'>";
+            echo "<div class='front_module {$module['slug']}' data-module-slug='{$module['slug']}'>";
             echo "<input type='checkbox' name='{$module['slug']}' id='{$module['slug']}' {$checked} />";
             echo "<label for='{$module['slug']}'> {$module['name']} </label>";
             echo "</div>";
@@ -138,20 +140,20 @@ class Options {
 
     }
     
-    public function ssm_public_modules_functions() {
+    public function ssm_front_modules_functions() {
 
-        $public_enabled_functions = get_option( 'public_enabled_functions' );
+        $front_enabled_functions = get_option( 'front_enabled_functions' );
 
-        echo "<div id='public_functions'>";
+        echo "<div id='front_functions'>";
 
-        foreach ( $this->public_modules_functions as $slug => $function ) {
-            echo "<div class='public_function {$slug}' data-module-slug='{$slug}'>";
+        foreach ( $this->front_modules_functions as $slug => $function ) {
+            echo "<div class='front_function {$slug}' data-module-slug='{$slug}'>";
             echo "<h4 class='module_name'>{$function['module_name']}</h3>";
 
             foreach ( $function['hooks'] as $hook ) {
                 
-                if ( is_array( $public_enabled_functions[$slug]['hooks'] ) ) {
-                    $checked = ( in_array( $hook, $public_enabled_functions[$slug]['hooks'] ) ) ? 'checked' : '';
+                if ( is_array( $front_enabled_functions[$slug]['hooks'] ) ) {
+                    $checked = ( in_array( $hook, $front_enabled_functions[$slug]['hooks'] ) ) ? 'checked' : '';
                 }
 
                 echo "<input type='checkbox' name='{$hook['function']}' id='{$hook['function']}' {$checked} />";
@@ -168,7 +170,7 @@ class Options {
 
     public function ssm_helpers() {
 
-        $helpers = get_class_methods('SSMH');
+        $helpers = get_class_methods('SSM\Includes\Helpers');
 
         echo "<div id='helpers'>";
         
@@ -189,7 +191,7 @@ class Options {
         if ( isset( $_POST ) && $_POST['option_page'] == 'ssm-core-settings-group' && $_POST['action'] == 'update' ) {
 
             $new_admin_modules = array();
-            $new_public_modules = array();
+            $new_front_modules = array();
 
             foreach ( $this->admin_modules as $module ) {
                 
@@ -199,10 +201,10 @@ class Options {
 
             }
 
-            foreach ( $this->public_modules as $module ) {
+            foreach ( $this->front_modules as $module ) {
                 
                 if ( $_POST[$module['slug']] == 'on' ) {
-                    array_push( $new_public_modules, $module );
+                    array_push( $new_front_modules, $module );
                 }
 
             }
@@ -225,28 +227,28 @@ class Options {
                 
             }
 
-            foreach ( $this->public_modules_functions as $slug => $function ) {
+            foreach ( $this->front_modules_functions as $slug => $function ) {
 
-                $new_public_functions[$slug] = array();
-                $new_public_hooks = array();
+                $new_front_functions[$slug] = array();
+                $new_front_hooks = array();
 
                 foreach ( $function['hooks'] as $hook ) {
 
                     if ( $_POST[$hook['function']] == 'on' ) {
-                        array_push( $new_public_hooks, $hook );
+                        array_push( $new_front_hooks, $hook );
                     }
                     
                 }
 
-                $new_public_functions[$slug]["module_name"] = $function['module_name'];
-                $new_public_functions[$slug]["hooks"] = $new_public_hooks;
+                $new_front_functions[$slug]["module_name"] = $function['module_name'];
+                $new_front_functions[$slug]["hooks"] = $new_front_hooks;
                 
             }
 
             update_option( 'admin_enabled_modules', $new_admin_modules );
             update_option( 'admin_enabled_functions', $new_admin_functions );
-            update_option( 'public_enabled_modules', $new_public_modules );
-            update_option( 'public_enabled_functions', $new_public_functions );
+            update_option( 'front_enabled_modules', $new_front_modules );
+            update_option( 'front_enabled_functions', $new_front_functions );
 
         }
     }
@@ -254,7 +256,7 @@ class Options {
 	public function ssm_core_agency_options() {}
     
     public function ssm_core_admin_modules() {}
-    public function ssm_core_public_modules() {}
+    public function ssm_core_front_modules() {}
     public function ssm_core_helpers() {}
 
 	public function ssm_core_agency_name() {

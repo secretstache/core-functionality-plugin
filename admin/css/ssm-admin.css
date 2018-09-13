@@ -23,25 +23,20 @@
 
 #admin_modules .admin_module,
 #admin_functions .admin_function,
-#public_modules .public_module,
-#public_functions .public_function,
+#front_modules .front_module,
+#front_functions .front_function,
 #helpers .helper {
     float: left;
     margin-right: 40px;
 }
 
 #admin_functions .module_name,
-#public_functions .module_name  {
+#front_functions .module_name  {
     margin-top: 5px;
 }
 
 .admin_function.ssm-admin-setup {
     clear: both;
-}
-
-.admin_function.ssm-admin-setup,
-.admin_function.ssm-field-factory {
-    margin-top: 40px;
 }
 
 #helpers {
