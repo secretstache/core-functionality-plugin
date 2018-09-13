@@ -9,7 +9,6 @@ class FrontSetup extends Front {
 
     /**
      * Show current year as a shortcode
-	 * @since 1.0.0
 	 */
     public function add_year_shortcode() {
         add_shortcode('year', array( $this, 'add_year_shortcode_cb' ) );
@@ -17,7 +16,6 @@ class FrontSetup extends Front {
     
     /**
      * add_year_shortcode() callback
-	 * @since 1.0.0
 	 */
     public function add_year_shortcode_cb() {
         
@@ -28,8 +26,6 @@ class FrontSetup extends Front {
 
     /**
      * Set Favicon
-     *
-	 * @since 1.0.0
      */
     public function set_favicon() {
 
@@ -41,8 +37,6 @@ class FrontSetup extends Front {
 
     /**
      * Dynamically Adds the Facebook Pixel
-     *
-	 * @since 1.0.0
      */
     public function ssm_do_facebook_pixel() {
 
@@ -88,8 +82,6 @@ class FrontSetup extends Front {
 
     /**
      * Setup Google Tag Manager
-     *
-	 * @since 1.0.0
      */
     public function ssm_setup_google_tag_manager() { ?>
 
@@ -113,8 +105,6 @@ class FrontSetup extends Front {
 
     /**
      * Setup Google Tag Manager
-     *
-	 * @since 1.0.0
      */
     public function ssm_setup_google_site_verification() { ?>
 
@@ -130,8 +120,6 @@ class FrontSetup extends Front {
 
     /**
      * Custom Head Scripts
-     *
-	 * @since 1.0.0
      */
     public function ssm_custom_head_scripts() {
 
@@ -150,8 +138,6 @@ class FrontSetup extends Front {
 
     /**
      * Custom Footer Scripts
-     *
-     * @since 1.0.0
      */
     public function ssm_custom_footer_scripts() {
         
@@ -171,7 +157,6 @@ class FrontSetup extends Front {
 
     /**
      * Force Gravity Forms to init scripts in the footer and ensure that the DOM is loaded before scripts are executed
-	 * @since 1.0.0
 	 */
     public function footer_scripts_init() {
         return true;
@@ -179,7 +164,6 @@ class FrontSetup extends Front {
 
     /**
      * Wrap Gform - CData open
-	 * @since 1.0.0
 	 */
     public function wrap_gform_cdata_open( $content = '' ) {
         
@@ -195,7 +179,6 @@ class FrontSetup extends Front {
 
     /**
      * Wrap Gform - CData close
-	 * @since 1.0.0
 	 */
     public function wrap_gform_cdata_close( $content = '' ) {
    

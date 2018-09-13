@@ -6,39 +6,19 @@ class Helpers {
 
     /**
      * Field abstraction layer
-     * 
-	 * @since    1.0.0
      */
     public static function get_field( $field_name, $options = FALSE, $post_id = '' ) {
-
-        // if ( FIELD_LIBRARY == 'ACF' ) {
             
-            if ( $options == TRUE ) {
-                return get_field( $field_name, 'options' );
-            } else {
-                return get_field( $field_name, $post_id );
-            }
-
-        // } 
-        
-        // elseif ( FIELD_LIBRARY == 'Carbon' ) {
-
-        //     if ( $options == TRUE ) {
-        //         return carbon_get_theme_option( $field_name );
-        //     } else {
-        //         return carbon_get_the_post_meta( $field_name );
-        //     }
-
-        // } else {
-        //     return false;
-        // }
+        if ( $options == TRUE ) {
+            return get_field( $field_name, 'options' );
+        } else {
+            return get_field( $field_name, $post_id );
+        }    
     
     }
 
     /**
      * Option abstraction layer
-     * 
-	 * @since    1.0.0
      */
 	public function get_option( $option_name, $default = '' ) {
 
@@ -52,8 +32,6 @@ class Helpers {
 
     /**
      * Retrieve the brand logo
-     * 
-	 * @since    1.0.0
      */
     public static function get_the_brand_logo( $link = true ) {
         
@@ -86,8 +64,6 @@ class Helpers {
 
     /**
      * Echo the site logo
-     * 
-	 * @since    1.0.0
      */
     public static function the_brand_logo( $link = true ) {
         echo get_the_brand_logo( $link );
@@ -95,8 +71,6 @@ class Helpers {
 
     /**
      * Retrieve the primary category
-     * 
-	 * @since    1.0.0
      */
     public static function get_the_primary_category() {
 
@@ -123,8 +97,6 @@ class Helpers {
 
     /**
      * Check if query has multiple pages
-     * 
-	 * @since    1.0.0
      */
     public static function has_multiple_pages() {
         global $wp_query;
@@ -133,8 +105,6 @@ class Helpers {
 
     /**
      * Retreive the menu arguments to pass to wp_nav_menu
-     * 
-	 * @since    1.0.0
      */
     public static function get_menu_args( $context = 'primary' ) {
         
@@ -164,8 +134,6 @@ class Helpers {
     }
     /**
      * Retreive the hamburger button
-     * 
-	 * @since    1.0.0
      */
     public static function get_the_hamburger_button( $context = 'offCanvas' ) {
 
@@ -182,8 +150,6 @@ class Helpers {
 
     /**
      * Echo the hamburger button
-     * 
-	 * @since    1.0.0
      */
     public static function the_hamburger_button( $context = 'offCanvas' ) {
         echo get_the_hamburger_button( $context );
@@ -191,8 +157,6 @@ class Helpers {
 
     /**
      * Retrieve the close icon
-     * 
-	 * @since    1.0.0
      */
     public static function get_the_close_icon( $class = 'editable' ) {
         return $icon = '<img src="' . get_stylesheet_directory_uri() . '/dist/images/x.svg" alt="Close" class="' . $class . '">';
@@ -200,8 +164,6 @@ class Helpers {
 
     /**
      * Echo the close icon
-     * 
-	 * @since    1.0.0
      */
     public static function the_close_icon( $class = 'editable' ) {
         echo get_the_close_icon( $class );
@@ -209,8 +171,6 @@ class Helpers {
 
     /**
      * Utility for prettier print_r
-     * 
-	 * @since    1.0.0
      */
     public static function pprint_r( $q ) {
         echo '<pre>';
@@ -220,8 +180,6 @@ class Helpers {
 
     /**
      * Control the number of words returned
-     * 
-	 * @since    1.0.0
      */
     public static function limit_words($string, $word_limit, $ellipses = true) {
         

@@ -57,21 +57,6 @@ class Options {
 
         add_settings_field( 'ssm-helpers', 'Functions', array( $this, 'ssm_helpers' ), 'ssm_core', 'ssm-core-helpers' );
 
-
-        // add_settings_field( 'ssm-modules', 'Modules', array( $this, 'ssm_modules' ), 'ssm_core', 'ssm-core-admin-modules' );
-        // add_settings_field( 'ssm-modules-functions', 'Modules Functions', array( $this, 'ssm_modules_functions' ), 'ssm_core', 'ssm-core-admin-modules' );
-
-        // add_settings_section( 'ssm-core-acf-options', 'ACF Options', array( $this,  'ssm_acf_options' ), 'ssm_core' );
-        // add_settings_field(
-		// 	'ssm-core-acf-admin-users',
-		// 	'Admin users who need access to ACF',
-		// 	array( $this, 'ssm_core_acf_admin_users' ),
-		// 	'ssm_core',
-		// 	'ssm-core-acf-options',
-		// 	[
-		// 		'admins' => get_users( array('role' => 'administrator') )
-		// 	]
-        // );
     }
 
     public function ssm_admin_modules() {

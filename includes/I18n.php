@@ -3,35 +3,12 @@
 namespace SSM\Includes;
 
 /**
- * Define the internationalization functionality
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @link       https://www.secretstache.com/
- * @since      1.0.0
- *
- * @package    SSM
- * @subpackage SSM/includes
- */
-
-/**
  * Define the internationalization functionality.
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @since      1.0.0
- * @package    SSM
- * @subpackage SSM/includes
- * @author     Secret Stache Media <alex@secretstache.com>
  */
 class I18n {
 
 	/**
 	 * Load the plugin text domain for translation.
-	 *
-	 * @since    1.0.0
 	 */
 	public function load_plugin_textdomain() {
 
@@ -42,7 +19,5 @@ class I18n {
 		);
 
 	}
-
-
 
 }

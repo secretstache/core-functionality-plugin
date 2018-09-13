@@ -6,44 +6,26 @@ class Admin {
 
 	/**
 	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
 	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
 
-	    /**
+	/**
 	 * The list of admin modules to be included in the core
-	 *
-	 * @since    1.0.0
-	 * @access   protected
 	 */
     protected $admin_modules;
 
     /**
 	 * The array of arguments in accordance with corresponding admin core modules
-	 *
-	 * @since    1.0.0
-	 * @access   protected
 	 */
     protected $admin_modules_functions;
 
 	/**
 	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version, $admin_modules, $admin_modules_functions ) {
 
@@ -57,8 +39,6 @@ class Admin {
 
 	/**
 	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-admin.css', array(), $this->version, 'all' );
@@ -66,8 +46,6 @@ class Admin {
 
 	/**
 	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {		
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-admin.js', array( 'jquery' ), $this->version, false );
@@ -76,8 +54,6 @@ class Admin {
 	/**
 	 * Step by step, it adds items to main multidemensional array of post types,
 	 * taxonomies and terms and call corresponding hooks using do_action().
-	 *	
-	 * @since    1.0.0
 	 */
 	public function call_registration() {
 

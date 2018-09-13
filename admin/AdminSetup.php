@@ -8,8 +8,7 @@ use SSM\Includes\Helpers as SSMH;
 class AdminSetup extends Admin {
 
     /**
-	 * Remove unnecessary standard WP Roles
-	 * @since 1.0.0
+	 * Remove unnecessary standard WP Roles	 
 	 */
     public function remove_roles() {
 
@@ -19,8 +18,7 @@ class AdminSetup extends Admin {
 	}
 
 	/**
-	 * Remove default link for images
-	 * @since 1.0.0
+	 * Remove default link for images 
 	 */
 	public function remove_image_link() {
 
@@ -33,7 +31,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Show Kitchen Sink in WYSIWYG Editor by default
-	 * @since 1.0.0
 	 */
 	public function show_kitchen_sink( $args ) {
 		$args['wordpress_adv_hidden'] = false;
@@ -42,7 +39,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Disable unused widgets.
-	 * @since 1.0.0
 	 */
 	public function remove_widgets() {
 
@@ -83,7 +79,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Modifies the TinyMCE settings array
-	 * @since 1.0.0
 	 */
 	public function update_tiny_mce( $init ) {
 
@@ -95,27 +90,21 @@ class AdminSetup extends Admin {
 	/**
 	 * Remove <p> tags from around images
 	 * See: http://css-tricks.com/snippets/wordpress/remove-paragraph-tags-from-around-images/
-	 * @since 1.0.0
 	 */
 	public function remove_ptags_on_images( $content ) {
-
 		return preg_replace( '/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content );
-	
 	}
 
 	/**
 	 * Remove the injected styles for the [gallery] shortcode
-	 * @since 1.0.0
+	 
 	 */
 	public function remove_gallery_styles( $css ) {
-
 		return preg_replace( "!<style type='text/css'>(.*?)</style>!s", '', $css );
-	
 	}
 
 	/**
 	* Set Home Page Programmatically if a Page Called "Home" Exists
-	* @since 1.0.0
 	*/
 	public function force_homepage() {
 		$homepage = get_page_by_title( 'Home' );
@@ -128,7 +117,6 @@ class AdminSetup extends Admin {
 
 	/**
 	* Removes unnecessary menu items from add new dropdown
-	* @since 1.0.0
 	*/
 	public function remove_wp_nodes() {
 		global $wp_admin_bar;
@@ -140,7 +128,6 @@ class AdminSetup extends Admin {
 	
 	/**
 	 * Filter Yoast SEO Metabox Priority
-	 * @since 1.0.0
 	 */
 	public function yoast_seo_metabox_priority() {
 		return 'low';
@@ -148,8 +135,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Remove Editor Support on Pages (Replaced with SSMPB)
-	 * 
-	 * @since 1.0.0
 	 */
 	public function remove_post_type_support() {
 		remove_post_type_support( 'page', 'editor' );
@@ -157,8 +142,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Remove default dasboards
-	 * 
-	 * @since 1.0.0
 	 */
 	public function remove_dashboard_meta() {
 
@@ -180,8 +163,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Add SSM menu item
-	 * 
-	 * @since 1.0.0
 	 */
 	public function ssm_admin_menu() {
 
@@ -199,8 +180,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Move various menu items into LIB menu
-	 * 
-	 * @since 1.0.0
 	 */
 	public function move_cpts_to_admin_menu() {
 	
@@ -214,8 +193,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Filter the admin body classes if is_front
-	 * 
-	 * @since 1.0.0
 	 */
 	public function is_front_admin_body_class( $classes ) {
 		
@@ -232,8 +209,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Update width post meta on AJAX call
-	 * 
-	 * @since 1.0.0
 	 */
 	public function update_width_post_meta( $post_ID, $post, $update ) {
 	
@@ -252,8 +227,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Get width values on AJAX call
-	 * 
-	 * @since 1.0.0
 	 */
 	public function get_width_values() {
 		
@@ -269,8 +242,7 @@ class AdminSetup extends Admin {
 	}
 
     /**
-	 * Makes the login screen's logo link to your homepage, instead of to WordPress.org.
-	 * @since 1.0.0
+	 * Makes the login screen's logo link to your homepage, instead of to WordPress.org 
 	 */
 	public function login_headerurl() {
 		return home_url();
@@ -278,17 +250,15 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Makes the login screen's logo title attribute your site title, instead of 'WordPress'.
-	 * @since 1.0.0
 	 */
 	public function login_headertitle() {
 		return get_bloginfo( 'name' );
 	}
 
-		/**
+	/**
 	 * Replaces the login screen's WordPress logo with the 'login-logo.png' in your child theme images folder.
 	 * Disabled by default. Make sure you have a login logo before using this function!
 	 * Updated 2.0.1: Assumes SVG logo by default
-	 * @since 1.0.0
 	 */
 	public function login_logo() {
 
@@ -314,7 +284,6 @@ class AdminSetup extends Admin {
 
 	/**
 	 * Makes WordPress-generated emails appear 'from' your WordPress site name, instead of from 'WordPress'.
-	 * @since 1.0.0
 	 */
 	public function mail_from_name() {
 		return SSMH::get_option( 'blogname' );
@@ -323,7 +292,6 @@ class AdminSetup extends Admin {
 	/**
 	 * Makes WordPress-generated emails appear 'from' your WordPress admin email address.
 	 * Disabled by default, in case you don't want to reveal your admin email.
-	 * @since 1.0.0
 	 */
 	public function wp_mail_from() {
 		return SSMH::get_option( 'admin_email' );
@@ -332,7 +300,6 @@ class AdminSetup extends Admin {
 	/**
 	 * Removes the WP icon from the admin bar
 	 * See: http://wp-snippets.com/remove-wordpress-logo-admin-bar/
-	 * @since 1.0.0
 	 */
 	public function remove_icon_bar() {
 		global $wp_admin_bar;
@@ -342,7 +309,6 @@ class AdminSetup extends Admin {
 	/**
 	 * Modify the admin footer text
 	 * See: http://wp-snippets.com/change-footer-text-in-wp-admin/
-	 * @since 1.0.0
 	 */
 	function admin_footer_text() {
 
