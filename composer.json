@@ -1,13 +1,29 @@
 {
-    "require": {
-      "soberwp/bundle": "1.0.2-p",
-      "johnbillion/extended-cpts": "4.2.0"
+  "name": "ssm/core-functionality-plugin",
+  "description": "Core functionality boilerplate for SSM projects built on top of WordPress Plugin Boilerplate",
+  "homepage": "https://github.com/secretstache/core-functionality-plugin",
+  "authors": [
+    {
+      "name": "Rich Staats",
+      "email": "rich@secretstache.com",
+      "homepage": "https://www.secretstache.com/"
     },
-    "autoload": {
-      "psr-4": {
-          "SSM\\Includes\\": "includes/",
-          "SSM\\Front\\": "front/",
-          "SSM\\Admin\\": "admin/"
-      }
+    {
+      "name": "Alexander Smulsky",
+      "email": "alex@secretstache.com",
+      "homepage": "https://www.secretstache.com/"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "soberwp/bundle": "1.0.2-p",
+    "johnbillion/extended-cpts": "4.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SSM\\Includes\\": "includes/",
+      "SSM\\Front\\": "front/",
+      "SSM\\Admin\\": "admin/"
     }
   }
+}
