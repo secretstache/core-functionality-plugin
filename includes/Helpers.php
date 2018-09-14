@@ -2,12 +2,14 @@
 
 namespace SSM\Includes;
 
-class Helpers {
+class Helpers
+{
 
     /**
      * Field abstraction layer
      */
-    public static function get_field( $field_name, $options = FALSE, $post_id = '' ) {
+    public static function getField( $field_name, $options = FALSE, $post_id = '' )
+    {
             
         if ( $options == TRUE ) {
             return get_field( $field_name, 'options' );
@@ -20,7 +22,8 @@ class Helpers {
     /**
      * Option abstraction layer
      */
-	public function get_option( $option_name, $default = '' ) {
+    public static function getOption( $option_name, $default = '' )
+    {
 
 		if ( \get_option('ssm_core_options')[$option_name] != NULL ) {
 			return \get_option('ssm_core_options')[$option_name];
@@ -33,7 +36,8 @@ class Helpers {
     /**
      * Retrieve the brand logo
      */
-    public static function get_the_brand_logo( $link = true ) {
+    public static function getTheBrandLogo( $link = true )
+    {
         
         $html = '';
 
@@ -65,14 +69,16 @@ class Helpers {
     /**
      * Echo the site logo
      */
-    public static function the_brand_logo( $link = true ) {
+    public static function theBrandLogo( $link = true )
+    {
         echo get_the_brand_logo( $link );
     }
 
     /**
      * Retrieve the primary category
      */
-    public static function get_the_primary_category() {
+    public static function getThePrimaryCategory() 
+    {
 
         global $post;
 
@@ -98,15 +104,19 @@ class Helpers {
     /**
      * Check if query has multiple pages
      */
-    public static function has_multiple_pages() {
+    public static function hasMultiplePages()
+    {
+
         global $wp_query;
         return ( $wp_query->max_num_pages > 1 );
+
     }
 
     /**
      * Retreive the menu arguments to pass to wp_nav_menu
      */
-    public static function get_menu_args( $context = 'primary' ) {
+    public static function getMenuArgs( $context = 'primary' )
+    {
         
         $args = array();
 
@@ -132,10 +142,12 @@ class Helpers {
 
         return $args;
     }
+
     /**
      * Retreive the hamburger button
      */
-    public static function get_the_hamburger_button( $context = 'offCanvas' ) {
+    public static function getTheHamburgerButton( $context = 'offCanvas' )
+    {
 
         $html = '';
         
@@ -146,33 +158,38 @@ class Helpers {
         $html .= '</button>';
 
         return $html;
+
     }
 
     /**
      * Echo the hamburger button
      */
-    public static function the_hamburger_button( $context = 'offCanvas' ) {
+    public static function theHamburgerButton( $context = 'offCanvas' )
+    {
         echo get_the_hamburger_button( $context );
     }
 
     /**
      * Retrieve the close icon
      */
-    public static function get_the_close_icon( $class = 'editable' ) {
+    public static function getTheCloseIcon( $class = 'editable' )
+    {
         return $icon = '<img src="' . get_stylesheet_directory_uri() . '/dist/images/x.svg" alt="Close" class="' . $class . '">';
     }
 
     /**
      * Echo the close icon
      */
-    public static function the_close_icon( $class = 'editable' ) {
+    public static function theCloseIcon( $class = 'editable' )
+    {
         echo get_the_close_icon( $class );
     }
 
     /**
      * Utility for prettier print_r
      */
-    public static function pprint_r( $q ) {
+    public static function pPrint( $q )
+    {
         echo '<pre>';
         print_r( $q );
         echo '</pre>';
@@ -181,8 +198,9 @@ class Helpers {
     /**
      * Control the number of words returned
      */
-    public static function limit_words($string, $word_limit, $ellipses = true) {
-        
+    public static function limitWords( $string, $word_limit, $ellipses = true )
+    {
+    
         $word_limit = (int) $word_limit;
     
         $string = preg_replace("/<img[^>]+\>/i", '', $string); 		

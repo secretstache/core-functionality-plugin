@@ -5,7 +5,8 @@ namespace SSM\Includes;
 /**
  * Register all actions and filters for the plugin.
  */
-class Loader {
+class Loader
+{
 
 	/**
 	 * The array of actions registered with WordPress.

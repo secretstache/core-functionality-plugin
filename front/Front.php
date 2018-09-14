@@ -2,12 +2,13 @@
 
 namespace SSM\Front;
 
-class Front {
+class Front
+{
 
 	/**
 	 * The ID of this plugin.
 	 */
-	private $plugin_name;
+	private $pluginName;
 
 	/**
 	 * The version of this plugin.
@@ -17,38 +18,41 @@ class Front {
 	/**
 	 * The list of public modules to be included in the core
 	 */
-    protected $public_modules;
+    protected $publicModules;
 
     /**
 	 * The array of arguments in accordance with corresponding public core modules
 	 */
-	protected $public_modules_functions;
+	protected $publicModuleFunctions;
 	
 	/**
 	 * Initialize the class and set its properties.
 	 */
-	public function __construct( $plugin_name, $version, $public_modules, $public_modules_functions ) {
+	public function __construct( $pluginName, $version, $publicModules, $publicModuleFunctions )
+	{
 
-		$this->plugin_name = $plugin_name;
+		$this->pluginName = $pluginName;
 		$this->version = $version;
 
-		$this->public_modules = $public_modules;
-        $this->public_modules_functions = $public_modules_functions;
+		$this->publicModules = $publicModules;
+        $this->publicModuleFunctions = $publicModuleFunctions;
 
 	}
 
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 */
-	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-public.css', array(), $this->version, 'all' );
+	public function enqueueStyles()
+	{
+		wp_enqueue_style( $this->pluginName, plugin_dir_url( __FILE__ ) . 'css/public.css', array(), $this->version, 'all' );
 	}
 
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
 	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-public.js', array( 'jquery' ), $this->version, false );
+	public function enqueueScripts()
+	{
+		wp_enqueue_script( $this->pluginName, plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
 	}
 
 }

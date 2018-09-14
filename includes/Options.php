@@ -4,26 +4,27 @@ namespace SSM\Includes;
 
 use SSM\Includes\Helpers as SSMH;
 
-class Options {
+class Options
+{
 
     /**
      * Initialize the class and set its properties.
      *
 	 * @since    1.0.0
 	 */
-	public function __construct( $front_modules, $front_modules_functions, $admin_modules, $admin_modules_functions ) {
-
-        $this->front_modules = $front_modules;
-        $this->front_modules_functions = $front_modules_functions;
-        $this->admin_modules = $admin_modules;
-        $this->admin_modules_functions = $admin_modules_functions;
+    public function __construct( $frontModules, $frontModuleFunctions, $adminModules, $adminModuleFunctions )
+    {
+        $this->frontModules = $frontModules;
+        $this->frontModuleFunctions = $frontModuleFunctions;
+        $this->adminModules = $adminModules;
+        $this->adminModuleFunctions = $adminModuleFunctions;
     }
     
     /** 
      * Register SSM Core Settings
-     *  
      */
-    public function ssm_core_settings() {
+    public function ssmCoreSettings()
+    {
 
 		register_setting( 'ssm-core-settings-group', 'ssm_core_acf_admin_users' );
 	
@@ -34,38 +35,42 @@ class Options {
 		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_width' );
 		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_height' );
 	
-		add_settings_section( 'ssm-core-agency-options', 'Agency Options', array( $this, 'ssm_core_agency_options'), 'ssm_core');
+		add_settings_section( 'ssm-core-agency-options', 'Agency Options', array( $this, 'ssmCoreAgencyOptions'), 'ssm_core');
 	
-		add_settings_field( 'ssm-core-agency-name', 'Agency Name', array( $this, 'ssm_core_agency_name' ), 'ssm_core', 'ssm-core-agency-options' );
-		add_settings_field( 'ssm-core-agency-url', 'Agency URL', array( $this, 'ssm_core_agency_url' ), 'ssm_core', 'ssm-core-agency-options' );
-		add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssm_core_login_logo' ), 'ssm_core', 'ssm-core-agency-options' );
+		add_settings_field( 'ssm-core-agency-name', 'Agency Name', array( $this, 'ssmCoreAgencyName' ), 'ssm_core', 'ssm-core-agency-options' );
+		add_settings_field( 'ssm-core-agency-url', 'Agency URL', array( $this, 'ssmCoreAgencyUrl' ), 'ssm_core', 'ssm-core-agency-options' );
+		add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssmCoreLoginLogo' ), 'ssm_core', 'ssm-core-agency-options' );
         
         //Admin Area
-        add_settings_section( 'ssm-core-admin-modules', 'Admin Area', array( $this, 'ssm_core_admin_modules'), 'ssm_core');
+        add_settings_section( 'ssm-core-admin-modules', 'Admin Area', array( $this, 'ssmCoreAdminModules'), 'ssm_core');
    
-        add_settings_field( 'ssm-admin-modules', 'Modules', array( $this, 'ssm_admin_modules' ), 'ssm_core', 'ssm-core-admin-modules' );
-        add_settings_field( 'ssm-admin-modules-functions', 'Modules Functions', array( $this, 'ssm_admin_modules_functions' ), 'ssm_core', 'ssm-core-admin-modules' );
+        add_settings_field( 'ssm-admin-modules', 'Modules', array( $this, 'ssmAdminModules' ), 'ssm_core', 'ssm-core-admin-modules' );
+        add_settings_field( 'ssm-admin-module-functions', 'Module Functions', array( $this, 'ssmAdminModuleFunctions' ), 'ssm_core', 'ssm-core-admin-modules' );
         
         //Front Area
-        add_settings_section( 'ssm-core-front-modules', 'Front Area', array( $this, 'ssm_core_front_modules'), 'ssm_core');
+        add_settings_section( 'ssm-core-front-modules', 'Front Area', array( $this, 'ssmCoreFrontModules'), 'ssm_core');
 
-        add_settings_field( 'ssm-front-modules', 'Modules', array( $this, 'ssm_front_modules' ), 'ssm_core', 'ssm-core-front-modules' );
-        add_settings_field( 'ssm-front-modules-functions', 'Modules Functions', array( $this, 'ssm_front_modules_functions' ), 'ssm_core', 'ssm-core-front-modules' );
+        add_settings_field( 'ssm-front-modules', 'Modules', array( $this, 'ssmFrontModules' ), 'ssm_core', 'ssm-core-front-modules' );
+        add_settings_field( 'ssm-front-module-functions', 'Module Functions', array( $this, 'ssmFrontModuleFunctions' ), 'ssm_core', 'ssm-core-front-modules' );
         
         //Helpers
-        add_settings_section( 'ssm-core-helpers', 'Helpers', array( $this, 'ssm_core_helpers'), 'ssm_core');
+        add_settings_section( 'ssm-core-helpers', 'Helpers', array( $this, 'ssmCoreHelpers'), 'ssm_core');
 
-        add_settings_field( 'ssm-helpers', 'Functions', array( $this, 'ssm_helpers' ), 'ssm_core', 'ssm-core-helpers' );
+        add_settings_field( 'ssm-helpers', 'Functions', array( $this, 'ssmHelpers' ), 'ssm_core', 'ssm-core-helpers' );
 
     }
 
-    public function ssm_admin_modules() {
+    /** 
+     * Add "Admin Modules" section
+     */
+    public function ssmAdminModules()
+    {
 
         $admin_enabled_modules = get_option( 'admin_enabled_modules' );
 
         echo "<div id='admin_modules'>";
         
-        foreach ( $this->admin_modules as $module ) {
+        foreach ( $this->adminModules as $module ) {
 
             $checked = ( in_array( $module, $admin_enabled_modules ) ) ? 'checked' : '';
             
@@ -78,13 +83,17 @@ class Options {
         echo "</div>";
     }
     
-    public function ssm_admin_modules_functions() {
+    /** 
+     * Add "Admin Module Functions" section
+     */
+    public function ssmAdminModuleFunctions()
+    {
 
         $admin_enabled_functions = get_option( 'admin_enabled_functions' );
 
         echo "<div id='admin_functions'>";
 
-        foreach ( $this->admin_modules_functions as $slug => $function ) {
+        foreach ( $this->adminModuleFunctions as $slug => $function ) {
             echo "<div class='admin_function {$slug}' data-module-slug='{$slug}'>";
             echo "<h4 class='module_name'>{$function['module_name']}</h3>";
 
@@ -105,13 +114,17 @@ class Options {
         echo "</div>";
     }
 
-    public function ssm_front_modules() {
+    /** 
+     * Add "Front Modules" section
+     */
+    public function ssmFrontModules()
+    {
         
         $front_enabled_modules = get_option( 'front_enabled_modules' );
 
         echo "<div id='front_modules'>";
         
-        foreach ( $this->front_modules as $module ) {
+        foreach ( $this->frontModules as $module ) {
 
             $checked = ( in_array( $module, $front_enabled_modules ) ) ? 'checked' : '';
             
@@ -125,13 +138,17 @@ class Options {
 
     }
     
-    public function ssm_front_modules_functions() {
+    /** 
+     * Add "Front Module Functions" section
+     */
+    public function ssmFrontModuleFunctions()
+    {
 
         $front_enabled_functions = get_option( 'front_enabled_functions' );
 
         echo "<div id='front_functions'>";
 
-        foreach ( $this->front_modules_functions as $slug => $function ) {
+        foreach ( $this->frontModuleFunctions as $slug => $function ) {
             echo "<div class='front_function {$slug}' data-module-slug='{$slug}'>";
             echo "<h4 class='module_name'>{$function['module_name']}</h3>";
 
@@ -153,7 +170,11 @@ class Options {
 
     }
 
-    public function ssm_helpers() {
+    /** 
+     * Add "Helpers" section
+     */
+    public function ssmHelpers()
+    {
 
         $helpers = get_class_methods('SSM\Includes\Helpers');
 
@@ -171,14 +192,18 @@ class Options {
 
     }
 
-    public function handle_options_update() {
+    /** 
+     * Handle user's input while updating an option values
+     */
+    public function handleOptionsUpdate()
+    {
 
-        if ( isset( $_POST ) && $_POST['option_page'] == 'ssm-core-settings-group' && $_POST['action'] == 'update' ) {
+        if ( isset( $_POST['option_page'] ) && $_POST['option_page'] == 'ssm-core-settings-group' && $_POST['action'] == 'update' ) {
 
             $new_admin_modules = array();
             $new_front_modules = array();
 
-            foreach ( $this->admin_modules as $module ) {
+            foreach ( $this->adminModules as $module ) {
                 
                 if ( $_POST[$module['slug']] == 'on' ) {
                     array_push( $new_admin_modules, $module );
@@ -186,7 +211,7 @@ class Options {
 
             }
 
-            foreach ( $this->front_modules as $module ) {
+            foreach ( $this->frontModules as $module ) {
                 
                 if ( $_POST[$module['slug']] == 'on' ) {
                     array_push( $new_front_modules, $module );
@@ -194,7 +219,7 @@ class Options {
 
             }
 
-            foreach ( $this->admin_modules_functions as $slug => $function ) {
+            foreach ( $this->adminModuleFunctions as $slug => $function ) {
 
                 $new_admin_functions[$slug] = array();
                 $new_admin_hooks = array();
@@ -212,7 +237,7 @@ class Options {
                 
             }
 
-            foreach ( $this->front_modules_functions as $slug => $function ) {
+            foreach ( $this->frontModuleFunctions as $slug => $function ) {
 
                 $new_front_functions[$slug] = array();
                 $new_front_hooks = array();
@@ -237,61 +262,57 @@ class Options {
 
         }
     }
-	
-	public function ssm_core_agency_options() {}
-    
-    public function ssm_core_admin_modules() {}
-    public function ssm_core_front_modules() {}
-    public function ssm_core_helpers() {}
 
-	public function ssm_core_agency_name() {
-		$agencyName = get_option('ssm_core_agency_name') != NULL ? esc_attr( get_option('ssm_core_agency_name') ) : 'Secret Stache Media';
-		echo '<input type="text" name="ssm_core_agency_name" value="' . $agencyName . '" class="regular-text"/>';
-	}
-	
-	public function ssm_core_agency_url() {
-		$agencyURL = get_option('ssm_core_agency_url') != NULL ? esc_attr( get_option('ssm_core_agency_url') ) : 'http://secretstache.com';
-		echo '<input type="text" name="ssm_core_agency_url" value="' . $agencyURL . '" class="regular-text url"/>';
+    /** 
+     * Add "Agency Name" field 
+     */
+    public function ssmCoreAgencyName()
+    {
+
+        $agency_name = get_option('ssm_core_agency_name') != NULL ? esc_attr( get_option('ssm_core_agency_name') ) : 'Secret Stache Media';
+		echo '<input type="text" name="ssm_core_agency_name" value="' . $agency_name . '" class="regular-text"/>';
+
+    }
+    
+    /** 
+     * Add "Agency URL" field 
+     */
+    public function ssmCoreAgencyUrl()
+    {
+
+        $agency_URL = get_option('ssm_core_agency_url') != NULL ? esc_attr( get_option('ssm_core_agency_url') ) : 'http://secretstache.com';
+		echo '<input type="text" name="ssm_core_agency_url" value="' . $agency_URL . '" class="regular-text url"/>';
 		echo '<p class="description">Include <code>http(s)://</code></p>';
-	}
-	
-	public function ssm_core_login_logo() {
-		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
-		$loginLogo = get_option('ssm_core_login_logo') != NULL ? esc_attr( get_option('ssm_core_login_logo') ) : $defaultLogo;
+
+    }
+    
+    /** 
+     * Add "Agency Logo" field 
+     */
+    public function ssmCoreLoginLogo()
+    {
+		$default_logo = SSMC_ADMIN_URL . 'images/login-logo.png';
+		$login_logo = get_option('ssm_core_login_logo') != NULL ? esc_attr( get_option('ssm_core_login_logo') ) : $default_logo;
 		$width = get_option('ssm_core_login_logo_width') != NULL ? esc_attr( get_option('ssm_core_login_logo_width') ) : '230px';
 		$height = get_option('ssm_core_login_logo_height') != NULL ? esc_attr( get_option('ssm_core_login_logo_height') ) : 'auto';
 	
 		echo '<div class="login-logo-wrap">';
-		echo '<img src="' . $loginLogo . '" id="logo-preview" class="login-logo" alt="Login Logo" style="height: ' . $height . '; width: ' . $width . '; "/>';
+		echo '<img src="' . $login_logo . '" id="logo-preview" class="login-logo" alt="Login Logo" style="height: ' . $height . '; width: ' . $width . '; "/>';
 		echo '<div class="media-buttons">';
 		echo '<input type="button" id="upload-image-button" class="button button-secondary" value="Upload Logo" />';
 		echo '<input type="button" id="remove-image-button" class="button button-secondary" value="Remove Logo" />';
 		echo '</div>';
-		echo '<input type="hidden" id="ssm-core-login-logo" name="ssm_core_login_logo" value="' . $loginLogo . '">';
+		echo '<input type="hidden" id="ssm-core-login-logo" name="ssm_core_login_logo" value="' . $login_logo . '">';
 		echo '<input type="hidden" id="ssm-core-login-logo-width" name="ssm_core_login_logo_width" value="' . $width . '">';
 		echo '<input type="hidden" id="ssm-core-login-logo-height" name="ssm_core_login_logo_height" value="' . $height . '">';
 		echo '</div>';
 	}
-	
-	public function ssm_acf_options() {}
-	
-	public function ssm_core_acf_admin_users( $args ) {
-		$admins = $args['admins'];
-		$acfAdmins = get_option('ssm_core_acf_admin_users') != NULL ? get_option('ssm_core_acf_admin_users') : array();
-	
-		?>
-		<select id="ssm-core-acf-admin-users" name="ssm_core_acf_admin_users[]" multiple style="min-width: 200px;">
-			<?php foreach ( $admins as $admin ) { ?>
-				<?php $selected = in_array( $admin->ID, $acfAdmins ) ? ' selected' : ''; ?>
-				<option value="<?php echo $admin->ID; ?>"<?php echo $selected; ?>>
-					<?php echo $admin->user_login; ?>
-				</option>
-			<?php } ?>
-		</select>
-		<?php
-	}
-	
-	public function add_ssm_options_page() {
+    
+    /** 
+     * Add Options Page 
+     */
+    public function addSsmOptionsPage()
+    {
 	
 		add_submenu_page(
 		'options-general.php',
@@ -299,13 +320,26 @@ class Options {
 		  'Core', // menu title
 		'manage_options',
 		'ssm_core',
-		array( $this, 'ssm_core_options_page' )
+		array( $this, 'ssmCoreOptionsPage' )
 	  );
 	
 	}
-	
-	public function ssm_core_options_page() {
+    
+    /** 
+     * Add "Agency Name" field - include template 
+     */
+    public function ssmCoreOptionsPage()
+    {
         require_once( SSMC_DIR . 'admin/templates/admin-options.php' );
     }
+
+    /** 
+     * Empty functions we are obligatory to leave here 
+     * since they are callbacks for field declarations 
+     */
+    public function ssmCoreAgencyOptions() {}
+    public function ssmCoreAdminModules() {}
+    public function ssmCoreFrontModules() {}
+    public function ssmCoreHelpers() {}
 
 }

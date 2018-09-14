@@ -10,7 +10,8 @@ use SSM\Admin\AdminSetup;
 use SSM\Front\Front;
 use SSM\Front\FrontSetup;
 
-class Root {
+class Root
+{
 	
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -21,7 +22,7 @@ class Root {
 	/**
 	 * The unique identifier of this plugin.
 	 */
-	protected $plugin_name;
+	protected $pluginName;
 
 	/**
 	 * The current version of the plugin.
@@ -39,17 +40,17 @@ class Root {
 			$this->version = '1.0.0';
 		}
 
-		$this->plugin_name = 'ssm';
+		$this->pluginName = 'ssm';
 		$this->loader = new Loader();
 
-		$this->set_locale();
+		$this->setLocale();
 
-		$this->set_admin_modules();
-		$this->set_front_modules();
+		$this->setAdminModules();
+		$this->setFrontModules();
 
-		$this->set_initial_options();
-		$this->define_hooks();
-		$this->set_options_page();
+		$this->setInitialOptions();
+		$this->defineHooks();
+		$this->setOptionsPage();
 	}
 
 	/**
@@ -57,11 +58,12 @@ class Root {
 	 *
 	 * Uses the I18n class in order to set the domain
 	 */
-	private function set_locale() {
+	private function setLocale()
+	{
 
 		$plugin_i18n = new I18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'loadPluginTextdomain' );
 
 	}
 
@@ -69,41 +71,42 @@ class Root {
 	 * Fulfill arrays of admin modules and functions with initial data
 	 *
 	 */
-	private function set_admin_modules() {
+	private function setAdminModules()
+	{
 
-		$this->admin_modules = array(
+		$this->adminModules = array(
 			[ "slug" => 'ssm-admin-setup', "name" => "Admin Setup" ]
 		);
 
-		$this->admin_modules_functions['ssm-admin-setup'] = array(
+		$this->adminModuleFunctions['ssm-admin-setup'] = array(
 			"module_name" => "Admin Setup",
 			"hooks" => array(
-				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "remove_roles" ],
-				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "remove_image_link", "priority" => 10 ],
-				[ "type" => "filter" , "name" => "tiny_mce_before_init", "class" => "plugin_admin_setup", "function" => "show_kitchen_sink", "priority" => 10, "arguments" => 1 ],
-				[ "type" => "action" , "name" => "widgets_init", "class" => "plugin_admin_setup", "function" => "remove_widgets" ],
-				[ "type" => "action" , "name" => "wp_dashboard_setup", "class" => "plugin_admin_setup", "function" => "hosting_dashboard_widget" ],
-				[ "type" => "filter" , "name" => "tiny_mce_before_init", "class" => "plugin_admin_setup", "function" => "update_tiny_mce", "priority" => 10, "arguments" => 1 ],
-				[ "type" => "filter" , "name" => "the_content", "class" => "plugin_admin_setup", "function" => "remove_ptags_on_images", "priority" => 10, "arguments" => 1 ],
-				[ "type" => "filter" , "name" => "gallery_style", "class" => "plugin_admin_setup", "function" => "remove_gallery_styles", "priority" => 10, "arguments" => 1 ],
-				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "force_homepage" ],
-				[ "type" => "action" , "name" => "admin_bar_menu", "class" => "plugin_admin_setup", "function" => "remove_wp_nodes", "priority" => 999 ],
-				[ "type" => "filter" , "name" => "wpseo_metabox_prio", "class" => "plugin_admin_setup", "function" => "yoast_seo_metabox_priority" ],
-				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "remove_post_type_support" ],
-				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "remove_dashboard_meta" ],
-				[ "type" => "action" , "name" => "admin_menu", "class" => "plugin_admin_setup", "function" => "ssm_admin_menu" ],
-				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "move_cpts_to_admin_menu", "priority" => 25 ],
-				[ "type" => "filter" , "name" => "admin_body_class", "class" => "plugin_admin_setup", "function" => "is_front_admin_body_class", "priority" => 10, "arguments" => 1 ],
-				[ "type" => "action" , "name" => "wp_ajax_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
-				[ "type" => "action" , "name" => "wp_ajax_nopriv_get_width_values", "class" => "plugin_admin_setup", "function" => "get_width_values" ],
-				[ "type" => "action" , "name" => "save_post", "class" => "plugin_admin_setup", "function" => "update_width_post_meta", "priority" => 10, "arguments" => 3 ],
-				[ "type" => "filter" , "name" => "login_headerurl", "class" => "plugin_admin_setup", "function" => "login_headerurl" ],
-				[ "type" => "filter" , "name" => "login_headertitle", "class" => "plugin_admin_setup", "function" => "login_headertitle" ],
-				[ "type" => "filter" , "name" => "login_enqueue_scripts", "class" => "plugin_admin_setup", "function" => "login_logo" ],
-				[ "type" => "filter" , "name" => "wp_mail_from_name", "class" => "plugin_admin_setup", "function" => "mail_from_name" ],
-				[ "type" => "filter" , "name" => "wp_mail_from", "class" => "plugin_admin_setup", "function" => "wp_mail_from" ],
-				[ "type" => "action" , "name" => "wp_before_admin_bar_render", "class" => "plugin_admin_setup", "function" => "remove_icon_bar" ],
-				[ "type" => "filter" , "name" => "admin_footer_text", "class" => "plugin_admin_setup", "function" => "admin_footer_text" ]
+				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "removeRoles" ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "removeImageLink", "priority" => 10 ],
+				[ "type" => "filter" , "name" => "tiny_mce_before_init", "class" => "plugin_admin_setup", "function" => "showKitchenSink", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "widgets_init", "class" => "plugin_admin_setup", "function" => "removeWidgets" ],
+				[ "type" => "action" , "name" => "wp_dashboard_setup", "class" => "plugin_admin_setup", "function" => "hostingDashboardWidget" ],
+				[ "type" => "filter" , "name" => "tiny_mce_before_init", "class" => "plugin_admin_setup", "function" => "updateTinyMCE", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "filter" , "name" => "the_content", "class" => "plugin_admin_setup", "function" => "removePtagsOnImages", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "filter" , "name" => "gallery_style", "class" => "plugin_admin_setup", "function" => "removeGalleryStyles", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "forceHomepage" ],
+				[ "type" => "action" , "name" => "admin_bar_menu", "class" => "plugin_admin_setup", "function" => "removeWPNodes", "priority" => 999 ],
+				[ "type" => "filter" , "name" => "wpseo_metabox_prio", "class" => "plugin_admin_setup", "function" => "yoastSeoMetaboxPriority" ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "removePostTypeSupport" ],
+				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "removeDashboardMeta" ],
+				[ "type" => "action" , "name" => "admin_menu", "class" => "plugin_admin_setup", "function" => "createAdminMenu" ],
+				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "moveCptsToAdminMenu", "priority" => 25 ],
+				[ "type" => "filter" , "name" => "admin_body_class", "class" => "plugin_admin_setup", "function" => "isFrontAdminBodyClass", "priority" => 10, "arguments" => 1 ],
+				[ "type" => "action" , "name" => "wp_ajax_get_width_values", "class" => "plugin_admin_setup", "function" => "getWidthValues" ],
+				[ "type" => "action" , "name" => "wp_ajax_nopriv_get_width_values", "class" => "plugin_admin_setup", "function" => "getWidthValues" ],
+				[ "type" => "action" , "name" => "save_post", "class" => "plugin_admin_setup", "function" => "updateWidthPostMeta", "priority" => 10, "arguments" => 3 ],
+				[ "type" => "filter" , "name" => "login_headerurl", "class" => "plugin_admin_setup", "function" => "loginHeaderurl" ],
+				[ "type" => "filter" , "name" => "login_headertitle", "class" => "plugin_admin_setup", "function" => "loginHeadertitle" ],
+				[ "type" => "filter" , "name" => "login_enqueue_scripts", "class" => "plugin_admin_setup", "function" => "loginLogo" ],
+				[ "type" => "filter" , "name" => "wp_mail_from_name", "class" => "plugin_admin_setup", "function" => "mailFromName" ],
+				[ "type" => "filter" , "name" => "wp_mail_from", "class" => "plugin_admin_setup", "function" => "wpMailFrom" ],
+				[ "type" => "action" , "name" => "wp_before_admin_bar_render", "class" => "plugin_admin_setup", "function" => "removeIconBar" ],
+				[ "type" => "filter" , "name" => "admin_footer_text", "class" => "plugin_admin_setup", "function" => "adminFooterText" ]
 			)
 		);
 
@@ -113,25 +116,26 @@ class Root {
 	 * Fulfill arrays of front modules ann functions with initial data
 	 *
 	 */
-	private function set_front_modules() {
+	private function setFrontModules()
+	{
 
-		$this->front_modules = array(
+		$this->frontModules = array(
 			[ "slug" => 'ssm-front-setup', "name" => "Front Setup" ]
 		);
 
-		$this->front_modules_functions['ssm-front-setup'] = array(
+		$this->frontModuleFunctions['ssm-front-setup'] = array(
 			"module_name" => "Front Setup",
 			"hooks" => array(
-				[ "type" => "action" , "name" => "init", "class" => "plugin_front_setup", "function" => "add_year_shortcode" ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "set_favicon" ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "ssm_do_facebook_pixel", "priority" => 99 ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "ssm_setup_google_tag_manager", "priority" => 99 ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "ssm_setup_google_site_verification", "priority" => 1 ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "ssm_custom_head_scripts", "priority" => 99 ],
-				[ "type" => "action" , "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "ssm_custom_footer_scripts", "priority" => 99 ],
-				[ "type" => "filter" , "name" => "gform_init_scripts_open", "class" => "plugin_front_setup", "function" => "footer_scripts_init" ],
-				[ "type" => "filter" , "name" => "gfrom_cdata_open", "class" => "plugin_front_setup", "function" => "wrap_gform_cdata_open", "priority" => 10 ],
-				[ "type" => "filter" , "name" => "gform_cdata_close", "class" => "plugin_front_setup", "function" => "wrap_gform_cdata_close", "priority" => 99 ]
+				[ "type" => "action" , "name" => "init", "class" => "plugin_front_setup", "function" => "addYearShortcode" ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setFavicon" ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "doFacebookPixel", "priority" => 99 ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setupGoogleTagManager", "priority" => 99 ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setupGoogleSiteVerification", "priority" => 1 ],
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "customHeadScripts", "priority" => 99 ],
+				[ "type" => "action" , "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "customFooterScripts", "priority" => 99 ],
+				[ "type" => "filter" , "name" => "gform_init_scripts_open", "class" => "plugin_front_setup", "function" => "footerScriptsInit" ],
+				[ "type" => "filter" , "name" => "gfrom_cdata_open", "class" => "plugin_front_setup", "function" => "wrapGformCdataOpen", "priority" => 10 ],
+				[ "type" => "filter" , "name" => "gform_cdata_close", "class" => "plugin_front_setup", "function" => "wrapGformCdataClose", "priority" => 99 ]
 			)
 		);
 
@@ -141,28 +145,29 @@ class Root {
 	 * Set up initial state of the main options (enable all of the modules and features).
 	 *
 	 */
-    public function set_initial_options() {
+	public function setInitialOptions()
+	{
 
         //Set initial state of Admin variables
         if ( !get_option( 'admin_enabled_modules' ) ) {
             add_option( 'admin_enabled_modules' );
-            update_option('admin_enabled_modules', $this->admin_modules, true);
+            update_option('admin_enabled_modules', $this->adminModules, true);
         }
 
         if ( !get_option( 'admin_enabled_functions' ) ) {
             add_option( 'admin_enabled_functions' );
-            update_option('admin_enabled_functions', $this->admin_modules_functions, true);
+            update_option('admin_enabled_functions', $this->adminModuleFunctions, true);
         }
 
         //Set initial state of Front variables
         if ( !get_option( 'front_enabled_modules' ) ) {
             add_option( 'front_enabled_modules' );
-            update_option('front_enabled_modules', $this->front_modules, true);
+            update_option('front_enabled_modules', $this->frontModules, true);
         }
 
         if ( !get_option( 'front_enabled_functions' ) ) {
             add_option( 'front_enabled_functions' );
-            update_option('front_enabled_functions', $this->front_modules_functions, true);
+            update_option('front_enabled_functions', $this->frontModuleFunctions, true);
 		}
 
 	}
@@ -171,27 +176,28 @@ class Root {
 	 * Register all of the hooks related to the front-facing and
 	 * admi functionality of the plugin.
 	 */
-	private function define_hooks() {
+	private function defineHooks()
+	{
 
-		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_front_modules_functions() );
-		$plugin_front = new Front( $this->get_plugin_name(), $this->get_version(), $this->get_front_modules(), $this->get_front_modules_functions() );
-		$plugin_front_setup = new FrontSetup( $this->get_plugin_name(), $this->get_version(), $this->get_front_modules(), $this->get_front_modules_functions() );
-		$plugin_admin_setup = new AdminSetup( $this->get_plugin_name(), $this->get_version(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_admin = new Admin( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getFrontModuleFunctions() );
+		$plugin_front = new Front( $this->getPluginName(), $this->getVersion(), $this->getFrontModules(), $this->getFrontModuleFunctions() );
+		$plugin_front_setup = new FrontSetup( $this->getPluginName(), $this->getVersion(), $this->getFrontModules(), $this->getFrontModuleFunctions() );
+		$plugin_admin_setup = new AdminSetup( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueStyles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueScripts' );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_front, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_front, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_front, 'enqueueStyles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_front, 'enqueueScripts' );
 
-		$this->loader->add_action( 'init', $plugin_admin, 'call_registration' );
+		$this->loader->add_action( 'init', $plugin_admin, 'callRegistration' );
 
-		$this->register_modules( 'front', array(
+		$this->registerModules( 'front', array(
 				"plugin_front_setup" => $plugin_front_setup
 			)
 		);
 
-		$this->register_modules( 'admin', array(
+		$this->registerModules( 'admin', array(
 				'plugin_admin_setup' => $plugin_admin_setup
 			)
 		);
@@ -202,7 +208,8 @@ class Root {
 	 * Receive context (front,admin) and array of modules,
 	 * go through it and register corresponding hooks
 	 */
-	private function register_modules( $context, $objects ) {
+	private function registerModules( $context, $objects )
+	{
 
 		foreach ( $objects as $slug => $object ) {
 			$$slug = $object;
@@ -219,9 +226,12 @@ class Root {
 			if ( current_theme_supports( $slug ) ) {
 				foreach ( $function['hooks'] as $hook ) {
 
+					$priority = ( isset( $hook['priority'] ) && $hook['priority'] != '' ) ? $hook['priority'] : '';
+					$arguments = ( isset( $hook['arguments'] ) && $hook['arguments'] != '' ) ? $hook['arguments'] : '';
+
 					call_user_func_array(
 						array( $this->loader, "add_{$hook['type']}" ),
-						array( $hook['name'], ${$hook['class']}, $hook['function'], $hook['priority'], $hook['arguments'] )
+						array( $hook['name'], ${$hook['class']}, $hook['function'], $priority, $arguments )
 					);
 					
 				}
@@ -233,49 +243,55 @@ class Root {
 	/**
 	 * Set up Options Page
 	 */
-	private function set_options_page() {
+	private function setOptionsPage()
+	{
 
-		$plugin_options = new Options( $this->get_front_modules(), $this->get_front_modules_functions(), $this->get_admin_modules(), $this->get_admin_modules_functions() );
+		$plugin_options = new Options( $this->getFrontModules(), $this->getFrontModuleFunctions(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 			
-		$this->loader->add_action( 'admin_init', $plugin_options, 'ssm_core_settings' );
-		$this->loader->add_action( 'admin_menu', $plugin_options, 'add_ssm_options_page', 99 );
-		$this->loader->add_action( 'admin_init', $plugin_options, 'handle_options_update' );
+		$this->loader->add_action( 'admin_init', $plugin_options, 'ssmCoreSettings' );
+		$this->loader->add_action( 'admin_menu', $plugin_options, 'addSsmOptionsPage', 99 );
+		$this->loader->add_action( 'admin_init', $plugin_options, 'handleOptionsUpdate' );
 
 	}
 
 	/**
 	 * Run the loader to execute all of the registered hooks
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
 	/**
 	 * Return plugin's name
 	 */
-	public function get_plugin_name() {
-		return $this->plugin_name;
+	public function getPluginName()
+	{
+		return $this->pluginName;
 	}
 
 	/**
 	 * Return plugin's loader
 	 */
-	public function get_loader() {
+	public function getLoader()
+	{
 		return $this->loader;
 	}
 
 	/**
 	 * Retrieve the version number of the plugin.
 	 */
-	public function get_version() {
+	public function getVersion()
+	{
 		return $this->version;
 	}
 
 	/**
 	 * Return array of current registered admin modules
 	 */
-	protected function get_admin_modules() {
-		return $this->admin_modules;
+	protected function getAdminModules()
+	{
+		return $this->adminModules;
 	}
 
 	/**
@@ -283,8 +299,9 @@ class Root {
 	 *
 	 * @since    1.0.0
 	 */
-	protected function get_admin_modules_functions() {
-		return $this->admin_modules_functions;
+	protected function getAdminModuleFunctions()
+	{
+		return $this->adminModuleFunctions;
 	}
 
 	/**
@@ -292,8 +309,9 @@ class Root {
 	 *
 	 * @since    1.0.0
 	 */
-	protected function get_front_modules() {
-		return $this->front_modules;
+	protected function getFrontModules()
+	{
+		return $this->frontModules;
 	}
 
 	/**
@@ -301,8 +319,8 @@ class Root {
 	 *
 	 * @since    1.0.0
 	 */
-	protected function get_front_modules_functions() {
-		return $this->front_modules_functions;
+	protected function getFrontModuleFunctions() {
+		return $this->frontModuleFunctions;
 	}
 
 }

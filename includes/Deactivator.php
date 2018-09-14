@@ -1,6 +1,6 @@
 <?php
 
-namespace SSM\Deactivate;
+namespace SSM\Includes;
 
 /**
  * Fired during plugin deactivation.
@@ -8,12 +8,14 @@ namespace SSM\Deactivate;
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  */
-class Deactivator {
+class Deactivator
+{
 
 	/**
 	 * Deactivation function
 	 */
-	public static function deactivate() {
+	public static function deactivate()
+	{
 
 	}
 

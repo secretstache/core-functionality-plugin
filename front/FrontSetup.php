@@ -5,19 +5,22 @@ namespace SSM\Front;
 use SSM\Front\Front;
 use SSM\Includes\Helpers as SSMH;
 
-class FrontSetup extends Front {
+class FrontSetup extends Front
+{
 
     /**
      * Show current year as a shortcode
 	 */
-    public function add_year_shortcode() {
-        add_shortcode('year', array( $this, 'add_year_shortcode_cb' ) );
+    public function addYearShortcode()
+    {
+        add_shortcode('year', array( $this, 'addYearShortcodeCB' ) );
     }
     
     /**
-     * add_year_shortcode() callback
+     * addYearShortcode() callback
 	 */
-    public function add_year_shortcode_cb() {
+    public function addYearShortcodeCB()
+    {
         
         $year = date('Y');
         return $year;
@@ -27,9 +30,10 @@ class FrontSetup extends Front {
     /**
      * Set Favicon
      */
-    public function set_favicon() {
+    public function setFavicon()
+    {
 
-        if ( $favicon = SSMH::get_field('favicon', 'options') ) {
+        if ( $favicon = SSMH::getField('favicon', 'options') ) {
             echo '<link rel="shortcut icon" href="' . $favicon['url'] . '" />';
         }
 
@@ -38,16 +42,17 @@ class FrontSetup extends Front {
     /**
      * Dynamically Adds the Facebook Pixel
      */
-    public function ssm_do_facebook_pixel() {
+    public function doFacebookPixel()
+    {
 
-        if ( $fb_id = SSMH::get_field('facebook_account_id', 'options') ) {
+        if ( $fb_id = SSMH::getField('facebook_account_id', 'options') ) {
             
             global $post;
             
             $fb_standard_event = '';
             $value = '';
             
-            if ( SSMH::get_field('facebook_standard_event') != NULL && SSMH::get_field('facebook_standard_event') == 'purchase' ) {
+            if ( SSMH::getField('facebook_standard_event') != NULL && SSMH::getField('facebook_standard_event') == 'purchase' ) {
             
                 if ( $value ) {
                     $fb_standard_event = 'fbq("track", "Purchase", {"value": "' . $value . '" , "currency" : "USD"});';
@@ -55,8 +60,8 @@ class FrontSetup extends Front {
                     $fb_standard_event = 'fbq("track", "Purchase");';
                 }
         
-            } elseif ( SSMH::get_field('facebook_standard_event') != NULL ) {
-                $fb_standard_event = SSMH::get_field('facebook_standard_event');
+            } elseif ( SSMH::getField('facebook_standard_event') != NULL ) {
+                $fb_standard_event = SSMH::getField('facebook_standard_event');
             }
             
             ?>
@@ -83,9 +88,11 @@ class FrontSetup extends Front {
     /**
      * Setup Google Tag Manager
      */
-    public function ssm_setup_google_tag_manager() { ?>
+    public function setupGoogleTagManager()
+    {
+        ?>
 
-        <?php if ( $gtm = SSMH::get_field('google_tag_manager_id', 'options') ) { ?>
+        <?php if ( $gtm = SSMH::getField('google_tag_manager_id', 'options') ) { ?>
 
         <!-- Begin Google Tag Manager -->
         <noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -106,9 +113,11 @@ class FrontSetup extends Front {
     /**
      * Setup Google Tag Manager
      */
-    public function ssm_setup_google_site_verification() { ?>
+    public function setupGoogleSiteVerification()
+    {
+        ?>
 
-        <?php if ( $sv = SSMH::get_field('google_site_verification_id', 'options') ) { ?>
+        <?php if ( $sv = SSMH::getField('google_site_verification_id', 'options') ) { ?>
 
         <!-- Begin Google Search Console Verification -->
         <meta name="google-site-verification" content="<?php echo $sv; ?>" />
@@ -121,9 +130,10 @@ class FrontSetup extends Front {
     /**
      * Custom Head Scripts
      */
-    public function ssm_custom_head_scripts() {
+    public function CustomHeadScripts()
+    {
 
-        $custom_scripts = SSMH::get_field('custom_tracking_scripts', 'options');
+        $custom_scripts = SSMH::getField('custom_tracking_scripts', 'options');
         
         if ( $custom_scripts ) {
             
@@ -139,9 +149,10 @@ class FrontSetup extends Front {
     /**
      * Custom Footer Scripts
      */
-    public function ssm_custom_footer_scripts() {
+    public function customFooterScripts()
+    {
         
-        $custom_scripts = SSMH::get_field('custom_tracking_scripts', 'options');
+        $custom_scripts = SSMH::getField('custom_tracking_scripts', 'options');
         
         if ( $custom_scripts ) {
            
@@ -158,14 +169,16 @@ class FrontSetup extends Front {
     /**
      * Force Gravity Forms to init scripts in the footer and ensure that the DOM is loaded before scripts are executed
 	 */
-    public function footer_scripts_init() {
+    public function footerScriptsInit()
+    {
         return true;
     }
 
     /**
      * Wrap Gform - CData open
 	 */
-    public function wrap_gform_cdata_open( $content = '' ) {
+    public function wrapGformCdataOpen( $content = '' )
+    {
         
         if ( ( defined('DOING_AJAX') && DOING_AJAX ) || isset( $_POST['gform_ajax'] ) ) {
             return $content;
@@ -180,7 +193,8 @@ class FrontSetup extends Front {
     /**
      * Wrap Gform - CData close
 	 */
-    public function wrap_gform_cdata_close( $content = '' ) {
+    public function wrapGformCdataClose( $content = '' )
+    {
    
         if ( ( defined('DOING_AJAX') && DOING_AJAX ) || isset( $_POST['gform_ajax'] ) ) {
             return $content;

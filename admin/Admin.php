@@ -2,12 +2,13 @@
 
 namespace SSM\Admin;
 
-class Admin {
+class Admin
+{
 
 	/**
 	 * The ID of this plugin.
 	 */
-	private $plugin_name;
+	private $pluginName;
 
 	/**
 	 * The version of this plugin.
@@ -17,45 +18,49 @@ class Admin {
 	/**
 	 * The list of admin modules to be included in the core
 	 */
-    protected $admin_modules;
+    protected $adminModules;
 
     /**
 	 * The array of arguments in accordance with corresponding admin core modules
 	 */
-    protected $admin_modules_functions;
+    protected $adminModuleFunctions;
 
 	/**
 	 * Initialize the class and set its properties.
 	 */
-	public function __construct( $plugin_name, $version, $admin_modules, $admin_modules_functions ) {
+	public function __construct( $pluginName, $version, $adminModules, $adminModuleFunctions )
+	{
 
-		$this->plugin_name = $plugin_name;
+		$this->pluginName = $pluginName;
 		$this->version = $version;
 
-		$this->admin_modules = $admin_modules;
-        $this->admin_modules_functions = $admin_modules_functions;
+		$this->adminModules = $adminModules;
+        $this->adminModuleFunctions = $adminModuleFunctions;
 
 	}
 
 	/**
 	 * Register the stylesheets for the admin area.
 	 */
-	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ssm-admin.css', array(), $this->version, 'all' );
+	public function enqueueStyles()
+	{
+		wp_enqueue_style( $this->pluginName, plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), $this->version, 'all' );
 	}
 
 	/**
 	 * Register the JavaScript for the admin area.
 	 */
-	public function enqueue_scripts() {		
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ssm-admin.js', array( 'jquery' ), $this->version, false );
+	public function enqueueScripts()
+	{		
+		wp_enqueue_script( $this->pluginName, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
 	}
 
 	/**
 	 * Step by step, it adds items to main multidemensional array of post types,
 	 * taxonomies and terms and call corresponding hooks using do_action().
 	 */
-	public function call_registration() {
+	public function callRegistration()
+	{
 
 		// Registration of CPT
 

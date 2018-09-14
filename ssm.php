@@ -16,12 +16,6 @@
  * Domain Path:       /includes/languages
  */
 
-namespace SSM;
-
-use SSM\Includes\Root;
-use SSM\Includes\Activator;
-use SSM\Includes\Deactivator;
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -43,7 +37,7 @@ define( 'SSMC_PUBLIC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'front
  * 
  */
 function activate_ssm() {
-	Activator::activate();
+	SSM\Includes\Activator::activate();
 }
 
 /**
@@ -51,7 +45,7 @@ function activate_ssm() {
  * This action is documented in includes/Deactivator.php
  */
 function deactivate_ssm() {
-	Deactivator::deactivate();
+	SSM\Includes\Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_ssm' );
@@ -65,7 +59,7 @@ function run_ssm() {
 	// Require composer's autoload file
 	require_once( plugin_dir_path( __FILE__ ) . "vendor/autoload.php" );
 
-	$root = new Root();
+	$root = new SSM\Includes\Root();
 	$root->run();
 
 }

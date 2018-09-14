@@ -7,14 +7,15 @@ namespace SSM\Includes;
  *
  * This class defines all code necessary to run during the plugin's activation.
  */
-class Activator {
+class Activator
+{
 
 	/**
 	 * Activation function
 	 */
-	public static function activate() {
+	public static function activate()
+	{	
 		
-
 	}
 
 }
