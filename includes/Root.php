@@ -60,7 +60,7 @@ class Root
 	 */
 	private function setLocale()
 	{
-
+		
 		$plugin_i18n = new I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'loadPluginTextdomain' );

@@ -23,7 +23,8 @@
     "psr-4": {
       "SSM\\Includes\\": "includes/",
       "SSM\\Front\\": "front/",
-      "SSM\\Admin\\": "admin/"
+      "SSM\\Admin\\": "admin/",
+      "App\\Controllers\\": "ssmpb/"
     }
   }
 }
