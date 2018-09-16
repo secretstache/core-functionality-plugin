@@ -1,5 +1,8 @@
 {
   "name": "ssm/core-functionality-plugin",
+  "version": "master",
+  "type": "wordpress-plugin",
+  "license": "MIT",
   "description": "Core functionality boilerplate for SSM projects built on top of WordPress Plugin Boilerplate",
   "homepage": "https://github.com/secretstache/core-functionality-plugin",
   "authors": [
@@ -14,10 +17,15 @@
       "homepage": "https://www.secretstache.com/"
     }
   ],
-  "type": "wordpress-plugin",
   "require": {
+    "php": ">=5.4.0",
+    "composer/installers": "~1.0",
     "soberwp/bundle": "1.0.2-p",
     "johnbillion/extended-cpts": "4.2.0"
+  },
+  "dist": {
+    "url": "git@github.com:secretstache/core-functionality-plugin.git",
+    "type": "git"
   },
   "autoload": {
     "psr-4": {
