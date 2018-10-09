@@ -1,0 +1,28 @@
+[
+    {
+      "name": "Radio Buttons for Taxonomies",
+      "slug": "radio-buttons-for-taxonomies",
+      "required": true,
+      "force_activation": true
+    },
+    {
+        "name": "SVG Support",
+        "slug": "svg-support",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Advanced Custom Fields PRO",
+        "slug": "advanced-custom-fields-pro",
+        "required": true,
+        "source": "https://docs.google.com/uc?export=download&id=1ZdApuuDxTKCGkB5XG_IvnmGIbanvpsY9",
+        "force_activation": true
+    },
+    {
+        "name": "WP Migrate DB Pro",
+        "slug": "wp-migrate-db-pro",
+        "required": true,
+        "source": "https://docs.google.com/uc?export=download&id=1xHf7GWC7O9vEHCDIcwSWEWt8Z44XxjZ5",
+        "force_activation": true
+      }
+  ]

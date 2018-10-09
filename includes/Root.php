@@ -7,6 +7,7 @@ use SSM\Includes\I18n;
 use SSM\Includes\Helpers as SSMH;
 use SSM\Admin\Admin;
 use SSM\Admin\AdminSetup;
+use SSM\Admin\RequiredPlugins;
 use SSM\Front\Front;
 use SSM\Front\FrontSetup;
 
@@ -75,7 +76,8 @@ class Root
 	{
 
 		$this->adminModules = array(
-			[ "slug" => 'ssm-admin-setup', "name" => "Admin Setup" ]
+			[ "slug" => 'ssm-admin-setup', "name" => "Admin Setup" ],
+			[ "slug" => 'ssm-required-plugins', "name" => "Required Plugins" ],
 		);
 
 		$this->adminModuleFunctions['ssm-admin-setup'] = array(
@@ -107,6 +109,13 @@ class Root
 				[ "type" => "filter" , "name" => "wp_mail_from", "class" => "plugin_admin_setup", "function" => "wpMailFrom" ],
 				[ "type" => "action" , "name" => "wp_before_admin_bar_render", "class" => "plugin_admin_setup", "function" => "removeIconBar" ],
 				[ "type" => "filter" , "name" => "admin_footer_text", "class" => "plugin_admin_setup", "function" => "adminFooterText" ]
+			)
+		);
+
+		$this->adminModuleFunctions['ssm-required-plugins'] = array(
+			"module_name" => "Required Plugins",
+			"hooks" => array(
+				[ "type" => "filter" , "name" => "sober/bundle/file", "class" => "plugin_required_plugins", "function" => "checkRequiredPlugins" ]
 			)
 		);
 
@@ -183,6 +192,7 @@ class Root
 		$plugin_front = new Front( $this->getPluginName(), $this->getVersion(), $this->getFrontModules(), $this->getFrontModuleFunctions() );
 		$plugin_front_setup = new FrontSetup( $this->getPluginName(), $this->getVersion(), $this->getFrontModules(), $this->getFrontModuleFunctions() );
 		$plugin_admin_setup = new AdminSetup( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
+		$plugin_required_plugins = new RequiredPlugins( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueStyles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueScripts' );
@@ -198,7 +208,8 @@ class Root
 		);
 
 		$this->registerModules( 'admin', array(
-				'plugin_admin_setup' => $plugin_admin_setup
+				'plugin_admin_setup' => $plugin_admin_setup,
+				'plugin_required_plugins' => $plugin_required_plugins
 			)
 		);
 
