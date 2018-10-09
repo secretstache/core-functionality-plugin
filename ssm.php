@@ -34,8 +34,6 @@ define( 'SSMC_ADMIN_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'admin
 define( 'SSMC_FRONT_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'front/' ) );
 define( 'SSMC_INCLUDES_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'includes/' ) );
 
-die(var_dump(SSMC_ADMIN_DIR));
-
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/Activator.php
