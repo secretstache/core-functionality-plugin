@@ -48,7 +48,7 @@ class Root
 		$this->setAdminModules();
 		$this->setFrontModules();
 
-		$this->setInitialOptions();
+		// $this->setInitialOptions();
 		$this->defineHooks();
 		$this->setOptionsPage();
 	}
@@ -145,32 +145,32 @@ class Root
 	 * Set up initial state of the main options (enable all of the modules and features).
 	 *
 	 */
-	public function setInitialOptions()
-	{
+	// public function setInitialOptions()
+	// {
 
-        //Set initial state of Admin variables
-        if ( !get_option( 'admin_enabled_modules' ) ) {
-            add_option( 'admin_enabled_modules' );
-            update_option('admin_enabled_modules', $this->adminModules, true);
-        }
+    //     //Set initial state of Admin variables
+    //     if ( !get_option( 'admin_enabled_modules' ) ) {
+    //         add_option( 'admin_enabled_modules' );
+    //         update_option('admin_enabled_modules', $this->adminModules, true);
+    //     }
 
-        if ( !get_option( 'admin_enabled_functions' ) ) {
-            add_option( 'admin_enabled_functions' );
-            update_option('admin_enabled_functions', $this->adminModuleFunctions, true);
-        }
+    //     if ( !get_option( 'admin_enabled_functions' ) ) {
+    //         add_option( 'admin_enabled_functions' );
+    //         update_option('admin_enabled_functions', $this->adminModuleFunctions, true);
+    //     }
 
-        //Set initial state of Front variables
-        if ( !get_option( 'front_enabled_modules' ) ) {
-            add_option( 'front_enabled_modules' );
-            update_option('front_enabled_modules', $this->frontModules, true);
-        }
+    //     //Set initial state of Front variables
+    //     if ( !get_option( 'front_enabled_modules' ) ) {
+    //         add_option( 'front_enabled_modules' );
+    //         update_option('front_enabled_modules', $this->frontModules, true);
+    //     }
 
-        if ( !get_option( 'front_enabled_functions' ) ) {
-            add_option( 'front_enabled_functions' );
-            update_option('front_enabled_functions', $this->frontModuleFunctions, true);
-		}
+    //     if ( !get_option( 'front_enabled_functions' ) ) {
+    //         add_option( 'front_enabled_functions' );
+    //         update_option('front_enabled_functions', $this->frontModuleFunctions, true);
+	// 	}
 
-	}
+	// }
 
 	/**
 	 * Register all of the hooks related to the front-facing and
@@ -215,15 +215,16 @@ class Root
 			$$slug = $object;
 		}
 
-		${$context . "_enabled_modules"} = get_option( "{$context}_enabled_modules" );
-		${$context . "_enabled_functions"}= get_option( "{$context}_enabled_functions" );
+		// ${$context . "_enabled_modules"} = get_option( "{$context}_enabled_modules" );
+		// ${$context . "_enabled_functions"}= get_option( "{$context}_enabled_functions" );
 
-		foreach ( ${$context . "_enabled_modules"} as $module ) {
-			add_theme_support( $module['slug'] );
-		}
+		// foreach ( ${$context . "_enabled_modules"} as $module ) {
+		// 	add_theme_support( $module['slug'] );
+		// }
 
-		foreach ( ${$context . "_enabled_functions"} as $slug => $function ) {
-			if ( current_theme_supports( $slug ) ) {
+		// foreach ( ${$context . "_enabled_functions"} as $slug => $function ) {
+		foreach ( $this->{$context . "_modules_functions"} as $slug => $function ) {
+			// if ( current_theme_supports( $slug ) ) {
 				foreach ( $function['hooks'] as $hook ) {
 
 					$priority = ( isset( $hook['priority'] ) && $hook['priority'] != '' ) ? $hook['priority'] : '';
@@ -235,7 +236,7 @@ class Root
 					);
 					
 				}
-			}
+			// }
 		}
 
 	}

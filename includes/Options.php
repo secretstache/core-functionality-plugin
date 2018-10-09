@@ -42,21 +42,21 @@ class Options
 		add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssmCoreLoginLogo' ), 'ssm_core', 'ssm-core-agency-options' );
         
         //Admin Area
-        add_settings_section( 'ssm-core-admin-modules', 'Admin Area', array( $this, 'ssmCoreAdminModules'), 'ssm_core');
+        // add_settings_section( 'ssm-core-admin-modules', 'Admin Area', array( $this, 'ssmCoreAdminModules'), 'ssm_core');
    
-        add_settings_field( 'ssm-admin-modules', 'Modules', array( $this, 'ssmAdminModules' ), 'ssm_core', 'ssm-core-admin-modules' );
-        add_settings_field( 'ssm-admin-module-functions', 'Module Functions', array( $this, 'ssmAdminModuleFunctions' ), 'ssm_core', 'ssm-core-admin-modules' );
+        // add_settings_field( 'ssm-admin-modules', 'Modules', array( $this, 'ssmAdminModules' ), 'ssm_core', 'ssm-core-admin-modules' );
+        // add_settings_field( 'ssm-admin-module-functions', 'Module Functions', array( $this, 'ssmAdminModuleFunctions' ), 'ssm_core', 'ssm-core-admin-modules' );
         
         //Front Area
-        add_settings_section( 'ssm-core-front-modules', 'Front Area', array( $this, 'ssmCoreFrontModules'), 'ssm_core');
+        // add_settings_section( 'ssm-core-front-modules', 'Front Area', array( $this, 'ssmCoreFrontModules'), 'ssm_core');
 
-        add_settings_field( 'ssm-front-modules', 'Modules', array( $this, 'ssmFrontModules' ), 'ssm_core', 'ssm-core-front-modules' );
-        add_settings_field( 'ssm-front-module-functions', 'Module Functions', array( $this, 'ssmFrontModuleFunctions' ), 'ssm_core', 'ssm-core-front-modules' );
+        // add_settings_field( 'ssm-front-modules', 'Modules', array( $this, 'ssmFrontModules' ), 'ssm_core', 'ssm-core-front-modules' );
+        // add_settings_field( 'ssm-front-module-functions', 'Module Functions', array( $this, 'ssmFrontModuleFunctions' ), 'ssm_core', 'ssm-core-front-modules' );
         
         //Helpers
-        add_settings_section( 'ssm-core-helpers', 'Helpers', array( $this, 'ssmCoreHelpers'), 'ssm_core');
+        // add_settings_section( 'ssm-core-helpers', 'Helpers', array( $this, 'ssmCoreHelpers'), 'ssm_core');
 
-        add_settings_field( 'ssm-helpers', 'Functions', array( $this, 'ssmHelpers' ), 'ssm_core', 'ssm-core-helpers' );
+        // add_settings_field( 'ssm-helpers', 'Functions', array( $this, 'ssmHelpers' ), 'ssm_core', 'ssm-core-helpers' );
 
     }
 
