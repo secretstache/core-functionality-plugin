@@ -223,7 +223,7 @@ class Root
 		// }
 
 		// foreach ( ${$context . "_enabled_functions"} as $slug => $function ) {
-		foreach ( $this->{$context . "_modules_functions"} as $slug => $function ) {
+		foreach ( $this->{$context . "ModuleFunctions"} as $slug => $function ) {
 			// if ( current_theme_supports( $slug ) ) {
 				foreach ( $function['hooks'] as $hook ) {
 
