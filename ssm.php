@@ -29,7 +29,12 @@ define( 'SSMC_VERSION', '0.2.3' );
 define( 'SSMC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) ) );
 define( 'SSMC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SSMC_ADMIN_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'admin/' ) );
-define( 'SSMC_PUBLIC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'front/' ) );
+define( 'SSMC_FRONT_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'front/' ) );
+define( 'SSMC_ADMIN_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'admin/' ) );
+define( 'SSMC_FRONT_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'front/' ) );
+define( 'SSMC_INCLUDES_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'includes/' ) );
+
+die(var_dump(SSMC_ADMIN_DIR));
 
 /**
  * The code that runs during plugin activation.
