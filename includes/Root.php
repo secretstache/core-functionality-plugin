@@ -222,8 +222,6 @@ class Root
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_front, 'enqueueStyles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_front, 'enqueueScripts' );
 
-		$this->loader->add_action( 'init', $plugin_admin, 'callRegistration' );
-
 		$this->registerModules( 'front', array(
 				"plugin_front_setup" => $plugin_front_setup
 			)
