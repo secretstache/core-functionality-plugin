@@ -5,7 +5,8 @@ namespace SSM\Admin;
 use SSM\Admin\Admin;
 use SSM\Includes\Helpers as SSMH;
 
-class AdminSetup extends Admin {
+class AdminSetup extends Admin
+{
 
     /**
 	 * Remove unnecessary standard WP Roles	 

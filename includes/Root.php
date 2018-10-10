@@ -8,6 +8,7 @@ use SSM\Includes\Helpers as SSMH;
 use SSM\Admin\Admin;
 use SSM\Admin\AdminSetup;
 use SSM\Admin\RequiredPlugins;
+use SSM\Admin\FieldFactory;
 use SSM\Front\Front;
 use SSM\Front\FrontSetup;
 
@@ -78,6 +79,7 @@ class Root
 		$this->adminModules = array(
 			[ "slug" => 'ssm-admin-setup', "name" => "Admin Setup" ],
 			[ "slug" => 'ssm-required-plugins', "name" => "Required Plugins" ],
+			[ "slug" => 'ssm-field-factory', "name" => "Field Factory" ]
 		);
 
 		$this->adminModuleFunctions['ssm-admin-setup'] = array(
@@ -116,6 +118,14 @@ class Root
 			"module_name" => "Required Plugins",
 			"hooks" => array(
 				[ "type" => "filter" , "name" => "sober/bundle/file", "class" => "plugin_required_plugins", "function" => "checkRequiredPlugins" ]
+			)
+		);
+
+		$this->adminModuleFunctions['ssm-field-factory'] = array(
+			"module_name" => "Field Factory",
+			"hooks" => array(
+				[ "type" => "filter" , "name" => "acf/settings/save_json", "class" => "plugin_field_factory", "function" => "saveJSON" ],
+				[ "type" => "filter" , "name" => "acf/settings/load_json", "class" => "plugin_field_factory", "function" => "loadJSON", "priority" => 10, "arguments" => 1 ]
 			)
 		);
 
@@ -193,6 +203,7 @@ class Root
 		$plugin_front_setup = new FrontSetup( $this->getPluginName(), $this->getVersion(), $this->getFrontModules(), $this->getFrontModuleFunctions() );
 		$plugin_admin_setup = new AdminSetup( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 		$plugin_required_plugins = new RequiredPlugins( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
+		$plugin_field_factory = new FieldFactory( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueStyles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueScripts' );
@@ -209,7 +220,8 @@ class Root
 
 		$this->registerModules( 'admin', array(
 				'plugin_admin_setup' => $plugin_admin_setup,
-				'plugin_required_plugins' => $plugin_required_plugins
+				'plugin_required_plugins' => $plugin_required_plugins,
+				'plugin_field_factory' => $plugin_field_factory
 			)
 		);
 
