@@ -9,6 +9,7 @@ use SSM\Admin\Admin;
 use SSM\Admin\AdminSetup;
 use SSM\Admin\RequiredPlugins;
 use SSM\Admin\FieldFactory;
+use SSM\Admin\CPT;
 use SSM\Front\Front;
 use SSM\Front\FrontSetup;
 
@@ -79,7 +80,8 @@ class Root
 		$this->adminModules = array(
 			[ "slug" => 'ssm-admin-setup', "name" => "Admin Setup" ],
 			[ "slug" => 'ssm-required-plugins', "name" => "Required Plugins" ],
-			[ "slug" => 'ssm-field-factory', "name" => "Field Factory" ]
+			[ "slug" => 'ssm-field-factory', "name" => "Field Factory" ],
+			[ "slug" => 'ssm-cpt', "name" => "CPT" ]
 		);
 
 		$this->adminModuleFunctions['ssm-admin-setup'] = array(
@@ -126,6 +128,14 @@ class Root
 			"hooks" => array(
 				[ "type" => "filter" , "name" => "acf/settings/save_json", "class" => "plugin_field_factory", "function" => "saveJSON" ],
 				[ "type" => "filter" , "name" => "acf/settings/load_json", "class" => "plugin_field_factory", "function" => "loadJSON", "priority" => 10, "arguments" => 1 ]
+			)
+		);
+
+		$this->adminModuleFunctions['ssm-cpt'] = array(
+			"module_name" => "CPT",
+			"hooks" => array(
+				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerPostTypes" ],
+				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerTaxonomies" ]
 			)
 		);
 
@@ -204,6 +214,7 @@ class Root
 		$plugin_admin_setup = new AdminSetup( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 		$plugin_required_plugins = new RequiredPlugins( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 		$plugin_field_factory = new FieldFactory( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
+		$plugin_cpt = new CPT( $this->getPluginName(), $this->getVersion(), $this->getAdminModules(), $this->getAdminModuleFunctions() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueStyles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueueScripts' );
@@ -221,7 +232,8 @@ class Root
 		$this->registerModules( 'admin', array(
 				'plugin_admin_setup' => $plugin_admin_setup,
 				'plugin_required_plugins' => $plugin_required_plugins,
-				'plugin_field_factory' => $plugin_field_factory
+				'plugin_field_factory' => $plugin_field_factory,
+				'plugin_cpt' => $plugin_cpt
 			)
 		);
 
