@@ -56,6 +56,14 @@ class CPT extends Admin
             'slug'      => 'category'
 
         ) );
+
+        register_extended_taxonomy( 'acf_category', 'acf-field-group', array(), array(
+
+            'singular'  => 'Category',
+            'plural'    => 'Categories',
+            'slug'      => 'category'
+
+        ) );
     
     }
 
