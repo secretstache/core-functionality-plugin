@@ -206,4 +206,61 @@ class FrontSetup extends Front
     
     }
 
+    /**
+     * Injects inline CSS into the head
+	 */
+    public function injectInlineCss()
+    {
+
+        global $post;
+        $styles = array();
+
+        if ( $global_styles = ssm_get_field('global_inline_styles', 'options') ) {
+            $styles[] = $global_styles;
+        }
+
+        if ( $page_styles = ssm_get_field('page_inline_styles') ) {
+            $styles[] = $page_styles;
+        }
+
+        foreach ( $styles as $style ) {
+            $output .= $style;
+        }
+        
+        if ( $output != '' ) {
+            echo '<style id="inline-css">' . $output . '</style>';
+        }
+
+    }
+
+    /**
+     * Injects inline JS into the footer
+	 */
+    public function injectInlineJs()
+    {
+        global $post;
+
+        if ( $page_script = get_field('page_inline_scripts') ) {
+            echo '<script type="text/javascript" id="inline-js">' . $page_script . '</script>';
+        }
+
+    }
+
+    /**
+     * Conditionally shows message if URL contains ssmpb=save_reminder
+     */
+    public function saveReminderNotice()
+    {
+
+        if (isset($_GET["ssmpb"]) && trim($_GET["ssmpb"]) == 'save_reminder') {
+
+            global $post;
+
+            echo '<div class="notice notice-warning is-dismissible">';
+            echo '<p>After you save this new ' . get_post_type() . ' item, you will need to reload the last page to retreive it.</p>';
+            echo '</div>';
+        }
+
+    }
+
 }

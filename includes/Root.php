@@ -164,7 +164,9 @@ class Root
 				[ "type" => "action" , "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "customFooterScripts", "priority" => 99 ],
 				[ "type" => "filter" , "name" => "gform_init_scripts_open", "class" => "plugin_front_setup", "function" => "footerScriptsInit" ],
 				[ "type" => "filter" , "name" => "gfrom_cdata_open", "class" => "plugin_front_setup", "function" => "wrapGformCdataOpen", "priority" => 10 ],
-				[ "type" => "filter" , "name" => "gform_cdata_close", "class" => "plugin_front_setup", "function" => "wrapGformCdataClose", "priority" => 99 ]
+				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "injectInlineCss", "priority" => 99 ],
+				[ "type" => "action" , "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "injectInlineJs", "priority" => 99 ],
+				[ "type" => "action" , "name" => "admin_notices", "class" => "plugin_front_setup", "function" => "saveReminderNotice" ]
 			)
 		);
 
