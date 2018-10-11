@@ -67,4 +67,19 @@ class CPT extends Admin
     
     }
 
+    /**
+	 * Register custom Terms
+	 */
+    public function registerTerms()
+    {
+        
+        wp_insert_term('Modules', 'acf_category');
+        wp_insert_term('Lists', 'acf_category');
+        wp_insert_term('Components', 'acf_category');
+        wp_insert_term('Options', 'acf_category');
+        wp_insert_term('Page UI', 'acf_category');        
+        wp_insert_term('Settings Page UI', 'acf_category');
+    
+    }
+
 }

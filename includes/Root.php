@@ -135,7 +135,8 @@ class Root
 			"module_name" => "CPT",
 			"hooks" => array(
 				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerPostTypes" ],
-				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerTaxonomies" ]
+				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerTaxonomies" ],
+				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerTerms" ]
 			)
 		);
 
