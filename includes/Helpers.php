@@ -71,7 +71,7 @@ class Helpers
      */
     public static function theBrandLogo( $link = true )
     {
-        echo get_the_brand_logo( $link );
+        echo $this->getTheBrandLogo( $link );
     }
 
     /**
@@ -166,7 +166,7 @@ class Helpers
      */
     public static function theHamburgerButton( $context = 'offCanvas' )
     {
-        echo get_the_hamburger_button( $context );
+        echo $this->getTheHamburgerButton( $context );
     }
 
     /**
@@ -182,7 +182,7 @@ class Helpers
      */
     public static function theCloseIcon( $class = 'editable' )
     {
-        echo get_the_close_icon( $class );
+        echo $this->getTheCloseIcon( $class );
     }
 
     /**
