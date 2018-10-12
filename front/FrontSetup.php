@@ -215,11 +215,11 @@ class FrontSetup extends Front
         global $post;
         $styles = array();
 
-        if ( $global_styles = ssm_get_field('global_inline_styles', 'options') ) {
+        if ( $global_styles = SSMH::getField('global_inline_styles', 'options') ) {
             $styles[] = $global_styles;
         }
 
-        if ( $page_styles = ssm_get_field('page_inline_styles') ) {
+        if ( $page_styles = SSMH::getField('page_inline_styles') ) {
             $styles[] = $page_styles;
         }
 
