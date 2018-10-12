@@ -14,8 +14,25 @@
 				
 				var category_class = $(this).attr('class').split(/\s+/).slice(-1)[0];
 				var category = category_class.split('-');
+
+				console.log(category_class);
+				console.log(category);
 				
-				category_name = category[1];
+				switch (category.length) {
+					case 2:
+						category_name = category[1];
+						break;
+					case 3:
+						category_name = category[1] + '-' + category[2];
+						break;
+					case 4:
+						category_name = category[1] + '-' + category[2] + '-' + category[3];
+						break;
+					case 5:
+						category_name = category[1] + '-' + category[2] + '-' + category[3] + '-' + category[4];
+						break;
+				}
+
 				category_link = '/wp-admin/edit.php?post_type=acf-field-group&acf_category=' + category_name;
 
 				$(this).append(
