@@ -101,6 +101,7 @@ class Root
 				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "removePostTypeSupport" ],
 				[ "type" => "action" , "name" => "admin_init", "class" => "plugin_admin_setup", "function" => "removeDashboardMeta" ],
 				[ "type" => "action" , "name" => "admin_menu", "class" => "plugin_admin_setup", "function" => "createAdminMenu" ],
+				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "addAcfSubMenu" ],
 				[ "type" => "action" , "name" => "init", "class" => "plugin_admin_setup", "function" => "moveCptsToAdminMenu", "priority" => 25 ],
 				[ "type" => "filter" , "name" => "admin_body_class", "class" => "plugin_admin_setup", "function" => "isFrontAdminBodyClass", "priority" => 10, "arguments" => 1 ],
 				[ "type" => "action" , "name" => "wp_ajax_get_width_values", "class" => "plugin_admin_setup", "function" => "getWidthValues" ],

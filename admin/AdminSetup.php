@@ -198,6 +198,28 @@ class AdminSetup extends Admin
 	}
 
 	/**
+	 * Create ACF Sub Pages and move them to SSM menu
+	 */
+	public function addAcfSubMenu()
+	{
+
+		// Add Brand Settings Page
+		acf_add_options_sub_page(array(
+			'page_title' => 'Brand Settings',
+			'menu_title' => 'Brand Settings',
+			'parent_slug' => 'ssm',
+		));
+		
+		// Add Documentation Page
+		acf_add_options_sub_page(array(
+			'page_title' => 'Documentation',
+			'menu_title' => 'Documentation',
+			'parent_slug' => 'ssm',
+		));
+
+	}
+
+	/**
 	 * Move various menu items into LIB menu
 	 */
 	public function moveCptsToAdminMenu()
