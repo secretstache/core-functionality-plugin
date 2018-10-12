@@ -176,6 +176,7 @@ class AdminSetup extends Admin
 		remove_meta_box( 'wpe_dify_news_feed', 'dashboard', 'normal' );
 		remove_meta_box( 'wpseo-dashboard-overview', 'dashboard', 'normal' );
 		remove_meta_box( 'ssm_main_dashboard_widget', 'dashboard', 'normal' );
+		remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
 	
 	}
 
@@ -209,7 +210,7 @@ class AdminSetup extends Admin
 			'menu_title' => 'Brand Settings',
 			'parent_slug' => 'ssm',
 		));
-		
+
 		// Add Documentation Page
 		acf_add_options_sub_page(array(
 			'page_title' => 'Documentation',
