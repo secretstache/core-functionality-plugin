@@ -221,4 +221,27 @@ class Helpers
         
     }
 
+    /**
+     * Sanitize HTML Classes
+     */
+    function sanitizeHtmlClasses( $class, $fallback = null ) {
+        
+        // Explode it, if it's a string
+        if ( is_string( $class ) ) {
+            $class = explode(" ", $class);
+        }
+
+        if ( is_array( $class ) && count( $class ) > 0 ) {
+          
+            $class = array_map("sanitize_html_class", $class);
+            return implode(" ", $class);
+
+        } else {
+
+            return sanitize_html_class( $class, $fallback );
+        
+        }
+    
+    }
+
 }
