@@ -418,36 +418,46 @@ class PageBuilder extends Controller
     }
 
     //component_id_classes()
-    protected function getModuleClasses( $c_classes = '' )
+    protected function getModuleClasses( $module_classes = '' )
     {
 
         global $c_i;
 
-        $even_odd = 0 == $c_i % 2 ? 'even' : 'odd';
+        $even_odd = ( 0 == $c_i % 2 ) ? 'even' : 'odd';
         $inline_classes = get_sub_field('option_html_classes');
-        $module_id_classes = '';
+        $return = '';
 
         if ( $html_id = get_sub_field('option_html_id') ) {
-            $html_id = sanitize_html_class(strtolower($html_id));
-            $module_id_classes .= ' id="' . $html_id . '" class="module stack-order-' . $c_i . ' stack-order-' . $even_odd;
+
+            $html_id = sanitize_html_class( strtolower( $html_id ) );
+            $return .= ' id="' . $html_id . '" class="module stack-order-' . $c_i . ' stack-order-' . $even_odd;
+        
         } else {
-            $module_id_classes .= ' class="module stack-order-' . $c_i . ' stack-order-' . $even_odd;
+
+            $return .= ' class="module stack-order-' . $c_i . ' stack-order-' . $even_odd;
+        
         }
 
         if ( $alignment = get_sub_field('option_alignment') ) {
-            $module_id_classes .= ' ' . sanitize_html_class( $alignment );
+            $return .= ' ' . sanitize_html_class( $alignment );
         }
-        if ( $c_classes != NULL ) {
-            $c_classes = SSMH::sanitizeHtmlClasses($c_classes);
-            $module_id_classes .= ' ' . $c_classes;
+
+        if ( $module_classes != NULL ) {
+            
+            $module_classes = SSMH::sanitizeHtmlClasses( $module_classes );
+            $return .= ' ' . $module_classes;
+        
         }
+
         if ( $inline_classes != NULL ) {
-            $module_id_classes .= ' ' . $inline_classes;
+        
+            $return .= ' ' . $inline_classes;
+        
         }
 
-        $module_id_classes .= '"';
+        $return .= '"';
 
-        return $module_id_classes;
+        return $return;
 
     }
 
