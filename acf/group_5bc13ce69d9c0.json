@@ -100,7 +100,7 @@
         {
             "key": "field_5bc13e56d70ac",
             "label": "Background options",
-            "name": "template_background_options",
+            "name": "background_options",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -236,5 +236,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539717646
+    "modified": 1539791164
 }

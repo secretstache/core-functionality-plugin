@@ -3,83 +3,9 @@
     "title": "Hero Unit",
     "fields": [
         {
-            "key": "field_5bbfc802d8b4e",
-            "label": "Content",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5bbfc81bd8b50",
+            "key": "field_5bc759e8d1cbd",
             "label": "Columns",
-            "name": "hero_unit_columns",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 1,
-            "max": 2,
-            "layout": "block",
-            "button_label": "Add Column",
-            "sub_fields": [
-                {
-                    "key": "field_5bbfc84fd8b51",
-                    "label": "Module List",
-                    "name": "module_list",
-                    "type": "clone",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "clone": [
-                        "group_5bbfc64315e77"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
-                }
-            ]
-        },
-        {
-            "key": "field_5bbfc80fd8b4f",
-            "label": "Options",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5bbfc87ed8b52",
-            "label": "Background Options",
-            "name": "hero_unit_background_options",
+            "name": "columns",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -90,70 +16,7 @@
                 "id": ""
             },
             "clone": [
-                "group_5bb3745507bee"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_5bbfc8d3d8b53",
-            "label": "Column Alignment",
-            "name": "hero_unit_column_alignment",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5bb3765611e50"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_5bbfc907d8b54",
-            "label": "Height",
-            "name": "hero_unit_height",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5bbfeafc872bb"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
-        },
-        {
-            "key": "field_5bbfc93fd8b55",
-            "label": "HTML Attributes",
-            "name": "style",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_5b92e4de49df2"
+                "group_5bc758141b072"
             ],
             "display": "seamless",
             "layout": "block",
@@ -183,5 +46,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539396016
+    "modified": 1539791400
 }
