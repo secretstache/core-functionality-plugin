@@ -19,11 +19,22 @@ class PageBuilder extends Controller
     //sections.php
     public function init()
     {
+        
         if (!post_password_required()) {
 
+            global $tpl_args;
+
+            // Hero Unit
+            if ( have_rows( 'hero_unit_columns' ) ) {
+
+                $this->getTemplatePart( $this->templates_dir . '/hero-unit.php', $tpl_args);
+            
+            }
+
+
+            // Layout Builder
             if ( have_rows( 'templates' ) ) {
 
-                global $tpl_args;
                 $cols_cb_i = 0;
 
                 while ( have_rows( 'templates' ) ) {
@@ -74,24 +85,26 @@ class PageBuilder extends Controller
 
         if ($context == 'hero_unit') {
    
-            $cols = get_field($context . '_columns');
-            $alignment_array = get_field('hero_unit_column_alignment');
+            $cols = get_field( $context . '_columns' );
 				
-            if ($alignment_array['y_alignment'] != 'top') {
-                $y_alignment = ' align-' . $alignment_array['y_alignment'];
+            if ( get_sub_field( 'option_y_alignment' ) != 'top' ) {
+
+                $y_alignment = ' align-' . get_sub_field( 'option_y_alignment' );
+            
             }
 
             $x_alignment = ' align-center';
         
-        } elseif ($context == 'template') {
+        } elseif ( $context == 'template' ) {
 
             $cols = get_sub_field( $context . '_columns' );
 
-            if ( get_sub_field('option_y_alignment') != 'top' ) {
+            if ( get_sub_field( 'option_y_alignment ') != 'top' ) {
                 $y_alignment = ' align-' . get_sub_field('option_y_alignment');
             }
 
             $x_alignment = ' align-' . get_sub_field('option_x_alignment');
+
         }
 
         $count = count( $cols );
@@ -103,12 +116,12 @@ class PageBuilder extends Controller
         $tpl_args['column_count'] = $count;
         $tpl_args['context'] = $context;
 
-        if ( have_rows($context . '_columns' ) ) {
+        if ( have_rows( $context . '_columns' ) ) {
 
             echo '<div class="grid-container">';
             echo '<div class="main grid-x grid-margin-x' . $x_alignment . $y_alignment . ' has-' . $count . '-cols">';
             
-            while (have_rows($context . '_columns')) {
+            while ( have_rows($context . '_columns' ) ) {
 
                 the_row();
                 
@@ -403,7 +416,7 @@ class PageBuilder extends Controller
                 
                 $video = get_sub_field('option_background_video');
                 
-                $html = '<div class="hero-video">';
+                $html = '<div class="template-video">';
                 $html .= '<video autoplay loop>';
                 $html .= '<source src="' . $video['url'] . '" type="video/mp4">';
                 $html .= '</video>';
@@ -462,40 +475,40 @@ class PageBuilder extends Controller
     }
 
     // hero_unit_id_classes()
-    protected function getHeroUnitClasses( $h_classes = '' )
+    protected function getHeroUnitClasses( $classes = '' )
     {
 
-        $inline_classes = get_field('html_classes');
+        $inline_classes = get_field('option_html_classes');
         $hero_unit_id_classes = '';
 
-        if ( $html_id = get_field('html_id') ) {
+        if ( $html_id = get_field('option_html_id') ) {
             $html_id = sanitize_html_class(strtolower($html_id));
             $hero_unit_id_classes .= ' id="' . $html_id . '" class="hero-unit';
         } else {
             $hero_unit_id_classes .= ' class="hero-unit';
         }
 
-        if ( get_field('background_options') == 'Color' ) {
+        if ( get_field('option_background') == 'Color' ) {
             $hero_unit_id_classes .= ' ' . sanitize_html_class( get_field('background_color') );
         }
 
-        if ( get_field('background_options') == 'Image' ) {
+        if ( get_field('option_background') == 'Image' ) {
             $hero_unit_id_classes .= ' bg-image bg-dark';
         }
 
-        if ( get_field('background_options') == 'Video' ) {
+        if ( get_field('option_background') == 'Video' ) {
             $hero_unit_id_classes .= ' bg-video';
         }
 
-        if ( get_field('hero_unit_height') == 'full' ) {
+        if ( get_field('option_hero_unit_height') == 'full' ) {
             $hero_unit_id_classes .= ' full-height';
-        } elseif ( get_field('hero_unit_height') == 'auto' ) {
+        } elseif ( get_field('option_hero_unit_height') == 'auto' ) {
             $hero_unit_id_classes .= ' auto';
         }
         
-        if ( $h_classes != NULL ) {
-            $h_classes = SSMH::sanitize_html_classes($s_classes);
-            $hero_unit_id_classes .= ' ' . $h_classes;
+        if ( $classes != NULL ) {
+            $classes = SSMH::sanitizeHtmlClasses($s_classes);
+            $hero_unit_id_classes .= ' ' . $classes;
         }
 
         if ( $inline_classes != NULL ) {

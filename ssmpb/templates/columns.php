@@ -9,7 +9,7 @@
     
     $style = $this->getInlineStyles( 'template' );
 
-    ?>
+?>
 
 <section <?php echo $this->getTemplateClasses() . $style ?> >
 
