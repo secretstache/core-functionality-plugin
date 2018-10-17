@@ -1,16 +1,16 @@
 <?php
 
-$c_classes = 'buttons';
-$button = get_field( 'button' );
+  $module = 'button';
+  $option = 'option';
 
-echo '<div' . $this->getComponentClasses( $c_classes ) . '>';
+  $label = get_sub_field( $module . '_label' );
+  $url = get_sub_field( $module . '_url' );
+  $target = ( get_sub_field( $option . '_target' ) == 'new_tab' ) ? '_blank' : '_self';
 
-if ( $button ) {
-//   foreach( $buttons as $button ) {
-      $target = '_blank';
-    // $target = $button['target'] == 'New Tab' ? '_blank' : '_self';
-    echo '<a class="button" href="' . $button['url'] . '" target="' . $target . '">' . $button['label'] . '</a>';
-  }
-// }
+?>
 
-echo '</div>';
+<div <?php echo $this->getModuleClasses( $module ) ?> >
+
+    <a class="button" href="<?php echo $url; ?>" target="<?php echo $target; ?>"> <?php echo $label; ?> </a>
+
+</div>
