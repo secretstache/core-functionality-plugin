@@ -85,23 +85,25 @@ class PageBuilder extends Controller
         
         } elseif ($context == 'template') {
 
-            $cols = get_sub_field($context . '_columns');
+            $cols = get_sub_field( $context . '_columns' );
 
-            if (get_sub_field('option_y_alignment') != 'top') {
+            if ( get_sub_field('option_y_alignment') != 'top' ) {
                 $y_alignment = ' align-' . get_sub_field('option_y_alignment');
             }
 
             $x_alignment = ' align-' . get_sub_field('option_x_alignment');
         }
 
-        $count = count($cols);
-        $columns_width = get_post_meta($page_id, 'option_columns_width_' . $cols_cb_i, true);
-        $width_array = explode('_', $columns_width);
+        $count = count( $cols );
+
+        $columns_width = get_post_meta( $page_id, 'option_columns_width_' . $cols_cb_i, true );
+        $width_array = explode( '_', $columns_width );
         $pluck = 0;
+
         $tpl_args['column_count'] = $count;
         $tpl_args['context'] = $context;
 
-        if (have_rows($context . '_columns')) {
+        if ( have_rows($context . '_columns' ) ) {
 
             echo '<div class="grid-container">';
             echo '<div class="main grid-x grid-margin-x' . $x_alignment . $y_alignment . ' has-' . $count . '-cols">';
@@ -110,16 +112,20 @@ class PageBuilder extends Controller
 
                 the_row();
                 
-                if ($context == 'hero_unit') {
+                if ( $context == 'hero_unit' ) {
                     
                     $width = 12 / $count;
 
-                } elseif ($context == 'template') {
+                } elseif ( $context == 'template' ) {
                     
                     if ($columns_width != null) {
+
                         $width = $width_array[$pluck];
+
                     } else {
+
                         $width = 12 / $count;
+                    
                     }
                 
                 }
@@ -253,16 +259,20 @@ class PageBuilder extends Controller
 
         if ( $context == 'hero_unit' ) {
             
-            if (get_field('background_options') == 'Image' && get_field('background_image') != null) {
-                $image = get_field('background_image');
+            if ( get_field( 'option_background' ) == 'Image' && get_field('option_background_image') != null ) {
+                
+                $image = get_field('option_background_image');
                 $style = ' style="background-image: url(' . $image['url'] . ')"';
+            
             }
 
         } else {
 
-            if (get_sub_field('option_background_options') == 'Image' && get_sub_field('option_background_image') != null) {
+            if ( get_sub_field('option_background' ) == 'Image' && get_sub_field( 'option_background_image' ) != null ) {
+
                 $image = get_sub_field('option_background_image');
                 $style = ' style="background-image: url(' . $image['url'] . ')"';
+            
             }
 
         }
@@ -276,39 +286,53 @@ class PageBuilder extends Controller
     {
 
         $inline_classes = get_sub_field('option_html_classes');
-        $template_id_classes = '';
+        $return = '';
 
         if ( $html_id = get_sub_field('option_html_id') ) {
-          $html_id = sanitize_html_class(strtolower($html_id));
-          $template_id_classes .= ' id="' . $html_id . '" class="content-block';
+
+            $html_id = sanitize_html_class( strtolower( $html_id ) );
+            $return .= ' id="' . $html_id . '" class="content-block';
+
         } else {
-          $template_id_classes .= ' class="content-block';
+            
+            $return .= ' class="content-block';
+        
         }
 
-        if ( get_sub_field('option_background_options') == 'Color' ) {
-          $template_id_classes .= ' ' . sanitize_html_class( get_sub_field('option_background_color') );
+        if ( get_sub_field('option_background') == 'Color' ) {
+
+            $return .= ' ' . sanitize_html_class( get_sub_field('option_background_color') );
+        
         }
 
-        if ( get_sub_field('option_background_options') == 'Image' ) {
-          $template_id_classes .= ' bg-image bg-dark';
+        if ( get_sub_field('option_background') == 'Image' ) {
+            
+            $return .= ' bg-image bg-dark';
+        
         }
 
-        if ( get_sub_field('option_background_options') == 'Video' ) {
-          $template_id_classes .= ' bg-video bg-dark';
+        if ( get_sub_field('option_background') == 'Video' ) {
+        
+            $return .= ' bg-video bg-dark';
+        
         }
 
         if ( $classes != NULL ) {
-          $classes = SSMH::sanitizeHtmlClasses($classes);
-          $template_id_classes .= ' ' . $classes;
+            
+            $classes = SSMH::sanitizeHtmlClasses($classes);
+            $return .= ' ' . $classes;
+        
         }
 
         if ( $inline_classes != NULL ) {
-          $template_id_classes .= ' ' . $inline_classes;
+
+            $return .= ' ' . $inline_classes;
+        
         }
 
-        $template_id_classes .= '"';
+        $return .= '"';
 
-        return $template_id_classes;
+        return $return;
 
     }
 
@@ -321,6 +345,7 @@ class PageBuilder extends Controller
         $include_header = get_sub_field('option_include_template_header');
         $headline = get_sub_field('option_template_headline');
         $subheadline = get_sub_field('option_template_subheadline');
+
         $headline_tag_open = '<h2 class="headline">';
         $headline_tag_close = '</h2>';
         $subheadline_tag_open = '<h3 class="subheadline">';
@@ -328,25 +353,25 @@ class PageBuilder extends Controller
 
         if ( $include_header == TRUE ) {
 
-          $html = '<div class="grid-container">';
-          $html .= '<div class="grid-x grid-x-margin align-center">';
-              $html .= '<div class="cell small-12 medium-10">';
-                $html .= '<header class="component template-header align-center">';
+          $return = '<div class="grid-container">';
+          $return .= '<div class="grid-x grid-x-margin align-center">';
+              $return .= '<div class="cell small-12 medium-10">';
+                $return .= '<header class="component template-header align-center">';
 
                   if ( $headline ) {
-                    $html .= $headline_tag_open . $headline . $headline_tag_close;
+                    $return .= $headline_tag_open . $headline . $headline_tag_close;
                   }
 
                   if ( $subheadline ) {
-                    $html .= $subheadline_tag_open . $subheadline . $subheadline_tag_close;
+                    $return .= $subheadline_tag_open . $subheadline . $subheadline_tag_close;
                   }
 
-                $html .= '</header>';
-              $html .= '</div>';
-            $html .= '</div>';
-          $html .= '</div>';
+                $return .= '</header>';
+              $return .= '</div>';
+            $return .= '</div>';
+          $return .= '</div>';
           
-          return $html;
+          return $return;
         
         }
       
@@ -360,20 +385,24 @@ class PageBuilder extends Controller
 
         if ( $context == 'hero_unit' ) {
 
-            if ( get_field('background_options') == 'Video' && get_field('background_video') != null ) {
+            if ( get_field('option_background') == 'Video' && get_field('option_background_video') != null ) {
+                
                 $video = get_field('background_video');
-                $html = '<div class="hero-video">';
-                $html .= '<video autoplay loop>';
-                $html .= '<source src="' . $video['url'] . '" type="video/mp4">';
-                $html .= '</video>';
-                $html .= '</div>';
-                $html .= '<div class="overlay"></div>';
+
+                $return = '<div class="hero-video">';
+                $return .= '<video autoplay loop>';
+                $return .= '<source src="' . $video['url'] . '" type="video/mp4">';
+                $return .= '</video>';
+                $return .= '</div>';
+                $return .= '<div class="overlay"></div>';
             }
 
         } else {
 
-            if ( get_sub_field('option_background_options') == 'Video' && get_sub_field('option_background_video') != null ) {
+            if ( get_sub_field('option_background') == 'Video' && get_sub_field('option_background_video') != null ) {
+                
                 $video = get_sub_field('option_background_video');
+                
                 $html = '<div class="hero-video">';
                 $html .= '<video autoplay loop>';
                 $html .= '<source src="' . $video['url'] . '" type="video/mp4">';
@@ -384,11 +413,7 @@ class PageBuilder extends Controller
         
         }
 
-        if ( get_field('background_options') == 'Video' && get_field('background_video') != null || get_sub_field('option_background_options') == 'Video' && get_sub_field('option_background_video') != null ) {
-            
-        }
-
-        return $html;
+        return $return;
     
     }
 

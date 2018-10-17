@@ -7,11 +7,11 @@
 
     global $tpl_args;
     
-    $style = $this->getInlineStyles();
+    $style = $this->getInlineStyles( 'template' );
 
-?>
+    ?>
 
-<section <?php echo $this->getTemplateClasses() . $style ?> >;
+<section <?php echo $this->getTemplateClasses() . $style ?> >
 
     <?php echo $this->getVideoBackground(); ?>
     <?php echo $this->getTemplateHeader(); ?>
