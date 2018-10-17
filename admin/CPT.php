@@ -78,6 +78,7 @@ class CPT extends Admin
         wp_insert_term('Components', 'acf_category');
         wp_insert_term('Options', 'acf_category');
         wp_insert_term('Module Lists', 'acf_category');
+        wp_insert_term('Templates', 'acf_category');
         wp_insert_term('Page UI', 'acf_category');        
         wp_insert_term('Settings Page UI', 'acf_category');
     
