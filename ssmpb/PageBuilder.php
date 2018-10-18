@@ -8,8 +8,8 @@ use SSM\Includes\Helpers as SSMH;
 class PageBuilder extends Controller
 {
 
-    protected $modules_dir = SSMC_DIR . 'ssmpb/modules';
-    protected $templates_dir = SSMC_DIR . 'ssmpb/templates';
+    protected $modules_dir = SSMC_THEME_DIR . 'views/modules';
+    protected $templates_dir = SSMC_THEME_DIR . 'views/templates';
     protected $acf = true;
 
     public function builder() {
@@ -20,7 +20,7 @@ class PageBuilder extends Controller
     public function init()
     {
         
-        if (!post_password_required()) {
+        if ( !post_password_required() ) {
 
             global $tpl_args;
 

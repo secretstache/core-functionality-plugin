@@ -33,6 +33,7 @@ define( 'SSMC_FRONT_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'front/
 define( 'SSMC_ADMIN_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'admin/' ) );
 define( 'SSMC_FRONT_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'front/' ) );
 define( 'SSMC_INCLUDES_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'includes/' ) );
+define( 'SSMC_THEME_DIR', trailingslashit ( get_template_directory() ) );
 
 /**
  * The code that runs during plugin activation.
