@@ -366,7 +366,7 @@ class AdminSetup extends Admin
 	 * Modify the admin footer text
 	 * See: http://wp-snippets.com/change-footer-text-in-wp-admin/
 	 */
-	function adminFooterText()
+	public function adminFooterText()
 	{
 
 		$footer_text = SSMH::getOption('ssm_core_agency_name') != NULL ? SSMH::getOption('ssm_core_agency_name') : 'Secret Stache Media';

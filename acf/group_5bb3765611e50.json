@@ -24,7 +24,7 @@
         {
             "key": "field_5bb37688c1f33",
             "label": "X Alighment",
-            "name": "option_x_alighment",
+            "name": "option_x_alignment",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -58,5 +58,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539718202
+    "modified": 1539916283
 }

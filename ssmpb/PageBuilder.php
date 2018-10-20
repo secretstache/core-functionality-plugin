@@ -8,286 +8,19 @@ use SSM\Includes\Helpers as SSMH;
 class PageBuilder extends Controller
 {
 
-    protected $modules_dir = SSMC_THEME_DIR . 'views/modules';
-    protected $templates_dir = SSMC_THEME_DIR . 'views/templates';
     protected $acf = true;
 
     public function builder() {
         return $this;
-    } 
-
-    //sections.php
-    public function init()
-    {
-        
-        if ( !post_password_required() ) {
-
-            global $tpl_args;
-
-            // Hero Unit
-            if ( have_rows( 'hero_unit_columns' ) ) {
-
-                $this->getTemplatePart( $this->templates_dir . '/hero-unit.php', $tpl_args);
-            
-            }
-
-
-            // Layout Builder
-            if ( have_rows( 'templates' ) ) {
-
-                $cols_cb_i = 0;
-
-                while ( have_rows( 'templates' ) ) {
-
-                    the_row();
-
-                    $cb_i = get_row_index();
-                    $tpl_args['cb_i'] = $cb_i;
-                    $tpl_args['cols_cb_i'] = $cols_cb_i;
-
-                    $layout = get_row_layout();
-
-                    switch ( $layout ) {
-
-                        case 'columns':
-                            $this->getTemplatePart( $this->templates_dir . '/columns.php', $tpl_args);
-                            $cols_cb_i++;
-                            break;
-
-                        case 'related_content':
-                            $this->getTemplatePart( $this->templates_dir . '/related-content.php', $tpl_args);
-                            break;
-
-                        case 'block_grid':
-                            $this->getTemplatePart( $this->templates_dir . '/block-grid.php', $tpl_args);
-                            break;
-
-                        case 'image_gallery':
-                            $this->getTemplatePart( $this->templates_dir . '/image-gallery.php', $tpl_args);
-                            break;
-                    }
-                }
-            }
-        }
-    }
-
-    //the_columns()
-    protected function buildColumns( $context = 'template', $tpl_args )
-    {
-        
-		global $post;
-        global $tpl_args;
-        
-		$cols_cb_i = $tpl_args['cols_cb_i'];
-        $page_id = $post->ID;
-        $cols = '';
-        $alignment = '';
-
-        if ($context == 'hero_unit') {
-   
-            $cols = get_field( $context . '_columns' );
-				
-            if ( get_sub_field( 'option_y_alignment' ) != 'top' ) {
-
-                $y_alignment = ' align-' . get_sub_field( 'option_y_alignment' );
-            
-            }
-
-            $x_alignment = ' align-center';
-        
-        } elseif ( $context == 'template' ) {
-
-            $cols = get_sub_field( $context . '_columns' );
-
-            if ( get_sub_field( 'option_y_alignment ') != 'top' ) {
-                $y_alignment = ' align-' . get_sub_field('option_y_alignment');
-            }
-
-            $x_alignment = ' align-' . get_sub_field('option_x_alignment');
-
-        }
-
-        $count = count( $cols );
-
-        $columns_width = get_post_meta( $page_id, 'option_columns_width_' . $cols_cb_i, true );
-        $width_array = explode( '_', $columns_width );
-        $pluck = 0;
-
-        $tpl_args['column_count'] = $count;
-        $tpl_args['context'] = $context;
-
-        if ( have_rows( $context . '_columns' ) ) {
-
-            echo '<div class="grid-container">';
-            echo '<div class="main grid-x grid-margin-x' . $x_alignment . $y_alignment . ' has-' . $count . '-cols">';
-            
-            while ( have_rows($context . '_columns' ) ) {
-
-                the_row();
-                
-                if ( $context == 'hero_unit' ) {
-                    
-                    $width = 12 / $count;
-
-                } elseif ( $context == 'template' ) {
-                    
-                    if ($columns_width != null) {
-
-                        $width = $width_array[$pluck];
-
-                    } else {
-
-                        $width = 12 / $count;
-                    
-                    }
-                
-                }
-
-                $tpl_args['column_width'] = $width;
-                
-                echo '<div class="cell small-11 medium-' . $width . ' i-' . get_row_index() . '">';
-                echo '<div class="inner">';
-
-                $this->getModules( $tpl_args );
-                
-                echo '</div>';
-                echo '</div>';
-                $pluck++;
-            }
-            
-            echo '</div>';
-            echo '</div>';
-        }
-    }
-
-    //components.php
-    protected function getModules( $tpl_args )    
-    {
-
-        global $c_i;
-        global $tpl_args;
-
-        $c_i = 1;
-
-        while ( have_rows('modules') ) {
-
-            the_row();
-
-            $tpl_args['module_position'] = $c_i;
-            $layout = get_row_layout();
-            
-            switch ( $layout ) {
-                    
-                case 'header' : 
-                    $this->getTemplatePart( $this->modules_dir . '/related-content.php', $tpl_args);
-                    break;
-                case 'hero_header' :
-                    $this->getTemplatePart( $this->modules_dir . '/hero-header.php', $tpl_args);
-                    break;
-                case 'html_editor' :
-                    $this->getTemplatePart( $this->modules_dir . '/html-editor.php', $tpl_args);
-                    break;
-                case 'image' :
-                    $this->getTemplatePart( $this->modules_dir . '/image.php', $tpl_args);
-                    break;
-                case 'video' :
-                    $this->getTemplatePart( $this->modules_dir . '/video.php', $tpl_args);
-                    break;
-                case 'form' :
-                    $this->getTemplatePart( $this->modules_dir . '/form.php', $tpl_args);
-                    break;
-                case 'button' :
-                    $this->getTemplatePart( $this->modules_dir . '/button.php', $tpl_args);
-                    break;
-                case 'business_information' :
-                    $this->getTemplatePart( $this->modules_dir . '/business-information.php', $tpl_args);
-                    break;
-            }
-
-            $c_i++;
-        }
-
-    }
-
-    // hm_get_template_part()
-    protected function getTemplatePart( $file, $template_args = array(), $cache_args = array() )
-    {
-
-        $template_args = wp_parse_args($template_args);
-        $cache_args = wp_parse_args($cache_args);
-
-        if ( $cache_args ) {
-            
-            foreach ( $template_args as $key => $value ) {
-
-                if ( is_scalar($value) || is_array($value) ) {
-                    $cache_args[$key] = $value;
-                } elseif ( is_object($value) && method_exists($value, 'get_id' ) ) {
-                    $cache_args[$key] = call_user_func( 'get_id', $value );
-                }
-
-            }
-
-            if ( ( $cache = wp_cache_get( $file, serialize( $cache_args ) ) ) !== false ) {
-
-                if ( !empty( $template_args['return'] ) ) {
-                    return $cache;
-                }
-
-                echo $cache;
-                return;
-            }
-
-        }
-
-        $file_handle = $file;
-
-        if (file_exists($this->templates_dir . '/' . $file . '.php')) {
-            $file = $this->templates_dir . '/' . $file . '.php';
-        }
-
-        $return = require $file;
-
-        if ($cache_args) {
-            wp_cache_set($file, $data, serialize($cache_args), 3600);
-        }
-
-        if (!empty($template_args['return'])) {
-
-            if ($return === false) {
-                return false;
-            } else {
-                return $data;
-            }
-        }
-
-        return $data;
-    
     }
 
     //get_inline_styles()
-    protected function getInlineStyles( $context = 'template' )
-    {
-        $image = '';
+    public static function getInlineStyles ( $option_background, $image ) {
 
-        if ( $context == 'hero_unit' ) {
-            
-            if ( get_field( 'option_background' ) == 'Image' && get_field('option_background_image') != null ) {
-                
-                $image = get_field('option_background_image');
-                $style = ' style="background-image: url(' . $image['url'] . ')"';
-            
-            }
+        if ( $option_background == 'Image' && !is_null( $image ) ) {
 
-        } else {
-
-            if ( get_sub_field('option_background' ) == 'Image' && get_sub_field( 'option_background_image' ) != null ) {
-
-                $image = get_sub_field('option_background_image');
-                $style = ' style="background-image: url(' . $image['url'] . ')"';
-            
-            }
-
+            $style = ' style="background-image: url(' . $image->url . ')"';
+        
         }
 
         return $style;
@@ -295,230 +28,133 @@ class PageBuilder extends Controller
     }
     
     //section_id_classes()
-    protected function getTemplateClasses( $classes = '' )
-    {
+    public static function getTemplateClasses( $custom_classes, $inline_classes, $inline_id, $option_background, $background_color ) {
 
-        $inline_classes = get_sub_field('option_html_classes');
-        $return = '';
+        $response = '';
 
-        if ( $html_id = get_sub_field('option_html_id') ) {
+        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ) . '" class="content-block' : ' class="content-block';
 
-            $html_id = sanitize_html_class( strtolower( $html_id ) );
-            $return .= ' id="' . $html_id . '" class="content-block';
+        switch ( $option_background ) {
 
-        } else {
-            
-            $return .= ' class="content-block';
+            case 'Color':
+                $response .= ' ' . sanitize_html_class( $background_color );
+                break;
+            case 'Image':
+                $response .= ' bg-image bg-dark';
+                break;
+            case 'Video':
+                $response .= ' bg-video';
+                break;
         
         }
 
-        if ( get_sub_field('option_background') == 'Color' ) {
+        $response .=  ( !is_null( $custom_classes ) ) ? ' ' . SSMH::sanitizeHtmlClasses( $custom_classes ) : '';
 
-            $return .= ' ' . sanitize_html_class( get_sub_field('option_background_color') );
-        
-        }
+        $response .= ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
 
-        if ( get_sub_field('option_background') == 'Image' ) {
-            
-            $return .= ' bg-image bg-dark';
-        
-        }
+        $response .= '"';
 
-        if ( get_sub_field('option_background') == 'Video' ) {
-        
-            $return .= ' bg-video bg-dark';
-        
-        }
-
-        if ( $classes != NULL ) {
-            
-            $classes = SSMH::sanitizeHtmlClasses($classes);
-            $return .= ' ' . $classes;
-        
-        }
-
-        if ( $inline_classes != NULL ) {
-
-            $return .= ' ' . $inline_classes;
-        
-        }
-
-        $return .= '"';
-
-        return $return;
+        return $response;
 
     }
 
-    //the_section_header()
-    protected function getTemplateHeader()
-    {
+    // the_template_header()
+    public static function getTemplateHeader( $include, $headline, $subheadline ) {
 
-        global $tpl_args;
-        
-        $include_header = get_sub_field('option_include_template_header');
-        $headline = get_sub_field('option_template_headline');
-        $subheadline = get_sub_field('option_template_subheadline');
+        $response = '';
 
-        $headline_tag_open = '<h2 class="headline">';
-        $headline_tag_close = '</h2>';
-        $subheadline_tag_open = '<h3 class="subheadline">';
-        $subheadline_tag_close = '</h3>';
+        if ( $include ) {
 
-        if ( $include_header == TRUE ) {
+            $response = '<div class="grid-container">';
+            $response .= '<div class="grid-x grid-x-margin align-center">';
+                $response .= '<div class="cell small-12 medium-10">';
+                    $response .= '<header class="component template-header align-center">';
 
-          $return = '<div class="grid-container">';
-          $return .= '<div class="grid-x grid-x-margin align-center">';
-              $return .= '<div class="cell small-12 medium-10">';
-                $return .= '<header class="component template-header align-center">';
+                        $response .= ( $headline ) ? '<h2 class="headline">' . $headline . '</h2>' : '';
 
-                  if ( $headline ) {
-                    $return .= $headline_tag_open . $headline . $headline_tag_close;
-                  }
+                        $response .= ( $subheadline ) ? '<h3 class="subheadline">' . $subheadline .'</h3>' : '';
 
-                  if ( $subheadline ) {
-                    $return .= $subheadline_tag_open . $subheadline . $subheadline_tag_close;
-                  }
+                    $response .= '</header>';
+                $response .= '</div>';
+                $response .= '</div>';
+            $response .= '</div>';
 
-                $return .= '</header>';
-              $return .= '</div>';
-            $return .= '</div>';
-          $return .= '</div>';
-          
-          return $return;
-        
         }
-      
+
+        return $response;
+
     }
 
     // the_video_background()
-    protected function getVideoBackground( $context = 'template' )
-    {
-	
-        $html = '';
+    public static function getVideoBackground( $option_background, $video ) {
 
-        if ( $context == 'hero_unit' ) {
+        $response = '';
 
-            if ( get_field('option_background') == 'Video' && get_field('option_background_video') != null ) {
+        if ( $option_background == 'Video' && !is_null( $video ) ) {
                 
-                $video = get_field('background_video');
-
-                $return = '<div class="hero-video">';
-                $return .= '<video autoplay loop>';
-                $return .= '<source src="' . $video['url'] . '" type="video/mp4">';
-                $return .= '</video>';
-                $return .= '</div>';
-                $return .= '<div class="overlay"></div>';
-            }
-
-        } else {
-
-            if ( get_sub_field('option_background') == 'Video' && get_sub_field('option_background_video') != null ) {
-                
-                $video = get_sub_field('option_background_video');
-                
-                $html = '<div class="template-video">';
-                $html .= '<video autoplay loop>';
-                $html .= '<source src="' . $video['url'] . '" type="video/mp4">';
-                $html .= '</video>';
-                $html .= '</div>';
-                $html .= '<div class="overlay"></div>';
-            }
-        
+            $response = '<div class="template-video">';
+            $response .= '<video autoplay loop>';
+            $response .= '<source src="' . $video->url . '" type="video/mp4">';
+            $response .= '</video>';
+            $response .= '</div>';
+            $response .= '<div class="overlay"></div>';
         }
 
-        return $return;
-    
+        return $response;
+
     }
 
     //component_id_classes()
-    protected function getModuleClasses( $module_classes = '' )
-    {
+    public static function getModuleClasses( $custom_classes, $inline_classes, $inline_id, $column_index ) {
 
-        global $c_i;
+        $response = '';
 
-        $even_odd = ( 0 == $c_i % 2 ) ? 'even' : 'odd';
-        $inline_classes = get_sub_field('option_html_classes');
-        $return = '';
+        $odd = ( $column_index % 2 == 0 ) ? 'even' : 'odd';
 
-        if ( $html_id = get_sub_field('option_html_id') ) {
-
-            $html_id = sanitize_html_class( strtolower( $html_id ) );
-            $return .= ' id="' . $html_id . '" class="module stack-order-' . $c_i . ' stack-order-' . $even_odd;
+        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ) . '" class="module stack-order-' . $column_index . ' stack-order-' . $odd : ' class="module stack-order-' . $column_index . ' stack-order-' . $odd ;
+                    
+        $response .=  ( !is_null( $custom_classes ) ) ? ' ' . SSMH::sanitizeHtmlClasses( $custom_classes ) : '';
         
-        } else {
+        $response .=  ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
 
-            $return .= ' class="module stack-order-' . $c_i . ' stack-order-' . $even_odd;
+        $response .= '"';
         
-        }
-
-        if ( $alignment = get_sub_field('option_alignment') ) {
-            $return .= ' ' . sanitize_html_class( $alignment );
-        }
-
-        if ( $module_classes != NULL ) {
-            
-            $module_classes = SSMH::sanitizeHtmlClasses( $module_classes );
-            $return .= ' ' . $module_classes;
-        
-        }
-
-        if ( $inline_classes != NULL ) {
-        
-            $return .= ' ' . $inline_classes;
-        
-        }
-
-        $return .= '"';
-
-        return $return;
+        return $response;
 
     }
 
     // hero_unit_id_classes()
-    protected function getHeroUnitClasses( $classes = '' )
-    {
-
-        $inline_classes = get_field('option_html_classes');
-        $hero_unit_id_classes = '';
-
-        if ( $html_id = get_field('option_html_id') ) {
-            $html_id = sanitize_html_class(strtolower($html_id));
-            $hero_unit_id_classes .= ' id="' . $html_id . '" class="hero-unit';
-        } else {
-            $hero_unit_id_classes .= ' class="hero-unit';
-        }
-
-        if ( get_field('option_background') == 'Color' ) {
-            $hero_unit_id_classes .= ' ' . sanitize_html_class( get_field('background_color') );
-        }
-
-        if ( get_field('option_background') == 'Image' ) {
-            $hero_unit_id_classes .= ' bg-image bg-dark';
-        }
-
-        if ( get_field('option_background') == 'Video' ) {
-            $hero_unit_id_classes .= ' bg-video';
-        }
-
-        if ( get_field('option_hero_unit_height') == 'full' ) {
-            $hero_unit_id_classes .= ' full-height';
-        } elseif ( get_field('option_hero_unit_height') == 'auto' ) {
-            $hero_unit_id_classes .= ' auto';
-        }
+    public static function getHeroUnitClasses( $custom_classes, $inline_classes, $inline_id, $option_background, $background_color, $height ) {
         
-        if ( $classes != NULL ) {
-            $classes = SSMH::sanitizeHtmlClasses($s_classes);
-            $hero_unit_id_classes .= ' ' . $classes;
+        $response = '';
+
+        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ). '" class="hero-unit' : '';
+
+        switch ( $option_background ) {
+
+            case 'Color':
+                $response .= ' ' . sanitize_html_class( $background_color );
+                break;
+            case 'Image':
+                $response .= ' bg-image bg-dark';
+                break;
+            case 'Video':
+                $response .= ' bg-video';
+                break;
+        
         }
 
-        if ( $inline_classes != NULL ) {
-            $hero_unit_id_classes .= ' ' . $inline_classes;
-        }
+        $response .= ( $height == 'full' ) ? ' full-height' : ' auto';
 
-        $hero_unit_id_classes .= '"';
+        $response .=  ( !is_null( $custom_classes ) ) ? ' ' . SSMH::sanitizeHtmlClasses( $custom_classes ) : '';
 
-        return $hero_unit_id_classes;
+        $response .= ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
+
+        $response .= '"';
+
+        return $response;
 
     }
+
 
 }

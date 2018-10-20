@@ -21,7 +21,7 @@
         {
             "key": "field_5bc758c1e6e05",
             "label": "Columns",
-            "name": "hero_unit_columns",
+            "name": "columns",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -178,5 +178,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539794840
+    "modified": 1539911077
 }
