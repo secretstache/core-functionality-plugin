@@ -13,18 +13,35 @@ class PageBuilder extends Controller
     public function builder() {
         return $this;
     }
-    
-    //section_id_classes()
-    public static function getTemplateClasses( $custom_classes, $inline_classes, $inline_id, $option_background, $background_color ) {
+
+    public static function getCustomClasses( $custom_classes, $context, $column_index, $args ) {
 
         $response = '';
 
-        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ) . '" class="content-block' : ' class="content-block';
+        $inline_id = $args->option_html_id;
+        $inline_classes = $args->option_html_classes;
+        $odd = ( !empty( $column_index ) && $column_index % 2 == 0 ) ? 'even' : 'odd';
 
-        switch ( $option_background ) {
+        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ) . '"' : '';
+        
+        switch ( $context ) {
+
+            case 'template':
+                $response .= ' class="content-block ';
+                break;
+            case 'hero-unit':
+                $response .= ' class="hero-unit ';
+                break;
+            case 'module':
+                $response .= ' class="module stack-order-' . $column_index . ' stack-order-' . $odd;
+                break;
+                
+        }
+        
+        switch ( $args->option_background ) {
 
             case 'Color':
-                $response .= ' ' . sanitize_html_class( $background_color );
+                $response .= ' ' . sanitize_html_class( $args->option_background_color );
                 break;
             case 'Image':
                 $response .= ' bg-image bg-dark';
@@ -32,6 +49,12 @@ class PageBuilder extends Controller
             case 'Video':
                 $response .= ' bg-video';
                 break;
+        
+        }
+
+        if ( $context == 'hero-unit' && !is_null( $args->option_hero_unit_height ) ) {
+            
+            $response .= ( $args->option_hero_unit_height == 'full' ) ? ' full-height' : ' auto';
         
         }
 
@@ -44,58 +67,5 @@ class PageBuilder extends Controller
         return $response;
 
     }
-
-    //component_id_classes()
-    public static function getModuleClasses( $custom_classes, $inline_classes, $inline_id, $column_index ) {
-
-        $response = '';
-
-        $odd = ( $column_index % 2 == 0 ) ? 'even' : 'odd';
-
-        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ) . '" class="module stack-order-' . $column_index . ' stack-order-' . $odd : ' class="module stack-order-' . $column_index . ' stack-order-' . $odd ;
-                    
-        $response .=  ( !is_null( $custom_classes ) ) ? ' ' . SSMH::sanitizeHtmlClasses( $custom_classes ) : '';
-        
-        $response .=  ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
-
-        $response .= '"';
-        
-        return $response;
-
-    }
-
-    // hero_unit_id_classes()
-    public static function getHeroUnitClasses( $custom_classes, $inline_classes, $inline_id, $option_background, $background_color, $height ) {
-        
-        $response = '';
-
-        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ). '" class="hero-unit' : '';
-
-        switch ( $option_background ) {
-
-            case 'Color':
-                $response .= ' ' . sanitize_html_class( $background_color );
-                break;
-            case 'Image':
-                $response .= ' bg-image bg-dark';
-                break;
-            case 'Video':
-                $response .= ' bg-video';
-                break;
-        
-        }
-
-        $response .= ( $height == 'full' ) ? ' full-height' : ' auto';
-
-        $response .=  ( !is_null( $custom_classes ) ) ? ' ' . SSMH::sanitizeHtmlClasses( $custom_classes ) : '';
-
-        $response .= ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
-
-        $response .= '"';
-
-        return $response;
-
-    }
-
 
 }
