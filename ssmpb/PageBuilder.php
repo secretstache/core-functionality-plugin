@@ -14,24 +14,33 @@ class PageBuilder extends Controller
         return $this;
     }
 
-    public static function getCustomClasses( $context, $column_index, $args )
+    public static function getCustomID( $args )
     {
 
         $response = '';
 
         $inline_id = $args->option_html_id;
+        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ) . '"' : '';
+
+        return $response;
+
+    }
+
+    public static function getCustomClasses( $context, $column_index, $args )
+    {
+
+        $response = '';
+
         $inline_classes = $args->option_html_classes;
         $odd = ( !empty( $column_index ) && $column_index % 2 == 0 ) ? 'even' : 'odd';
-
-        $response .= ( $inline_id ) ? ' id="' . sanitize_html_class( strtolower( $inline_id ) ) . '"' : '';
         
         switch ( $context ) {
 
             case 'template':
-                $response .= ' class="content-block ';
+                $response .= ' class="content-block';
                 break;
             case 'hero-unit':
-                $response .= ' class="hero-unit ';
+                $response .= ' class="hero-unit';
                 break;
             case 'module':
                 $response .= ' class="module stack-order-' . $column_index . ' stack-order-' . $odd;
