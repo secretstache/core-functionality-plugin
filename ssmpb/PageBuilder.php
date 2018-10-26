@@ -13,19 +13,6 @@ class PageBuilder extends Controller
     public function builder() {
         return $this;
     }
-
-    //get_inline_styles()
-    public static function getInlineStyles ( $option_background, $image ) {
-
-        if ( $option_background == 'Image' && !is_null( $image ) ) {
-
-            $style = ' style="background-image: url(' . $image->url . ')"';
-        
-        }
-
-        return $style;
-
-    }
     
     //section_id_classes()
     public static function getTemplateClasses( $custom_classes, $inline_classes, $inline_id, $option_background, $background_color ) {
@@ -53,52 +40,6 @@ class PageBuilder extends Controller
         $response .= ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
 
         $response .= '"';
-
-        return $response;
-
-    }
-
-    // the_template_header()
-    public static function getTemplateHeader( $include, $headline, $subheadline ) {
-
-        $response = '';
-
-        if ( $include ) {
-
-            $response = '<div class="grid-container">';
-            $response .= '<div class="grid-x grid-x-margin align-center">';
-                $response .= '<div class="cell small-12 medium-10">';
-                    $response .= '<header class="component template-header align-center">';
-
-                        $response .= ( $headline ) ? '<h2 class="headline">' . $headline . '</h2>' : '';
-
-                        $response .= ( $subheadline ) ? '<h3 class="subheadline">' . $subheadline .'</h3>' : '';
-
-                    $response .= '</header>';
-                $response .= '</div>';
-                $response .= '</div>';
-            $response .= '</div>';
-
-        }
-
-        return $response;
-
-    }
-
-    // the_video_background()
-    public static function getVideoBackground( $option_background, $video ) {
-
-        $response = '';
-
-        if ( $option_background == 'Video' && !is_null( $video ) ) {
-                
-            $response = '<div class="template-video">';
-            $response .= '<video autoplay loop>';
-            $response .= '<source src="' . $video->url . '" type="video/mp4">';
-            $response .= '</video>';
-            $response .= '</div>';
-            $response .= '<div class="overlay"></div>';
-        }
 
         return $response;
 
