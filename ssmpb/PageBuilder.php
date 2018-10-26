@@ -14,7 +14,8 @@ class PageBuilder extends Controller
         return $this;
     }
 
-    public static function getCustomClasses( $custom_classes, $context, $column_index, $args ) {
+    public static function getCustomClasses( $context, $column_index, $args )
+    {
 
         $response = '';
 
@@ -57,8 +58,6 @@ class PageBuilder extends Controller
             $response .= ( $args->option_hero_unit_height == 'full' ) ? ' full-height' : ' auto';
         
         }
-
-        $response .=  ( !is_null( $custom_classes ) ) ? ' ' . SSMH::sanitizeHtmlClasses( $custom_classes ) : '';
 
         $response .= ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
 
