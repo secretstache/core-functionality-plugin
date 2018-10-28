@@ -12,7 +12,7 @@ class RequiredPlugins extends Admin
 	 */
     public function checkRequiredPlugins()
     {
-        return SSMC_ADMIN_DIR . '/json/bundle.json';
+        return SSMC_INCLUDES_DIR . '/json/bundle.json';
 	}
 
 }

@@ -120,24 +120,24 @@ class Root
 		$this->adminModuleFunctions['ssm-required-plugins'] = array(
 			"module_name" => "Required Plugins",
 			"hooks" => array(
-				[ "type" => "filter" , "name" => "sober/bundle/file", "class" => "plugin_required_plugins", "function" => "checkRequiredPlugins" ]
+				[ "type" => "filter", "name" => "sober/bundle/file", "class" => "plugin_required_plugins", "function" => "checkRequiredPlugins" ]
 			)
 		);
 
-		$this->adminModuleFunctions['ssm-field-factory'] = array(
-			"module_name" => "Field Factory",
-			"hooks" => array(
-				[ "type" => "filter" , "name" => "acf/settings/save_json", "class" => "plugin_field_factory", "function" => "saveJSON" ],
-				[ "type" => "filter" , "name" => "acf/settings/load_json", "class" => "plugin_field_factory", "function" => "loadJSON", "priority" => 10, "arguments" => 1 ]
-			)
-		);
+		// $this->adminModuleFunctions['ssm-field-factory'] = array(
+		// 	"module_name" => "Field Factory",
+		// 	"hooks" => array(
+		// 		[ "type" => "filter", "name" => "acf/settings/save_json", "class" => "plugin_field_factory", "function" => "saveJSON" ],
+		// 		[ "type" => "filter", "name" => "acf/settings/load_json", "class" => "plugin_field_factory", "function" => "loadJSON", "priority" => 10, "arguments" => 1 ]
+		// 	)
+		// );
 
 		$this->adminModuleFunctions['ssm-cpt'] = array(
 			"module_name" => "CPT",
 			"hooks" => array(
-				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerPostTypes" ],
-				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerTaxonomies" ],
-				[ "type" => "action" , "name" => "init", "class" => "plugin_cpt", "function" => "registerTerms" ]
+				[ "type" => "action", "name" => "init", "class" => "plugin_cpt", "function" => "registerPostTypes" ],
+				[ "type" => "action", "name" => "init", "class" => "plugin_cpt", "function" => "registerTaxonomies" ],
+				[ "type" => "action", "name" => "init", "class" => "plugin_cpt", "function" => "registerTerms" ]
 			)
 		);
 
@@ -157,18 +157,18 @@ class Root
 		$this->frontModuleFunctions['ssm-front-setup'] = array(
 			"module_name" => "Front Setup",
 			"hooks" => array(
-				[ "type" => "action" , "name" => "init", "class" => "plugin_front_setup", "function" => "addYearShortcode" ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setFavicon" ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "doFacebookPixel", "priority" => 99 ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setupGoogleTagManager", "priority" => 99 ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setupGoogleSiteVerification", "priority" => 1 ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "customHeadScripts", "priority" => 99 ],
-				[ "type" => "action" , "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "customFooterScripts", "priority" => 99 ],
-				[ "type" => "filter" , "name" => "gform_init_scripts_open", "class" => "plugin_front_setup", "function" => "footerScriptsInit" ],
-				[ "type" => "filter" , "name" => "gfrom_cdata_open", "class" => "plugin_front_setup", "function" => "wrapGformCdataOpen", "priority" => 10 ],
-				[ "type" => "action" , "name" => "wp_head", "class" => "plugin_front_setup", "function" => "injectInlineCss", "priority" => 99 ],
-				[ "type" => "action" , "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "injectInlineJs", "priority" => 99 ],
-				[ "type" => "action" , "name" => "admin_notices", "class" => "plugin_front_setup", "function" => "saveReminderNotice" ]
+				[ "type" => "action", "name" => "init", "class" => "plugin_front_setup", "function" => "addYearShortcode" ],
+				[ "type" => "action", "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setFavicon" ],
+				[ "type" => "action", "name" => "wp_head", "class" => "plugin_front_setup", "function" => "doFacebookPixel", "priority" => 99 ],
+				[ "type" => "action", "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setupGoogleTagManager", "priority" => 99 ],
+				[ "type" => "action", "name" => "wp_head", "class" => "plugin_front_setup", "function" => "setupGoogleSiteVerification", "priority" => 1 ],
+				[ "type" => "action", "name" => "wp_head", "class" => "plugin_front_setup", "function" => "customHeadScripts", "priority" => 99 ],
+				[ "type" => "action", "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "customFooterScripts", "priority" => 99 ],
+				[ "type" => "filter", "name" => "gform_init_scripts_open", "class" => "plugin_front_setup", "function" => "footerScriptsInit" ],
+				[ "type" => "filter", "name" => "gfrom_cdata_open", "class" => "plugin_front_setup", "function" => "wrapGformCdataOpen", "priority" => 10 ],
+				[ "type" => "action", "name" => "wp_head", "class" => "plugin_front_setup", "function" => "injectInlineCss", "priority" => 99 ],
+				[ "type" => "action", "name" => "wp_footer", "class" => "plugin_front_setup", "function" => "injectInlineJs", "priority" => 99 ],
+				[ "type" => "action", "name" => "admin_notices", "class" => "plugin_front_setup", "function" => "saveReminderNotice" ]
 			)
 		);
 
@@ -357,7 +357,8 @@ class Root
 	 *
 	 * @since    1.0.0
 	 */
-	protected function getFrontModuleFunctions() {
+	protected function getFrontModuleFunctions()
+	{
 		return $this->frontModuleFunctions;
 	}
 
