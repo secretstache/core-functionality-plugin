@@ -1,0 +1,85 @@
+{
+    "name": "Front Setup",
+    "slug": "plugin_front_setup",
+    "class": "SSM\\Front\\FrontSetup",
+    "hooks": [
+        {
+            "type": "action",
+            "name": "wp_enqueue_scripts",
+            "function": "enqueueStyles"
+        },
+        {
+            "type": "action",
+            "name": "wp_enqueue_scripts",
+            "function": "enqueueScripts"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "addYearShortcode"
+        },
+        {
+            "type": "action",
+            "name": "wp_head",
+            "function": "setFavicon"
+        },
+        {
+            "type": "action",
+            "name": "wp_head",
+            "function": "doFacebookPixel",
+            "priority": 99
+        },
+        {
+            "type": "action",
+            "name": "wp_head",
+            "function": "setupGoogleTagManager",
+            "priority": 99
+        },
+        {
+            "type": "action",
+            "name": "wp_head",
+            "function": "setupGoogleSiteVerification",
+            "priority": 1
+        },
+        {
+            "type": "action",
+            "name": "wp_head",
+            "function": "customHeadScripts",
+            "priority": 99
+        },
+        {
+            "type": "action",
+            "name": "wp_footer",
+            "function": "customFooterScripts",
+            "priority": 99
+        },
+        {
+            "type": "filter",
+            "name": "gform_init_scripts_open",
+            "function": "footerScriptsInit"
+        },
+        {
+            "type": "filter",
+            "name": "gfrom_cdata_open",
+            "function": "wrapGformCdataOpen",
+            "priority": 10
+        },
+        {
+            "type": "action",
+            "name": "wp_head",
+            "function": "injectInlineCss",
+            "priority": 99
+        },
+        {
+            "type": "action",
+            "name": "wp_footer",
+            "function": "injectInlineJs",
+            "priority": 99
+        },
+        {
+            "type": "action",
+            "name": "admin_notices",
+            "function": "saveReminderNotice"
+        }
+    ]
+}

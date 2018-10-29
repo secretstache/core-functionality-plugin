@@ -2,12 +2,27 @@
 
 namespace SSM\Front;
 
-use SSM\Front\Front;
 use SSM\Includes\Helpers as SSMH;
 
-class FrontSetup extends Front
+class FrontSetup
 {
 
+    /**
+	 * Register the stylesheets for the public-facing side of the site.
+	 */
+	public function enqueueStyles()
+	{
+		wp_enqueue_style( $this->pluginName, plugin_dir_url( __FILE__ ) . 'css/public.css', array(), $this->version, 'all' );
+	}
+
+	/**
+	 * Register the JavaScript for the public-facing side of the site.
+	 */
+	public function enqueueScripts()
+	{
+		wp_enqueue_script( $this->pluginName, plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
+    }
+    
     /**
      * Show current year as a shortcode
 	 */

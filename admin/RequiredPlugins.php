@@ -2,9 +2,7 @@
 
 namespace SSM\Admin;
 
-use SSM\Admin\Admin;
-
-class RequiredPlugins extends Admin
+class RequiredPlugins
 {
 
 	/**

@@ -1,0 +1,22 @@
+{
+    "name": "CPT",
+    "slug": "plugin_cpt",
+    "class": "SSM\\Admin\\CPT",
+    "hooks": [
+        {
+            "type": "action",
+            "name": "init",
+            "function": "registerPostTypes"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "registerTaxonomies"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "registerTerms"
+        }
+    ]
+}

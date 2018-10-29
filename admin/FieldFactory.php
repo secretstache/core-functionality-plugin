@@ -2,9 +2,7 @@
 
 namespace SSM\Admin;
 
-use SSM\Admin\Admin;
-
-class FieldFactory extends Admin
+class FieldFactory
 {	
     
     /**

@@ -5,8 +5,24 @@ namespace SSM\Admin;
 use SSM\Admin\Admin;
 use SSM\Includes\Helpers as SSMH;
 
-class AdminSetup extends Admin
+class AdminSetup
 {
+
+	/**
+	 * Register the stylesheets for the admin area.
+	 */
+	public function enqueueStyles()
+	{
+		wp_enqueue_style( $this->pluginName, plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), $this->version, 'all' );
+	}
+
+	/**
+	 * Register the JavaScript for the admin area.
+	 */
+	public function enqueueScripts()
+	{		
+		wp_enqueue_script( $this->pluginName, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+	}
 
     /**
 	 * Remove unnecessary standard WP Roles	 

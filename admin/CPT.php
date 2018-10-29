@@ -2,9 +2,7 @@
 
 namespace SSM\Admin;
 
-use SSM\Admin\Admin;
-
-class CPT extends Admin
+class CPT
 {
 
 	/**

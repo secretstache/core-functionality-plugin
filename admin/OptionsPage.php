@@ -1,24 +1,11 @@
 <?php
 
-namespace SSM\Includes;
+namespace SSM\Admin;
 
 use SSM\Includes\Helpers as SSMH;
 
-class Options
+class OptionsPage
 {
-
-    /**
-     * Initialize the class and set its properties.
-     *
-	 * @since    1.0.0
-	 */
-    public function __construct( $frontModules, $frontModuleFunctions, $adminModules, $adminModuleFunctions )
-    {
-        $this->frontModules = $frontModules;
-        $this->frontModuleFunctions = $frontModuleFunctions;
-        $this->adminModules = $adminModules;
-        $this->adminModuleFunctions = $adminModuleFunctions;
-    }
     
     /** 
      * Register SSM Core Settings
