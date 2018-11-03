@@ -1,4 +1,5 @@
 (function( $ ) {
+	console.log('3');
 
 	$(document).ready(function() {
 
@@ -14,9 +15,6 @@
 				
 				var category_class = $(this).attr('class').split(/\s+/).slice(-1)[0];
 				var category = category_class.split('-');
-
-				console.log(category_class);
-				console.log(category);
 				
 				switch (category.length) {
 					case 2:
@@ -48,9 +46,9 @@
 
 		}
 
-	})
-
-	$('#upload-image-button').click(function() {
+	});
+	
+	$(document).on( 'click', '#upload-image-button', function() {
 		var send_attachment = wp.media.editor.send.attachment;
 		var button = $(this);
 		wp.media.editor.send.attachment = function(props, attachment) {
@@ -61,15 +59,10 @@
 			var orientation;
 			var defaultLogo = login_logo.url;
   
-			console.log( 'Width: ' + origWidth );
-			console.log( 'Height: ' + origHeight );
-  
 			if ( origWidth > origHeight ) {
 				orientation = 'landscape';
-				// console.log(orientation);
 			} else {
 				orientation = 'portrait';
-				// console.log(orientation);
 			}
   
 			if ( orientation == 'landscape' && origWidth >= 290 ) {
@@ -77,21 +70,17 @@
 				h = w * (origHeight / origWidth);
 				width = w.toString() + 'px';
 				height = h.toString() + 'px';
-				// console.log('landscape > 290');
 			} else if ( orientation == 'landscape' && origWidth < 290 ) {
 				width = origWidth.toString() + 'px';
 				height = origHeight.toString() + 'px';
-				// console.log('landscape < 290');
 			} else if ( orientation == 'portrait' && origWidth >= 125 ) {
 				w = 125;
 				h = w * (origHeight / origWidth);
 				width = w.toString() + 'px';
 				height = h.toString() + 'px';
-				// console.log( 'portrait > 125' );
 			} else if ( orientation == 'portrait' && origWidth < 125 ) {
 				width = origWidth.toString() + 'px';
 				height = origHeight.toString() + 'px';
-				// console.log('portrait < 125');
 			}
   
 			$('#ssm-core-login-logo').attr('value', url);
@@ -108,7 +97,7 @@
 	});
   
 	// The "Remove" button (remove the value from input type='hidden')
-	$('#remove-image-button').click(function() {
+	$(document).on( 'click', '#remove-image-button', function() {
 	  var answer = confirm('Are you sure?');
 	  if (answer == true) {
   

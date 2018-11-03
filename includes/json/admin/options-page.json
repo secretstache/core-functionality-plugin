@@ -13,11 +13,6 @@
             "name": "admin_menu",
             "function": "addSsmOptionsPage",
             "priority": 99
-        },
-        {
-            "type": "action",
-            "name": "admin_init",
-            "function": "handleOptionsUpdate"
         }
     ]
 }

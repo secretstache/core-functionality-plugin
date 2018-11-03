@@ -13,7 +13,7 @@ class AdminSetup
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style( $this->pluginName, plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'ssm', plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -21,7 +21,10 @@ class AdminSetup
 	 */
 	public function enqueueScripts()
 	{		
-		wp_enqueue_script( $this->pluginName, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+
+		wp_enqueue_script( 'ssm', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+		wp_localize_script( 'ssm', 'login_logo', array('url' => SSMC_ADMIN_URL . 'images/login-logo.png' ) );
+	
 	}
 
     /**
@@ -41,7 +44,7 @@ class AdminSetup
 	public function removeImageLink()
 	{
 
-		$image_set = SSMH::getOption( 'image_default_link_type' );
+		$image_set = get_option( 'image_default_link_type' );
 		
 		if ( $image_set !== 'none' ) {
 			update_option('image_default_link_type', 'none');
@@ -261,7 +264,7 @@ class AdminSetup
 		if ( $post ) {
 		
 			$current_id = $post->ID;
-			$front_page_id = SSMH::getOption( 'page_on_front' );
+			$front_page_id = get_option( 'page_on_front' );
 		
 			if ( $current_id == $front_page_id ) {
 				return $classes = 'is-front';
@@ -333,9 +336,9 @@ class AdminSetup
 
 		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
 		
-		$background_image =  SSMH::getOption('ssm_core_login_logo') != NULL ? SSMH::getOption('ssm_core_login_logo') : $defaultLogo;
-		$height =  SSMH::getOption('ssm_core_login_logo_height') != NULL ? SSMH::getOption('ssm_core_login_logo_height') : '128px';
-		$width =  SSMH::getOption('ssm_core_login_logo_width') != NULL ? SSMH::getOption('ssm_core_login_logo_width') : '150px';
+		$background_image =  get_option('ssm_core_login_logo') != NULL ? get_option('ssm_core_login_logo') : $defaultLogo;
+		$height =  get_option('ssm_core_login_logo_height') != NULL ? get_option('ssm_core_login_logo_height') : '128px';
+		$width =  get_option('ssm_core_login_logo_width') != NULL ? get_option('ssm_core_login_logo_width') : '150px';
 		
         ?>
         <style type="text/css">
@@ -356,7 +359,7 @@ class AdminSetup
 	 */
 	public function mailFromName()
 	{
-		return SSMH::getOption( 'blogname' );
+		return get_option( 'blogname' );
 	}
 
 	/**
@@ -365,7 +368,7 @@ class AdminSetup
 	 */
 	public function wp_mail_from()
 	{
-		return SSMH::getOption( 'admin_email' );
+		return get_option( 'admin_email' );
 	}
 
 	/**
@@ -385,8 +388,8 @@ class AdminSetup
 	public function adminFooterText()
 	{
 
-		$footer_text = SSMH::getOption('ssm_core_agency_name') != NULL ? SSMH::getOption('ssm_core_agency_name') : 'Secret Stache Media';
-		$footer_link = SSMH::getOption('ssm_core_agency_url') != NULL ? SSMH::getOption('ssm_core_agency_url') : 'http://secretstache.com';
+		$footer_text = get_option('ssm_core_agency_name') != NULL ? get_option('ssm_core_agency_name') : 'Secret Stache Media';
+		$footer_link = get_option('ssm_core_agency_url') != NULL ? get_option('ssm_core_agency_url') : 'http://secretstache.com';
 
 		echo 'Built by <a href="' . $footer_link . '" target="_blank">' . $footer_text . '</a> with WordPress.';
 	}
