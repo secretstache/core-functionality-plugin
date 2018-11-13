@@ -13,8 +13,6 @@ class OptionsPage
     public function ssmCoreSettings()
     {
 
-        wp_enqueue_media();
-
 		register_setting( 'ssm-core-settings-group', 'ssm_core_acf_admin_users' );
 	
 		register_setting( 'ssm-core-settings-group', 'ssm_core_agency_name' );
@@ -99,7 +97,38 @@ class OptionsPage
      */
     public function ssmCoreOptionsPage()
     {
-        require_once( SSMC_DIR . 'admin/templates/admin-options.php' );
+        ?>
+
+        <div class="wrap">
+
+            <?php if ( get_option('ssm_core_agency_name') ) { ?>
+
+                <h1><?php echo get_option('ssm_core_agency_name'); ?> Admin Core</h1>
+
+            <?php } else { ?>
+
+                <h1>Admin Core</h1>
+
+            <?php } ?>
+
+            <div class="core-settings-form">
+
+                <form method="post" action="options.php">
+
+                    <?php settings_fields( 'ssm-core-settings-group' ); ?>
+                    <?php do_settings_sections( 'ssm_core' ); ?>
+
+                    <?php submit_button(); ?>
+
+                </form>
+
+            </div>
+
+            </div>
+
+
+        <?php
+
     }
 
     /** 

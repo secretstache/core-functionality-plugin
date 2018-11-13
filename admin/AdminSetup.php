@@ -394,4 +394,15 @@ class AdminSetup
 		echo 'Built by <a href="' . $footer_link . '" target="_blank">' . $footer_text . '</a> with WordPress.';
 	}
 
+	/**
+	 * Inject internal WP JS variables on Core Settings page 
+	 */
+	public function	enqueueWpMedia() {
+		
+		if ( get_current_screen()->base == 'settings_page_ssm_core' ) {
+ 			wp_enqueue_media();
+ 		}
+	
+	}
+
 }
