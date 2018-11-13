@@ -366,7 +366,7 @@ class AdminSetup
 	 * Makes WordPress-generated emails appear 'from' your WordPress admin email address.
 	 * Disabled by default, in case you don't want to reveal your admin email.
 	 */
-	public function wp_mail_from()
+	public function wpMailFrom()
 	{
 		return get_option( 'admin_email' );
 	}
