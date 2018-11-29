@@ -47,3 +47,7 @@
 .wp-list-table a.row-category {
     text-transform: capitalize;
 }
+
+#dashboard-widgets-wrap {
+    display: none;
+}
