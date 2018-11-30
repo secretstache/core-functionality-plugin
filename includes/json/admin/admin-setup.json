@@ -171,6 +171,12 @@
             "type": "filter",
             "name": "admin_enqueue_scripts",
             "function": "enqueueWpMedia"
+        },
+        {
+            "type": "action",
+            "name": "admin_bar_menu",
+            "function": "addEnvNode",
+            "arguments": 1
         }
     ]
 }

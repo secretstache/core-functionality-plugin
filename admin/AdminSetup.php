@@ -405,4 +405,33 @@ class AdminSetup
 	
 	}
 
+	/**
+ 	 *  Show Environment in Admin Bar
+ 	 */
+	public function addEnvNode( $wp_admin_bar ) {
+
+		$env = '';
+		
+		if (defined('SSM_ENVIRONMENT')) {
+		
+			$env = SSM_ENVIRONMENT;
+		
+		}
+
+		if ( $env == '' ) {
+			return;
+		}
+
+		$args = array(
+		
+			'id'    => sanitize_title_with_dashes( $env ),
+			'title' => ucfirst( $env ) . ' Environment',
+			'meta'  => array( 'class' => 'env-' . sanitize_title_with_dashes( $env ) )
+		
+		);
+
+		$wp_admin_bar->add_node( $args );
+
+	}
+
 }

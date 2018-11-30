@@ -51,3 +51,19 @@
 #dashboard-widgets-wrap {
     display: none;
 }
+
+#wpadminbar ul li.env-dev,
+#wpadminbar ul li.env-dev:hover div,
+#wpadminbar ul li.env-development,
+#wpadminbar ul li.env-development:hover div,
+#wpadminbar ul li.env-staging,
+#wpadminbar ul li.env-staging:hover div {
+	background: #b20000 !important;
+	color: white !important;
+}
+
+#wpadminbar ul li.env-production,
+#wpadminbar ul li.env-production:hover div {
+	background: #248f24 !important;
+	color: white !important;
+}
