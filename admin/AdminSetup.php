@@ -434,4 +434,14 @@ class AdminSetup
 
 	}
 
+	/**
+	 * Remove Admin Bar on frontend
+	 *
+	 */
+	public function removeAdminBar() {
+
+		show_admin_bar(false);
+
+	}
+
 }

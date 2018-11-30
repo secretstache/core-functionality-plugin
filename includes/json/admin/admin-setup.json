@@ -177,6 +177,11 @@
             "name": "admin_bar_menu",
             "function": "addEnvNode",
             "arguments": 1
+        },
+        {
+            "type": "action",
+            "name": "after_setup_theme",
+            "function": "removeAdminBar"
         }
     ]
 }
