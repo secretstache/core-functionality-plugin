@@ -444,4 +444,24 @@ class AdminSetup
 
 	}
 
+	/**
+	 * Remove ACF Menu for non-checked users
+	 *
+	 */
+	public function removeACFMenu() {
+
+		$acfAdmins = get_option('ssm_core_acf_admin_users') != NULL ? get_option('ssm_core_acf_admin_users') : array(1);
+	
+		$current_user = wp_get_current_user();
+	
+		if ( $acfAdmins != NULL ) {
+
+			if( !in_array( $current_user->ID, $acfAdmins ) ) {
+				remove_menu_page('edit.php?post_type=acf-field-group');
+			}
+		
+		}
+
+	}
+
 }

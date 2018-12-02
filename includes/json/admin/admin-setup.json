@@ -182,6 +182,11 @@
             "type": "action",
             "name": "after_setup_theme",
             "function": "removeAdminBar"
+        },
+        {
+            "type": "action",
+            "name": "admin_init",
+            "function": "removeACFMenu"
         }
     ]
 }

@@ -26,8 +26,46 @@ class OptionsPage
 	
 		add_settings_field( 'ssm-core-agency-name', 'Agency Name', array( $this, 'ssmCoreAgencyName' ), 'ssm_core', 'ssm-core-agency-options' );
 		add_settings_field( 'ssm-core-agency-url', 'Agency URL', array( $this, 'ssmCoreAgencyUrl' ), 'ssm_core', 'ssm-core-agency-options' );
-		add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssmCoreLoginLogo' ), 'ssm_core', 'ssm-core-agency-options' );
+        add_settings_field( 'ssm-core-login-logo', 'Login Logo', array( $this, 'ssmCoreLoginLogo' ), 'ssm_core', 'ssm-core-agency-options' );
+        
+        add_settings_section( 'ssm-core-acf-options', 'ACF Options', array( $this, 'ssm_acf_options' ), 'ssm_core' );
 
+        add_settings_field(
+            'ssm-core-acf-admin-users',
+            'Admin users who need access to ACF',
+            array( $this, 'ssm_core_acf_admin_users' ),
+            'ssm_core',
+            'ssm-core-acf-options',
+            [ 'admins' => get_users( array('role' => 'administrator') ) ]
+        );
+
+    }
+
+    /** 
+     * Add Admin users who need access to ACF field 
+     */
+    function ssm_core_acf_admin_users( $args ) {
+
+        $admins = $args['admins'];
+        $acfAdmins = get_option('ssm_core_acf_admin_users') != NULL ? get_option('ssm_core_acf_admin_users') : array();
+
+        ?>
+        
+        <select id="ssm-core-acf-admin-users" name="ssm_core_acf_admin_users[]" multiple style="min-width: 200px;">
+            
+            <?php foreach ( $admins as $admin ) { ?>
+            
+                <?php $selected = in_array( $admin->ID, $acfAdmins ) ? ' selected' : ''; ?>
+            
+                <option value="<?php echo $admin->ID; ?>"<?php echo $selected; ?>>
+                    <?php echo $admin->user_login; ?>
+                </option>
+            
+            <?php } ?>
+
+        </select>
+        
+        <?php
     }
 
     /** 
@@ -139,5 +177,6 @@ class OptionsPage
     public function ssmCoreAdminModules() {}
     public function ssmCoreFrontModules() {}
     public function ssmCoreHelpers() {}
+    public function ssm_acf_options() {}
 
 }
