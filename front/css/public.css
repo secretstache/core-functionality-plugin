@@ -2,3 +2,24 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ .ssm-admin-menu {
+    background: #248f24;
+    display: block;
+    padding: rem-calc(10);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 11;
+}
+
+.ssm-admin-menu a {
+    color: white;
+    text-transform: uppercase;
+    transition: all .3s;
+}
+
+.ssm-admin-menu a:hover {
+    background: rgba( white, .90);
+    color: #248f24;
+}

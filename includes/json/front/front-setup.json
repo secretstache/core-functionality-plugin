@@ -80,6 +80,11 @@
             "type": "action",
             "name": "admin_notices",
             "function": "saveReminderNotice"
+        },
+        {
+            "type": "action",
+            "name": "wp_head",
+            "function": "replaceAdminBar"
         }
     ]
 }

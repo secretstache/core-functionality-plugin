@@ -12,7 +12,7 @@ class FrontSetup
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style( $this->pluginName, plugin_dir_url( __FILE__ ) . 'css/public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'ssm', plugin_dir_url( __FILE__ ) . 'css/public.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -20,7 +20,7 @@ class FrontSetup
 	 */
 	public function enqueueScripts()
 	{
-		wp_enqueue_script( $this->pluginName, plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'ssm', plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
     }
     
     /**
@@ -277,5 +277,38 @@ class FrontSetup
         }
 
     }
+
+    /**
+	 * Remove Admin Bar with custom Bar
+	 *
+	 */
+	public function replaceAdminBar() {
+
+		if ( is_user_logged_in() ) {
+
+			global $post;
+			$user = wp_get_current_user();
+		
+			if ( ! user_can( $user, 'edit_pages' ) ) {
+			  return;
+			}
+		
+			echo '<div class="ssm-admin-menu">';
+			  echo '<ul class="menu horizontal">';
+			  echo '<li><a href="' . get_edit_post_link( $post->ID ) . '">Edit Page</a></li>';
+			  echo '<li><a href="' . admin_url() . '">Admin Dashboard</a></li>';
+			  echo '<li><a href="' . admin_url('admin.php?page=acf-options-brand-settings') . '">Brand Settings</a></li>';
+			  echo '<li><a href="' . admin_url('admin.php?page=acf-options-documentation') . '">Documentation</a></li>';
+		
+			  if ( $user->user_login == 'jrstaatsiii') {
+				echo '<li><a href="' . admin_url('edit.php?post_type=acf-field-group') . '">Field Groups</a></li>';
+			  }
+		
+			  echo '</ul>'; 
+			echo '</div>';
+		
+		}
+		
+	}
 
 }
