@@ -52,7 +52,8 @@
             "type": "filter",
             "name": "the_content",
             "function": "removePtagsOnImages",
-            "priority": 10
+            "priority": 10,
+            "arguments": 1
         },
         {
             "type": "filter",
