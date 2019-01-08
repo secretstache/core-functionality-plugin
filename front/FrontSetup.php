@@ -290,21 +290,26 @@ class FrontSetup
 			$user = wp_get_current_user();
 		
 			if ( ! user_can( $user, 'edit_pages' ) ) {
-			  return;
+			    return;
 			}
 		
 			echo '<div class="ssm-admin-menu">';
-			  echo '<ul class="menu horizontal">';
-			  echo '<li><a href="' . get_edit_post_link( $post->ID ) . '">Edit Page</a></li>';
-			  echo '<li><a href="' . admin_url() . '">Admin Dashboard</a></li>';
-			  echo '<li><a href="' . admin_url('admin.php?page=acf-options-brand-settings') . '">Brand Settings</a></li>';
-			  echo '<li><a href="' . admin_url('admin.php?page=acf-options-documentation') . '">Documentation</a></li>';
+                echo '<ul class="menu horizontal">';
+                
+                if ( $env = SSM_ENVIRONMENT ) {
+                    echo '<li class="env env-' . sanitize_title_with_dashes( $env ) . '">' . ucfirst( $env ) . ' Environment</li>';
+                }
+
+			    echo '<li><a href="' . get_edit_post_link( $post->ID ) . '">Edit Page</a></li>';
+			    echo '<li><a href="' . admin_url() . '">Admin Dashboard</a></li>';
+			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-brand-settings') . '">Brand Settings</a></li>';
+			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-documentation') . '">Documentation</a></li>';
 		
-			  if ( $user->user_login == 'jrstaatsiii') {
-				echo '<li><a href="' . admin_url('edit.php?post_type=acf-field-group') . '">Field Groups</a></li>';
-			  }
+			    if ( $user->user_login == 'jrstaatsiii') {
+			        echo '<li><a href="' . admin_url('edit.php?post_type=acf-field-group') . '">Field Groups</a></li>';
+			    }
 		
-			  echo '</ul>'; 
+			    echo '</ul>'; 
 			echo '</div>';
 		
 		}
