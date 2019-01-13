@@ -1,9 +1,81 @@
 [
     {
-      "name": "Radio Buttons for Taxonomies",
-      "slug": "radio-buttons-for-taxonomies",
-      "required": true,
-      "force_activation": true
+        "name": "Advanced Custom Fields PRO",
+        "slug": "advanced-custom-fields-pro",
+        "source": "https://docs.google.com/uc?export=download&id=1olckFwxpq4sSdBkngmb73H0_axk_naC7",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "WP Migrate DB Pro",
+        "slug": "wp-migrate-db-pro",
+        "source": "https://docs.google.com/uc?export=download&id=1TGZMjjAHNxtQ3aGHmjybDcfgzx3sX7nn",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "WP Migrate DB Pro Media Files",
+        "slug": "wp-migrate-db-pro-media-files",
+        "source": "https://docs.google.com/uc?export=download&id=1sSZvGBrEKlwdKAky5ClgIukjKdCfY_uB",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Advanced Custom Fields: Phone",
+        "slug": "acf-field-phone",
+        "source": "https://docs.google.com/uc?export=download&id=1KxWw9VSZPbbwOIj3HhWIB3BVnY0pp5C0",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Advanced Custom Fields: Address",
+        "slug": "acf-field-address",
+        "source": "https://docs.google.com/uc?export=download&id=1ng1EPZ_x2ZS0q31VxY6EV3n4CgyClTyS",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "ACF Code Field",
+        "slug": "acf-code-field",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Advanced Custom Fields: Gravityforms Add-on",
+        "slug": "acf-gravityforms-add-on",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Autoptimize",
+        "slug": "autoptimize",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Customizer Remove All Parts",
+        "slug": "customizer-remove-all-parts",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Disable Comments",
+        "slug": "disable-comments",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Regenerate Thumbnails",
+        "slug": "regenerate-thumbnails",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Roots/Soil",
+        "slug": "roots-soil",
+        "source": "https://docs.google.com/uc?export=download&id=1lOHKm6ls9Im_no61YBE97RKxyFfJQgL7",
+        "required": true,
+        "force_activation": true
     },
     {
         "name": "SVG Support",
@@ -12,17 +84,15 @@
         "force_activation": true
     },
     {
-        "name": "Advanced Custom Fields PRO",
-        "slug": "advanced-custom-fields-pro",
+        "name": "User Switcher",
+        "slug": "userswitcher",
         "required": true,
-        "source": "https://docs.google.com/uc?export=download&id=1ZdApuuDxTKCGkB5XG_IvnmGIbanvpsY9",
         "force_activation": true
     },
     {
-        "name": "WP Migrate DB Pro",
-        "slug": "wp-migrate-db-pro",
+        "name": "Yoast SEO",
+        "slug": "wordpress-seo",
         "required": true,
-        "source": "https://docs.google.com/uc?export=download&id=1xHf7GWC7O9vEHCDIcwSWEWt8Z44XxjZ5",
         "force_activation": true
-      }
+    }
 ]
