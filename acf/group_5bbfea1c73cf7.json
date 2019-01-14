@@ -5,7 +5,7 @@
         {
             "key": "field_5bbfeaf7a11cb",
             "label": "Columns Width",
-            "name": "option_columns_width",
+            "name": "columns_width",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -44,5 +44,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539772326
+    "modified": 1547473070
 }

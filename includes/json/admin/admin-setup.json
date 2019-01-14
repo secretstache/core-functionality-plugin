@@ -128,10 +128,10 @@
         },
         {
             "type": "action",
-            "name": "save_post",
+            "name": "acf/save_post",
             "function": "updateWidthPostMeta",
             "priority": 10,
-            "arguments": 3
+            "arguments": 1
         },
         {
             "type": "filter",

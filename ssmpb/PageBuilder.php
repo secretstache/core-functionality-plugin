@@ -76,4 +76,11 @@ class PageBuilder extends Controller
 
     }
 
+    public static function getColumnsWidth( $column_index ) {
+    
+        global $post;
+        return get_post_meta( $post->ID, 'custom_columns_width_' . $column_index, true);
+    
+    }
+
 }

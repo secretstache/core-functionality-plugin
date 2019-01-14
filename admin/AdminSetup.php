@@ -281,19 +281,31 @@ class AdminSetup
 	/**
 	 * Update width post meta on AJAX call
 	 */
-	public function updateWidthPostMeta( $post_ID, $post, $update )
+	public function updateWidthPostMeta( $post_id )
 	{
 	
-		if ( isset( $_POST['columns_count'] ) ) {
-	
-			for ( $i = 0; $i < $_POST['columns_count']; $i++ ) { 
-
-				if ( get_post_meta( $_POST['post_ID'], 'columns_width_' . $i ) ) {
-					update_post_meta( $_POST['post_ID'], 'columns_width_' . $i, $_POST['columns_width_' . $i] );
-				} else {
-					add_post_meta( $_POST['post_ID'], 'columns_width_' . $i, $_POST['columns_width_' . $i] );       
-				}
+		$column_values = array();
+		
+		foreach( $_POST as $key => $value) {
+		
+			if ( strpos( $key, 'columns_width') === 0 ) {
+				array_push( $column_values, $value );
 			}
+	
+		}
+		
+		if ( !empty( $column_values ) ) {
+			for ( $i = 0; $i < count( $column_values ); $i++ ) {
+		
+				$key = 'custom_columns_width_' . $i;
+			
+				if ( get_post_meta( $post_id, $key, true ) ) {
+					delete_post_meta( $post_id, $key );
+				}
+				add_post_meta( $post_id, $key, $column_values[$i] );
+			
+			}
+		
 		}
 	}
 
@@ -306,7 +318,7 @@ class AdminSetup
 		$response = array();
 		
 		for ( $i = 0; $i < $_POST['columns_count']; $i++ ) { 
-			array_push( $response, get_post_meta( $_POST['page_id'], 'columns_width_' . $i, true ) );
+			array_push( $response, get_post_meta( $_POST['page_id'], 'custom_columns_width_' . $i, true ) );
 		}
 		
 		echo json_encode( $response );

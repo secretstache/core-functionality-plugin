@@ -16,24 +16,6 @@
     margin: 0 3px;
 }
 
-#admin_modules .admin_module,
-#admin_functions .admin_function,
-#front_modules .front_module,
-#front_functions .front_function,
-#helpers .helper {
-    float: left;
-    margin-right: 40px;
-}
-
-#admin_functions .module_name,
-#front_functions .module_name  {
-    margin-top: 5px;
-}
-
-.admin_function.ssm-admin-setup {
-    clear: both;
-}
-
 #helpers {
     line-height: 2.5em;
 }
@@ -66,4 +48,50 @@
 #wpadminbar ul li.env-production:hover div {
 	background: #248f24 !important;
 	color: white !important;
+}
+
+#tagsdiv-post_tag,
+table#event_tribe_organizer,
+.eventBritePluginPlug,
+#tribe_events_event_options,
+#tribe_events_catdiv {
+    display: none;
+}
+
+#edit-slug-box {
+    color: #444;
+    padding: 0;
+}
+
+#welcome-panel {
+    padding: 20px;
+}
+
+.welcome-panel-close {
+    display: none;
+}
+
+#dashboard-widgets-wrap {
+    display: none;
+}
+
+.acf-field.columns-width .acf-radio-list {
+    margin-left: 20px;
+}
+
+.acf-field.columns-width .acf-radio-list li {
+    margin-right: 35px;
+}
+
+.acf-field.columns-width .acf-radio-list input {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+img.thumbs {
+    border: 1px solid #ddd;
+    max-width: 75px;
+    height: auto;
 }
