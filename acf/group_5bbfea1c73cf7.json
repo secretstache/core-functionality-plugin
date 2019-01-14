@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfea1c73cf7",
-    "title": "[Option] Columns Width",
+    "title": "[Options] Columns Width",
     "fields": [
         {
             "key": "field_5bbfeaf7a11cb",
@@ -44,5 +44,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1547473070
+    "modified": 1547476399
 }

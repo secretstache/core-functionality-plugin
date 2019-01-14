@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfe4f6bc425",
-    "title": "Business Information",
+    "title": "[Settings Page UI] Business Information",
     "fields": [
         {
             "key": "field_5bbfe5b52bc62",
@@ -95,5 +95,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539340234
+    "modified": 1547476573
 }

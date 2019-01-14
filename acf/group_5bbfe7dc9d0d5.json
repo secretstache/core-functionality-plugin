@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfe7dc9d0d5",
-    "title": "Global Inline Styles",
+    "title": "[Settings Page UI] Global Inline Styles",
     "fields": [
         {
             "key": "field_5bbfe89643dc9",
@@ -39,5 +39,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539340674
+    "modified": 1547476640
 }

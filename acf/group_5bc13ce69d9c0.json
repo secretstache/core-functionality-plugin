@@ -1,6 +1,6 @@
 {
     "key": "group_5bc13ce69d9c0",
-    "title": "[Template] Column(s)",
+    "title": "[Templates] Column(s)",
     "fields": [
         {
             "key": "field_5bc13d61d70a6",
@@ -236,5 +236,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539791164
+    "modified": 1547476459
 }

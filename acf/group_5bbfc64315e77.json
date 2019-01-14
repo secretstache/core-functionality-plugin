@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfc64315e77",
-    "title": "[Module List] Hero Unit",
+    "title": "[Module Lists] Hero Unit",
     "fields": [
         {
             "key": "field_5bbfc7143a8bd",
@@ -132,5 +132,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539395790
+    "modified": 1547476277
 }

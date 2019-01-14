@@ -1,6 +1,6 @@
 {
     "key": "group_5bc139c5d2216",
-    "title": "[Module] Image",
+    "title": "[Modules] Image",
     "fields": [
         {
             "key": "field_5bc13a36f1960",
@@ -115,5 +115,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539390125
+    "modified": 1547476334
 }

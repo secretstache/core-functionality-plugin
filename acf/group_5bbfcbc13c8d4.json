@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfcbc13c8d4",
-    "title": "Inline Scripts",
+    "title": "[Page UI] Inline Scripts",
     "fields": [
         {
             "key": "field_5bbfcc8a23a47",
@@ -44,5 +44,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1539301971
+    "modified": 1547476597
 }

@@ -1,6 +1,6 @@
 {
     "key": "group_5bc50f5b7a123",
-    "title": "[Template] Related Content",
+    "title": "[Templates] Related Content",
     "fields": [
         {
             "key": "field_5bc512cba667d",
@@ -169,5 +169,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1539641734
+    "modified": 1547476489
 }
