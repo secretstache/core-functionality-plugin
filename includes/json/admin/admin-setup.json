@@ -188,6 +188,12 @@
             "type": "action",
             "name": "admin_init",
             "function": "removeACFMenu"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "assignCategoryGroupFields",
+            "priority": 20
         }
     ]
 }
