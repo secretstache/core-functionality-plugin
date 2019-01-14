@@ -12,31 +12,38 @@
 
 			grid.find('tbody tr').each(function() {
 				
-				var category_class = $(this).attr('class').split(/\s+/).slice(-1)[0];
-				var category = category_class.split('-');
-				
-				switch (category.length) {
-					case 2:
-						category_name = category[1];
-						break;
-					case 3:
-						category_name = category[1] + '-' + category[2];
-						break;
-					case 4:
-						category_name = category[1] + '-' + category[2] + '-' + category[3];
-						break;
-					case 5:
-						category_name = category[1] + '-' + category[2] + '-' + category[3] + '-' + category[4];
-						break;
+				if ( $(this).attr('class') ) {
+					
+					var category_class = $(this).attr('class').split(/\s+/).slice(-1)[0];
+					var category = category_class.split('-');
+					var category_name = '';
+
+					switch (category.length) {
+						case 2:
+							category_name = category[1];
+							break;
+						case 3:
+							category_name = category[1] + '-' + category[2];
+							break;
+						case 4:
+							category_name = category[1] + '-' + category[2] + '-' + category[3];
+							break;
+						case 5:
+							category_name = category[1] + '-' + category[2] + '-' + category[3] + '-' + category[4];
+							break;
+					}
 				}
 
-				category_link = '/wp-admin/edit.php?post_type=acf-field-group&acf_category=' + category_name;
+				if ( category_name ) {
+					category_link = '/wp-admin/edit.php?post_type=acf-field-group&acf_category=' + category_name;
 
-				$(this).append(
-					'<td class="acf-fg-category column-acf-fg-category" data-colname="Category">\
-						<a class="row-category" href="' + category_link + '" aria-label="“' + category_name + '” (Edit)">' + category_name + '</a>\
-					</td>'
-				)
+					$(this).append(
+						'<td class="acf-fg-category column-acf-fg-category" data-colname="Category">\
+							<a class="row-category" href="' + category_link + '" aria-label="“' + category_name + '” (Edit)">' + category_name + '</a>\
+						</td>'
+					)
+				}
+
 			})
 
 			grid.find('tfoot tr').append(
