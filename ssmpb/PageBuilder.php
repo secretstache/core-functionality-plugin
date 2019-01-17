@@ -29,22 +29,25 @@ class PageBuilder extends Controller
 
     public static function getCustomClasses( $context, $column_index, $args )
     {
-
+        
         $response = '';
-
+        
         $inline_classes = $args->option_html_classes;
         $odd = ( !empty( $column_index ) && $column_index % 2 == 0 ) ? 'even' : 'odd';
+        $column_index++;
         
         switch ( $context ) {
 
             case 'template':
                 $response .= ' class="content-block';
                 break;
+            
             case 'hero-unit':
                 $response .= ' class="hero-unit';
                 break;
+            
             case 'module':
-                $response .= ' class="module stack-order-' . $column_index . ' stack-order-' . $odd;
+                $response .= ' class="component ' . $args->acf_fc_layout . ' stack-order-' . $column_index . ' stack-order-' . $odd;
                 break;
                 
         }
@@ -54,9 +57,11 @@ class PageBuilder extends Controller
             case 'Color':
                 $response .= ' ' . sanitize_html_class( $args->option_background_color );
                 break;
+            
             case 'Image':
                 $response .= ' bg-image bg-dark';
                 break;
+            
             case 'Video':
                 $response .= ' bg-video';
                 break;
@@ -64,17 +69,15 @@ class PageBuilder extends Controller
         }
 
         if ( $context == 'hero-unit' && !is_null( $args->option_hero_unit_height ) ) {
-            
             $response .= ( $args->option_hero_unit_height == 'full' ) ? ' full-height' : ' auto';
-        
         }
 
         $response .= ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
 
         $response .= '"';
-
+        
         return $response;
-
+    
     }
 
     public static function getColumnsWidth( $column_index ) {
