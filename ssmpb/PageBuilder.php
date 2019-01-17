@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Sober\Controller\Controller;
+use SSM\Includes\Walker;
 use SSM\Includes\Helpers as SSMH;
 
 class PageBuilder extends Controller
@@ -80,6 +81,43 @@ class PageBuilder extends Controller
     
         global $post;
         return get_post_meta( $post->ID, 'custom_columns_width_' . $column_index, true);
+    
+    }
+
+    public static function getMenuArgs( $context ) {
+
+        $response = array();
+
+        if ( $context == 'offCanvas') {
+            
+            $response = array( 
+                'theme_location' => 'primary_navigation', 
+                'container' => FALSE, 
+                'items_wrap' => '<ul class="vertical menu accordion-menu" data-accordion-menu>%3$s</ul>', 
+                'walker' => new Walker()
+            );
+
+        } elseif ( $context == 'primary_navigation' ) {
+
+            $response = array( 
+                'theme_location' => 'primary_navigation', 
+                'container' => FALSE, 
+                'items_wrap' => '<ul class="dropdown menu show-for-medium" data-dropdown-menu>%3$s</ul>', 
+                'walker' => new Walker()
+            );
+
+        } elseif ( $context == 'footer_navigation' ) {
+
+            $response = array(
+                'theme_location' => 'footer_navigation', 
+                'container' => FALSE, 
+                'items_wrap' => '<ul class="menu vertical">%3$s</ul>', 
+                'walker' => new Walker()
+            );
+            
+        }
+
+        return $response;
     
     }
 
