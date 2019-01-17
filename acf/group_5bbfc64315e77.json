@@ -16,16 +16,16 @@
                 "id": ""
             },
             "layouts": {
-                "5bbfc66fbf9f5": {
-                    "key": "5bbfc66fbf9f5",
-                    "name": "button",
-                    "label": "Button",
+                "layout_5c3f746f7f7ee": {
+                    "key": "layout_5c3f746f7f7ee",
+                    "name": "header",
+                    "label": "Header",
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_5bbfc7473a8be",
-                            "label": "Button",
-                            "name": "button",
+                            "key": "field_5c3f747b7f7ef",
+                            "label": "Header",
+                            "name": "header",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -36,38 +36,7 @@
                                 "id": ""
                             },
                             "clone": [
-                                "group_5b92e5e37e1e0"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_5bc150342baed": {
-                    "key": "layout_5bc150342baed",
-                    "name": "image",
-                    "label": "Image",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5bc150982baef",
-                            "label": "Image",
-                            "name": "image",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5bc139c5d2216"
+                                "group_5c3f7393e2ce7"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -108,6 +77,68 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "5bbfc66fbf9f5": {
+                    "key": "5bbfc66fbf9f5",
+                    "name": "buttons",
+                    "label": "Button(s)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bbfc7473a8be",
+                            "label": "Button",
+                            "name": "buttons",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b92e6e0e4276"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5bc150342baed": {
+                    "key": "layout_5bc150342baed",
+                    "name": "image",
+                    "label": "Image",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bc150982baef",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5bc139c5d2216"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Module",
@@ -132,5 +163,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1547476277
+    "modified": 1547666065
 }
