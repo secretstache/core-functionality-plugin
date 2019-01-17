@@ -296,7 +296,7 @@ class FrontSetup
 			echo '<div class="ssm-admin-menu">';
                 echo '<ul class="menu horizontal">';
                 
-                if ( $env = SSM_ENVIRONMENT ) {
+                if ( defined( 'SSM_ENVIRONMENT' ) && $env = SSM_ENVIRONMENT ) {
                     echo '<li class="env env-' . sanitize_title_with_dashes( $env ) . '">' . ucfirst( $env ) . ' Environment</li>';
                 }
 
