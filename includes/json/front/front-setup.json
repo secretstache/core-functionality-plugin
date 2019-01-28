@@ -83,8 +83,9 @@
         },
         {
             "type": "action",
-            "name": "wp_head",
-            "function": "replaceAdminBar"
+            "name": "wp_footer",
+            "function": "replaceAdminBar",
+            "priority": 99
         }
     ]
 }
