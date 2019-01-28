@@ -94,6 +94,12 @@
         },
         {
             "type": "action",
+            "name": "admin_init",
+            "function": "removeMainSubMenu",
+            "priority": 99
+        },
+        {
+            "type": "action",
             "name": "init",
             "function": "addAcfSubMenu"
         },

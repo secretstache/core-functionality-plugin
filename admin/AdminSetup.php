@@ -218,6 +218,14 @@ class AdminSetup
 	}
 
 	/**
+	 * Remove first submenu item
+	 */
+	public function removeMainSubMenu()
+	{
+		remove_submenu_page('ssm', 'ssm');
+	}
+
+	/**
 	 * Create ACF Sub Pages and move them to SSM menu
 	 */
 	public function addAcfSubMenu()

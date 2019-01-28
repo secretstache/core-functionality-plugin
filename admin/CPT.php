@@ -16,6 +16,11 @@ class CPT
             'menu_icon'         => 'dashicons-format-aside',
             "menu_position"		=> 25,
             "supports" 			=> array( 'title', 'editor', 'thumbnail' ),
+            "show_in_menu"      => 'ssm',
+
+            "labels" => array(
+                "all_items" => "Articles"
+            ),
 
             'admin_cols'    => array( // admin posts list columns
                 'category' => array(
