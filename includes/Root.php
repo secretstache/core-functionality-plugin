@@ -55,7 +55,7 @@ class Root
 	 */
 	private function setAdminModules()
 	{
-		die(var_dump(count( scandir( SSMC_DIR . "includes/json/front/") )));
+
 		if ( count( scandir( SSMC_DIR . "includes/json/admin/") ) > 2 ) {
 
 			$modules = array_diff( scandir( SSMC_DIR . "includes/json/admin/" ), array( '.', '..' ) ); // remove . and .. from list of files
