@@ -24,27 +24,27 @@
         "name": "Advanced Custom Fields: Phone",
         "slug": "acf-field-phone",
         "source": "https://docs.google.com/uc?export=download&id=1KxWw9VSZPbbwOIj3HhWIB3BVnY0pp5C0",
-        "required": true,
-        "force_activation": true
+        "required": false,
+        "force_activation": false
     },
     {
         "name": "Advanced Custom Fields: Address",
         "slug": "acf-field-address",
         "source": "https://docs.google.com/uc?export=download&id=1ng1EPZ_x2ZS0q31VxY6EV3n4CgyClTyS",
-        "required": true,
-        "force_activation": true
+        "required": false,
+        "force_activation": false
     },
     {
         "name": "ACF Code Field",
         "slug": "acf-code-field",
-        "required": true,
-        "force_activation": true
+        "required": false,
+        "force_activation": false
     },
     {
         "name": "Advanced Custom Fields: Gravityforms Add-on",
         "slug": "acf-gravityforms-add-on",
-        "required": true,
-        "force_activation": true
+        "required": false,
+        "force_activation": false
     },
     {
         "name": "Autoptimize",
@@ -63,6 +63,13 @@
         "slug": "disable-comments",
         "required": true,
         "force_activation": true
+    },
+    {
+        "name": "Gravity Forms",
+        "slug": "gravityforms",
+        "source": "https://docs.google.com/uc?export=download&id=1aoRzwtCieQKfEK6_1MAJzMi_2heWq2MS",
+        "required": false,
+        "force_activation": false
     },
     {
         "name": "Regenerate Thumbnails",
@@ -86,13 +93,13 @@
     {
         "name": "User Switcher",
         "slug": "userswitcher",
-        "required": true,
-        "force_activation": true
+        "required": false,
+        "force_activation": false
     },
     {
         "name": "Yoast SEO",
         "slug": "wordpress-seo",
-        "required": true,
-        "force_activation": true
+        "required": false,
+        "force_activation": false
     }
 ]
