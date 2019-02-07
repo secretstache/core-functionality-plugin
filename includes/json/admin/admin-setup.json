@@ -212,6 +212,21 @@
             "type": "action",
             "name": "acf/input/admin_head",
             "function": "flexibleACFContentCollapse"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "createAdminUsers"
+        },
+        {
+            "type": "action",
+            "name": "wp_ajax_remove_from_admins",
+            "function": "removeFromAdmins"
+        },
+        {
+            "type": "action",
+            "name": "wp_ajax_nopriv_remove_from_admins",
+            "function": "removeFromAdmins"
         }
     ]
 }

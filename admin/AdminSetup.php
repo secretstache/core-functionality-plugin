@@ -23,6 +23,8 @@ class AdminSetup
 	{		
 
 		wp_enqueue_script( 'ssm', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+
+		wp_localize_script( 'ssm', 'custom', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 		wp_localize_script( 'ssm', 'login_logo', array('url' => SSMC_URL . 'admin/' . 'images/login-logo.png' ) );
 	
 	}
@@ -544,6 +546,67 @@ class AdminSetup
 		</script>
 
 		<?php
+	}
+
+	/**
+	 * Create admin users on project setup
+	 */
+	public function createAdminUsers() {
+
+		if ( !username_exists( 'alex' ) ) {
+
+			$alex_pass = wp_generate_password();
+			$alex_id = wp_create_user( 'alex', $alex_pass, 'alex@secretstache.com' );
+
+			if ( $alex_id ) {
+	
+				add_option( 'alex_pass', $alex_pass );
+	
+				$alex = new \WP_User( $alex_id );
+				$alex->remove_role( 'subscriber' );
+				$alex->add_role( 'administrator' );
+	
+			}
+
+		}
+
+		if ( !username_exists( 'jrstaatsiii' ) ) {
+
+			$rich_pass = wp_generate_password();
+			$rich_id = wp_create_user( 'jrstaatsiii', $rich_pass, 'rich@secretstache.com' );
+
+			if ( $rich_id ) {
+
+				add_option( 'rich_pass', $rich_pass );
+
+				$rich = new \WP_User( $rich_id );
+				$rich->remove_role( 'subscriber' );
+				$rich->add_role( 'administrator' );
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Fires when clicked 'remove' button in Admin Credentials section
+	 */
+	public function removeFromAdmins()
+	{
+			
+		$action = $_POST['custom_action'];
+		$data = $_POST['custom_value'];
+
+		if ( $action == 'remove-user' ) {
+			$response = wp_delete_user( username_exists('admin'), $data );
+		} elseif ( $action == 'remove-option' ) {
+			$response = delete_option( $data );
+		}
+		
+		echo json_encode( $response );
+		wp_die();
+	
 	}
 
 }

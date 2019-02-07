@@ -20,8 +20,12 @@ class OptionsPage
 	
 		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo' );
 		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_width' );
-		register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_height' );
-	
+        register_setting( 'ssm-core-settings-group', 'ssm_core_login_logo_height' );
+        
+        if ( get_option( 'alex_pass' ) || get_option( 'rich_pass' ) ) {
+            add_settings_section( 'ssm-core-admin-credentials', 'Admin Credentials', array( $this, 'ssmCoreAdminCredentials'), 'ssm_core');
+        }
+
 		add_settings_section( 'ssm-core-agency-options', 'Agency Options', array( $this, 'ssmCoreAgencyOptions'), 'ssm_core');
 	
 		add_settings_field( 'ssm-core-agency-name', 'Agency Name', array( $this, 'ssmCoreAgencyName' ), 'ssm_core', 'ssm-core-agency-options' );
@@ -40,6 +44,44 @@ class OptionsPage
         );
 
     }
+
+    public function ssmCoreAdminCredentials() {
+
+        echo '<div class="admin-credentials">';
+
+            echo '<p class="desc">Please, make sure you copied and saved your password before removing corresponding option / common admin user.</p>';
+
+            if ( $alex_pass = get_option( 'alex_pass' ) ) {
+                
+                echo '<p class="user-pass"><span class="username">alex: </span> <span id="alex-pass">' . $alex_pass . '</span>
+                        <button class="button button-primary copy-pass" id="copy-alex-pass">Copy</button>
+                        <button class="button button-primary remove remove-option" data-option-name="alex_pass">Remove Option</button>
+                    </p>';
+
+            }
+
+            if ( $rich_pass = get_option( 'rich_pass' ) ) {
+                
+                echo '<p class="user-pass"><span class="username">jrstaatsiii: </span> <span id="rich-pass">' . $rich_pass . '</span>
+                        <button class="button button-primary copy-pass" id="copy-rich-pass">Copy</button>
+                        <button class="button button-primary remove remove-option" data-option-name="rich_pass">Remove Option</button>
+                    </p>';
+            }
+
+            if ( $admin_id = username_exists('admin') ) {
+
+                $reassign_id = ( username_exists('jrstaatsiii') ) ? username_exists('jrstaatsiii') : username_exists('alex');
+                
+                echo '<p class="user-pass"><span class="username">admin: </span> admin123
+                        <button class="button button-primary remove remove-user" data-reassign-id="' . $reassign_id . '">Remove User</button>
+                    </p>';
+
+            }
+        
+        echo '</div>';
+
+    }
+
 
     /** 
      * Add Admin users who need access to ACF field 

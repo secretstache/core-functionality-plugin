@@ -135,4 +135,76 @@
 	
 	});
 
+	function copyToClipboard( element ) {
+
+		var $temp = $("<input>");
+		$("body").append($temp);
+		$temp.val($(element).text()).select();
+		document.execCommand("copy");
+		$temp.remove();
+
+	}
+
+	$(document).on( 'click', '.admin-credentials .copy-pass', function( e ) {
+
+		e.preventDefault();
+
+		var id = $(this).attr('id');
+
+		if ( id == 'copy-alex-pass' ) {
+
+			copyToClipboard( '#alex-pass' );
+			$(this).text('Copied').addClass('copied');
+			$('#copy-rich-pass').text('Copy').removeClass('copied');
+
+		} else {
+
+			copyToClipboard( '#rich-pass' );
+			$(this).text('Copied').addClass('copied');
+			$('#copy-alex-pass').text('Copy').removeClass('copied');
+
+		}
+
+
+	});
+
+	$(document).on( 'click', '.admin-credentials .remove', function( e ) {
+
+		e.preventDefault();
+
+		var custom_action = $(this).attr('class').split(' ')[3];
+
+		if (custom_action == 'remove-user') {
+			custom_value = $(this).data('reassign-id');
+		} else if ( custom_action == 'remove-option' ) {
+			custom_value = $(this).data('option-name');
+		}
+
+		$.ajax({
+
+			url: custom.ajax_url,
+			type: "post",
+			async: false,
+			ContentType: "application/json",
+	
+			data: {
+				action: 'remove_from_admins',
+				custom_action: custom_action,
+				custom_value: custom_value
+			},
+	
+			success: (html) => {
+
+				if ( JSON.parse( html ) == true ) {
+					$(this).parents('.user-pass').fadeOut();
+				}
+
+			},
+	
+		});
+
+
+	});
+
+
 })( jQuery );
