@@ -55,15 +55,19 @@ class Root
 	 */
 	private function setAdminModules()
 	{
+		die(var_dump(count( scandir( SSMC_DIR . "includes/json/front/") )));
+		if ( count( scandir( SSMC_DIR . "includes/json/admin/") ) > 2 ) {
 
-		$modules = array_diff( scandir( SSMC_DIR . "includes/json/admin/" ), array( '.', '..' ) ); // remove . and .. from list of files
+			$modules = array_diff( scandir( SSMC_DIR . "includes/json/admin/" ), array( '.', '..' ) ); // remove . and .. from list of files
 
-		foreach ( $modules as $module ) {
+			foreach ( $modules as $module ) {
 
-			$$module = json_decode( file_get_contents( SSMC_DIR . "includes/json/admin/{$module}" ), true ); // $required_plugins = array( ... ) 
+				$$module = json_decode( file_get_contents( SSMC_DIR . "includes/json/admin/{$module}" ), true ); // $required_plugins = array( ... ) 
 
-			if ( isset( $$module['hooks'] ) && !empty( $$module['hooks'] ) ) { // if ( isset( $required_plugins['hooks'] ) && !empty( $required_plugins['hooks'] ) )
-				$this->registerModule( $$module ); // registerModule( $required_plugins )
+				if ( isset( $$module['hooks'] ) && !empty( $$module['hooks'] ) ) { // if ( isset( $required_plugins['hooks'] ) && !empty( $required_plugins['hooks'] ) )
+					$this->registerModule( $$module ); // registerModule( $required_plugins )
+				}
+			
 			}
 		
 		}
@@ -76,17 +80,20 @@ class Root
 	 */
 	private function setFrontModules()
 	{
+		if ( count( scandir( SSMC_DIR . "includes/json/front/") ) > 2 ) {
 		
-		$modules = array_diff( scandir( SSMC_DIR . "includes/json/front/" ), array( '.', '..' ) ); // remove . and .. from list of files
+			$modules = array_diff( scandir( SSMC_DIR . "includes/json/front/" ), array( '.', '..' ) ); // remove . and .. from list of files
 
-		foreach ( $modules as $module ) {
+			foreach ( $modules as $module ) {
 
-			$$module = json_decode( file_get_contents( SSMC_DIR . "includes/json/front/{$module}" ), true ); // $front_setup = array( ... ) 
+				$$module = json_decode( file_get_contents( SSMC_DIR . "includes/json/front/{$module}" ), true ); // $front_setup = array( ... ) 
 
-			if ( isset( $$module['hooks'] ) && !empty( $$module['hooks'] ) ) { // if ( isset( $front_setup['hooks'] ) && !empty( $front_setup['hooks'] ) )
-				$this->registerModule( $$module ); // registerModule( $front_setup )
+				if ( isset( $$module['hooks'] ) && !empty( $$module['hooks'] ) ) { // if ( isset( $front_setup['hooks'] ) && !empty( $front_setup['hooks'] ) )
+					$this->registerModule( $$module ); // registerModule( $front_setup )
+				}
+			
 			}
-		
+
 		}
 
 	}
