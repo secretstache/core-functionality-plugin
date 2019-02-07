@@ -15,7 +15,7 @@ class I18n
 	{
 
 		load_plugin_textdomain(
-			'ssm',
+			LOCALIZATION_ID,
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/admin/languages/'
 		);
