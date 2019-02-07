@@ -10,7 +10,7 @@ class RequiredPlugins
 	 */
     public function checkRequiredPlugins()
     {
-        return SSMC_INCLUDES_DIR . '/json/bundle.json';
+        return SSMC_DIR . 'includes/json/bundle.json';
 	}
 
 }

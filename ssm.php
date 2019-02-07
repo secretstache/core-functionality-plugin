@@ -24,15 +24,8 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Define plugin constants
  */
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
-define( 'SSMC_VERSION', '0.2.3' );
 define( 'SSMC_URL', trailingslashit ( plugin_dir_url( __FILE__ ) ) );
 define( 'SSMC_DIR', plugin_dir_path( __FILE__ ) );
-define( 'SSMC_ADMIN_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'admin/' ) );
-define( 'SSMC_FRONT_URL', trailingslashit ( plugin_dir_url( __FILE__ ) . 'front/' ) );
-define( 'SSMC_ADMIN_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'admin/' ) );
-define( 'SSMC_FRONT_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'front/' ) );
-define( 'SSMC_INCLUDES_DIR', trailingslashit ( plugin_dir_path( __FILE__ ) . 'includes/' ) );
 define( 'SSMC_THEME_DIR', trailingslashit ( get_template_directory() ) );
 
 /**

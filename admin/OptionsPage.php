@@ -96,7 +96,7 @@ class OptionsPage
      */
     public function ssmCoreLoginLogo()
     {
-        $default_logo = SSMC_ADMIN_URL . 'images/login-logo.png';
+        $default_logo = SSMC_URL . 'admin/' . 'images/login-logo.png';
         $login_logo = get_option('ssm_core_login_logo') != NULL ? esc_attr( get_option('ssm_core_login_logo') ) : $default_logo;
 		$width = get_option('ssm_core_login_logo_width') != NULL ? esc_attr( get_option('ssm_core_login_logo_width') ) : '230px';
 		$height = get_option('ssm_core_login_logo_height') != NULL ? esc_attr( get_option('ssm_core_login_logo_height') ) : 'auto';

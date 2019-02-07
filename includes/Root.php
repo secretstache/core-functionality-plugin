@@ -22,27 +22,10 @@ class Root
 	protected $loader;
 
 	/**
-	 * The unique identifier of this plugin.
-	 */
-	protected $pluginName;
-
-	/**
-	 * The current version of the plugin.
-	 */
-	protected $version;
-
-	/**
 	 * Define the core functionality of the plugin.
 	 */
 	public function __construct() {
 
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
-		} else {
-			$this->version = '1.0.0';
-		}
-
-		$this->pluginName = 'ssm';
 		$this->loader = new Loader();
 
 		$this->setLocale();
@@ -73,11 +56,11 @@ class Root
 	private function setAdminModules()
 	{
 
-		$modules = array_diff( scandir( SSMC_INCLUDES_DIR . "/json/admin/" ), array( '.', '..' ) ); // remove . and .. from list of files
+		$modules = array_diff( scandir( SSMC_DIR . "includes/json/admin/" ), array( '.', '..' ) ); // remove . and .. from list of files
 
 		foreach ( $modules as $module ) {
 
-			$$module = json_decode( file_get_contents( SSMC_INCLUDES_DIR . "/json/admin/{$module}" ), true ); // $required_plugins = array( ... ) 
+			$$module = json_decode( file_get_contents( SSMC_DIR . "includes/json/admin/{$module}" ), true ); // $required_plugins = array( ... ) 
 
 			if ( isset( $$module['hooks'] ) && !empty( $$module['hooks'] ) ) { // if ( isset( $required_plugins['hooks'] ) && !empty( $required_plugins['hooks'] ) )
 				$this->registerModule( $$module ); // registerModule( $required_plugins )
@@ -94,11 +77,11 @@ class Root
 	private function setFrontModules()
 	{
 		
-		$modules = array_diff( scandir( SSMC_INCLUDES_DIR . "/json/front/" ), array( '.', '..' ) ); // remove . and .. from list of files
+		$modules = array_diff( scandir( SSMC_DIR . "includes/json/front/" ), array( '.', '..' ) ); // remove . and .. from list of files
 
 		foreach ( $modules as $module ) {
 
-			$$module = json_decode( file_get_contents( SSMC_INCLUDES_DIR . "/json/front/{$module}" ), true ); // $front_setup = array( ... ) 
+			$$module = json_decode( file_get_contents( SSMC_DIR . "includes/json/front/{$module}" ), true ); // $front_setup = array( ... ) 
 
 			if ( isset( $$module['hooks'] ) && !empty( $$module['hooks'] ) ) { // if ( isset( $front_setup['hooks'] ) && !empty( $front_setup['hooks'] ) )
 				$this->registerModule( $$module ); // registerModule( $front_setup )

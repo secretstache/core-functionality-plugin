@@ -23,7 +23,7 @@ class AdminSetup
 	{		
 
 		wp_enqueue_script( 'ssm', plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
-		wp_localize_script( 'ssm', 'login_logo', array('url' => SSMC_ADMIN_URL . 'images/login-logo.png' ) );
+		wp_localize_script( 'ssm', 'login_logo', array('url' => SSMC_URL . 'admin/' . 'images/login-logo.png' ) );
 	
 	}
 
@@ -357,12 +357,11 @@ class AdminSetup
 	 */
 	public function loginLogo()
 	{
-
-		$defaultLogo = SSMC_ADMIN_URL . 'images/login-logo.png';
+		$defaultLogo = SSMC_URL . 'admin/' . 'images/login-logo.png';
 		
 		$background_image =  get_option('ssm_core_login_logo') != NULL ? get_option('ssm_core_login_logo') : $defaultLogo;
-		$height =  get_option('ssm_core_login_logo_height') != NULL ? get_option('ssm_core_login_logo_height') : '128px';
-		$width =  get_option('ssm_core_login_logo_width') != NULL ? get_option('ssm_core_login_logo_width') : '150px';
+		$height = get_option('ssm_core_login_logo_height') != NULL ? get_option('ssm_core_login_logo_height') : '128px';
+		$width = get_option('ssm_core_login_logo_width') != NULL ? get_option('ssm_core_login_logo_width') : '150px';
 		
         ?>
         <style type="text/css">

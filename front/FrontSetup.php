@@ -48,7 +48,7 @@ class FrontSetup
     public function setFavicon()
     {
 
-        if ( $favicon = SSMH::getField('favicon', 'options') ) {
+        if ( $favicon = get_field('favicon', 'options') ) {
             echo '<link rel="shortcut icon" href="' . $favicon['url'] . '" />';
         }
 
@@ -60,14 +60,14 @@ class FrontSetup
     public function doFacebookPixel()
     {
 
-        if ( $fb_id = SSMH::getField('facebook_account_id', 'options') ) {
+        if ( $fb_id = get_field('facebook_account_id', 'options') ) {
             
             global $post;
             
             $fb_standard_event = '';
             $value = '';
             
-            if ( SSMH::getField('facebook_standard_event') != NULL && SSMH::getField('facebook_standard_event') == 'purchase' ) {
+            if ( get_field('facebook_standard_event') != NULL && get_field('facebook_standard_event') == 'purchase' ) {
             
                 if ( $value ) {
                     $fb_standard_event = 'fbq("track", "Purchase", {"value": "' . $value . '" , "currency" : "USD"});';
@@ -75,8 +75,8 @@ class FrontSetup
                     $fb_standard_event = 'fbq("track", "Purchase");';
                 }
         
-            } elseif ( SSMH::getField('facebook_standard_event') != NULL ) {
-                $fb_standard_event = SSMH::getField('facebook_standard_event');
+            } elseif ( get_field('facebook_standard_event') != NULL ) {
+                $fb_standard_event = get_field('facebook_standard_event');
             }
             
             ?>
@@ -107,7 +107,7 @@ class FrontSetup
     {
         ?>
 
-        <?php if ( $gtm = SSMH::getField('google_tag_manager_id', 'options') ) { ?>
+        <?php if ( $gtm = get_field('google_tag_manager_id', 'options') ) { ?>
 
         <!-- Begin Google Tag Manager -->
         <noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -132,7 +132,7 @@ class FrontSetup
     {
         ?>
 
-        <?php if ( $sv = SSMH::getField('google_site_verification_id', 'options') ) { ?>
+        <?php if ( $sv = get_field('google_site_verification_id', 'options') ) { ?>
 
         <!-- Begin Google Search Console Verification -->
         <meta name="google-site-verification" content="<?php echo $sv; ?>" />
@@ -148,7 +148,7 @@ class FrontSetup
     public function CustomHeadScripts()
     {
 
-        $custom_scripts = SSMH::getField('custom_tracking_scripts', 'options');
+        $custom_scripts = get_field('custom_tracking_scripts', 'options');
         
         if ( $custom_scripts ) {
             
@@ -167,7 +167,7 @@ class FrontSetup
     public function customFooterScripts()
     {
         
-        $custom_scripts = SSMH::getField('custom_tracking_scripts', 'options');
+        $custom_scripts = get_field('custom_tracking_scripts', 'options');
         
         if ( $custom_scripts ) {
            
@@ -230,11 +230,11 @@ class FrontSetup
         global $post;
         $styles = array();
 
-        if ( $global_styles = SSMH::getField('global_inline_styles', 'options') ) {
+        if ( $global_styles = get_field('global_inline_styles', 'options') ) {
             $styles[] = $global_styles;
         }
 
-        if ( $page_styles = SSMH::getField('page_inline_styles') ) {
+        if ( $page_styles = get_field('page_inline_styles') ) {
             $styles[] = $page_styles;
         }
 

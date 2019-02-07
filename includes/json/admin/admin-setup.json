@@ -150,8 +150,8 @@
             "function": "loginHeadertitle"
         },
         {
-            "type": "filter",
-            "name": "login_enqueue_scripts",
+            "type": "action",
+            "name": "init",
             "function": "loginLogo"
         },
         {
