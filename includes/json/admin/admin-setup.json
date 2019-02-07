@@ -200,6 +200,18 @@
             "name": "init",
             "function": "assignCategoryGroupFields",
             "priority": 20
+        },
+        {
+            "type": "filter",
+            "name": "acf/fields/flexible_content/layout_title/name=templates",
+            "function": "updateACFSectionTitle",
+            "priority": 10,
+            "arguments": 4
+        },
+        {
+            "type": "action",
+            "name": "acf/input/admin_head",
+            "function": "flexibleACFContentCollapse"
         }
     ]
 }

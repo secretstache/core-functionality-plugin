@@ -512,5 +512,38 @@ class AdminSetup
 		}
 
 	}
+	
+	/**
+	 * Dynamically Update The Flexible Content Label
+	 */
+	public function updateACFSectionTitle( $title, $field, $layout, $i ) {
+
+		if ( get_sub_field('option_section_label') ) {
+			$label = get_sub_field('option_section_label');
+		} else {
+			$label = $title;
+		}
+
+		return $label;
+
+	}
+
+	/**
+	 * Collapse Flexible Content Fields by default
+	 */
+	public function flexibleACFContentCollapse() {
+		?>
+
+		<style id="acf-flexible-content-collapse">.acf-flexible-content .acf-fields { display: none; }</style>
+		
+		<script type="text/javascript">
+				jQuery(function($) {
+						$('.acf-flexible-content .layout').addClass('-collapsed');
+						$('#acf-flexible-content-collapse').detach();
+				});
+		</script>
+
+		<?php
+	}
 
 }
