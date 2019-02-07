@@ -59,8 +59,14 @@
         "force_activation": true
     },
     {
-        "name": "Disable Comments",
-        "slug": "disable-comments",
+        "name": "Customizer Remove All Parts",
+        "slug": "customizer-remove-all-parts",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "Classic Editor",
+        "slug": "classic-editor",
         "required": true,
         "force_activation": true
     },
