@@ -358,22 +358,24 @@ class AdminSetup
 	public function loginLogo()
 	{
 		$defaultLogo = SSMC_URL . 'admin/' . 'images/login-logo.png';
-		
 		$background_image =  get_option('ssm_core_login_logo') != NULL ? get_option('ssm_core_login_logo') : $defaultLogo;
-		$height = get_option('ssm_core_login_logo_height') != NULL ? get_option('ssm_core_login_logo_height') : '128px';
-		$width = get_option('ssm_core_login_logo_width') != NULL ? get_option('ssm_core_login_logo_width') : '150px';
-		
         ?>
-        <style type="text/css">
-            body.login div#login h1 a {
-                background-image: url(<?php echo $background_image; ?>) !important;
-                background-repeat: no-repeat;
-                background-size: cover;
-                height: <?php echo $height; ?>;
-                margin-bottom: 15px;
-                width: <?php echo $width; ?>;
-            }
-        </style>
+
+		<?php if (!is_user_logged_in()):  ?>
+		
+			<style type="text/css">
+				body.login div#login h1 a {
+					background-image: url(<?php echo $background_image; ?>) !important;
+					background-repeat: no-repeat;
+					background-size: cover;
+					width: 150px;
+					height: 128px;
+					margin-bottom: 15px;
+				}
+			</style>
+
+		<?php endif; ?>
+
         <?php
     }
 
@@ -421,7 +423,7 @@ class AdminSetup
 	 * Inject internal WP JS variables on Core Settings page 
 	 */
 	public function	enqueueWpMedia() {
-		
+
 		if ( get_current_screen()->base == 'settings_page_ssm_core' ) {
  			wp_enqueue_media();
  		}

@@ -117,19 +117,19 @@
 	// The "Remove" button (remove the value from input type='hidden')
 	$(document).on( 'click', '.core-settings-form #remove-image-button', function() {
 
-	  var answer = confirm('Are you sure?');
+		var answer = confirm('Are you sure?');
 
-	  if (answer == true) {
+		if (answer == true) {
   
-		var defaultLogo = login_logo.url;
+			var defaultLogo = login_logo.url;
   
-		$('#ssm-core-login-logo').attr('value', '');
-		$('#logo-preview').attr('src', defaultLogo);
-		$('#logo-preview').css({'width': '230px', 'height': 'auto'});
-		$('#ssm-core-login-logo-width').attr('value', '');
-		$('#ssm-core-login-logo-height').attr('value', '');
-	
-	}
+			$('#ssm-core-login-logo').attr('value', '');
+			$('#logo-preview').attr('src', defaultLogo);
+			$('#logo-preview').css({'width': '230px', 'height': 'auto'});
+			$('#ssm-core-login-logo-width').attr('value', '');
+			$('#ssm-core-login-logo-height').attr('value', '');
+		
+		}
 	  
 		return false;
 	

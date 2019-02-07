@@ -33,7 +33,7 @@ class OptionsPage
         add_settings_field(
             'ssm-core-acf-admin-users',
             'Admin users who need access to ACF',
-            array( $this, 'ssm_core_acf_admin_users' ),
+            array( $this, 'ssmCoreACFAdminUsers' ),
             'ssm_core',
             'ssm-core-acf-options',
             [ 'admins' => get_users( array('role' => 'administrator') ) ]
@@ -44,7 +44,7 @@ class OptionsPage
     /** 
      * Add Admin users who need access to ACF field 
      */
-    function ssm_core_acf_admin_users( $args ) {
+    function ssmCoreACFAdminUsers( $args ) {
 
         $admins = $args['admins'];
         $acfAdmins = get_option('ssm_core_acf_admin_users') != NULL ? get_option('ssm_core_acf_admin_users') : array();
@@ -73,10 +73,12 @@ class OptionsPage
      */
     public function ssmCoreAgencyName()
     {
-
         $agency_name = get_option('ssm_core_agency_name') != NULL ? esc_attr( get_option('ssm_core_agency_name') ) : 'Secret Stache Media';
-		echo '<input type="text" name="ssm_core_agency_name" value="' . $agency_name . '" class="regular-text"/>';
+        ?>
 
+        <input type="text" name="ssm_core_agency_name" value="<?php echo $agency_name ?>" class="regular-text"/>
+    
+    <?php
     }
     
     /** 
@@ -84,11 +86,13 @@ class OptionsPage
      */
     public function ssmCoreAgencyUrl()
     {
+        $agency_URL = get_option('ssm_core_agency_url') != NULL ? esc_attr( get_option('ssm_core_agency_url') ) : 'https://secretstache.com';
+        ?>
 
-        $agency_URL = get_option('ssm_core_agency_url') != NULL ? esc_attr( get_option('ssm_core_agency_url') ) : 'http://secretstache.com';
-		echo '<input type="text" name="ssm_core_agency_url" value="' . $agency_URL . '" class="regular-text url"/>';
-		echo '<p class="description">Include <code>http(s)://</code></p>';
-
+		<input type="text" name="ssm_core_agency_url" value="<?php echo $agency_URL ?>" class="regular-text url"/>
+		<p class="description">Include <code>http(s)://</code></p>
+    
+    <?php
     }
     
     /** 
@@ -96,21 +100,29 @@ class OptionsPage
      */
     public function ssmCoreLoginLogo()
     {
+
         $default_logo = SSMC_URL . 'admin/' . 'images/login-logo.png';
         $login_logo = get_option('ssm_core_login_logo') != NULL ? esc_attr( get_option('ssm_core_login_logo') ) : $default_logo;
-		$width = get_option('ssm_core_login_logo_width') != NULL ? esc_attr( get_option('ssm_core_login_logo_width') ) : '230px';
-		$height = get_option('ssm_core_login_logo_height') != NULL ? esc_attr( get_option('ssm_core_login_logo_height') ) : 'auto';
 
-		echo '<div class="login-logo-wrap">';
-		echo '<img src="' . $login_logo . '" id="logo-preview" class="login-logo" alt="Login Logo" style="height: ' . $height . '; width: ' . $width . '; "/>';
-		echo '<div class="media-buttons">';
-		echo '<input type="button" id="upload-image-button" class="button button-secondary" value="Upload Logo" />';
-		echo '<input type="button" id="remove-image-button" class="button button-secondary" value="Remove Logo" />';
-		echo '</div>';
-		echo '<input type="hidden" id="ssm-core-login-logo" name="ssm_core_login_logo" value="' . $login_logo . '">';
-		echo '<input type="hidden" id="ssm-core-login-logo-width" name="ssm_core_login_logo_width" value="' . $width . '">';
-		echo '<input type="hidden" id="ssm-core-login-logo-height" name="ssm_core_login_logo_height" value="' . $height . '">';
-		echo '</div>';
+    ?>
+
+	    <div class="login-logo-wrap">
+                
+            <img src="<?php echo $login_logo ?>" id="logo-preview" class="login-logo" alt="Login Logo" style="height: auto; width: 230px" />
+            
+            <div class="media-buttons">
+                <input type="button" id="upload-image-button" class="button button-secondary" value="Upload Logo" />
+                <input type="button" id="remove-image-button" class="button button-secondary" value="Remove Logo" />
+            </div>
+            
+            <input type="hidden" id="ssm-core-login-logo" name="ssm_core_login_logo" value="<?php echo $login_logo ?>">
+            <input type="hidden" id="ssm-core-login-logo-width" name="ssm_core_login_logo_width" value="230px">
+            <input type="hidden" id="ssm-core-login-logo-height" name="ssm_core_login_logo_height" value="auto">
+            
+        </div>
+
+    <?php
+
 	}
     
     /** 
@@ -120,13 +132,13 @@ class OptionsPage
     {
 	
 		add_submenu_page(
-		'options-general.php',
-		  'SSM Core', // page title
-		  'Core', // menu title
-		'manage_options',
-		'ssm_core',
-		array( $this, 'ssmCoreOptionsPage' )
-	  );
+		    'options-general.php',
+		    'SSM Core', // page title
+		    'Core', // menu title
+		    'manage_options',
+		    'ssm_core',
+	        array( $this, 'ssmCoreOptionsPage' )
+	    );
 	
 	}
     
@@ -135,7 +147,7 @@ class OptionsPage
      */
     public function ssmCoreOptionsPage()
     {
-        ?>
+    ?>
 
         <div class="wrap">
 
@@ -162,11 +174,9 @@ class OptionsPage
 
             </div>
 
-            </div>
+        </div>
 
-
-        <?php
-
+    <?php
     }
 
     /** 
