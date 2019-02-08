@@ -108,8 +108,8 @@ class Root
 
 		foreach ( $module['hooks'] as $hook ) {
 
-			$priority = ( isset( $hook['priority'] ) && $hook['priority'] != '' ) ? $hook['priority'] : '';
-			$arguments = ( isset( $hook['arguments'] ) && $hook['arguments'] != '' ) ? $hook['arguments'] : '';
+			$priority = ( isset( $hook['priority'] ) && $hook['priority'] != '' ) ? $hook['priority'] : 10;
+			$arguments = ( isset( $hook['arguments'] ) && $hook['arguments'] != '' ) ? $hook['arguments'] : 1;
 
 			call_user_func_array(
 				array( $this->loader, "add_{$hook['type']}" ), // array( $this->loader, "add_action" )
