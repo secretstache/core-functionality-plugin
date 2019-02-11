@@ -182,46 +182,6 @@ class FrontSetup
     }
 
     /**
-     * Force Gravity Forms to init scripts in the footer and ensure that the DOM is loaded before scripts are executed
-	 */
-    public function footerScriptsInit()
-    {
-        return true;
-    }
-
-    /**
-     * Wrap Gform - CData open
-	 */
-    public function wrapGformCdataOpen( $content = '' )
-    {
-        
-        if ( ( defined('DOING_AJAX') && DOING_AJAX ) || isset( $_POST['gform_ajax'] ) ) {
-            return $content;
-        }
-        
-        $content = 'document.addEventListener( "DOMContentLoaded", function() { ';
-        
-        return $content;
-    
-    }
-
-    /**
-     * Wrap Gform - CData close
-	 */
-    public function wrapGformCdataClose( $content = '' )
-    {
-   
-        if ( ( defined('DOING_AJAX') && DOING_AJAX ) || isset( $_POST['gform_ajax'] ) ) {
-            return $content;
-        }
-    
-        $content = ' }, false );';
-    
-        return $content;
-    
-    }
-
-    /**
      * Injects inline CSS into the head
 	 */
     public function injectInlineCss()
