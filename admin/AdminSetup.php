@@ -363,7 +363,7 @@ class AdminSetup
 		$background_image =  get_option('ssm_core_login_logo') != NULL ? get_option('ssm_core_login_logo') : $defaultLogo;
         ?>
 
-		<?php if (!is_user_logged_in()):  ?>
+		<?php if (!is_user_logged_in() && $GLOBALS['pagenow'] === 'wp-login.php' ):  ?>
 		
 			<style type="text/css">
 				body.login div#login h1 a {
