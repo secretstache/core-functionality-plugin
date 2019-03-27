@@ -260,7 +260,22 @@ class FrontSetup
                     echo '<li class="env env-' . sanitize_title_with_dashes( $env ) . '">' . ucfirst( $env ) . ' Environment</li>';
                 }
 
-			    echo '<li><a href="' . get_edit_post_link( $post->ID ) . '">Edit Page</a></li>';
+                if ( is_page() || is_single() ) {
+                    
+                    $edit_post_link = get_edit_post_link( $post->ID );
+
+                } elseif( is_tax() ){
+
+                    $term = get_term( get_queried_object()->term_id );
+                    $edit_post_link = get_edit_term_link( $term->term_id, $term->taxonomy );
+
+                } elseif( is_archive() ) {
+                
+                    $edit_post_link = admin_url( 'edit.php?post_type=' . $post->post_type );
+                
+                }
+
+			    echo '<li><a href="' . $edit_post_link . '">Edit Page</a></li>';
 			    echo '<li><a href="' . admin_url() . '">Admin Dashboard</a></li>';
 			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-brand-settings') . '">Brand Settings</a></li>';
 			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-documentation') . '">Documentation</a></li>';
