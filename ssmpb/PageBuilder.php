@@ -72,7 +72,7 @@ class PageBuilder extends Controller
             $response .= ( $args->option_hero_unit_height == 'full' ) ? ' full-height' : ' auto';
         }
 
-        $response .= ( !is_null( $inline_classes ) ) ? ' ' . $inline_classes : '';
+        $response .= ( !empty( $inline_classes ) ) ? ' ' . $inline_classes : '';
 
         $response .= '"';
         
