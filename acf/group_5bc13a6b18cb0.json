@@ -1,6 +1,6 @@
 {
     "key": "group_5bc13a6b18cb0",
-    "title": "[Component] HTML Editor",
+    "title": "[Component] - HTML Editor",
     "fields": [
         {
             "key": "field_5bc13ae436db0",
@@ -39,5 +39,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553710488
+    "modified": 1553711889
 }

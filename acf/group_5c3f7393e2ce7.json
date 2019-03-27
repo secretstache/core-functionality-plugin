@@ -1,6 +1,6 @@
 {
     "key": "group_5c3f7393e2ce7",
-    "title": "[Module] Header",
+    "title": "[Module] - Header",
     "fields": [
         {
             "key": "field_5c3f73b6784e7",
@@ -94,5 +94,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553710365
+    "modified": 1553711916
 }

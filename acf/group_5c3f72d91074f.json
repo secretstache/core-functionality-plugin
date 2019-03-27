@@ -1,6 +1,6 @@
 {
     "key": "group_5c3f72d91074f",
-    "title": "[Component] Header",
+    "title": "[Component] - Header",
     "fields": [
         {
             "key": "field_5c3f72e830e17",
@@ -58,5 +58,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553710492
+    "modified": 1553711884
 }

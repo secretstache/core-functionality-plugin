@@ -1,6 +1,6 @@
 {
     "key": "group_5bc758141b072",
-    "title": "[Template] Hero Unit Columns",
+    "title": "[Template] - Hero Unit Columns",
     "fields": [
         {
             "key": "field_5bc75839e6e03",
@@ -178,5 +178,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553710153
+    "modified": 1553712101
 }
