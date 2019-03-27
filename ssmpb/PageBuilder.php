@@ -124,4 +124,53 @@ class PageBuilder extends Controller
     
     }
 
+    public static function getTheAddress( $address ) {
+
+        $response = '';
+
+        $street1 = $address->street1;
+        $street2 = $address->street2;
+        $city = $address->city;
+        $state = $address->state;
+        $zip = $address->zip;
+
+        if ( $street1 || $street2 || $city || $state || $zip ) {
+            $response .= ( $street1 ) ? $street1 : '';
+            $response .= ( $street2 ) ? ", " . $street2 : '';
+            $response .= ( $city ) ? "<br />" . $city : '';
+            $response .= ( $state ) ? ", " . $state : '';
+            $response .= ( $zip ) ? " " . $zip : '';
+        }
+
+        return $response;
+    
+    }
+
+    public static function getPreparedAddress( $address ) {
+
+        $prepared_url = $address->street1;
+        $prepared_url .= ( $address->street2 ) ? $address->street2 : '';
+        $prepared_url .= ' ' . $address->city;
+        $prepared_url .= ' ' . $address->state;
+        $prepared_url .= ' ' . $address->zip;
+        $prepared_url = urlencode($prepared_url);
+
+        return $prepared_url;
+    
+    }
+
+    public static function getPreparedPhoneNumber( $number ) {
+
+        $formatted = '';
+        
+        $pieces = explode(' ', $number );
+ 
+        $formatted = '(' . $pieces[0] . ') ' . $pieces[1];
+        $formatted .= ( isset( $pieces[2] ) ) ? $pieces[2] : '';
+        $formatted .= ( isset( $pieces[3] ) ) ? $pieces[3] : '';
+
+        return $formatted;
+
+    }
+
 }
