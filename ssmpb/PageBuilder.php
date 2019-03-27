@@ -27,7 +27,7 @@ class PageBuilder extends Controller
 
     }
 
-    public static function getCustomClasses( $context, $column_index, $args )
+    public static function getCustomClasses( $context, $custom_classes = null, $column_index, $args )
     {
         
         $response = '';
@@ -51,11 +51,10 @@ class PageBuilder extends Controller
                 break;
                 
         }
-        
         switch ( $args->option_background ) {
 
             case 'Color':
-                $response .= ' ' . sanitize_html_class( $args->option_background_color );
+                $response .= ' bg-dark ' . sanitize_html_class( $args->option_background_color );
                 break;
             
             case 'Image':
@@ -72,8 +71,12 @@ class PageBuilder extends Controller
             $response .= ( $args->option_hero_unit_height == 'full' ) ? ' full-height' : ' auto';
         }
 
+        if ( $context == 'module' && !is_null( $args->text_alignment ) ) {
+            $response .= " " . $args->text_alignment;
+        }
+        
+        $response .= ( !empty( $custom_classes ) ) ? ' ' . $custom_classes : '';
         $response .= ( !empty( $inline_classes ) ) ? ' ' . $inline_classes : '';
-
         $response .= '"';
         
         return $response;
