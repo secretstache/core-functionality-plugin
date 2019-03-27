@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfcb649fe73",
-    "title": "[Page UI] Inline Styles",
+    "title": "Inline Styles",
     "fields": [
         {
             "key": "field_5bbfcc295cd00",
@@ -44,5 +44,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1547476586
+    "modified": 1553709360
 }

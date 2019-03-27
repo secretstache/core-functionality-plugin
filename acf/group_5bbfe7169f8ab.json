@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfe7169f8ab",
-    "title": "[Settings Page UI] Analytics",
+    "title": "Analytics",
     "fields": [
         {
             "key": "field_5bbfe7d4fed7c",
@@ -160,5 +160,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1547476633
+    "modified": 1553709582
 }

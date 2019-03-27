@@ -1,6 +1,6 @@
 {
     "key": "group_5bc13f0476386",
-    "title": "[Templates] Image Gallery",
+    "title": "[Template] Image Gallery",
     "fields": [
         {
             "key": "field_5bc13f8554131",
@@ -177,5 +177,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1547476469
+    "modified": 1553710150
 }

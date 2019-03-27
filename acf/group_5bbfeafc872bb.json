@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfeafc872bb",
-    "title": "[Options] Hero Unit Height",
+    "title": "[Option] Hero Unit Height",
     "fields": [
         {
             "key": "field_5bbfebd8d7b3f",
@@ -44,5 +44,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1547476403
+    "modified": 1553710622
 }

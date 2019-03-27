@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfe58fb0900",
-    "title": "[Settings Page UI] Social Networks",
+    "title": "Social Networks",
     "fields": [
         {
             "key": "field_5bbfe64af0f7f",
@@ -77,5 +77,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1547476605
+    "modified": 1553709547
 }

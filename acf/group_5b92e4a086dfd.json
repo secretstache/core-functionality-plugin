@@ -1,6 +1,6 @@
 {
     "key": "group_5b92e4a086dfd",
-    "title": "[Components] Button",
+    "title": "[Component] Button",
     "fields": [
         {
             "key": "field_5b92e4b64e351",
@@ -58,5 +58,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1547476679
+    "modified": 1553710494
 }

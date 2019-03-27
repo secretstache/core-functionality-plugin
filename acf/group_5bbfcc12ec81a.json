@@ -1,6 +1,6 @@
 {
     "key": "group_5bbfcc12ec81a",
-    "title": "[Page UI] Facebook Conversion Pixel",
+    "title": "Facebook Conversion Pixel",
     "fields": [
         {
             "key": "field_5bbfcce02061b",
@@ -54,5 +54,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1547476627
+    "modified": 1553709349
 }
