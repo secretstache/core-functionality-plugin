@@ -1,0 +1,76 @@
+[
+    {
+        "category_name": "Modules",
+        "groups": [
+            "[Module] Button",
+            "[Module] Header",
+            "[Module] HTML Editor",
+            "[Module] Image"
+        ]
+    },
+    {
+        "category_name": "Lists",
+        "groups": [
+            "[List] - Buttons"
+        ]
+    },
+    {
+        "category_name": "Components",
+        "groups": [
+            "[Component] Button",
+            "[Component] Header",
+            "[Component] HTML Editor",
+            "[Component] Image"
+        ]
+    },
+    {
+        "category_name": "Options",
+        "groups": [
+            "[Option] Admin",
+            "[Option] Alignment",
+            "[Option] Background",
+            "[Option] Columns Width",
+            "[Option] Hero Unit Height",
+            "[Option] HTML Attributes",
+            "[Option] Link Target",
+            "[Option] Template Header"
+        ]
+    },
+    {
+        "category_name": "Module Lists",
+        "groups": [
+            "[Module List] Hero Unit",
+            "[Module List] Templates"
+        ]
+    },
+    {
+        "category_name": "Templates",
+        "groups": [
+            "[Template] Column(s)",
+            "[Template] Hero Unit Columns",
+            "[Template] Image Gallery",
+            "[Template] Related Content"
+        ]
+    },
+    {
+        "category_name": "Page UI",
+        "groups": [
+            "Layout Builder",
+            "Hero Unit",
+            "Inline Styles",
+            "Inline Scripts",
+            "Facebook Conversion Pixel"
+        ]
+    },
+    {
+        "category_name": "Settings Page UI",
+        "groups": [
+            "Logo Assets",
+            "Business Information",
+            "Social Networks",
+            "Footer Copy",
+            "Analytics",
+            "Global Inline Styles"
+        ]
+    }
+]

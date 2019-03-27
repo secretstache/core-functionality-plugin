@@ -497,20 +497,38 @@ class AdminSetup
 	 */
 	public function assignCategoryGroupFields() {
 
-		$posts = get_posts( array( 'post_type' => 'acf-field-group', 'posts_per_page' => -1, 'post_status' => array( 'publish', 'draft', 'acf-disabled', 'acf-' ) ) );
+		if ( count( scandir( SSMC_DIR . "includes/json/") ) > 5 ) {
 
-		foreach( $posts as $post ) {
-			
-			$post_id = $post->ID;
-			$current_categories = wp_get_post_terms( $post_id, 'acf_category' );
+			$items = json_decode( file_get_contents( SSMC_DIR . "includes/json/acf_categories.json" ), true );
 
-			$category_name = str_replace( array("["), "", explode( "]", $post->post_title)[0] );
-			$category = get_term_by( 'name', $category_name, 'acf_category' );
+			foreach( $items as $item ) {
 
-			if ( !in_array( $category, $current_categories ) ) {
-				wp_set_object_terms( $post_id, array( $category->term_id ), 'acf_category' );
+				$category_name = $item['category_name'];
+				$groups = $item['groups'];
+
+				$category = get_term_by( 'name', $category_name, 'acf_category' );
+
+				foreach( $groups as $group_name ) {
+
+					$group = get_page_by_title( $group_name, OBJECT, 'acf-field-group' );
+
+					if( $group ) {
+						
+						$current_categories = wp_get_post_terms( $group->ID, 'acf_category' );
+
+						if ( empty( $current_categories ) ) {
+						
+							wp_set_object_terms( $group->ID, array( $category->term_id ), 'acf_category' );
+						
+						}
+
+					}
+
+				}
+
 			}
-		
+
+
 		}
 
 	}
