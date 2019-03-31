@@ -627,4 +627,32 @@ class AdminSetup
 	
 	}
 
+	public function registerACFCategoryTaxonomy() {
+
+		register_extended_taxonomy( 'acf_category', 'acf-field-group', array(
+			
+			'hierarchical'		=> false
+
+		), array(
+
+			'singular'  		=> 'Category',
+			'plural'    		=> 'Categories',
+			'slug'      		=> 'category'
+
+		) );
+
+	}
+	public function registerACFTerms() {
+		
+        wp_insert_term('Modules', 'acf_category');
+        wp_insert_term('Lists', 'acf_category');
+        wp_insert_term('Components', 'acf_category');
+        wp_insert_term('Options', 'acf_category');
+        wp_insert_term('Module Lists', 'acf_category');
+        wp_insert_term('Templates', 'acf_category');
+        wp_insert_term('Page UI', 'acf_category');        
+        wp_insert_term('Settings Page UI', 'acf_category');
+    
+	}
+
 }

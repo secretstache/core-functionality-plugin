@@ -1,0 +1,17 @@
+{
+    "name": "Article",
+    "slug": "plugin_article",
+    "class": "SSM\\Objects\\Article",
+    "hooks": [
+        {
+            "type": "action",
+            "name": "init",
+            "function": "registerPostType"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "registerTaxonomies"
+        }
+    ]
+} 

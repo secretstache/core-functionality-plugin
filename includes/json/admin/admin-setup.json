@@ -228,6 +228,16 @@
             "type": "action",
             "name": "wp_ajax_nopriv_remove_from_admins",
             "function": "removeFromAdmins"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "registerACFCategoryTaxonomy"
+        },
+        {
+            "type": "action",
+            "name": "init",
+            "function": "registerACFTerms"
         }
     ]
 }

@@ -32,6 +32,7 @@ class Root
 
 		$this->setAdminModules();
 		$this->setFrontModules();
+		$this->setObjectModules();
 
 	}
 
@@ -96,6 +97,30 @@ class Root
 
 		}
 
+	}
+
+	/**
+	 * Scan /json/objects/ dir for front modules and register them if available
+	 *
+	 */
+	private function setObjectModules()
+	{
+		if ( count( scandir( SSMC_DIR . "includes/json/objects/") ) > 2 ) {
+		
+			$modules = array_diff( scandir( SSMC_DIR . "includes/json/objects/" ), array( '.', '..' ) ); // remove . and .. from list of files
+			
+			foreach ( $modules as $module ) {
+			
+				$$module = json_decode( file_get_contents( SSMC_DIR . "includes/json/objects/{$module}" ), true ); // $project = array( ... ) 
+			
+				if ( isset( $$module['hooks'] ) && !empty( $$module['hooks'] ) ) { // if ( isset( $project['hooks'] ) && !empty( $project['hooks'] ) )
+					$this->registerModule( $$module ); // registerModule( $project )
+				}
+			
+			}
+		
+		}
+	
 	}
 
 	/**

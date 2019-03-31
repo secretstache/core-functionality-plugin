@@ -1,14 +1,11 @@
 <?php
 
-namespace SSM\Admin;
+namespace SSM\Objects;
 
-class CPT
+class Article
 {
 
-	/**
-	 * Register custom Post Types
-	 */
-    public function registerPostTypes()
+    public function registerPostType()
     {
         register_extended_post_type( 'article', array(
 
@@ -41,50 +38,23 @@ class CPT
             'slug'      => 'article'
 
         ) );
+
     }
 
-    /**
-	 * Register custom Taxonomies
-	 */
-    public function registerTaxonomies()
-    {
+    public function registerTaxonomies() {
+
         register_extended_taxonomy( 'article_category', 'article', array(
 
             'hierarchical' => true
-
+            
         ), array(
-
+            
             'singular'  => 'Category',
             'plural'    => 'Categories',
             'slug'      => 'category'
-
+            
         ) );
 
-        register_extended_taxonomy( 'acf_category', 'acf-field-group', array(), array(
-
-            'singular'  => 'Category',
-            'plural'    => 'Categories',
-            'slug'      => 'category'
-
-        ) );
-    
     }
-
-    /**
-	 * Register custom Terms
-	 */
-    public function registerTerms()
-    {
-
-        wp_insert_term('Modules', 'acf_category');
-        wp_insert_term('Lists', 'acf_category');
-        wp_insert_term('Components', 'acf_category');
-        wp_insert_term('Options', 'acf_category');
-        wp_insert_term('Module Lists', 'acf_category');
-        wp_insert_term('Templates', 'acf_category');
-        wp_insert_term('Page UI', 'acf_category');        
-        wp_insert_term('Settings Page UI', 'acf_category');
     
-    }
-
 }

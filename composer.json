@@ -32,6 +32,7 @@
       "SSM\\Includes\\": "includes/",
       "SSM\\Front\\": "front/",
       "SSM\\Admin\\": "admin/",
+      "SSM\\Objects\\": "objects/",
       "App\\Controllers\\": "ssmpb/"
     }
   }
