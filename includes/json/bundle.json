@@ -2,35 +2,21 @@
     {
         "name": "Advanced Custom Fields PRO",
         "slug": "advanced-custom-fields-pro",
-        "source": "https://docs.google.com/uc?export=download&id=1olckFwxpq4sSdBkngmb73H0_axk_naC7",
-        "required": true,
-        "force_activation": true
-    },
-    {
-        "name": "WP Migrate DB Pro",
-        "slug": "wp-migrate-db-pro",
-        "source": "https://docs.google.com/uc?export=download&id=1TGZMjjAHNxtQ3aGHmjybDcfgzx3sX7nn",
-        "required": true,
-        "force_activation": true
-    },
-    {
-        "name": "WP Migrate DB Pro Media Files",
-        "slug": "wp-migrate-db-pro-media-files",
-        "source": "https://docs.google.com/uc?export=download&id=1sSZvGBrEKlwdKAky5ClgIukjKdCfY_uB",
+        "source": "https://www.secretstache.com/required-plugins/advanced-custom-fields-pro.zip",
         "required": true,
         "force_activation": true
     },
     {
         "name": "Advanced Custom Fields: Phone",
         "slug": "acf-field-phone",
-        "source": "https://docs.google.com/uc?export=download&id=1KxWw9VSZPbbwOIj3HhWIB3BVnY0pp5C0",
+        "source": "https://www.secretstache.com/required-plugins/acf-field-phone.zip",
         "required": false,
         "force_activation": false
     },
     {
         "name": "Advanced Custom Fields: Address",
         "slug": "acf-field-address",
-        "source": "https://docs.google.com/uc?export=download&id=1ng1EPZ_x2ZS0q31VxY6EV3n4CgyClTyS",
+        "source": "https://www.secretstache.com/required-plugins/acf-field-address.zip",
         "required": false,
         "force_activation": false
     },
@@ -73,7 +59,7 @@
     {
         "name": "Gravity Forms",
         "slug": "gravityforms",
-        "source": "https://docs.google.com/uc?export=download&id=1aoRzwtCieQKfEK6_1MAJzMi_2heWq2MS",
+        "source": "https://www.secretstache.com/required-plugins/gravityforms.zip",
         "required": false,
         "force_activation": false
     },
@@ -86,7 +72,7 @@
     {
         "name": "Roots/Soil",
         "slug": "roots-soil",
-        "source": "https://docs.google.com/uc?export=download&id=1lOHKm6ls9Im_no61YBE97RKxyFfJQgL7",
+        "source": "https://www.secretstache.com/required-plugins/roots-soil.zip",
         "required": true,
         "force_activation": true
     },
@@ -107,5 +93,19 @@
         "slug": "wordpress-seo",
         "required": false,
         "force_activation": false
+    },
+    {
+        "name": "WP Migrate DB Pro",
+        "slug": "wp-migrate-db-pro",
+        "source": "https://www.secretstache.com/required-plugins/wp-migrate-db-pro.zip",
+        "required": true,
+        "force_activation": true
+    },
+    {
+        "name": "WP Migrate DB Pro Media Files",
+        "slug": "wp-migrate-db-pro-media-files",
+        "source": "https://www.secretstache.com/required-plugins/wp-migrate-db-pro-media-files.zip",
+        "required": true,
+        "force_activation": true
     }
 ]
