@@ -3,7 +3,7 @@
         "category_name": "Modules",
         "groups": [
             "[Module] - Button",
-            "[Module] - Header",
+            "[Module] - Headline",
             "[Module] - Text Editor",
             "[Module] - Image"
         ]
@@ -18,7 +18,7 @@
         "category_name": "Components",
         "groups": [
             "[Component] - Button",
-            "[Component] - Header",
+            "[Component] - Headline",
             "[Component] - Text Editor",
             "[Component] - Image"
         ]

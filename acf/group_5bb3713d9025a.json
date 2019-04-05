@@ -16,47 +16,16 @@
                 "id": ""
             },
             "layouts": {
-                "5bb3721f31e77": {
-                    "key": "5bb3721f31e77",
-                    "name": "buttons",
-                    "label": "Button(s)",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5bb3723282bce",
-                            "label": "Button",
-                            "name": "buttons",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5b92e6e0e4276"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_5c3f83272fa3d": {
                     "key": "layout_5c3f83272fa3d",
-                    "name": "header",
-                    "label": "Header",
+                    "name": "headline",
+                    "label": "Headline",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_5c3f83312fa3e",
-                            "label": "Header",
-                            "name": "header",
+                            "label": "Headline",
+                            "name": "headline",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -68,37 +37,6 @@
                             },
                             "clone": [
                                 "group_5c3f7393e2ce7"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_5bc13be877e5a": {
-                    "key": "layout_5bc13be877e5a",
-                    "name": "image",
-                    "label": "Image",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5bc13bf677e5b",
-                            "label": "Image",
-                            "name": "image",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5bc139c5d2216"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -139,6 +77,68 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "5bb3721f31e77": {
+                    "key": "5bb3721f31e77",
+                    "name": "buttons",
+                    "label": "Button(s)",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bb3723282bce",
+                            "label": "Button",
+                            "name": "buttons",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5b92e6e0e4276"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5bc13be877e5a": {
+                    "key": "layout_5bc13be877e5a",
+                    "name": "image",
+                    "label": "Image",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5bc13bf677e5b",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5bc139c5d2216"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Module",
@@ -163,5 +163,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1554475230
+    "modified": 1554476712
 }
