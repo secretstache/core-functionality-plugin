@@ -1,12 +1,12 @@
 {
-    "key": "group_5ca7756d5cc35",
-    "title": "[Component] - Video",
+    "key": "group_5ca777c28d0c6",
+    "title": "[Component] - Form",
     "fields": [
         {
-            "key": "field_5ca77582c1f8c",
-            "label": "Video",
-            "name": "video",
-            "type": "oembed",
+            "key": "field_5ca7799706c55",
+            "label": "Form",
+            "name": "form",
+            "type": "forms",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,8 +15,9 @@
                 "class": "hide-label",
                 "id": ""
             },
-            "width": "",
-            "height": ""
+            "return_format": "id",
+            "allow_null": 0,
+            "multiple": 0
         }
     ],
     "location": [
@@ -36,5 +37,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1554478967
+    "modified": 1554479576
 }

@@ -6,7 +6,8 @@
             "[Module] - Text Editor",
             "[Module] - Button",
             "[Module] - Image",
-            "[Module] - Video"
+            "[Module] - Video",
+            "[Module] - Form"
         ]
     },
     {
@@ -22,7 +23,8 @@
             "[Component] - Text Editor",
             "[Component] - Button",
             "[Component] - Image",
-            "[Component] - Video"
+            "[Component] - Video",
+            "[Component] - Form"
         ]
     },
     {
