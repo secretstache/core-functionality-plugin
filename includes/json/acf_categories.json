@@ -34,7 +34,8 @@
             "[Option] - Hero Unit Height",
             "[Option] - HTML Attributes",
             "[Option] - Default Button Options",
-            "[Option] - Template Header"
+            "[Option] - Template Header",
+            "[Option] - Mobile Sort Order"
         ]
     },
     {

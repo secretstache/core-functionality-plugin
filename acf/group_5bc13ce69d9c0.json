@@ -55,9 +55,25 @@
             "collapsed": "",
             "min": 1,
             "max": 4,
-            "layout": "table",
+            "layout": "block",
             "button_label": "Add Column",
             "sub_fields": [
+                {
+                    "key": "field_5ca74d8ca4c46",
+                    "label": "Content",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0
+                },
                 {
                     "key": "field_5bc13df8d70ab",
                     "label": "Modules",
@@ -73,6 +89,64 @@
                     },
                     "clone": [
                         "group_5bb3713d9025a"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_5ca74da6a4c47",
+                    "label": "Options",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_5ca74daea4c48",
+                    "label": "Mobile Sort Order",
+                    "name": "mobile_sort_order",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5ca74c7592c4d"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_5ca74dd0a4c49",
+                    "label": "HTML Attributes",
+                    "name": "html_attributes",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b92e4de49df2"
                     ],
                     "display": "seamless",
                     "layout": "block",
@@ -236,5 +310,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1554467382
+    "modified": 1554468645
 }
