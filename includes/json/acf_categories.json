@@ -4,7 +4,7 @@
         "groups": [
             "[Module] - Button",
             "[Module] - Header",
-            "[Module] - HTML Editor",
+            "[Module] - Text Editor",
             "[Module] - Image"
         ]
     },
@@ -19,7 +19,7 @@
         "groups": [
             "[Component] - Button",
             "[Component] - Header",
-            "[Component] - HTML Editor",
+            "[Component] - Text Editor",
             "[Component] - Image"
         ]
     },

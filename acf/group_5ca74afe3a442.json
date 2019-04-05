@@ -16,9 +16,9 @@
                 "id": ""
             },
             "choices": {
-                "left": "Left",
-                "center": "Center",
-                "right": "Right"
+                "align-left": "Left",
+                "align-center": "Center",
+                "align-right": "Right"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -43,7 +43,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": 0,
     "description": "",
-    "modified": 1554467657
+    "modified": 1554475830
 }

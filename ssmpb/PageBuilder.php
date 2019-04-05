@@ -71,8 +71,8 @@ class PageBuilder extends Controller
             $response .= ( $args->option_hero_unit_height == 'full' ) ? ' full-height' : ' auto';
         }
 
-        if ( $context == 'module' && !is_null( $args->text_alignment ) ) {
-            $response .= " " . $args->text_alignment;
+        if ( $context == 'module' && !is_null( $args->option_text_alignment ) ) {
+            $response .= " " . $args->option_text_alignment;
         }
         
         $response .= ( !empty( $custom_classes ) ) ? ' ' . $custom_classes : '';

@@ -1,24 +1,24 @@
 {
     "key": "group_5bc13a6b18cb0",
-    "title": "[Component] - HTML Editor",
+    "title": "[Component] - Text Editor",
     "fields": [
         {
             "key": "field_5bc13ae436db0",
-            "label": "HTML Editor",
-            "name": "html_editor_inner_text",
+            "label": "Text Editor",
+            "name": "text_editor_inner_text",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         }
     ],
@@ -39,5 +39,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553711889
+    "modified": 1554475067
 }

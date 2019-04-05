@@ -111,14 +111,14 @@
                 },
                 "layout_5bc13c0c77e5c": {
                     "key": "layout_5bc13c0c77e5c",
-                    "name": "html_editor",
-                    "label": "HTML Editor",
+                    "name": "text_editor",
+                    "label": "Text Editor",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_5bc13c1c77e5d",
-                            "label": "HTML Editor",
-                            "name": "html_editor",
+                            "label": "Text Editor",
+                            "name": "text_editor",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -163,5 +163,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553711907
+    "modified": 1554475230
 }

@@ -1,6 +1,6 @@
 {
     "key": "group_5bc13ab008e31",
-    "title": "[Module] - HTML Editor",
+    "title": "[Module] - Text Editor",
     "fields": [
         {
             "key": "field_5bc13b264f465",
@@ -20,8 +20,8 @@
         },
         {
             "key": "field_5bc13b3e4f467",
-            "label": "HTML Editor",
-            "name": "html_editor",
+            "label": "Text Editor",
+            "name": "text_editor",
             "type": "clone",
             "instructions": "",
             "required": 0,
@@ -54,6 +54,27 @@
             },
             "placement": "top",
             "endpoint": 0
+        },
+        {
+            "key": "field_5ca7688bddebb",
+            "label": "Text Alignment",
+            "name": "text_alignment",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5ca74afe3a442"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
             "key": "field_5bc13b564f468",
@@ -94,5 +115,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553711922
+    "modified": 1554475168
 }
