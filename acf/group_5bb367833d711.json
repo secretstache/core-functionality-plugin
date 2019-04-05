@@ -46,68 +46,6 @@
                     ],
                     "min": "",
                     "max": ""
-                },
-                "layout_5bc140fde0999": {
-                    "key": "layout_5bc140fde0999",
-                    "name": "image_gallery",
-                    "label": "Image Gallery",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5bc14106e099a",
-                            "label": "Image Gallery",
-                            "name": "image_gallery",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5bc13f0476386"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_5bc5142672073": {
-                    "key": "layout_5bc5142672073",
-                    "name": "related_content",
-                    "label": "Related Content",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5bc5143272074",
-                            "label": "Related Content",
-                            "name": "related_content",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_5bc50f5b7a123"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
                 }
             },
             "button_label": "Add Content Block",
@@ -137,5 +75,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1553709365
+    "modified": 1554482556
 }
