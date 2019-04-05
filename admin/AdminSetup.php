@@ -71,7 +71,6 @@ class AdminSetup
 
 		unregister_widget( 'WP_Widget_Pages' );
 		unregister_widget( 'WP_Widget_Calendar' );
-		// unregister_widget( 'WP_Widget_Archives' );
 		unregister_widget( 'WP_Widget_Meta' );
 		unregister_widget( 'WP_Widget_Recent_Posts' );
 		unregister_widget( 'WP_Widget_Recent_Comments' );
@@ -90,7 +89,8 @@ class AdminSetup
 			'ssm_main_dashboard_widget', // Widget slug.
 			'Managed Hosting by Secret Stache Media', // Title.
 			array( $this, 'hostingWidgetFunction') // Display function.
-		);  
+		);
+		
 	}
 	
 	/**
