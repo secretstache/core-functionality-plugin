@@ -2,10 +2,11 @@
     {
         "category_name": "Modules",
         "groups": [
-            "[Module] - Button",
             "[Module] - Headline",
             "[Module] - Text Editor",
-            "[Module] - Image"
+            "[Module] - Button",
+            "[Module] - Image",
+            "[Module] - Video"
         ]
     },
     {
@@ -17,10 +18,11 @@
     {
         "category_name": "Components",
         "groups": [
-            "[Component] - Button",
             "[Component] - Headline",
             "[Component] - Text Editor",
-            "[Component] - Image"
+            "[Component] - Button",
+            "[Component] - Image",
+            "[Component] - Video"
         ]
     },
     {
