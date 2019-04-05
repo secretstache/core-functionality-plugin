@@ -1,12 +1,12 @@
 {
     "key": "group_5bb3765611e50",
-    "title": "[Option] - Alignment",
+    "title": "[Option] - Column Alignment",
     "fields": [
         {
             "key": "field_5bb3766ac1f32",
             "label": "Y Alignment",
             "name": "option_y_alignment",
-            "type": "text",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,17 +15,23 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "choices": {
+                "top": "Top",
+                "middle": "Middle",
+                "bottom": "Bottom"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "top",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
         },
         {
             "key": "field_5bb37688c1f33",
             "label": "X Alighment",
             "name": "option_x_alignment",
-            "type": "text",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -34,11 +40,17 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "choices": {
+                "left": "Left",
+                "center": "Center",
+                "right": "Right"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "left",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -58,5 +70,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553711988
+    "modified": 1554467558
 }

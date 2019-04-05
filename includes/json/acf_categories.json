@@ -26,8 +26,9 @@
     {
         "category_name": "Options",
         "groups": [
-            "[Option] - Admin",
-            "[Option] - Alignment",
+            "[Option] - Admin Options",
+            "[Option] - Column Alignment",
+            "[Option] - Text Alignment",
             "[Option] - Background",
             "[Option] - Columns Width",
             "[Option] - Hero Unit Height",
