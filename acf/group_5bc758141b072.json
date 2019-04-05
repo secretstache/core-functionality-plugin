@@ -19,6 +19,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_5ca77d0b15bfb",
+            "label": "Headline",
+            "name": "headline",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_5bb36db73441d"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
+        },
+        {
             "key": "field_5bc758c1e6e05",
             "label": "Columns",
             "name": "columns",
@@ -28,15 +49,31 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
             "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
+            "min": 1,
+            "max": 4,
+            "layout": "block",
+            "button_label": "Add Column",
             "sub_fields": [
+                {
+                    "key": "field_5ca77d4e15bfc",
+                    "label": "Content",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0
+                },
                 {
                     "key": "field_5bc758dee6e06",
                     "label": "Modules",
@@ -52,6 +89,64 @@
                     },
                     "clone": [
                         "group_5bbfc64315e77"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_5ca77d5f15bfd",
+                    "label": "Options",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_5ca77d7115bfe",
+                    "label": "Mobile Sort Order",
+                    "name": "mobile_sort_order",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5ca74c7592c4d"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_5ca77d8315bff",
+                    "label": "HTML Attributes",
+                    "name": "html_attributes",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_5b92e4de49df2"
                     ],
                     "display": "seamless",
                     "layout": "block",
@@ -178,5 +273,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553712101
+    "modified": 1554481213
 }

@@ -18,14 +18,14 @@
             "layouts": {
                 "layout_5c3f746f7f7ee": {
                     "key": "layout_5c3f746f7f7ee",
-                    "name": "header",
-                    "label": "Header",
+                    "name": "headline",
+                    "label": "Headline",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_5c3f747b7f7ef",
-                            "label": "Header",
-                            "name": "header",
+                            "label": "Headline",
+                            "name": "headline",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -49,14 +49,14 @@
                 },
                 "layout_5bc150b02baf0": {
                     "key": "layout_5bc150b02baf0",
-                    "name": "html_editor",
-                    "label": "HTML Editor",
+                    "name": "text_editor",
+                    "label": "Text Editor",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_5bc150b72baf1",
-                            "label": "HTML Editor",
-                            "name": "html_editor",
+                            "label": "Text Editor",
+                            "name": "text_editor",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -139,6 +139,68 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5ca77c3769f41": {
+                    "key": "layout_5ca77c3769f41",
+                    "name": "video",
+                    "label": "Video",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5ca77c3c69f42",
+                            "label": "Video",
+                            "name": "video",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5ca775c8ccaa8"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5ca77c5069f43": {
+                    "key": "layout_5ca77c5069f43",
+                    "name": "form",
+                    "label": "Form",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5ca77c5569f44",
+                            "label": "Form",
+                            "name": "form",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5ca779e36da40"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Module",
@@ -163,5 +225,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553711902
+    "modified": 1554480955
 }
