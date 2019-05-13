@@ -369,9 +369,9 @@ class AdminSetup
 				body.login div#login h1 a {
 					background-image: url(<?php echo $background_image; ?>) !important;
 					background-repeat: no-repeat;
-					background-size: cover;
-					width: 150px;
-					height: 128px;
+					background-size: contain;
+					width: auto;
+					height: 90px;
 					margin-bottom: 15px;
 				}
 			</style>
