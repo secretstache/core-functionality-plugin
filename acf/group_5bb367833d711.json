@@ -77,6 +77,37 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5cebe47ce9596": {
+                    "key": "layout_5cebe47ce9596",
+                    "name": "related_content",
+                    "label": "Related Content",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5cebe487e9597",
+                            "label": "Related Content",
+                            "name": "related_content",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_5cebe2b83f2ed"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Content Block",
@@ -106,5 +137,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1554484179
+    "modified": 1558963362
 }
