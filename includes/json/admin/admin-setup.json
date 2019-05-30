@@ -151,7 +151,7 @@
         },
         {
             "type": "action",
-            "name": "init",
+            "name": "login_enqueue_scripts",
             "function": "loginLogo"
         },
         {
