@@ -77,8 +77,8 @@
         "force_activation": true
     },
     {
-        "name": "SVG Support",
-        "slug": "svg-support",
+        "name": "Safe SVG",
+        "slug": "safe-svg",
         "required": true,
         "force_activation": true
     },
