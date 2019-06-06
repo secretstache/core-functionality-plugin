@@ -264,18 +264,26 @@ class FrontSetup
                     
                     $edit_post_link = get_edit_post_link( $post->ID );
 
-                } elseif( is_tax() ){
+                    $post_label = get_post_type_object( get_post_type() )->labels->singular_name;
+
+                } elseif( get_queried_object()->taxonomy ){
 
                     $term = get_term( get_queried_object()->term_id );
                     $edit_post_link = get_edit_term_link( $term->term_id, $term->taxonomy );
 
+                    $post_label = get_taxonomy_labels( get_taxonomy( $term->taxonomy ) )->singular_name;
+
                 } elseif( is_archive() ) {
                 
                     $edit_post_link = admin_url( 'edit.php?post_type=' . $post->post_type );
+
+                    $post_label = get_post_type_object( $post->post_type )->labels->name;
                 
                 }
 
-			    echo '<li><a href="' . $edit_post_link . '">Edit Page</a></li>';
+
+
+			    echo '<li><a href="' . $edit_post_link . '">Edit ' . $post_label . '</a></li>';
 			    echo '<li><a href="' . admin_url() . '">Admin Dashboard</a></li>';
 			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-brand-settings') . '">Brand Settings</a></li>';
 			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-documentation') . '">Documentation</a></li>';

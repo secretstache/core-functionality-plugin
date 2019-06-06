@@ -14,6 +14,7 @@ class Article
             "menu_position"		=> 25,
             "supports" 			=> array( 'title', 'editor', 'thumbnail' ),
             "show_in_menu"      => 'ssm',
+            "has_archive"       => 'articles',
 
             "labels" => array(
                 "all_items" => "Articles"
@@ -51,7 +52,7 @@ class Article
             
             'singular'  => 'Category',
             'plural'    => 'Categories',
-            'slug'      => 'category'
+            'slug'      => 'article_category'
             
         ) );
 
