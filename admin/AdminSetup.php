@@ -509,7 +509,7 @@ class AdminSetup
 				$category = get_term_by( 'name', $category_name, 'acf_category' );
 
 				foreach( $groups as $group_name ) {
-
+					
 					$group = get_page_by_title( $group_name, OBJECT, 'acf-field-group' );
 
 					if( $group ) {
