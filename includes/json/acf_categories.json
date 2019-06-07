@@ -2,7 +2,7 @@
     {
         "category_name": "Modules",
         "groups": [
-            "[Module] - Headline",
+            "[Module] - Header",
             "[Module] - Text Editor",
             "[Module] - Button",
             "[Module] - Image",
@@ -20,7 +20,7 @@
     {
         "category_name": "Components",
         "groups": [
-            "[Component] - Headline",
+            "[Component] - Header",
             "[Component] - Text Editor",
             "[Component] - Button",
             "[Component] - Image",
@@ -40,7 +40,7 @@
             "[Option] - Hero Unit Height",
             "[Option] - HTML Attributes",
             "[Option] - Default Button Options",
-            "[Option] - Template Headline",
+            "[Option] - Template Header",
             "[Option] - Image Link",
             "[Option] - Mobile Sort Order"
         ]

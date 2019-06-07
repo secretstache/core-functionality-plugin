@@ -19,10 +19,10 @@
             "endpoint": 0
         },
         {
-            "key": "field_5ca78c9249c49",
-            "label": "Headline",
-            "name": "cta_headline",
-            "type": "text",
+            "key": "field_5cfa5fa436a9b",
+            "label": "Header",
+            "name": "header",
+            "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -31,17 +31,19 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "clone": [
+                "group_5c3f72d91074f"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
-            "key": "field_5ca78ca749c4a",
-            "label": "Subheadline",
-            "name": "cta_subheadline",
-            "type": "text",
+            "key": "field_5cfa60e0504a5",
+            "label": "Buttons",
+            "name": "buttons",
+            "type": "clone",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -50,11 +52,13 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "clone": [
+                "group_5b92e6e0e4276"
+            ],
+            "display": "seamless",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 0
         },
         {
             "key": "field_5ca78cb749c4b",
@@ -286,5 +290,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1559908137
+    "modified": 1559912693
 }
