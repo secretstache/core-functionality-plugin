@@ -142,12 +142,12 @@
         {
             "type": "filter",
             "name": "login_headerurl",
-            "function": "loginHeaderurl"
+            "function": "loginHeaderUrl"
         },
         {
             "type": "filter",
-            "name": "login_headertitle",
-            "function": "loginHeadertitle"
+            "name": "login_headertext",
+            "function": "loginHeaderText"
         },
         {
             "type": "action",

@@ -339,15 +339,15 @@ class AdminSetup
     /**
 	 * Makes the login screen's logo link to your homepage, instead of to WordPress.org 
 	 */
-	public function loginHeaderurl()
+	public function loginHeaderUrl()
 	{
 		return home_url();
 	}
 
 	/**
-	 * Makes the login screen's logo title attribute your site title, instead of 'WordPress'.
+	 * Makes the login screen's logo title attribute your site title, instead of 'Powered by WordPress'.
 	 */
-	public function loginHeadertitle()
+	public function loginHeaderText()
 	{
 		return get_bloginfo( 'name' );
 	}
