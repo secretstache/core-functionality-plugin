@@ -655,4 +655,25 @@ class AdminSetup
     
 	}
 
+	/**
+	 * Remove unnecessary items from Top Menu
+	 *
+	 */
+	function removeFromTopMenu( ) {
+
+		global $wp_admin_bar;
+		
+		if (is_admin()) {
+		
+			$wp_admin_bar->remove_node('wpseo-menu');
+			$wp_admin_bar->remove_node('autoptimize');
+			$wp_admin_bar->remove_node('archive');
+			$wp_admin_bar->remove_node('updates');
+			$wp_admin_bar->remove_node('gform-forms');
+			$wp_admin_bar->remove_node('searchwp');
+			$wp_admin_bar->remove_node('comments');
+
+		}
+	}
+
 }

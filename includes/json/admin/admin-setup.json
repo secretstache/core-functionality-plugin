@@ -238,6 +238,13 @@
             "type": "action",
             "name": "init",
             "function": "registerACFTerms"
+        },
+        {
+            "type": "action",
+            "name": "wp_before_admin_bar_render",
+            "function": "removeFromTopMenu",
+            "priority": 999,
+            "arguments": 1
         }
     ]
 }
