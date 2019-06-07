@@ -27,6 +27,13 @@
         "force_activation": false
     },
     {
+        "name": "Admin Menu Editor Pro",
+        "slug": "admin-menu-editor-pro",
+        "source": "https://www.secretstache.com/required-plugins/admin-menu-editor-pro.zip",
+        "required": true,
+        "force_activation": true
+    },
+    {
         "name": "Advanced Custom Fields: Gravityforms Add-on",
         "slug": "acf-gravityforms-add-on",
         "required": false,
