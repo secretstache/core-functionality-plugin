@@ -281,16 +281,23 @@ class FrontSetup
                 
                 }
 
-
-
 			    echo '<li><a href="' . $edit_post_link . '">Edit ' . $post_label . '</a></li>';
 			    echo '<li><a href="' . admin_url() . '">Admin Dashboard</a></li>';
 			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-brand-settings') . '">Brand Settings</a></li>';
-			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-documentation') . '">Documentation</a></li>';
-		
-			    if ( $user->user_login == 'jrstaatsiii') {
-			        echo '<li><a href="' . admin_url('edit.php?post_type=acf-field-group') . '">Field Groups</a></li>';
-			    }
+                
+                $acfAdmins = get_option('ssm_core_acf_admin_users') != NULL ? get_option('ssm_core_acf_admin_users') : array(1);
+	
+                $current_user = wp_get_current_user();
+            
+                if ( $acfAdmins != NULL ) {
+
+                    if( in_array( $current_user->ID, $acfAdmins ) ) {
+
+                        echo '<li><a href="' . admin_url('edit.php?post_type=acf-field-group') . '">Field Groups</a></li>';
+
+                    }
+                
+                }
 		
 			    echo '</ul>'; 
 			echo '</div>';
