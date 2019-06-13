@@ -243,11 +243,11 @@ class AdminSetup
 			));
 
 			// Add Documentation Page
-			acf_add_options_sub_page(array(
-				"page_title" => "Documentation",
-				"menu_title" => "Documentation",
-				"parent_slug" => "ssm",
-			));
+			// acf_add_options_sub_page(array(
+			// 	"page_title" => "Documentation",
+			// 	"menu_title" => "Documentation",
+			// 	"parent_slug" => "ssm",
+			// ));
 
 		}
 
