@@ -6,8 +6,8 @@ use App\Controllers\PageBuilder;
 
 class FourZeroFour extends PageBuilder
 {
-    
-    protected $template = '404';
+
+    protected $template = "404";
     protected $acf = false;
 
 }

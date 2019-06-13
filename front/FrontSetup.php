@@ -12,7 +12,7 @@ class FrontSetup
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style( 'ssm', plugin_dir_url( __FILE__ ) . 'css/public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( "ssm", plugin_dir_url( __FILE__ ) . "css/public.css", array(), $this->version, "all" );
 	}
 
 	/**
@@ -20,26 +20,26 @@ class FrontSetup
 	 */
 	public function enqueueScripts()
 	{
-		wp_enqueue_script( 'ssm', plugin_dir_url( __FILE__ ) . 'js/public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( "ssm", plugin_dir_url( __FILE__ ) . "js/public.js", array( "jquery" ), $this->version, false );
     }
-    
+
     /**
      * Show current year as a shortcode
 	 */
     public function addYearShortcode()
     {
-        add_shortcode('year', array( $this, 'addYearShortcodeCB' ) );
+        add_shortcode("year", array( $this, "addYearShortcodeCB" ) );
     }
-    
+
     /**
      * addYearShortcode() callback
 	 */
     public function addYearShortcodeCB()
     {
-        
-        $year = date('Y');
+
+        $year = date("Y");
         return $year;
-    
+
     }
 
     /**
@@ -48,8 +48,8 @@ class FrontSetup
     public function setFavicon()
     {
 
-        if ( $favicon = get_field('favicon', 'options') ) {
-            echo '<link rel="shortcut icon" href="' . $favicon['url'] . '" />';
+        if ( $favicon = get_field("favicon", "options") ) {
+            echo "<link rel=\"shortcut icon\" href=\"" . $favicon["url"] . "\" />";
         }
 
     }
@@ -60,34 +60,34 @@ class FrontSetup
     public function doFacebookPixel()
     {
 
-        if ( $fb_id = get_field('facebook_account_id', 'options') ) {
-            
+        if ( $fb_id = get_field("facebook_account_id", "options") ) {
+
             global $post;
-            
-            $fb_standard_event = '';
-            $value = '';
-            
-            if ( get_field('facebook_standard_event') != NULL && get_field('facebook_standard_event') == 'purchase' ) {
-            
+
+            $fb_standard_event = "";
+            $value = "";
+
+            if ( get_field("facebook_standard_event") != NULL && get_field("facebook_standard_event") == "purchase" ) {
+
                 if ( $value ) {
-                    $fb_standard_event = 'fbq("track", "Purchase", {"value": "' . $value . '" , "currency" : "USD"});';
+                    $fb_standard_event = "fbq(\"track\", \"Purchase\", {\"value\": \"" . $value . "\" , \"currency\" : \"USD\"});";
                 } else {
-                    $fb_standard_event = 'fbq("track", "Purchase");';
+                    $fb_standard_event = "fbq(\"track\", \"Purchase\");";
                 }
-        
-            } elseif ( get_field('facebook_standard_event') != NULL ) {
-                $fb_standard_event = get_field('facebook_standard_event');
+
+            } elseif ( get_field("facebook_standard_event") != NULL ) {
+                $fb_standard_event = get_field("facebook_standard_event");
             }
-            
+
             ?>
 
             <!-- Facebook Pixel Code -->
             <script>
                 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
                 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-                n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+                n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;
                 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-                document,'script','https://connect.facebook.net/en_US/fbevents.js');
+                document,"script","https://connect.facebook.net/en_US/fbevents.js");
                 fbq("init", "<?php echo $fb_id; ?>");
                 fbq("track", "PageView");
 
@@ -107,16 +107,16 @@ class FrontSetup
     {
         ?>
 
-        <?php if ( $gtm = get_field('google_tag_manager_id', 'options') ) { ?>
+        <?php if ( $gtm = get_field("google_tag_manager_id", "options") ) { ?>
 
         <!-- Begin Google Tag Manager -->
         <noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <script>
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','<?php echo $gtm; ?>');
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+            new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+            "//www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,"script","dataLayer","<?php echo $gtm; ?>");
         </script>
         <!-- End Google Tag Manager -->
 
@@ -132,7 +132,7 @@ class FrontSetup
     {
         ?>
 
-        <?php if ( $sv = get_field('google_site_verification_id', 'options') ) { ?>
+        <?php if ( $sv = get_field("google_site_verification_id", "options") ) { ?>
 
         <!-- Begin Google Search Console Verification -->
         <meta name="google-site-verification" content="<?php echo $sv; ?>" />
@@ -148,14 +148,14 @@ class FrontSetup
     public function CustomHeadScripts()
     {
 
-        $custom_scripts = get_field('custom_tracking_scripts', 'options');
-        
+        $custom_scripts = get_field("custom_tracking_scripts", "options");
+
         if ( $custom_scripts ) {
-            
+
             foreach ( $custom_scripts as $script ) {
-            
-                if ( $script['location'] == 'header' && $script['code'] != NULL ) {
-                    echo $script['code'];
+
+                if ( $script["location"] == "header" && $script["code"] != NULL ) {
+                    echo $script["code"];
                 }
             }
         }
@@ -166,17 +166,17 @@ class FrontSetup
      */
     public function customFooterScripts()
     {
-        
-        $custom_scripts = get_field('custom_tracking_scripts', 'options');
-        
+
+        $custom_scripts = get_field("custom_tracking_scripts", "options");
+
         if ( $custom_scripts ) {
-           
+
             foreach ( $custom_scripts as $script ) {
-            
-                if ( $script['location'] == 'footer' && $script['code'] != NULL ) {
-                    echo $script['code'];
+
+                if ( $script["location"] == "footer" && $script["code"] != NULL ) {
+                    echo $script["code"];
                 }
-           
+
             }
         }
     }
@@ -190,20 +190,20 @@ class FrontSetup
         global $post;
         $styles = array();
 
-        if ( $global_styles = get_field('global_inline_styles', 'options') ) {
+        if ( $global_styles = get_field("global_inline_styles", "options") ) {
             $styles[] = $global_styles;
         }
 
-        if ( $page_styles = get_field('page_inline_styles') ) {
+        if ( $page_styles = get_field("page_inline_styles") ) {
             $styles[] = $page_styles;
         }
 
         foreach ( $styles as $style ) {
             $output .= $style;
         }
-        
-        if ( $output != '' ) {
-            echo '<style id="inline-css">' . $output . '</style>';
+
+        if ( $output != "" ) {
+            echo "<style id=\"inline-css\">" . $output . "</style>";
         }
 
     }
@@ -215,8 +215,8 @@ class FrontSetup
     {
         global $post;
 
-        if ( $page_script = get_field('page_inline_scripts') ) {
-            echo '<script type="text/javascript" id="inline-js">' . $page_script . '</script>';
+        if ( $page_script = get_field("page_inline_scripts") ) {
+            echo "<script type=\"text/javascript\" id=\"inline-js\">" . $page_script . "</script>";
         }
 
     }
@@ -227,13 +227,13 @@ class FrontSetup
     public function saveReminderNotice()
     {
 
-        if (isset($_GET["ssmpb"]) && trim($_GET["ssmpb"]) == 'save_reminder') {
+        if (isset($_GET["ssmpb"]) && trim($_GET["ssmpb"]) == "save_reminder") {
 
             global $post;
 
-            echo '<div class="notice notice-warning is-dismissible">';
-            echo '<p>After you save this new ' . get_post_type() . ' item, you will need to reload the last page to retreive it.</p>';
-            echo '</div>';
+            echo "<div class=\"notice notice-warning is-dismissible\">";
+            echo "<p>After you save this new " . get_post_type() . " item, you will need to reload the last page to retreive it.</p>";
+            echo "</div>";
         }
 
     }
@@ -248,20 +248,20 @@ class FrontSetup
 
 			global $post;
 			$user = wp_get_current_user();
-		
-			if ( ! user_can( $user, 'edit_pages' ) ) {
+
+			if ( ! user_can( $user, "edit_pages" ) ) {
 			    return;
 			}
-		
-			echo '<div class="ssm-admin-menu">';
-                echo '<ul class="menu horizontal">';
-                
-                if ( defined( 'SSM_ENVIRONMENT' ) && $env = SSM_ENVIRONMENT ) {
-                    echo '<li class="env env-' . sanitize_title_with_dashes( $env ) . '">' . ucfirst( $env ) . ' Environment</li>';
+
+			echo "<div class=\"ssm-admin-menu\">";
+                echo "<ul class=\"menu horizontal\">";
+
+                if ( defined( "SSM_ENVIRONMENT" ) && $env = SSM_ENVIRONMENT ) {
+                    echo "<li class=\"env env-" . sanitize_title_with_dashes( $env ) . "\">" . ucfirst( $env ) . " Environment</li>";
                 }
 
                 if ( is_page() || is_single() ) {
-                    
+
                     $edit_post_link = get_edit_post_link( $post->ID );
 
                     $post_label = get_post_type_object( get_post_type() )->labels->singular_name;
@@ -274,36 +274,36 @@ class FrontSetup
                     $post_label = get_taxonomy_labels( get_taxonomy( $term->taxonomy ) )->singular_name;
 
                 } elseif( is_archive() ) {
-                
-                    $edit_post_link = admin_url( 'edit.php?post_type=' . $post->post_type );
+
+                    $edit_post_link = admin_url( "edit.php?post_type=" . $post->post_type );
 
                     $post_label = get_post_type_object( $post->post_type )->labels->name;
-                
+
                 }
 
-			    echo '<li><a href="' . $edit_post_link . '">Edit ' . $post_label . '</a></li>';
-			    echo '<li><a href="' . admin_url() . '">Admin Dashboard</a></li>';
-			    echo '<li><a href="' . admin_url('admin.php?page=acf-options-brand-settings') . '">Brand Settings</a></li>';
-                
-                $acfAdmins = get_option('ssm_core_acf_admin_users') != NULL ? get_option('ssm_core_acf_admin_users') : array(1);
-	
+			    echo "<li><a href=\"" . $edit_post_link . "\">Edit " . $post_label . "</a></li>";
+			    echo "<li><a href=\"" . admin_url() . "\">Admin Dashboard</a></li>";
+			    echo "<li><a href=\"" . admin_url("admin.php?page=acf-options-brand-settings") . "\">Brand Settings</a></li>";
+
+                $acfAdmins = get_option("ssm_core_acf_admin_users") != NULL ? get_option("ssm_core_acf_admin_users") : array(1);
+
                 $current_user = wp_get_current_user();
-            
+
                 if ( $acfAdmins != NULL ) {
 
                     if( in_array( $current_user->ID, $acfAdmins ) ) {
 
-                        echo '<li><a href="' . admin_url('edit.php?post_type=acf-field-group') . '">Field Groups</a></li>';
+                        echo "<li><a href=\"" . admin_url("edit.php?post_type=acf-field-group") . "\">Field Groups</a></li>";
 
                     }
-                
+
                 }
-		
-			    echo '</ul>'; 
-			echo '</div>';
-		
+
+			    echo "</ul>";
+			echo "</div>";
+
 		}
-		
+
 	}
 
 }

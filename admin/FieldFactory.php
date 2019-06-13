@@ -3,14 +3,14 @@
 namespace SSM\Admin;
 
 class FieldFactory
-{	
-    
+{
+
     /**
 	 * Set up directory where to [save] JSON
 	 */
     public function saveJSON()
     {
-		return SSMC_DIR . '/acf';
+		return SSMC_DIR . "/acf";
 	}
 
 	/**
@@ -18,7 +18,7 @@ class FieldFactory
 	 */
     public function loadJSON( $paths )
     {
-		$paths[] = SSMC_DIR . '/acf';
+		$paths[] = SSMC_DIR . "/acf";
 		return $paths;
 	}
 

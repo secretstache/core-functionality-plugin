@@ -5,7 +5,7 @@ namespace SSM\Includes;
 /**
  * Define the internationalization functionality.
  */
-class I18n 
+class I18n
 {
 
 	/**
@@ -17,7 +17,7 @@ class I18n
 		load_plugin_textdomain(
 			LOCALIZATION_ID,
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/admin/languages/'
+			dirname( dirname( plugin_basename( __FILE__ ) ) ) . "/admin/languages/"
 		);
 
 	}
