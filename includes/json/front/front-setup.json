@@ -69,6 +69,11 @@
             "type": "action",
             "name": "admin_notices",
             "function": "saveReminderNotice"
+		},
+		{
+            "type": "action",
+            "name": "after_setup_theme",
+            "function": "removeAdminBar"
         },
         {
             "type": "action",

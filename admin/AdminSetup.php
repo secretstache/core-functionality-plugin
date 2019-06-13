@@ -254,20 +254,6 @@ class AdminSetup
 	}
 
 	/**
-	 * Move various menu items into LIB menu
-	 */
-	public function moveCptsToAdminMenu()
-	{
-
-		global $wp_post_types;
-
-		if ( post_type_exists("insert_cpt") ) {
-			$wp_post_types["insert_cpt"]->show_in_menu = "ssm";
-		}
-
-	}
-
-	/**
 	 * Filter the admin body classes if is_front
 	 */
 	public function isFrontAdminBodyClass( $classes )
@@ -285,6 +271,23 @@ class AdminSetup
 			}
 
 		}
+
+	}
+
+	/**
+	 * Get width values on AJAX call
+	 */
+	public function getWidthValues()
+	{
+
+		$response = array();
+
+		for ( $i = 0; $i < $_POST["columns_count"]; $i++ ) {
+			array_push( $response, get_post_meta( $_POST["page_id"], "custom_columns_width_" . $i, true ) );
+		}
+
+		echo json_encode( $response );
+		wp_die();
 
 	}
 
@@ -317,23 +320,6 @@ class AdminSetup
 			}
 
 		}
-	}
-
-	/**
-	 * Get width values on AJAX call
-	 */
-	public function getWidthValues()
-	{
-
-		$response = array();
-
-		for ( $i = 0; $i < $_POST["columns_count"]; $i++ ) {
-			array_push( $response, get_post_meta( $_POST["page_id"], "custom_columns_width_" . $i, true ) );
-		}
-
-		echo json_encode( $response );
-		wp_die();
-
 	}
 
     /**
@@ -462,16 +448,6 @@ class AdminSetup
 	}
 
 	/**
-	 * Remove Admin Bar on frontend
-	 *
-	 */
-	public function removeAdminBar() {
-
-		show_admin_bar(false);
-
-	}
-
-	/**
 	 * Remove ACF Menu for non-checked users
 	 *
 	 */
@@ -539,9 +515,13 @@ class AdminSetup
 	public function updateACFSectionTitle( $title, $field, $layout, $i ) {
 
 		if ( get_sub_field("option_section_label") ) {
+
 			$label = get_sub_field("option_section_label");
+
 		} else {
+
 			$label = $title;
+
 		}
 
 		return $label;
@@ -557,10 +537,12 @@ class AdminSetup
 		<style id="acf-flexible-content-collapse">.acf-flexible-content .acf-fields { display: none; }</style>
 
 		<script type="text/javascript">
-				jQuery(function($) {
-						$(".acf-flexible-content .layout").addClass("-collapsed");
-						$("#acf-flexible-content-collapse").detach();
-				});
+
+			jQuery(function($) {
+					$(".acf-flexible-content .layout").addClass("-collapsed");
+					$("#acf-flexible-content-collapse").detach();
+			});
+
 		</script>
 
 		<?php

@@ -104,12 +104,6 @@
             "function": "addAcfSubMenu"
         },
         {
-            "type": "action",
-            "name": "init",
-            "function": "moveCptsToAdminMenu",
-            "priority": 25
-        },
-        {
             "type": "filter",
             "name": "admin_body_class",
             "function": "isFrontAdminBodyClass",
@@ -184,11 +178,6 @@
             "name": "admin_bar_menu",
             "function": "addEnvNode",
             "arguments": 1
-        },
-        {
-            "type": "action",
-            "name": "after_setup_theme",
-            "function": "removeAdminBar"
         },
         {
             "type": "action",

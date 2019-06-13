@@ -145,7 +145,7 @@ class FrontSetup
     /**
      * Custom Head Scripts
      */
-    public function CustomHeadScripts()
+    public function customHeadScripts()
     {
 
         $custom_scripts = get_field("custom_tracking_scripts", "options");
@@ -236,7 +236,17 @@ class FrontSetup
             echo "</div>";
         }
 
-    }
+	}
+
+	/**
+	 * Remove Admin Bar on frontend
+	 *
+	 */
+	public function removeAdminBar() {
+
+		show_admin_bar(false);
+
+	}
 
     /**
 	 * Remove Admin Bar with custom Bar
@@ -254,6 +264,7 @@ class FrontSetup
 			}
 
 			echo "<div class=\"ssm-admin-menu\">";
+
                 echo "<ul class=\"menu horizontal\">";
 
                 if ( defined( "SSM_ENVIRONMENT" ) && $env = SSM_ENVIRONMENT ) {
@@ -299,7 +310,8 @@ class FrontSetup
 
                 }
 
-			    echo "</ul>";
+				echo "</ul>";
+
 			echo "</div>";
 
 		}
