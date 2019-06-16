@@ -14,6 +14,7 @@ class OptionsPage
     {
 
 		register_setting( "ssm-core-settings-group", "ssm_core_acf_admin_users" );
+		register_setting( "ssm-core-settings-group", "ssm_core_team_members" );
 
 		register_setting( "ssm-core-settings-group", "ssm_core_agency_name" );
 		register_setting( "ssm-core-settings-group", "ssm_core_agency_url" );
@@ -32,20 +33,30 @@ class OptionsPage
 		add_settings_field( "ssm-core-agency-url", "Agency URL", array( $this, "ssmCoreAgencyUrl" ), "ssm_core", "ssm-core-agency-options" );
         add_settings_field( "ssm-core-login-logo", "Login Logo", array( $this, "ssmCoreLoginLogo" ), "ssm_core", "ssm-core-agency-options" );
 
-        add_settings_section( "ssm-core-acf-options", "ACF Options", array( $this, "ssm_acf_options" ), "ssm_core" );
+        add_settings_section( "ssm-core-acf-options", "Access Restriction", array( $this, "ssm_acf_options" ), "ssm_core" );
+
+		add_settings_field(
+            "ssm-core-team-members",
+            "SSM Team Members",
+            array( $this, "ssmCoreTeamMembers" ),
+            "ssm_core",
+            "ssm-core-acf-options",
+            [ "members" => get_users( array("role" => "administrator") ) ]
+		);
 
         add_settings_field(
             "ssm-core-acf-admin-users",
-            "Admin users who need access to ACF",
+            "Users with ACF access",
             array( $this, "ssmCoreACFAdminUsers" ),
             "ssm_core",
             "ssm-core-acf-options",
             [ "admins" => get_users( array("role" => "administrator") ) ]
-        );
+		);
 
     }
 
-    public function ssmCoreAdminCredentials() {
+	public function ssmCoreAdminCredentials()
+	{
 
         echo "<div class=\"admin-credentials\">";
 
@@ -54,7 +65,8 @@ class OptionsPage
             if ( $alex_pass = get_option( "alex_pass" ) ) {
 
                 echo "<p class=\"user-pass\"><span class=\"username\">alex: </span> <span id=\"alex-pass\">" . $alex_pass . "</span>
-                        <button class=\"button button-primary copy-pass\" id=\"copy-alex-pass\">Copy</button>
+						<button class=\"button button-primary copy-pass\" id=\"copy-alex-pass\">Copy</button>
+						<button class=\"button button-primary send-email\" data-password=\"" . $alex_pass . "\" data-username=\"alex\" data-email-address=\"alex@secretstache.com\">Send Email</button>
                         <button class=\"button button-primary remove remove-option\" data-option-name=\"alex_pass\">Remove Option</button>
                     </p>";
 
@@ -63,7 +75,8 @@ class OptionsPage
             if ( $rich_pass = get_option( "rich_pass" ) ) {
 
                 echo "<p class=\"user-pass\"><span class=\"username\">jrstaatsiii: </span> <span id=\"rich-pass\">" . $rich_pass . "</span>
-                        <button class=\"button button-primary copy-pass\" id=\"copy-rich-pass\">Copy</button>
+						<button class=\"button button-primary copy-pass\" id=\"copy-rich-pass\">Copy</button>
+						<button class=\"button button-primary send-email\" data-password=\"" . $rich_pass . "\" data-username=\"jrstaatsiii\" data-email-address=\"rich@secretstache.com\">Send Email</button>
                         <button class=\"button button-primary remove remove-option\" data-option-name=\"rich_pass\">Remove Option</button>
                     </p>";
             }
@@ -86,7 +99,8 @@ class OptionsPage
     /**
      * Add Admin users who need access to ACF field
      */
-    function ssmCoreACFAdminUsers( $args ) {
+	function ssmCoreACFAdminUsers( $args )
+	{
 
         $admins = $args["admins"];
         $acfAdmins = get_option("ssm_core_acf_admin_users") != NULL ? get_option("ssm_core_acf_admin_users") : array();
@@ -98,6 +112,34 @@ class OptionsPage
             <?php foreach ( $admins as $admin ) { ?>
 
                 <?php $selected = in_array( $admin->ID, $acfAdmins ) ? " selected" : ""; ?>
+
+                <option value="<?php echo $admin->ID; ?>"<?php echo $selected; ?>>
+                    <?php echo $admin->user_login; ?>
+                </option>
+
+            <?php } ?>
+
+        </select>
+
+        <?php
+	}
+
+	/**
+     * Add SSM Team Members
+     */
+	function ssmCoreTeamMembers( $args )
+	{
+
+        $admins = $args["members"];
+        $membersOption = get_option("ssm_core_team_members") != NULL ? get_option("ssm_core_team_members") : array();
+
+        ?>
+
+        <select id="ssm-core-team-members" name="ssm_core_team_members[]" multiple style="min-width: 200px;">
+
+            <?php foreach ( $admins as $admin ) { ?>
+
+                <?php $selected = in_array( $admin->ID, $membersOption ) ? " selected" : ""; ?>
 
                 <option value="<?php echo $admin->ID; ?>"<?php echo $selected; ?>>
                     <?php echo $admin->user_login; ?>
