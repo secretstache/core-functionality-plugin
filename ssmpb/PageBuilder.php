@@ -83,14 +83,16 @@ class PageBuilder extends Controller
 
     }
 
-    public static function getColumnsWidth( $column_index ) {
+	public static function getColumnsWidth( $column_index )
+	{
 
         global $post;
         return get_post_meta( $post->ID, "custom_columns_width_" . $column_index, true);
 
     }
 
-    public static function getMenuArgs( $context ) {
+	public static function getMenuArgs( $context )
+	{
 
         $response = array();
 
@@ -127,7 +129,8 @@ class PageBuilder extends Controller
 
     }
 
-    public static function getTheAddress( $address ) {
+	public static function getAddress( $address )
+	{
 
         $response = "";
 
@@ -149,7 +152,8 @@ class PageBuilder extends Controller
 
     }
 
-    public static function getPreparedAddress( $address ) {
+	public static function getPreparedAddress( $address )
+	{
 
         $prepared_url = $address->street1;
         $prepared_url .= ( $address->street2 ) ? $address->street2 : "";
@@ -162,7 +166,8 @@ class PageBuilder extends Controller
 
     }
 
-    public static function getPreparedPhoneNumber( $number ) {
+	public static function getPreparedPhoneNumber( $number )
+	{
 
         $formatted = "";
 
