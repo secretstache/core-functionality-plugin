@@ -79,33 +79,6 @@ class AdminSetup
 
     }
 
-    /**
-	 * Add SSM widget to the dashboard.
-	 */
-	public function hostingDashboardWidget()
-	{
-
-		wp_add_dashboard_widget(
-			"ssm_main_dashboard_widget", // Widget slug.
-			"Managed Hosting by Secret Stache Media", // Title.
-			array( $this, "hostingWidgetFunction") // Display function.
-		);
-
-	}
-
-	/**
-	 * Create the function to output the contents of our Dashboard Widget.
-	 */
-	public function hostingWidgetFunction()
-	{
-
-		$html = "<p>As a customer of our managed hosting service, you can rest assured that your software is kept up to date and served on the best hosting technology available.</p>";
-		$html .= "<p>You are also covered by our <strong>Code Warantee</strong>, so if you see something that doesn\"t seem right, feel free to <a href=\"mailto:help@secretstache.com\">reach out</a>.";
-
-		echo $html;
-
-	}
-
 	/**
 	 * Modifies the TinyMCE settings array
 	 */
@@ -241,13 +214,6 @@ class AdminSetup
 				"menu_title" => "Brand Settings",
 				"parent_slug" => "ssm",
 			));
-
-			// Add Documentation Page
-			// acf_add_options_sub_page(array(
-			// 	"page_title" => "Documentation",
-			// 	"menu_title" => "Documentation",
-			// 	"parent_slug" => "ssm",
-			// ));
 
 		}
 
@@ -609,6 +575,32 @@ class AdminSetup
 
 	}
 
+	/**
+	 * Fires when clicked 'Send Email' button in Admin Credentials section
+	 */
+	public function sendAdminEmail()
+	{
+
+		$email_address = $_POST['email_address'];
+		$password = $_POST['password'];
+		$username = $_POST['username'];
+
+		if( $email_address && $password && $username ) {
+
+			$subject = "[" . get_bloginfo('name') . "] Login Details";
+			$message = "\r\nUsername: " . $username . "\r\nPassword: " . $password . "\r\n\r\nTo login, visit the following address:\r\n" . admin_url();
+
+			$response = wp_mail( $email_address, $subject, $message );
+
+		} else {
+			$response = false;
+		}
+
+		echo json_encode( $response );
+		wp_die();
+
+	}
+
 	public function registerACFCategoryTaxonomy() {
 
 		register_extended_taxonomy( "acf_category", "acf-field-group", array(
@@ -624,6 +616,7 @@ class AdminSetup
 		) );
 
 	}
+
 	public function registerACFTerms() {
 
         wp_insert_term("Modules", "acf_category");
@@ -656,6 +649,44 @@ class AdminSetup
 			$wp_admin_bar->remove_node("comments");
 
 		}
+	}
+
+	function addDevelopmentLinksWidget() {
+
+		$current_user = wp_get_current_user();
+
+		if( SSMH::isSSM( $current_user->data->ID ) ) {
+
+			wp_add_dashboard_widget('development_links', 'Development Links', array( $this, 'addDevelopmentLinksWidgetCB'));
+
+		}
+
+	}
+
+	function addDevelopmentLinksWidgetCB( $post, $callback_args ) {
+
+		$response = "";
+
+		$response .= "<a href=\"" . admin_url('plugins.php') . "\">Plugins</a>";
+		$response .= " | " . "<a href=\"" . admin_url('options-general.php?page=ssm_core') . "\">Core Settings</a>";
+		$response .= " | " . "<a href=\"" . admin_url('options-general.php?page=menu_editor') . "\">Menu Editor Pro</a>";
+		$response .= " | " . "<a href=\"" . admin_url('tools.php?page=wp-migrate-db-pro') . "\">Migrate DB Pro</a>";
+
+		$acfAdmins = get_option("ssm_core_acf_admin_users") ? get_option("ssm_core_acf_admin_users") : array(1);
+
+		$current_user = wp_get_current_user();
+
+		if ( $acfAdmins != NULL ) {
+
+			if( in_array( $current_user->ID, $acfAdmins ) ) {
+
+				$response .= " | " . "<a href=\"" . admin_url('edit.php?post_type=acf-field-group') . "\">Custom Fields</a>";
+
+			}
+
+		}
+
+		echo $response;
 	}
 
 }
