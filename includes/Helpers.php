@@ -34,7 +34,8 @@ class Helpers
     /**
      * Sanitize HTML Classes
      */
-    public static function sanitizeHtmlClasses( $class, $fallback = null ) {
+	public static function sanitizeHtmlClasses( $class, $fallback = null )
+	{
 
         // Explode it, if it"s a string
         if ( is_string( $class ) ) {
@@ -52,6 +53,18 @@ class Helpers
 
         }
 
-    }
+	}
+
+	/**
+     * Check if user is member of SSM
+     */
+	public static function isSSM( $user_id )
+	{
+
+		$members = get_option("ssm_core_team_members") ? get_option("ssm_core_team_members") : array();
+
+		return ( in_array( $user_id, $members ) ) ? true : false;
+
+	}
 
 }

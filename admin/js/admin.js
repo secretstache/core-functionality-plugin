@@ -168,6 +168,41 @@
 
 	});
 
+	$(document).on( "click", ".admin-credentials .send-email", function( e ) {
+
+		e.preventDefault();
+
+		var email_address = $(this).data("email-address");
+		var password = $(this).data("password");
+		var username = $(this).data("username");
+
+		$.ajax({
+
+			url: custom.ajax_url,
+			type: "post",
+			async: false,
+			ContentType: "application/json",
+
+			data: {
+				action: "send_admin_email",
+				email_address: email_address,
+				username: username,
+				password: password
+			},
+
+			success: (html) => {
+
+				if ( JSON.parse( html ) == true ) {
+					$(this).text("Sent").addClass("sent");
+				}
+
+			},
+
+		});
+
+
+	});
+
 	$(document).on( "click", ".admin-credentials .remove", function( e ) {
 
 		e.preventDefault();
