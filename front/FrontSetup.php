@@ -12,7 +12,7 @@ class FrontSetup
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style( "ssm", plugin_dir_url( __FILE__ ) . "css/public.css", array(), $this->version, "all" );
+		wp_enqueue_style( "ssm", plugin_dir_url( __FILE__ ) . "css/public.css", array(), "1.0", "all" );
 	}
 
 	/**
@@ -20,7 +20,7 @@ class FrontSetup
 	 */
 	public function enqueueScripts()
 	{
-		wp_enqueue_script( "ssm", plugin_dir_url( __FILE__ ) . "js/public.js", array( "jquery" ), $this->version, false );
+		wp_enqueue_script( "ssm", plugin_dir_url( __FILE__ ) . "js/public.js", array( "jquery" ), "1.0", false );
     }
 
     /**

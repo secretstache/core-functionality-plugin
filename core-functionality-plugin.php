@@ -27,7 +27,6 @@ if ( ! defined( "WPINC" ) ) {
 define( "SSMC_URL", trailingslashit ( plugin_dir_url( __FILE__ ) ) );
 define( "SSMC_DIR", plugin_dir_path( __FILE__ ) );
 define( "SSMC_THEME_DIR", trailingslashit ( get_template_directory() ) );
-define( "SSMC_THEME_DIR", trailingslashit ( get_template_directory() ) );
 define(	"LOCALIZATION_ID", "ssm" );
 
 /**
