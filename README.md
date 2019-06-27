@@ -34,7 +34,7 @@
 
 **admin/**
 
-- responsible for common admin scope functionality regardless of specific objects.
+- responsible for common admin scope functionality regardless of specific objects
 
 	`Examples:` *createAdminMenu(), removeDashboardMetaBoxes(), addDevelopmentLinksWidget()*
 
@@ -61,3 +61,32 @@
 - contains list of sage controllers
 
 	`Examples:` *PageBuilder.php, FrontPage.php, Archive.php*
+
+
+## How To
+
+**Add function on plugin activation:**
+
+- Go to *includes/Activator.php*
+- Paste a function needed to run on plugin activation inside of *activate()* function.
+
+	`Example:`
+	```
+	public static function activate()
+	{
+		add_role( 'stf_sales_rep', 'Sales Rep', array( 'read' => true ) );
+	}
+	```
+
+**Add function on plugin deactivation:**
+
+- Go to *includes/Deactivator.php*
+- Paste a function needed to run on plugin deactivation inside of *deactivate()* function.
+
+	`Example:`
+	```
+	public static function activate()
+	{
+		remove_role( 'stf_sales_rep' );
+	}
+	```
