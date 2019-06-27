@@ -90,3 +90,301 @@
 		remove_role( 'stf_sales_rep' );
 	}
 	```
+
+**Add new required plugin / remove unnecessary one:**
+
+- Go to *includes/json/bundle.json*
+- Add corresponding object to *bundle.json* config file
+
+	`Example:`
+	```
+	…
+	{
+		"name": "User Switcher",
+		"slug": "userswitcher",
+		"required": false,
+		"force_activation": false
+	}
+	…
+	```
+
+**Assign newly created or existing ACF Group to specific category:** (needs to be done each time before adding a group within UI)
+
+- Go to *includes/json/acf_categories.json*
+- Add corresponding line/object to *acf_categories.json* config file
+
+	`Example:`
+	```
+	{
+		"category_name": "Templates",
+		"groups": [
+			…
+			"[Template] - Team Members"
+			…
+		]
+	}
+	```
+
+**Add general admin hook:**
+
+- Go to *includes/json/admin/admin-setup.json*
+- Add corresponding declaration to *admin-setup.json* file.
+
+	`Arguments:`
+
+	- **“type”** : filter | action
+	- **“name”** : hooked function
+	- **“function”** : custom function
+	- **“priority”** : (optional) default - 10
+	- **“arguments”** : (optional) default - 1
+
+- Go to *admin/AdminSetup.php*
+- Add corresponding method to *AdminSetup* class
+
+	`Example:`
+	```
+	…
+	{
+		"type": "action",
+		"name": "wp_before_admin_bar_render",
+		"function": "removeFromTopMenu",
+		"priority": 999
+	}
+	…
+	```
+
+	```
+	public function removeFromTopMenu()
+	{
+
+		global $wp_admin_bar;
+
+		if ( is_admin() ) {
+			…
+			$wp_admin_bar->remove_node("wpseo-menu");
+			…
+		}
+
+	}
+	```
+
+**Add general front hook:**
+
+- Go to *includes/json/front/front-setup.json*
+- Add corresponding declaration to *front-setup.json* file.
+
+	`Arguments:`
+
+	- **“type”** : filter | action
+	- **“name”** : hooked function
+	- **“function”** : custom function
+	- **“priority”** : (optional) default - 10
+	- **“arguments”** : (optional) default - 1
+
+- Go to *admin/AdminSetup.php*
+- Add corresponding method to *AdminSetup* class
+
+	`Example:`
+	```
+	…
+	{
+		"type": "action",
+		"name": "init",
+		"function": "addYearShortcode"
+	}
+	…
+	```
+	```
+	public function addYearShortcode()
+	{
+		add_shortcode("year", array( $this, "addYearShortcodeCB" ) );
+	}
+	```
+
+
+**Register new object:** (CPT and taxonomy)
+
+- Go to *includes/json/objects*
+- Add corresponding *.json* file to the folder
+- Add corresponding declarations to the created *.json* file.
+
+- Go to *objects/*
+- Add corresponding *class* to the folder
+- Add corresponding *method* to the created class
+
+	`Example:`
+
+	**article.json**
+	```
+	{
+		"name": "Article",
+		"slug": "plugin_article",
+		"class": "SSM\\Objects\\Article",
+		"hooks": [
+			{
+				"type": "action",
+				"name": "init",
+				"function": "registerPostType"
+			},
+			{
+				"type": "action",
+				"name": "init",
+				"function": "registerTaxonomies"
+			}
+		]
+	}
+	```
+
+	**Article.php**
+	```
+	<?php
+
+	namespace SSM\Objects;
+
+	class Article
+	{
+
+		public function registerPostType() {
+
+			register_extended_post_type(
+				…
+			)
+
+		}
+
+		public function registerTaxonomies() {
+
+			register_extended_taxonomy(
+				…
+			)
+		}
+	}
+	```
+
+**Add object specific function:**
+
+- Go to *includes/json/objects*
+- Add corresponding declarations to the *.json* file.
+
+- Go to *objects/*
+- Add corresponding method to the *class*
+
+	`Example:`
+	```
+	…
+
+	'admin_cols'    => array(
+
+		'featured_image' => array(
+			'title'          => 'Featured Image',
+			'featured_image' => 'thumbnail'
+		),
+		'title',
+		'custom_title' => array(
+			'title'     => "Title",
+			'meta_key'  => 'job_title'
+		)
+	)
+	…
+	```
+
+	```
+	…
+
+	public function moveThumbnailColumn( $columns ) {
+
+		unset($columns['title']);
+
+		$new_columns = array_slice($columns, 0, 2, true) + array("title" => "Name") + array_slice($columns, 2, count($columns) - 1, true);
+
+		return $new_columns;
+
+	}
+	…
+	```
+
+**Add new helper function:**
+
+- Go to *includes/Helpers.php*
+- Add corresponding *static* method to *Helpers* class
+
+	`Example:`
+	```
+	public static function isSSM( $user_id )
+	{
+
+	$members = get_option("ssm_core_team_members") ? get_option("ssm_core_team_members") : array();
+
+		return ( in_array( $user_id, $members ) ) ? true : false;
+
+	}
+	```
+
+**Extend Walker class or add any conditions:**
+
+- Go to *includes/Walker.php*
+- Add changes to corresponding *method*
+
+	`Example:`
+	```
+	…
+	if( $item->current || $item->current_item_ancestor || $item->current_item_parent ){
+				$class_names .= " active";
+	}
+	…
+	```
+
+**Add common LB function:**
+
+- Go to *ssmpb/PageBuilder.php* (parent class).
+- Add corresponding *static* method. Use the function in the theme.
+
+	`Example:`
+	```
+	public static function getAddress( $address )
+	{
+
+		$response = "";
+		$street1 = $address->street1;
+		…
+		return $response;
+	}
+	```
+	```
+	$builder->getAddress( $address_object )
+	```
+
+**Add specific LB function:**
+
+- Go to *ssmpb/FrontPage.php* (inherited class).
+- Add corresponding *static* method. Use the function in the theme.
+
+	`Example:`
+	```
+	public static function getFrontPageData( $page_id )
+	{
+
+		$response = "";
+		$data = get_some_data( $page_id );
+		…
+		return $response;
+	}
+	```
+	```
+	$builder->getFrontPageData( get_the_ID() )
+	```
+
+**Add 3rd party plugin dependency:**
+
+- Go to *composer.json*
+- Add corresponding dependency in *“require”* section.
+- Run *composer update*
+
+	`Example:`
+	```
+	"require": {
+		…
+		"soberwp/bundle": "1.0.2-p"
+		…
+	}
+	```
