@@ -147,6 +147,11 @@ img.thumbs {
     margin: 5px;
   }
 
+  .acf-field .layout .template-inactive {
+	  color: #b20000;
+	  font-weight: bold;
+  }
+
   .post-php a.button-primary[data-event="add-row"],
   .post-php a.button-primary[data-event="add-row"].disabled,
   .post-new-php a.button-primary[data-event="add-row"],

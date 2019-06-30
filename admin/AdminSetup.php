@@ -495,6 +495,25 @@ class AdminSetup
 	}
 
 	/**
+	 * Dynamically prepend "Inactive" to the template title
+	 */
+	public function prependACFInactiveTitle( $title, $field, $layout, $i ) {
+
+		if ( get_sub_field("option_status" ) == false ) {
+
+			$label .= "<span class=\"template-inactive\">Inactive</span> - " . $title;
+
+		} else {
+
+			$label = $title;
+
+		}
+
+		return $label;
+
+	}
+
+	/**
 	 * Collapse Flexible Content Fields by default
 	 */
 	public function flexibleACFContentCollapse() {

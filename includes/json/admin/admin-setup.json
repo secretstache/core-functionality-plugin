@@ -192,7 +192,14 @@
             "function": "updateACFSectionTitle",
             "priority": 10,
             "arguments": 4
-        },
+		},
+		{
+            "type": "filter",
+            "name": "acf/fields/flexible_content/layout_title/name=templates",
+            "function": "prependACFInactiveTitle",
+            "priority": 10,
+            "arguments": 4
+		},
         {
             "type": "action",
             "name": "acf/input/admin_head",
