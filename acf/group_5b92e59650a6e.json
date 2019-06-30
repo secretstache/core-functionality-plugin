@@ -1,11 +1,11 @@
 {
     "key": "group_5b92e59650a6e",
-    "title": "[Option] Link Target",
+    "title": "[Option] - Link Target",
     "fields": [
         {
             "key": "field_5b92e5acda967",
             "label": "Target",
-            "name": "target",
+            "name": "option_target",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -22,7 +22,7 @@
             "allow_null": 0,
             "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
+            "layout": "horizontal",
             "return_format": "value",
             "save_other_choice": 0
         }
@@ -44,5 +44,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1536579721
+    "modified": 1553712011
 }

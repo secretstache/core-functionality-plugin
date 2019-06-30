@@ -3,15 +3,39 @@
     "title": "[Component] - Button",
     "fields": [
         {
-            "key": "field_5b92e4b64e351",
-            "label": "Button Label",
-            "name": "label",
-            "type": "text",
+            "key": "field_5ca74255233a4",
+            "label": "Source",
+            "name": "button_source",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "internal": "Internal Page",
+                "custom": "Custom URL"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b92e4b64e351",
+            "label": "Label",
+            "name": "button_label",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -22,15 +46,53 @@
             "maxlength": ""
         },
         {
+            "key": "field_5ca7429c233a5",
+            "label": "Page",
+            "name": "button_page_id",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5ca74255233a4",
+                        "operator": "==",
+                        "value": "internal"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
+        {
             "key": "field_5b92e4c84e352",
             "label": "URL",
-            "name": "url",
+            "name": "button_url",
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5ca74255233a4",
+                        "operator": "==",
+                        "value": "custom"
+                    }
+                ]
+            ],
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -58,5 +120,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1536579708
+    "modified": 1554465809
 }

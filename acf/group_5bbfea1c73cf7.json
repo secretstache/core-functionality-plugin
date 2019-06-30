@@ -1,0 +1,48 @@
+{
+    "key": "group_5bbfea1c73cf7",
+    "title": "[Option] - Columns Width",
+    "fields": [
+        {
+            "key": "field_5bbfeaf7a11cb",
+            "label": "Columns Width",
+            "name": "option_columns_width",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "columns-width",
+                "id": ""
+            },
+            "choices": {
+                "8": "8",
+                "10": "10"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "modified": 1554467430
+}

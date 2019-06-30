@@ -1,0 +1,48 @@
+{
+    "key": "group_5ca74c7592c4d",
+    "title": "[Option] - Mobile Sort Order",
+    "fields": [
+        {
+            "key": "field_5ca74cef39c23",
+            "label": "Mobile Sort Order",
+            "name": "option_mobile_sort_order",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "medium-order-1": "First",
+                "medium-order-2": "Last"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "modified": 1554478973
+}

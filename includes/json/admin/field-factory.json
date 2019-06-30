@@ -1,0 +1,19 @@
+{
+    "name": "Field Factory",
+    "slug": "plugin_field_factory",
+    "class": "SSM\\Admin\\FieldFactory",
+    "hooks": [
+        {
+            "type": "filter",
+            "name": "acf/settings/save_json",
+            "function": "saveJSON"
+        },
+        {
+            "type": "filter",
+            "name": "acf/settings/load_json",
+            "function": "loadJSON",
+            "priority": 10,
+            "arguments": 1
+        }
+    ]
+}

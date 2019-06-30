@@ -1,0 +1,12 @@
+{
+    "name": "Required Plugins",
+    "slug": "plugin_required_plugins",
+    "class": "SSM\\Admin\\RequiredPlugins",
+    "hooks": [
+        {
+            "type": "filter",
+            "name": "sober/bundle/file",
+            "function": "checkRequiredPlugins"
+        }
+    ]
+}

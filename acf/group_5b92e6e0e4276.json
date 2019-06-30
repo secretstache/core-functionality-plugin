@@ -19,7 +19,7 @@
             "min": 0,
             "max": 0,
             "layout": "block",
-            "button_label": "",
+            "button_label": "Add Button",
             "sub_fields": [
                 {
                     "key": "field_5b92e70ddefb5",
@@ -52,13 +52,6 @@
                 "operator": "==",
                 "value": "post"
             }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
         ]
     ],
     "menu_order": 0,
@@ -67,7 +60,7 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": 0,
     "description": "",
-    "modified": 1536576784
+    "modified": 1554306126
 }

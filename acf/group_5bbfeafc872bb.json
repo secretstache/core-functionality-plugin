@@ -1,0 +1,48 @@
+{
+    "key": "group_5bbfeafc872bb",
+    "title": "[Option] - Hero Unit Height",
+    "fields": [
+        {
+            "key": "field_5bbfebd8d7b3f",
+            "label": "Height",
+            "name": "option_hero_unit_height",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "auto": "Auto",
+                "full": "Full"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "auto",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 0,
+    "description": "",
+    "modified": 1553711999
+}
