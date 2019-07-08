@@ -4,9 +4,9 @@
  * The plugin bootstrap file
  *
  * @wordpress-plugin
- * Plugin Name:       SSM Core Functionality Plugin
+ * Plugin Name:       Core Functionality Plugin
  * Plugin URI:        https://www.secretstache.com/
- * Description:       SSM Core Functionality Plugin
+ * Description:       [DO NOT DEACTIVATE] unless you know what you're doing.
  * Version:           1.0.0
  * Author:            Secret Stache Media
  * Author URI:        https://www.secretstache.com/
