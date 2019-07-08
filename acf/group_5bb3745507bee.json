@@ -16,10 +16,10 @@
                 "id": ""
             },
             "choices": {
-                "None": "None",
-                "Color": "Color",
-                "Image": "Image",
-                "Video": "Video"
+                "none": "None",
+                "color": "Color",
+                "image": "Image",
+                "video": "Video"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -40,7 +40,7 @@
                     {
                         "field": "field_5bb37462a9ebe",
                         "operator": "==",
-                        "value": "Color"
+                        "value": "color"
                     }
                 ]
             ],
@@ -71,7 +71,7 @@
                     {
                         "field": "field_5bb37462a9ebe",
                         "operator": "==",
-                        "value": "Image"
+                        "value": "image"
                     }
                 ]
             ],
@@ -103,7 +103,7 @@
                     {
                         "field": "field_5bb37462a9ebe",
                         "operator": "==",
-                        "value": "Video"
+                        "value": "video"
                     }
                 ]
             ],
@@ -136,5 +136,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1553711992
+    "modified": 1562592726
 }
