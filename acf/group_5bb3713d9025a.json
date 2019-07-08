@@ -18,14 +18,14 @@
             "layouts": {
                 "layout_5c3f83272fa3d": {
                     "key": "layout_5c3f83272fa3d",
-                    "name": "headline",
-                    "label": "Headline",
+                    "name": "header",
+                    "label": "Header",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_5c3f83312fa3e",
-                            "label": "Headline",
-                            "name": "headline",
+                            "label": "Header",
+                            "name": "header",
                             "type": "clone",
                             "instructions": "",
                             "required": 0,
@@ -256,5 +256,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1554485644
+    "modified": 1562592237
 }
