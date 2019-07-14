@@ -96,10 +96,10 @@ class PageBuilder extends Controller
 
         $response = array();
 
-        if ( $context == "offCanvas") {
+        if ( $context == "offcanvas") {
 
             $response = array(
-                "theme_location" => "primary_navigation",
+                "theme_location" => "offcanvas_navigation",
                 "container" => FALSE,
                 "items_wrap" => "<ul class=\"vertical menu accordion-menu\" data-accordion-menu>%3$s</ul>",
                 "walker" => new Walker()
