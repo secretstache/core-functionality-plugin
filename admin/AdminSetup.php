@@ -13,7 +13,7 @@ class AdminSetup
 	 */
 	public function enqueueStyles()
 	{
-		wp_enqueue_style( "ssm", plugin_dir_url( __FILE__ ) . "css/admin.css", array(), $this->version, "all" );
+		wp_enqueue_style( "ssm", plugin_dir_url( __FILE__ ) . "css/admin.css", array(), '1.0', "all" );
 	}
 
 	/**
@@ -22,7 +22,7 @@ class AdminSetup
 	public function enqueueScripts()
 	{
 
-		wp_enqueue_script( "ssm", plugin_dir_url( __FILE__ ) . "js/admin.js", array( "jquery" ), $this->version, false );
+		wp_enqueue_script( "ssm", plugin_dir_url( __FILE__ ) . "js/admin.js", array( "jquery" ), '1.0', false );
 
 		wp_localize_script( "ssm", "custom", array( "ajax_url" => admin_url( "admin-ajax.php" )));
 		wp_localize_script( "ssm", "login_logo", array("url" => SSMC_URL . "admin/" . "images/login-logo.png" ) );
