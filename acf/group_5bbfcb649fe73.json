@@ -6,7 +6,7 @@
             "key": "field_5bbfcc295cd00",
             "label": "CSS Editor",
             "name": "page_inline_styles",
-            "type": "text",
+            "type": "acf_code_field",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -17,9 +17,8 @@
             },
             "default_value": "",
             "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "mode": "css",
+            "theme": "monokai"
         }
     ],
     "location": [
@@ -44,5 +43,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1553709360
+    "modified": 1563886752
 }

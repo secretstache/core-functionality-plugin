@@ -10,21 +10,21 @@
         "name": "Advanced Custom Fields: Phone",
         "slug": "acf-field-phone",
         "source": "https://www.secretstache.com/required-plugins/acf-field-phone.zip",
-        "required": false,
-        "force_activation": false
+        "required": true,
+        "force_activation": true
     },
     {
         "name": "Advanced Custom Fields: Address",
         "slug": "acf-field-address",
         "source": "https://www.secretstache.com/required-plugins/acf-field-address.zip",
-        "required": false,
-        "force_activation": false
+        "required": true,
+        "force_activation": true
     },
     {
         "name": "ACF Code Field",
         "slug": "acf-code-field",
-        "required": false,
-        "force_activation": false
+        "required": true,
+        "force_activation": true
     },
     {
         "name": "Admin Menu Editor Pro",
