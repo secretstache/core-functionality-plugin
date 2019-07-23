@@ -4,8 +4,8 @@
     "fields": [
         {
             "key": "field_5bbfcce02061b",
-            "label": "Standart Event",
-            "name": "facebook_standart_event",
+            "label": "Standard Event",
+            "name": "facebook_standard_event",
             "type": "select",
             "instructions": "",
             "required": 0,
@@ -54,5 +54,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1553709349
+    "modified": 1563884482
 }
