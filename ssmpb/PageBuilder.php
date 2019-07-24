@@ -33,8 +33,8 @@ class PageBuilder extends Controller
         $response = "";
 
         $inline_classes = $args->option_html_classes;
-        $odd = ( !empty( $column_index ) && $column_index % 2 == 0 ) ? "even" : "odd";
         $column_index++;
+        $odd = ( !empty( $column_index ) && $column_index % 2 == 0 ) ? "even" : "odd";
 
         switch ( $context ) {
 
