@@ -3,6 +3,31 @@
     "title": "[Option] - Default Button Options",
     "fields": [
         {
+            "key": "field_5d4165d5137d6",
+            "label": "Alignment",
+            "name": "option_button_alignment",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "align-left": "Left",
+                "align-center": "Center",
+                "align-right": "Right"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "align-left",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_5ca7455e2403b",
             "label": "Size",
             "name": "option_button_size",
@@ -11,7 +36,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
@@ -36,7 +61,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
@@ -69,5 +94,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1554476147
+    "modified": 1564567196
 }
