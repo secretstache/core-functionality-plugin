@@ -100,6 +100,12 @@
         "slug": "wordpress-seo",
         "required": false,
         "force_activation": false
+	},
+	{
+        "name": "Query Monitor",
+        "slug": "query-monitor",
+        "required": false,
+        "force_activation": false
     },
     {
         "name": "WP Migrate DB Pro",
