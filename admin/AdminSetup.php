@@ -149,6 +149,7 @@ class AdminSetup
 	public function removePostTypeSupport()
 	{
 		remove_post_type_support( "page", "editor" );
+		remove_post_type_support( "page", "thumbnail" );
 	}
 
 	/**
