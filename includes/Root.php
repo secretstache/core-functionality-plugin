@@ -5,6 +5,7 @@ namespace SSM\Includes;
 use SSM\Includes\Loader;
 use SSM\Includes\I18n;
 use SSM\Includes\Helpers as SSMH;
+use SSM\Includes\SSMCLI;
 use SSM\Admin\AdminSetup;
 use SSM\Admin\RequiredPlugins;
 use SSM\Admin\FieldFactory;
@@ -33,6 +34,7 @@ class Root
 		$this->setAdminModules();
 		$this->setFrontModules();
 		$this->setObjectModules();
+		$this->runSSMCLI();
 
 	}
 
@@ -140,6 +142,16 @@ class Root
 				array( $this->loader, "add_{$hook["type"]}" ), // array( $this->loader, "add_action" )
 				array( $hook["name"], ${$module["slug"]}, $hook["function"], $priority, $arguments ) // array( wp_enqueue_scripts, $plugin_front_setup, enqueueStyles )
 			);
+
+		}
+
+	}
+
+	private function runSSMCLI() {
+
+		if ( class_exists( 'WP_CLI' ) && defined( 'WP_CLI' ) && WP_CLI ) {
+
+			\WP_CLI::add_command( 'ssm', 'SSM\Includes\SSMCLI' );
 
 		}
 
