@@ -101,7 +101,7 @@ class PageBuilder extends Controller
             $response = array(
                 "theme_location" => "offcanvas_navigation",
                 "container" => FALSE,
-                "items_wrap" => "<ul class=\"vertical menu accordion-menu\" data-accordion-menu>%3$s</ul>",
+				"items_wrap" => '<ul class="vertical menu accordion-menu" data-accordion-menu>%3$s</ul>',
                 "walker" => new Walker()
             );
 
@@ -110,7 +110,7 @@ class PageBuilder extends Controller
             $response = array(
                 "theme_location" => "primary_navigation",
                 "container" => FALSE,
-                "items_wrap" => "<ul class=\"dropdown menu show-for-medium\" data-dropdown-menu>%3$s</ul>",
+                "items_wrap" => '<ul class="dropdown menu show-for-medium" data-dropdown-menu>%3$s</ul>',
                 "walker" => new Walker()
             );
 
@@ -119,7 +119,7 @@ class PageBuilder extends Controller
             $response = array(
                 "theme_location" => "footer_navigation",
                 "container" => FALSE,
-                "items_wrap" => "<ul class=\"menu vertical\">%3$s</ul>",
+                "items_wrap" => '<ul class="menu vertical">%3$s</ul>',
                 "walker" => new Walker()
             );
 
