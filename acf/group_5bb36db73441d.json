@@ -12,10 +12,10 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
-                "class": "",
+                "class": "hide-label",
                 "id": ""
             },
-            "message": "",
+            "message": "Include Template Header",
             "default_value": 0,
             "ui": 0,
             "ui_on_text": "",
@@ -93,5 +93,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1559914401
+    "modified": 1566992226
 }
