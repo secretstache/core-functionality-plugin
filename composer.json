@@ -21,9 +21,7 @@
     "php": ">=5.4.0",
     "composer/installers": "~1.0",
     "soberwp/bundle": "1.0.2-p",
-	"johnbillion/extended-cpts": "4.2.0",
-	"wp-cli/wp-cli": "*",
-	"wp-cli/wp-cli-bundle": "*"
+	"johnbillion/extended-cpts": "4.2.0"
   },
   "dist": {
     "url": "git@github.com:secretstache/core-functionality-plugin.git",

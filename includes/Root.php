@@ -34,7 +34,7 @@ class Root
 		$this->setAdminModules();
 		$this->setFrontModules();
 		$this->setObjectModules();
-		$this->runSSMCLI();
+		// $this->runSSMCLI();
 
 	}
 
