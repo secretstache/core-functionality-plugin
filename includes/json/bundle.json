@@ -71,7 +71,7 @@
         "force_activation": false
     },
     {
-        "name": "eGenerate Thumbnails Advanced",
+        "name": "reGenerate Thumbnails Advanced",
         "slug": "regenerate-thumbnails-advanced",
         "required": true,
         "force_activation": true

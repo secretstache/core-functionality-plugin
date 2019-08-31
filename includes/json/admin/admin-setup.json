@@ -81,7 +81,12 @@
             "type": "action",
             "name": "admin_init",
             "function": "removeDashboardMeta"
-        },
+		},
+		{
+            "type": "action",
+            "name": "user_register",
+            "function": "showWelcomeMetabox"
+		},
         {
             "type": "action",
             "name": "admin_menu",

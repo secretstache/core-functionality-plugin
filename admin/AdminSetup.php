@@ -176,6 +176,16 @@ class AdminSetup
 	}
 
 	/**
+	 * Always show Welcome metabox by default for new users
+	 */
+	public function showWelcomeMetabox( $user_id ) {
+
+		if ( 1 != get_user_meta( $user_id, 'show_welcome_panel', true ) )
+			update_user_meta( $user_id, 'show_welcome_panel', 1 );
+
+	}
+
+	/**
 	 * Add SSM menu item
 	 */
 	public function createAdminMenu()
