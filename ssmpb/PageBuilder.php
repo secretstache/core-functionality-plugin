@@ -47,28 +47,24 @@ class PageBuilder extends Controller
                 break;
 
             case "module":
-                $response .= " class=\"component " . $args->acf_fc_layout . " stack-order-" . $column_index . " stack-order-" . $odd;
+                $response .= " class=\"module " . $args->acf_fc_layout . " stack-order-" . $column_index . " stack-order-" . $odd;
                 break;
 
         }
         switch ( $args->option_background ) {
 
-            case "Color":
+            case "color":
                 $response .= " bg-dark " . sanitize_html_class( $args->option_background_color );
                 break;
 
-            case "Image":
+            case "image":
                 $response .= " bg-image bg-dark";
                 break;
 
-            case "Video":
+            case "video":
                 $response .= " bg-video";
                 break;
 
-        }
-
-        if ( $context == "hero-unit" && !is_null( $args->option_hero_unit_height ) ) {
-            $response .= ( $args->option_hero_unit_height == "full" ) ? " full-height" : " auto";
         }
 
         if ( $context == "module" && !is_null( $args->option_text_alignment ) ) {
@@ -152,7 +148,7 @@ class PageBuilder extends Controller
 
     }
 
-	public static function getPreparedAddress( $address )
+	public static function getMapAddress( $address )
 	{
 
         $prepared_url = $address->street1;
@@ -166,7 +162,7 @@ class PageBuilder extends Controller
 
     }
 
-	public static function getPreparedPhoneNumber( $number )
+	public static function getPhoneNumber( $number )
 	{
 
         $formatted = "";
