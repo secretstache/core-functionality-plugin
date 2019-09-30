@@ -256,6 +256,11 @@
 			"type": "action",
 			"name": "wp_dashboard_setup",
 			"function": "addDevelopmentLinksWidget"
+		},
+		{
+			"type": "action",
+			"name": "admin_init",
+			"function": "hideProductionACF"
 		}
     ]
 }

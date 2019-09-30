@@ -437,7 +437,17 @@ class AdminSetup
 		if ( $acfAdmins != NULL ) {
 
 			if( !in_array( $current_user->ID, $acfAdmins ) ) {
+
 				remove_menu_page("edit.php?post_type=acf-field-group");
+
+				# Check current admin page.
+				if( isset( $_GET['post_type'] ) && $_GET['post_type'] == 'acf-field-group' ){
+
+					wp_redirect( admin_url( '/' ), 301 );
+					exit;
+
+				}
+
 			}
 
 		}
@@ -717,6 +727,23 @@ class AdminSetup
 		}
 
 		echo $response;
+	}
+
+	function hideProductionACF() {
+
+		# Check SSM Environment.
+		if ( defined( "SSM_ENVIRONMENT" ) && ( $env = SSM_ENVIRONMENT ) && ( $env == 'production' ) ) : ?>
+
+			<style type="text/css">
+
+				.post-type-acf-field-group ul.subsubsub {
+					display: none;
+				}
+
+			</style>
+
+		<?php endif;
+
 	}
 
 }
