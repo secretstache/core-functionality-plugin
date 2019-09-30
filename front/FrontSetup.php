@@ -148,14 +148,14 @@ class FrontSetup
     public function customHeadScripts()
     {
 
-        $custom_scripts = get_field("custom_tracking_scripts", "options");
+		$custom_scripts = get_field("custom_tracking_scripts", "options");
 
-        if ( $custom_scripts ) {
+		if ( $custom_scripts ) {
 
             foreach ( $custom_scripts as $script ) {
 
-                if ( $script["location"] == "header" && $script["code"] != NULL ) {
-                    echo $script["code"];
+                if ( $script["location"] == "header" && $script["script"] != NULL ) {
+                    echo $script["script"];
                 }
             }
         }
@@ -173,8 +173,8 @@ class FrontSetup
 
             foreach ( $custom_scripts as $script ) {
 
-                if ( $script["location"] == "footer" && $script["code"] != NULL ) {
-                    echo $script["code"];
+                if ( $script["location"] == "footer" && $script["script"] != NULL ) {
+                    echo $script["script"];
                 }
 
             }
