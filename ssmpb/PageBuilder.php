@@ -47,7 +47,7 @@ class PageBuilder extends Controller
                 break;
 
             case "module":
-                $response .= " class=\"module " . $args->acf_fc_layout . " stack-order-" . $column_index . " stack-order-" . $odd;
+                $response .= " class=\"module " . $args->acf_fc_layout;
                 break;
 
         }
