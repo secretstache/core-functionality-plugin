@@ -198,6 +198,8 @@ class FrontSetup
             $styles[] = $page_styles;
         }
 
+		$output = '';
+
         foreach ( $styles as $style ) {
             $output .= $style;
         }
