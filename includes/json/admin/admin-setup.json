@@ -261,6 +261,13 @@
 			"type": "action",
 			"name": "admin_init",
 			"function": "hideProductionACF"
+		},
+		{
+			"type": "filter",
+			"name": "display_post_states",
+			"function": "addAdminPagesPostStates",
+			"priority": 10,
+			"arguments": 2
 		}
     ]
 }

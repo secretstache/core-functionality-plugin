@@ -746,4 +746,17 @@ class AdminSetup
 
 	}
 
+	/**
+	 * Assign custom Page Post States
+	 */
+	public function addAdminPagesPostStates( $post_states, $post ) {
+
+		if( get_page_template_slug( $post ) == 'views/template-landing-page.blade.php' ) {
+			$post_states[] = 'Landing Page';
+		}
+
+		return $post_states;
+
+	}
+
 }
