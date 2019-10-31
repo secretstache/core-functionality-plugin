@@ -522,7 +522,7 @@ class AdminSetup
 
 		if ( get_sub_field("option_status" ) == false ) {
 
-			$label .= "<span class=\"template-inactive\">Inactive</span> - " . $title;
+			$label = "<span class=\"template-inactive\">Inactive</span> - " . $title;
 
 		} else {
 
