@@ -110,7 +110,6 @@ class FrontSetup
         <?php if ( $gtm = get_field("google_tag_manager_id", "options") ) { ?>
 
         <!-- Begin Google Tag Manager -->
-        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <script>
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
             new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
@@ -124,6 +123,16 @@ class FrontSetup
 
     <?php }
 
+	/**
+     * Add Google Tag Manager <noscript>
+     */
+	public function addGoogleTagManagerNoScript( $gtm ) {
+		?>
+
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm; ?>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+		<?php
+	}
 
     /**
      * Setup Google Tag Manager

@@ -34,6 +34,13 @@
             "name": "wp_head",
             "function": "setupGoogleTagManager",
             "priority": 99
+		},
+		{
+            "type": "action",
+            "name": "ssm_gtm_body_insert",
+			"function": "addGoogleTagManagerNoScript",
+			"priority": 10,
+			"arguments": 1
         },
         {
             "type": "action",
