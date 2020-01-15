@@ -40,12 +40,6 @@
         "force_activation": false
     },
     {
-        "name": "Autoptimize",
-        "slug": "autoptimize",
-        "required": true,
-        "force_activation": true
-    },
-    {
         "name": "Customizer Remove All Parts",
         "slug": "customizer-remove-all-parts",
         "required": true,
@@ -106,6 +100,13 @@
         "slug": "query-monitor",
         "required": false,
         "force_activation": false
+	},
+	{
+    	"name": "WP Rocket",
+    	"slug": "wp-rocket",
+    	"source": "https://www.secretstache.com/required-plugins/wp-rocket.zip",
+    	"required": false,
+    	"force_activation": false
     },
     {
         "name": "WP Migrate DB Pro",
