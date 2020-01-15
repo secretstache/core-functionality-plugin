@@ -1,6 +1,6 @@
 {
   "name": "ssm/core-functionality-plugin",
-  "version": "master",
+  "version": "1.0",
   "type": "wordpress-plugin",
   "license": "MIT",
   "description": "Core functionality boilerplate for SSM projects built on top of WordPress Plugin Boilerplate",
