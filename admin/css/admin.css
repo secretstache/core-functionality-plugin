@@ -217,3 +217,23 @@ img.thumbs {
 .core-settings-form .form-table:nth-of-type(2) tr > td {
 	padding-left: 0;
 }
+
+img.swatches {
+	width: 20px;
+	height: 20px;
+}
+
+.acf-field-radio.swatches .acf-radio-list li label {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+}
+
+.acf-field-radio.swatches .acf-radio-list li label input {
+	margin-bottom: 11px;
+}
+
+div[data-name="option_background_color"] .acf-input input[type="radio"] {
+	margin-bottom: 9px;
+}

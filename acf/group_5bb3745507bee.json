@@ -50,7 +50,9 @@
                 "id": ""
             },
             "choices": {
-                "bg-grey-light": "Light Grey"
+                "bg-white": "Default",
+                "bg-blue-light": "Light Grey",
+                "bg-blue": "Blue"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -136,5 +138,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1562592726
+    "modified": 1581076696
 }
