@@ -17,11 +17,11 @@
 
 1. **Clone** both repositories (CFP and empty project repository) to */wp-content/plugins/*
 	- git clone https://github.com/secretstache/core-functionality-plugin
-	- git clone https://github.com/secretstache/stf-core-functionality
+	- git clone [repository_url]
 4. **Copy** all the content from one repository to another (including *.gitignore* excluding *.git/*)
-	- Naming convention: *__project_code__-core-functionality* (*__stf__-core-functionality*)
+	- Naming convention: *__project_code__-core-functionality*
 6. **cd** to project’s folder.
-7. **Rename** main plugin file from *core-functionality-plugin.php* to *__project_code__-core-functionality.php* (*__stf__-core-functionality.php*)
+7. **Rename** main plugin file from *core-functionality-plugin.php* to *__project_code__-core-functionality.php*
 8. **Run** *composer install*
 9. **Activate** plugin in Admin Panel
 10. **Install** and **activate** all recommended plugins
